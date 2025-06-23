@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wellbyn/views/screen/Home/home_screen.dart';
 import 'package:get/get.dart';
+import 'package:wellbyn/views/screen/base_screen.dart';
 
 import '../../../utils/app_colors.dart';
 import '../../base/bottom_nav.dart';
@@ -80,7 +81,7 @@ class ConsentScreen extends StatelessWidget {
                           child: ElevatedButton.icon(
                             onPressed: () {
                               // Navigate or handle agreement
-                              Get.to(BottomNavScreen());
+                              Get.to(BaseScreen());
 
                             },
                             icon: const Icon(Icons.check, color: Colors.white),

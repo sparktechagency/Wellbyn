@@ -2,23 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:wellbyn/utils/app_icons.dart';
 import 'package:wellbyn/views/screen/doctor/doctor_details.dart';
 
 import '../../../controllers/tabcontroller.dart';
 import '../../../utils/app_colors.dart';
+import '../../../utils/nab_ids.dart';
 import '../../base/custom_field.dart';
 
 class Doctor extends StatelessWidget {
-  Doctor({super.key});
+  final void Function(String doctorId)? onDetailsTap;
+
+  Doctor({super.key, this.onDetailsTap});
 
   final TabControllerX controller = Get.put(TabControllerX());
-  TextEditingController searchcontroller = TextEditingController();
+  final TextEditingController searchcontroller = TextEditingController();
 
-  int selectedIndex = 0;
-
-  List<String> tabs = ["All", "Favorite (4)"];
+  final List<String> tabs = ["All", "Favorite (4)"];
 
   @override
   Widget build(BuildContext context) {
@@ -35,18 +35,14 @@ class Doctor extends StatelessWidget {
         ),
         centerTitle: true,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.back(id: NavIds.profile);
+          },
           icon: SvgPicture.asset(
             'assets/icons/arrow-left.svg',
             width: 30.w,
             height: 30.h,
             color: TextColors.neutral900,
-            // change color dynamically
-            semanticsLabel: 'App Logo',
-            // for accessibility
-            fit: BoxFit.contain,
-            // control how the image fits
-            alignment: Alignment.center, // position the image
           ),
         ),
       ),
@@ -54,7 +50,7 @@ class Doctor extends StatelessWidget {
         onTap: () => FocusScope.of(context).unfocus(),
         behavior: HitTestBehavior.opaque,
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
               CustomTextField(
@@ -81,30 +77,22 @@ class Doctor extends StatelessWidget {
                                 horizontal: 10,
                                 vertical: 10,
                               ),
-                              child: Stack(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(
-                                        tabs[index],
-                                        style: TextStyle(
-                                          overflow: TextOverflow.ellipsis,
-                                          color: isSelected
-                                              ? Colors.blue
-                                              : Colors.grey,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                      SizedBox(height: 4),
-                                      Container(
-                                        height: 2,
-                                        width: 40,
-                                        color: isSelected
-                                            ? Colors.blue
-                                            : Colors.transparent,
-                                      ),
-                                    ],
+                                  Text(
+                                    tabs[index],
+                                    style: TextStyle(
+                                      overflow: TextOverflow.ellipsis,
+                                      color: isSelected ? Colors.blue : Colors.grey,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  SizedBox(height: 4),
+                                  Container(
+                                    height: 2,
+                                    width: 40,
+                                    color: isSelected ? Colors.blue : Colors.transparent,
                                   ),
                                 ],
                               ),
@@ -118,13 +106,8 @@ class Doctor extends StatelessWidget {
                     bottom: 0,
                     left: 0,
                     right: 0,
-                    // Ensures full width (alternative to width: MediaQuery)
                     child: Container(
-                      margin: const EdgeInsets.only(
-                        bottom: 10,
-                        left: 10,
-                        right: 10,
-                      ),
+                      margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
                       height: 1,
                       color: Colors.grey,
                     ),
@@ -142,30 +125,26 @@ class Doctor extends StatelessWidget {
                   ),
                 ),
               ),
-
               Expanded(
                 child: GridView.count(
                   crossAxisCount: 2,
-                  // ✅ two items per row
                   crossAxisSpacing: 2,
                   mainAxisSpacing: 2,
                   childAspectRatio: 0.57,
-                  // Adjust for width/height ratio of cards
                   children: List.generate(9, (index) {
                     return GestureDetector(
-                      onTap: (){
-                        Get.to(DoctorDetails());
+                      onTap: () {
+                        Get.toNamed('/doctor_details',
+                          id: NavIds.profile,  // this matches nested key
+                          arguments: {'doctorId': 'some-id'},
+                        );
 
                       },
                       child: Card(
                         elevation: 4,
                         color: Colors.white,
                         child: Padding(
-                          padding: const EdgeInsets.only(
-                            top: 10,
-                            left: 5,
-                            right: 5,
-                          ),
+                          padding: const EdgeInsets.only(top: 10, left: 5, right: 5),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -173,31 +152,25 @@ class Doctor extends StatelessWidget {
                                 children: [
                                   ClipRRect(
                                     borderRadius: BorderRadius.circular(8),
-                                    // ✅ Border radius of 5
                                     child: Image.asset(
                                       "assets/image/doctor_image.png",
                                       height: 140.h,
                                       width: double.infinity,
-                                      // ✅ Set height// ✅ Set width
-                                      fit: BoxFit
-                                          .cover, // Optional for proper scaling
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
-
                                   Positioned(
                                     right: 0,
                                     child: Padding(
                                       padding: const EdgeInsets.all(5),
                                       child: SvgPicture.asset(
-                                        "assets/icons/Heart.svg", // Your SVG file
+                                        "assets/icons/Heart.svg",
                                         width: 4,
-                                        // Simplified from 15.999979972839355
                                         height: 24,
-                                        // For first image
                                         colorFilter: ColorFilter.mode(
                                           Colors.black,
                                           BlendMode.srcIn,
-                                        ), // Optional color
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -214,40 +187,34 @@ class Doctor extends StatelessWidget {
                                     fontWeight: FontWeight.w500,
                                   ),
                                   overflow: TextOverflow.ellipsis,
-                                  // This handles text overflow
-                                  maxLines: 1, // Typically used with overflow
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 0.0),
-                                child: Text(
-                                  "Heart Health Expert",
-                                  style: TextStyle(
-                                    color: TextColors.neutral500,
-                                    fontFamily: 'Satoshi',
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
                                 ),
+                              ),
+                              Text(
+                                "Heart Health Expert",
+                                style: TextStyle(
+                                  color: TextColors.neutral500,
+                                  fontFamily: 'Satoshi',
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
                               ),
                               SizedBox(height: 5),
                               Row(
                                 children: [
                                   SvgPicture.asset(
-                                    AppIcons.hospitallocationIcon, // Your SVG file
-                                    width: 4, // Simplified from 15.999979972839355
-                                    height: 16, // For first image
+                                    AppIcons.hospitallocationIcon,
+                                    width: 4,
+                                    height: 16,
                                     colorFilter: ColorFilter.mode(
                                       Appcolors.action,
                                       BlendMode.srcIn,
-                                    ), // Optional color
+                                    ),
                                   ),
                                   const SizedBox(width: 6),
-                                  // space between icon and text (optional)
                                   Expanded(
-                                    // ✅ allows the text to take remaining space
                                     child: Text(
                                       "Sylhet Health Center",
                                       style: TextStyle(
@@ -262,7 +229,6 @@ class Doctor extends StatelessWidget {
                                 ],
                               ),
                               SizedBox(height: 14),
-
                               Row(
                                 children: [
                                   Padding(
@@ -279,13 +245,13 @@ class Doctor extends StatelessWidget {
                                   ),
                                   Spacer(),
                                   SvgPicture.asset(
-                                    AppIcons.shearIcon, // Your SVG file
-                                    width: 4, // Simplified from 15.999979972839355
-                                    height: 24, // For first image
+                                    AppIcons.shearIcon,
+                                    width: 4,
+                                    height: 24,
                                     colorFilter: ColorFilter.mode(
                                       Colors.black,
                                       BlendMode.srcIn,
-                                    ), // Optional color
+                                    ),
                                   ),
                                 ],
                               ),

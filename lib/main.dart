@@ -6,6 +6,7 @@ import 'package:wellbyn/themes/light_theme.dart';
 import 'package:wellbyn/utils/app_constants.dart';
 import 'package:wellbyn/utils/message.dart';
 import 'package:wellbyn/utils/token_service.dart';
+import 'controllers/base_controller.dart';
 import 'controllers/localization_controller.dart';
 import 'controllers/theme_controller.dart';
 import 'helpers/di.dart' as di;
@@ -17,6 +18,7 @@ void main()async {
   Map<String, Map<String, String>> _languages = await di.init();
   await TokenService().init();
   runApp( MyApp(languages:_languages,));
+  Get.put(BaseController());
 }
 
 class MyApp extends StatelessWidget {
@@ -49,7 +51,6 @@ class MyApp extends StatelessWidget {
         );
       }
       );
-
     }
     );
 

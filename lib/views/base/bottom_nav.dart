@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+
+import 'package:wellbyn/utils/app_colors.dart';
+import 'package:wellbyn/views/base/tab_navigator.dart';
+import 'package:wellbyn/views/screen/Home/home_screen.dart';
+import 'package:wellbyn/views/screen/appointment/appointment.dart';
 import 'package:wellbyn/views/screen/doctor/doctor.dart';
+import 'package:wellbyn/views/screen/doctor/doctor_details.dart';
 import 'package:wellbyn/views/screen/profile/medical_info.dart';
-import '../../utils/app_colors.dart';
-import '../screen/Home/home_screen.dart';
-import '../screen/appointment/appointment.dart';
 
-class BottomNavScreen extends StatefulWidget {
-  const BottomNavScreen({super.key});
+import '../../controllers/bottom_nav_controll.dart';
 
-  @override
-  State<BottomNavScreen> createState() => _BottomNavScreenState();
-}
+class BottomNavScreen extends StatelessWidget {
+  BottomNavScreen({Key? key}) : super(key: key);
 
-class _BottomNavScreenState extends State<BottomNavScreen> {
-  int _selectedIndex = 0;
+  final BottomNavController controller = Get.put(BottomNavController());
 
   final List<String> _icons = [
     'assets/icons/home.svg',
@@ -30,90 +31,112 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     'Profile',
   ];
 
-  final List<Widget> _pages = [
-     HomeScreen(),
-     Doctor(),
-     Appointment(),
-     MedicalInfoPage(),
-  ];
-
-  void _onTap(int index) {
-    if (index >= 0 && index < _pages.length) {
-      setState(() {
-        _selectedIndex = index;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // Use IndexedStack to keep all pages alive
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: _pages,
-      ),
+    return WillPopScope(
+      onWillPop: controller.onWillPop,
+      child: Scaffold(
+        body: Obx(() {
+          return IndexedStack(
+            index: controller.selectedIndex.value,
+            children: [
+              TabNavigator(
+                navigatorKey: controller.navigatorKeys[0],
+                child: HomeScreen(),
+              ),
+              
+              TabNavigator(
+                navigatorKey: controller.navigatorKeys[1], // ✅ navigator key for Doctor tab
+                child: Doctor(
+                  onDetailsTap: (String doctorId) {
+                    // ✅ Use Get.to with id matching this navigator
+                    Get.to(() => DoctorDetails(
+                      doctorId: doctorId,
+                      onBack: () => Get.back(id: 1), // go back within this navigator
+                    ), id: 1); // id must match this navigator
+                  },
+                ),
+              ),
 
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          color: Appcolors.primary,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-          boxShadow: [
-            BoxShadow(
-              color: Appcolors.secondary,
-              blurRadius: 12,
-              offset: Offset(0, -2),
-            )
-          ],
-        ),
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: List.generate(_icons.length, (index) {
-                final isSelected = _selectedIndex == index;
-                return GestureDetector(
-                  onTap: () => _onTap(index),
-                  behavior: HitTestBehavior.translucent,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      SvgPicture.asset(
-                        _icons[index],
-                        colorFilter: ColorFilter.mode(
-                          isSelected ? const Color(0xFF2D8BC9) : Colors.black54,
-                          BlendMode.srcIn,
-                        ),
-                        height: 24,
-                        width: 24,
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        _labels[index],
-                        style: TextStyle(
-                          fontFamily: 'Satoshi',
-                          fontSize: 12,
-                          color: isSelected ? const Color(0xFF2D8BC9) : Colors.black54,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      if (isSelected)
-                        Container(
-                          height: 3,
-                          width: 20,
-                          decoration: BoxDecoration(
-                            color: Colors.grey[400],
-                            borderRadius: BorderRadius.circular(2),
-                          ),
-                        ),
-                    ],
-                  ),
-                );
-              }),
+              TabNavigator(
+                navigatorKey: controller.navigatorKeys[2],
+                child: Appointment(),
+              ),
+              TabNavigator(
+                navigatorKey: controller.navigatorKeys[3],
+                child: MedicalInfoPage(),
+              ),
+            ],
+          );
+        }),
+        bottomNavigationBar: Obx(() {
+          int selectedIndex = controller.selectedIndex.value;
+
+          return Container(
+            decoration: const BoxDecoration(
+              color: Appcolors.primary,
+              borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+              boxShadow: [
+                BoxShadow(
+                  color: Appcolors.secondary,
+                  blurRadius: 12,
+                  offset: Offset(0, -2),
+                )
+              ],
             ),
-          ),
-        ),
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: List.generate(4, (index) {
+                    final isSelected = selectedIndex == index;
+                    return GestureDetector(
+                      onTap: () => controller.selectTab(index),
+                      child: SizedBox(
+                        height: 60,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SvgPicture.asset(
+                              _icons[index],
+                              colorFilter: ColorFilter.mode(
+                                isSelected ? const Color(0xFF2D8BC9) : Colors.black54,
+                                BlendMode.srcIn,
+                              ),
+                              height: 24,
+                              width: 24,
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              _labels[index],
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: isSelected
+                                    ? const Color(0xFF2D8BC9)
+                                    : Colors.black54,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            if (isSelected)
+                              Container(
+                                height: 3,
+                                width: 20,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[400],
+                                  borderRadius: BorderRadius.circular(2),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }),
+                ),
+              ),
+            ),
+          );
+        }),
       ),
     );
   }
