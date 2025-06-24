@@ -23,6 +23,7 @@ class TabNavigator extends StatelessWidget {
           fullscreenDialog: false,
         );
       },
+
       observers: [GetObserver()],
     );
   }

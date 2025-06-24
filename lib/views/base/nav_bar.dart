@@ -24,6 +24,7 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     final BaseController controller = Get.find<BaseController>();
 
     return Obx(() {
@@ -35,9 +36,9 @@ class BottomNavBar extends StatelessWidget {
           borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
           boxShadow: [
             BoxShadow(
-              color: Appcolors.secondary,
-              blurRadius: 12,
-              offset: Offset(0, -2),
+              color:Colors.black26,
+              blurRadius: 5,
+              offset: Offset(-2, 01),
             )
           ],
         ),
@@ -48,12 +49,13 @@ class BottomNavBar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: List.generate(_icons.length, (index) {
                 final isSelected = selectedIndex == index;
-                return GestureDetector(
-                  onTap: () => controller.changePage(index),
-                  child: SizedBox(
-                    height: 60,
+                return Expanded( // Ensures full width per tab
+                  child: GestureDetector(
+                    onTap: () => controller.changePage(index),
+                    behavior: HitTestBehavior.opaque, // Captures taps in the full area
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SvgPicture.asset(
                           _icons[index],

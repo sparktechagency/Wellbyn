@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:wellbyn/views/screen/base_screen.dart';
 
 import '../../../utils/app_colors.dart';
-import '../../base/bottom_nav.dart';
 
 class ConsentScreen extends StatelessWidget {
   const ConsentScreen({super.key});

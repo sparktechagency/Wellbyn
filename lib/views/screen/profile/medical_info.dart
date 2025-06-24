@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wellbyn/utils/app_colors.dart';
 import 'package:wellbyn/views/screen/profile/base/existioncondition.dart';
-
-void main() {
-  runApp(MaterialApp(home: MedicalInfoPage()));
-}
-
 class MedicalInfoPage extends StatefulWidget {
   @override
   _MedicalInfoPageState createState() => _MedicalInfoPageState();
