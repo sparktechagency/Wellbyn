@@ -1,0 +1,58 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+class IconTextButton extends StatelessWidget {
+  final VoidCallback onTap;
+  final String text;
+  final String svgAsset;
+  final Color backgroundColor;
+  final Color textColor;
+  final double height;
+
+  const IconTextButton({
+    super.key,
+    required this.onTap,
+    this.text = "Back to login",
+    this.svgAsset = "assets/icons/back.svg",
+    this.backgroundColor = const Color(0xFF0055FF), // default example
+    this.textColor = Colors.white,
+    this.height = 45,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: height.h,
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SvgPicture.asset(
+              svgAsset,
+              width: 16.w,
+              height: 24.h,
+              colorFilter: ColorFilter.mode(textColor, BlendMode.srcIn),
+            ),
+            SizedBox(width: 12.w),
+            Text(
+              text,
+              style: TextStyle(
+                fontFamily: 'Satoshi',
+                fontSize: 16.sp,
+                color: textColor,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

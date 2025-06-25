@@ -7,8 +7,8 @@ import 'package:wellbyn/views/screen/Home/home_screen.dart';
 import 'package:wellbyn/views/screen/appointment/appointment.dart';
 import 'package:wellbyn/views/screen/doctor/doctor.dart';
 import 'package:wellbyn/views/screen/doctor/doctor_details.dart';
-import 'package:wellbyn/views/screen/profile/medical_info.dart';
-import 'package:wellbyn/views/screen/profile/personal_info.dart';
+import 'package:wellbyn/views/screen/profile/base/medical_info.dart';
+import 'package:wellbyn/views/screen/profile/base/personal_info.dart';
 import 'package:wellbyn/views/screen/profile/setting.dart';
 
 import '../../controllers/base_controller.dart';

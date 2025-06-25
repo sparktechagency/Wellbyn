@@ -1,6 +1,7 @@
 import 'dart:developer' hide log;
 import 'dart:io';
 import 'dart:math' show log, pow;
+import 'package:dotted_line/dotted_line.dart';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -9,15 +10,19 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart' hide FormData, MultipartFile;
 import 'package:get/get_core/src/get_main.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:wellbyn/controllers/book_report_controller.dart';
 import 'package:wellbyn/utils/app_icons.dart';
+import 'package:wellbyn/views/base/app_button.dart';
 import 'package:wellbyn/views/screen/doctor/widget/animationwave.dart';
 
 import '../../../controllers/speed_controller.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/nab_ids.dart';
 import 'package:file_picker/file_picker.dart';
+
+import '../../base/custom_field.dart';
 
 class BookReport extends StatefulWidget {
   BookReport({super.key});
@@ -30,10 +35,12 @@ class _BookReportState extends State<BookReport> {
   final BookReportController controller = Get.put(BookReportController());
   final SpeechToText _speechToText = SpeechToText();
   TextEditingController problem = TextEditingController();
+  TextEditingController optional = TextEditingController();
 
   late SpeechController speechController;
   List<Map<String, dynamic>> files = [];
   bool isUploading = false;
+
 
   @override
   void initState() {
@@ -54,7 +61,6 @@ class _BookReportState extends State<BookReport> {
     }
   }
 
-
   Future<void> pickAndUploadPDF() async {
     try {
       if (Platform.isAndroid) {
@@ -64,7 +70,9 @@ class _BookReportState extends State<BookReport> {
         // For Android 11+, request Manage External Storage permission
         bool manageGranted = true;
         if (await Permission.manageExternalStorage.isDenied) {
-          manageGranted = await Permission.manageExternalStorage.request().isGranted;
+          manageGranted = await Permission.manageExternalStorage
+              .request()
+              .isGranted;
         }
 
         if (!storageGranted || !manageGranted) {
@@ -116,8 +124,6 @@ class _BookReportState extends State<BookReport> {
     }
   }
 
-
-
   Future<void> _uploadFile(File file, String fileName, int index) async {
     try {
       String uploadUrl = 'YOUR_UPLOAD_ENDPOINT'; // Replace with your API
@@ -151,9 +157,9 @@ class _BookReportState extends State<BookReport> {
         files[index]['isUploading'] = false;
         files[index]['error'] = true;
       });
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Upload failed: ${e.toString()}')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Upload failed: ${e.toString()}')));
     }
   }
 
@@ -173,8 +179,10 @@ class _BookReportState extends State<BookReport> {
 
   Widget _buildFileItem(Map<String, dynamic> file, int index) {
     return Container(
-      margin: EdgeInsets.only(bottom: 12),
-      padding: EdgeInsets.all(12),
+      margin: const EdgeInsets.only(bottom: 8),
+      // smaller margin
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+      // reduced padding
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey[300]!),
         borderRadius: BorderRadius.circular(4),
@@ -183,7 +191,7 @@ class _BookReportState extends State<BookReport> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start, // tighter layout
             children: [
               Expanded(
                 child: Column(
@@ -191,16 +199,19 @@ class _BookReportState extends State<BookReport> {
                   children: [
                     Text(
                       file['name'],
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 11, // smaller font
                         fontFamily: "Satoshi",
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 2), // tighter spacing
                     Text(
                       file['size'],
-                      style: TextStyle(
+                      style: const TextStyle(
+                        fontSize: 9,
+                        fontWeight: FontWeight.w300,
                         fontFamily: "Satoshi",
                       ),
                     ),
@@ -209,37 +220,42 @@ class _BookReportState extends State<BookReport> {
               ),
               if (file['isUploading'] != true)
                 IconButton(
+                  padding: EdgeInsets.zero, // remove padding around icon
+                  constraints: const BoxConstraints(),
                   icon: SvgPicture.asset(
                     AppIcons.deleteIcon,
                     color: Colors.red,
+                    height: 16, // reduce icon size
+                    width: 16,
                   ),
                   onPressed: () => _deleteFile(index),
                 ),
             ],
           ),
           if (file['isUploading'] == true) ...[
-            SizedBox(height: 8),
+            const SizedBox(height: 4),
             LinearProgressIndicator(
               value: file['progress'],
               backgroundColor: Colors.grey[200],
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+              valueColor: const AlwaysStoppedAnimation<Color>(Colors.blue),
+              minHeight: 4, // smaller height
             ),
-            SizedBox(height: 4),
+            const SizedBox(height: 2),
             Text(
               '${(file['progress'] * 100).toStringAsFixed(1)}%',
-              style: TextStyle(
-                fontSize: 12,
-                fontFamily: "Satoshi",
-              ),
+              style: const TextStyle(fontSize: 10, fontFamily: "Satoshi"),
             ),
           ],
           if (file['error'] == true)
-            Text(
-              'Upload failed',
-              style: TextStyle(
-                color: Colors.red,
-                fontSize: 12,
-                fontFamily: "Satoshi",
+            const Padding(
+              padding: EdgeInsets.only(top: 2),
+              child: Text(
+                'Upload failed',
+                style: TextStyle(
+                  color: Colors.red,
+                  fontSize: 10,
+                  fontFamily: "Satoshi",
+                ),
               ),
             ),
         ],
@@ -273,125 +289,66 @@ class _BookReportState extends State<BookReport> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Obx(() => CustomDropdownDialog(
-                items: controller.items,
-                selectedValue: controller.selectedValue.value,
-                onChanged: (newValue) {
-                  controller.setSelected(newValue);
-                },
-              )),
-              SizedBox(height: 12),
-              Container(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Obx(
+                () => CustomDropdownDialog(
+                  items: controller.items,
+                  selectedValue: controller.selectedValue.value,
+                  onChanged: (newValue) {
+                    controller.setSelected(newValue);
+                  },
+                ),
+              ),
+            ),
+            SizedBox(height: 12),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Appcolors.primary,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.10),
-                        offset: Offset(0, 0.03),
-                        blurRadius: 20,
-                      )
-                    ]),
+                  borderRadius: BorderRadius.circular(8),
+                  color: Appcolors.primary,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.10),
+                      offset: Offset(0, 0.03),
+                      blurRadius: 20,
+                    ),
+                  ],
+                ),
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 15,
+                    vertical: 10,
+                  ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                          "What happened and how? Tell us! ",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: "Satoshi",
-                            fontWeight: FontWeight.w500,
-                          )),
-                      SizedBox(height: 8),
-                      Obx(() => TextField(
-                        controller: speechController.textController,
-                        maxLines: 1,
+                        "What happened and how? Tell us! ",
                         style: TextStyle(
+                          fontSize: 16,
                           fontFamily: "Satoshi",
-                          fontSize: 14,
-                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
                         ),
-                        decoration: InputDecoration(
-                          hintText: 'Talk to us or write it!',
-                          hintStyle: TextStyle(
-                            color: Colors.grey[600],
-                            fontFamily: "Satoshi",
-                          ),
-                          filled: true,
-                          fillColor: Appcolors.primary,
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 12),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: BorderSide(color: Appcolors.disabled),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: BorderSide(
-                                color: TextColors.neutral900, width: 1),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: BorderSide(color: Colors.red),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: BorderSide(color: Colors.redAccent),
-                          ),
-                          suffixIcon: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              if (speechController.isListening.value)
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 4),
-                                  child: SizedBox(
-                                    width: 20,
-                                    height: 20,
-                                    child: AnimatedWaveform(),
-                                  ),
-                                ),
-                              IconButton(
-                                icon: SvgPicture.asset(
-                                  AppIcons.micIcon,
-                                  color: speechController.isListening.value
-                                      ? Appcolors.action
-                                      : Appcolors.primaryInverted,
-                                ),
-                                onPressed: () {
-                                  speechController.toggleListening();
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      )),
+                      ),
                       SizedBox(height: 8),
-                      Text("Summary ",
-                          style: TextStyle(
-                            fontFamily: "Satoshi",
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          )),
-                      SizedBox(height: 8),
-                      TextField(
-                          controller: problem,
-                          maxLines: 2,
+                      Obx(
+                        () => TextField(
+                          controller: speechController.textController,
+                          maxLines: 1,
                           style: TextStyle(
                             fontFamily: "Satoshi",
                             fontSize: 14,
                             color: Colors.black,
                           ),
                           decoration: InputDecoration(
-                            hintText: 'Problem',
+                            hintText: 'Talk to us or write it!',
                             hintStyle: TextStyle(
                               color: Colors.grey[600],
                               fontFamily: "Satoshi",
@@ -399,7 +356,9 @@ class _BookReportState extends State<BookReport> {
                             filled: true,
                             fillColor: Appcolors.primary,
                             contentPadding: EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 12),
+                              horizontal: 16,
+                              vertical: 12,
+                            ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                               borderSide: BorderSide(color: Appcolors.disabled),
@@ -407,7 +366,9 @@ class _BookReportState extends State<BookReport> {
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                               borderSide: BorderSide(
-                                  color: TextColors.neutral900, width: 1),
+                                color: TextColors.neutral900,
+                                width: 1,
+                              ),
                             ),
                             errorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
@@ -417,13 +378,94 @@ class _BookReportState extends State<BookReport> {
                               borderRadius: BorderRadius.circular(8),
                               borderSide: BorderSide(color: Colors.redAccent),
                             ),
-                          )),
+                            suffixIcon: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                if (speechController.isListening.value)
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 4),
+                                    child: SizedBox(
+                                      width: 20,
+                                      height: 20,
+                                      child: AnimatedWaveform(),
+                                    ),
+                                  ),
+                                IconButton(
+                                  icon: SvgPicture.asset(
+                                    AppIcons.micIcon,
+                                    color: speechController.isListening.value
+                                        ? Appcolors.action
+                                        : Appcolors.primaryInverted,
+                                  ),
+                                  onPressed: () {
+                                    speechController.toggleListening();
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        "Summary ",
+                        style: TextStyle(
+                          fontFamily: "Satoshi",
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      TextField(
+                        controller: problem,
+                        maxLines: 2,
+                        style: TextStyle(
+                          fontFamily: "Satoshi",
+                          fontSize: 14,
+                          color: Colors.black,
+                        ),
+                        decoration: InputDecoration(
+                          hintText: 'Problem',
+                          hintStyle: TextStyle(
+                            color: Colors.grey[600],
+                            fontFamily: "Satoshi",
+                          ),
+                          filled: true,
+                          fillColor: Appcolors.primary,
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 12,
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(color: Appcolors.disabled),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                              color: TextColors.neutral900,
+                              width: 1,
+                            ),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(color: Colors.red),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(color: Colors.redAccent),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ),
-              SizedBox(height: 20),
-              Column(
+            ),
+            SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -435,15 +477,20 @@ class _BookReportState extends State<BookReport> {
                     ),
                   ),
                   SizedBox(height: 12),
-                  ...files.map((file) => _buildFileItem(file, files.indexOf(file))).toList(),
+                  ...files
+                      .map((file) => _buildFileItem(file, files.indexOf(file)))
+                      .toList(),
                   SizedBox(height: 12),
                   GestureDetector(
                     onTap: pickAndUploadPDF,
                     child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                      padding: EdgeInsets.symmetric(
+                        vertical: 5,
+                        horizontal: 10,
+                      ),
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(4),
+                        border: Border.all(color: Colors.blueAccent),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -463,8 +510,236 @@ class _BookReportState extends State<BookReport> {
                   ),
                 ],
               ),
-            ],
-          ),
+            ),
+
+            SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  'Current Medication',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontFamily: "Satoshi",
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 10),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: GestureDetector(
+                  onTap: pickAndUploadPDF,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.blue),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SvgPicture.asset(
+                          AppIcons.shearIcon,
+                          color: Colors.blue,
+                        ),
+                        SizedBox(width: 8),
+                        Text(
+                          'Share',
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontFamily: "Satoshi",
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Row(
+                children: [
+                  Text(
+                    "Prior Diagnoses",
+                    style: TextStyle(
+                      fontFamily: "Satoshi",
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  Text(
+                    "(Optional)",
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontFamily: "Satoshi",
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 15),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: CustomTextField(
+                maxLines: 6,
+                hintText: 'Search for a doctor by name or designation...',
+                controller: optional,
+                filColor: Appcolors.primary,
+              ),
+            ),
+            SizedBox(height: 30),
+
+            Container(
+              height: 200,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Appcolors.page,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.22),
+                    offset: Offset(-2, 0.03),
+                    blurRadius: 10,
+                  ),
+                ],
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
+                ),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(top: 10),
+                      height: 4,
+                      width: 50,
+                      decoration: BoxDecoration(
+                          color: Colors.black26.withOpacity(0.15),
+                        borderRadius: BorderRadius.circular(50),
+                        
+                      ),
+                  ),
+                  SizedBox(height: 8,),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          radius: 30,
+                          backgroundImage: AssetImage('assets/image/doctor_image.png'), // your local image path
+                        ),
+                        SizedBox(width: 10,),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                                "Dr. Moule Marrk",
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  fontFamily: "Satoshi",
+                                  fontWeight: FontWeight.w500,
+
+                                )
+                            ),
+                            Text(
+                                "Cardiology ",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color:  TextColors.neutral900,
+                                  fontFamily: "Satoshi",
+                                  fontWeight: FontWeight.w400,
+                                )
+                            ),
+                            Row(
+                              children: [
+                                SvgPicture.asset(AppIcons.hospitallocationIcon),
+                                SizedBox(width: 5,),
+                                Text(
+                                    "Sylhet Health Center",
+                               style: TextStyle(
+                                fontSize: 14,
+                                color: TextColors.neutral900,
+                                fontFamily: "Satoshi",
+                                fontWeight: FontWeight.w500,
+                                )
+                              ),
+
+                              ],
+                            )
+
+
+                          ],
+                        )
+
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Row(
+                      children: [
+                        Text(
+                            "Date & time",
+                            style: TextStyle(
+                              fontSize: 14,
+                              color:  TextColors.neutral500,
+                              fontWeight: FontWeight.w500,
+                            )
+                        ),
+                    const SizedBox(width: 8), // optional space between text and line
+                    Expanded(
+                      child: DottedLine(
+                        dashLength: 4,
+                        dashGapLength: 4,
+                        lineThickness: 1,
+                        dashColor: Colors.black26,
+                      ),
+                    ),
+                        
+                      ],
+                    ),
+                  ),
+                  
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Row(
+                      children: [
+                        Text("16 May 2025"),
+                        Spacer(),
+                        Text("10:25pm"),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: AppButton(
+                        text: "View Overview",
+                        onPressed: (){
+
+                    }),
+                  ),
+
+
+
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -516,7 +791,9 @@ class _CustomDropdownDialogState extends State<CustomDropdownDialog> {
                     item,
                     style: TextStyle(
                       fontFamily: 'Satoshi',
-                      fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+                      fontWeight: isSelected
+                          ? FontWeight.w700
+                          : FontWeight.w500,
                       fontSize: 15,
                       color: isSelected ? Colors.blue : Colors.black,
                     ),
@@ -585,7 +862,9 @@ class _CustomDropdownDialogState extends State<CustomDropdownDialog> {
           _selectedValue ?? 'Select state',
           style: TextStyle(
             color: _selectedValue == null ? Colors.grey[600] : Colors.black,
-            fontWeight: _selectedValue == null ? FontWeight.normal : FontWeight.w300,
+            fontWeight: _selectedValue == null
+                ? FontWeight.normal
+                : FontWeight.w300,
             fontSize: 14,
           ),
         ),

@@ -55,7 +55,8 @@ dependencies:
   file_picker: ^10.2.0  # For picking files
   dio: ^5.3.2         # For file uploads with progress
   path_provider: ^2.1.1
-
+  dotted_line: ^3.0.0
+  share_plus: ^11.0.0
 
 
 

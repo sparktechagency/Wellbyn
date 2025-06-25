@@ -35,6 +35,12 @@
 <key>NSPhotoLibraryUsageDescription</key>
 <string>Need photos permission to upload documents</string>
 	<key>UISupportedInterfaceOrientations</key>
+
+	<key>NSPhotoLibraryAddUsageDescription</key>
+    <string>We need access to save photos for sharing</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>We need access to your photos for sharing</string>
+
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>

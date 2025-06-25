@@ -23,6 +23,13 @@ class AppIcons{
   static String helpIcon="assets/icons/help_circle.svg";
   static String documentIcon="assets/icons/document_validation.svg";
   static String logoutIcon="assets/icons/logout03.svg";
+  static String navigationIcon="assets/icons/navigation03.svg";
+  static String backIcon="assets/icons/back.svg";
+  static String viewIcon="assets/icons/view.svg";
+  static String delete02Icon="assets/icons/delete02.svg";
+  static String alertIcon="assets/icons/alert_circle.svg";
+  static String heart01Icon="assets/icons/heart01.svg";
+
 
 
 

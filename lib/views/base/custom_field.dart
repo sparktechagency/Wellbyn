@@ -21,6 +21,7 @@ class CustomTextField extends StatefulWidget {
   final bool? isEmail;
   final AutovalidateMode? autovalidateMode;
   final ValueChanged<String>? onChanged;
+  final int? maxLines;
 
 
 
@@ -42,6 +43,8 @@ class CustomTextField extends StatefulWidget {
     this.labelText,
     this.isPassword = false, this.autovalidateMode,
     this.onChanged,
+    this.maxLines,
+
   });
 
   @override
@@ -62,6 +65,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return TextFormField(
       autovalidateMode: widget.autovalidateMode ?? AutovalidateMode.disabled,
       controller: widget.controller,
+      maxLines: widget.isPassword ? 1 : widget.maxLines,
       keyboardType: widget.keyboardType,
       obscuringCharacter: widget.obscure!,
       // validator: widget.validator,
@@ -145,6 +149,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             : widget.suffixIcon,
         prefixIconConstraints: BoxConstraints(minHeight: 20.w, minWidth: 20.w),
         labelText: widget.labelText,
+
         hintText: widget.hintText,
         hintStyle: TextStyle(
           fontFamily: 'Satoshi',

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:wellbyn/controllers/dotor_details.dart';
 import 'package:wellbyn/utils/app_colors.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:wellbyn/utils/app_icons.dart';
@@ -10,11 +12,21 @@ import 'package:wellbyn/views/screen/doctor/doctor.dart';
 
 import '../../../controllers/date_picker_controller.dart';
 import '../../../utils/nab_ids.dart';
-class DoctorDetails extends StatelessWidget {
-  final VoidCallback? onBack;
-  final String doctorId;
 
-   DoctorDetails({super.key, this.onBack, required this.doctorId, });
+class DoctorDetails extends StatelessWidget {
+  final String doctorId;
+  DoctorDetails({super.key, required this.doctorId});
+
+
+  DoctorDetailsController controller = Get.put(DoctorDetailsController());
+
+  void _shareText() {
+    SharePlus.instance.share(
+        ShareParams(text: 'check out my website https://example.com')
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -42,10 +54,8 @@ class DoctorDetails extends StatelessWidget {
                       top: 40,
                       left: 15,
                       child: GestureDetector(
-                        onTap: (){
-
+                        onTap: () {
                           Get.back(id: NavIds.profile);
-
                         },
                         child: Container(
                           padding: EdgeInsets.all(4),
@@ -59,39 +69,46 @@ class DoctorDetails extends StatelessWidget {
                           //   onPressed: () {
                           //     Get.back(id: NavIds.profile);
                           //   },
-                           child: SvgPicture.asset(
-                              'assets/icons/arrow-left.svg',
-                              width: 30.w,
-                              height: 30.h,
-                              color: Colors.black,
-                            ),
+                          child: SvgPicture.asset(
+                            'assets/icons/arrow-left.svg',
+                            width: 30.w,
+                            height: 30.h,
+                            color: Colors.black,
                           ),
+                        ),
                       ),
                     ),
-
                     Positioned(
                       top: 40,
                       right: 15,
-                      child: Container(
-                        padding: EdgeInsets.all(4),
-                        height: 30,
-                        width: 30,
-                        decoration: BoxDecoration(
-                          color: Appcolors.primary,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        // child: IconButton(
-                        //   onPressed: () {
-                        //     Get.back(id: NavIds.profile);
-                        //   },
-                        child: SvgPicture.asset(
-                          AppIcons.heartIcon,
-                          width: 15,
-                          height: 15,
-                          color: Colors.black,
-                        ),
-                      ),
+                      child: Obx(() {
+                        return GestureDetector(
+                          onTap: (){
+                            controller.toggleFavorite();
+
+                            },
+                          child: Container(
+                            padding: EdgeInsets.all(5),
+                            height: 30,
+                            width: 30,
+                            decoration: BoxDecoration(
+                              color: Appcolors.primary,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: SvgPicture.asset(
+                                controller.isFavorite.value? AppIcons.heart01Icon : AppIcons.heartIcon ,
+                                width: 20,
+                                height: 20,
+                                color:controller.isFavorite.value
+                                    ? Colors.red: Colors.black,
+                              ),
+                          ),
+                        );
+                      }),
                     ),
+
+
+
                   ],
                 ),
               ),
@@ -108,18 +125,19 @@ class DoctorDetails extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 8,
-                    )
-                  ],
+                  boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 8)],
                 ),
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Center(child: Container(height: 5, width: 40, color: Colors.grey[300])),
+                      Center(
+                        child: Container(
+                          height: 5,
+                          width: 40,
+                          color: Colors.grey[300],
+                        ),
+                      ),
                       SizedBox(height: 16),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -127,8 +145,21 @@ class DoctorDetails extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Dr. Moule Marrk", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, fontFamily: 'Satoshi')),
-                              Text("Cardiology", style: TextStyle(color: TextColors.neutral500, fontFamily: 'Satoshi')),
+                              Text(
+                                "Dr. Moule Marrk",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 20,
+                                  fontFamily: 'Satoshi',
+                                ),
+                              ),
+                              Text(
+                                "Cardiology",
+                                style: TextStyle(
+                                  color: TextColors.neutral500,
+                                  fontFamily: 'Satoshi',
+                                ),
+                              ),
                             ],
                           ),
                           Row(
@@ -138,8 +169,9 @@ class DoctorDetails extends StatelessWidget {
                                 height: 40,
                                 width: 40,
                                 decoration: BoxDecoration(
-                                    color: TextColors.primary500,
-                                    borderRadius: BorderRadius.circular(8)),
+                                  color: TextColors.primary500,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
                                 child: Align(
                                   alignment: Alignment.center,
                                   child: SvgPicture.asset(
@@ -149,25 +181,31 @@ class DoctorDetails extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              Container(
-                                margin: EdgeInsets.symmetric(horizontal: 8),
-                                height: 40,
-                                width: 40,
-                                decoration: BoxDecoration(
+                              GestureDetector(
+                                onTap: (){
+                                  _shareText();
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 8),
+                                  height: 40,
+                                  width: 40,
+                                  decoration: BoxDecoration(
                                     color: Appcolors.secondary,
                                     border: Border.all(
                                       width: 2,
                                       color: Colors.blue,
                                       style: BorderStyle.solid,
                                     ),
-                                    borderRadius: BorderRadius.circular(8)),
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: SvgPicture.asset(
-                                    height: 25,
-                                    width: 25,
-                                    color: Appcolors.action,
-                                    AppIcons.shearIcon,
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: SvgPicture.asset(
+                                      height: 25,
+                                      width: 25,
+                                      color: Appcolors.action,
+                                      AppIcons.shearIcon,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -178,21 +216,29 @@ class DoctorDetails extends StatelessWidget {
                       SizedBox(height: 10),
                       Row(
                         children: [
-                          SvgPicture.asset(AppIcons.hospitallocationIcon, color: Colors.blue),
+                          SvgPicture.asset(
+                            AppIcons.hospitallocationIcon,
+                            color: Colors.blue,
+                          ),
                           SizedBox(width: 4),
                           Text(
                             "Sylhet Health Center",
                             style: TextStyle(
-                                color: TextColors.neutral500,
-                                fontWeight: FontWeight.w400,
-                                fontFamily: 'Satoshi',
-                                fontSize: 20),
+                              color: TextColors.neutral500,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: 'Satoshi',
+                              fontSize: 20,
+                            ),
                           ),
                         ],
                       ),
                       Text(
                         "Calle Ceiba #142, Urb. Alturas de Monte Verde, Trujillo Alto, PR 00976",
-                        style: TextStyle(fontStyle: FontStyle.italic, fontSize: 12, color: Colors.grey),
+                        style: TextStyle(
+                          fontStyle: FontStyle.italic,
+                          fontSize: 12,
+                          color: Colors.grey,
+                        ),
                       ),
                       SizedBox(height: 20),
 
@@ -200,35 +246,43 @@ class DoctorDetails extends StatelessWidget {
                       Row(
                         children: [
                           // Waitlist Button (Outlined)
-
                           Expanded(
                             child: OutlinedButton.icon(
                               onPressed: () {},
-                              icon: SvgPicture.asset(AppIcons.alarmIcon, color: Colors.blue),
+                              icon: SvgPicture.asset(
+                                AppIcons.alarmIcon,
+                                color: Colors.blue,
+                              ),
                               label: Text(
                                 "Waitlist",
-                                style: TextStyle(fontFamily: 'Satoshi', color: Colors.blue),
+                                style: TextStyle(
+                                  fontFamily: 'Satoshi',
+                                  color: Colors.blue,
+                                ),
                               ),
                               style: OutlinedButton.styleFrom(
                                 side: BorderSide(color: Colors.blue),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8),
                                 ),
-                                padding: EdgeInsets.symmetric(vertical: 10), // vertical padding only
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 10,
+                                ), // vertical padding only
                               ),
                             ),
                           ),
 
                           const SizedBox(width: 10), // Space between buttons
-
                           // Next Button (Filled)
                           Expanded(
                             child: SizedBox(
                               height: 45,
                               child: ElevatedButton(
                                 onPressed: () {
-                                  Get.toNamed('/book_report',
-                                    id: NavIds.profile,);
+                                  Get.toNamed(
+                                    '/book_report',
+                                    id: NavIds.profile,
+                                  );
                                   // this matches nested key);
                                 },
                                 style: ElevatedButton.styleFrom(
@@ -239,7 +293,10 @@ class DoctorDetails extends StatelessWidget {
                                 ),
                                 child: Text(
                                   "Next",
-                                  style: TextStyle(fontFamily: 'Satoshi',color: Colors.white),
+                                  style: TextStyle(
+                                    fontFamily: 'Satoshi',
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ),
@@ -247,23 +304,17 @@ class DoctorDetails extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 20),
-
-
                     ],
                   ),
                 ),
               ),
-
             ),
           ),
         ],
-
       ),
     );
   }
-
 }
-
 
 class DateTimePickerSection extends StatefulWidget {
   final void Function(DateTime? date, String? time)? onSelectionChanged;
@@ -275,7 +326,9 @@ class DateTimePickerSection extends StatefulWidget {
 }
 
 class _DateTimePickerSectionState extends State<DateTimePickerSection> {
-  final DateTimePickerController controller = Get.put(DateTimePickerController());
+  final DateTimePickerController controller = Get.put(
+    DateTimePickerController(),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -295,7 +348,10 @@ class _DateTimePickerSectionState extends State<DateTimePickerSection> {
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: Row(
               children: [
-                Text("Select your date ", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20)),
+                Text(
+                  "Select your date ",
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+                ),
                 Spacer(),
                 buildMonthNavigation(),
               ],
@@ -307,7 +363,6 @@ class _DateTimePickerSectionState extends State<DateTimePickerSection> {
           const SizedBox(height: 10),
           buildTimeSlots(selectedTime),
           const SizedBox(height: 24),
-
         ],
       );
     });
@@ -316,14 +371,20 @@ class _DateTimePickerSectionState extends State<DateTimePickerSection> {
   Widget buildMonthNavigation() {
     return Row(
       children: [
-        buildArrowButton(Icons.arrow_back_ios, () => controller.changeMonth(-1)),
+        buildArrowButton(
+          Icons.arrow_back_ios,
+          () => controller.changeMonth(-1),
+        ),
         const SizedBox(width: 10),
         Text(
           "${getMonthName(controller.currentMonth.value.month)} ${controller.currentMonth.value.year}",
           style: TextStyle(fontSize: 16),
         ),
         const SizedBox(width: 10),
-        buildArrowButton(Icons.arrow_forward_ios, () => controller.changeMonth(1)),
+        buildArrowButton(
+          Icons.arrow_forward_ios,
+          () => controller.changeMonth(1),
+        ),
       ],
     );
   }
@@ -339,24 +400,29 @@ class _DateTimePickerSectionState extends State<DateTimePickerSection> {
       child: InkWell(
         borderRadius: BorderRadius.circular(8),
         onTap: onTap,
-        child: Icon(icon,color: Appcolors.action, size: 16),
+        child: Icon(icon, color: Appcolors.action, size: 16),
       ),
     );
   }
 
   Widget buildCalendarGrid(DateTime currentMonth, DateTime? selectedDate) {
-    int daysInMonth = DateTime(currentMonth.year, currentMonth.month + 1, 0).day;
+    int daysInMonth = DateTime(
+      currentMonth.year,
+      currentMonth.month + 1,
+      0,
+    ).day;
 
     List<DateTime> days = List.generate(
       daysInMonth,
-          (i) => DateTime(currentMonth.year, currentMonth.month, i + 1),
+      (i) => DateTime(currentMonth.year, currentMonth.month, i + 1),
     );
 
     return Wrap(
       spacing: 5,
       runSpacing: 5,
       children: days.map((date) {
-        final isSelected = selectedDate != null &&
+        final isSelected =
+            selectedDate != null &&
             date.year == selectedDate.year &&
             date.month == selectedDate.month &&
             date.day == selectedDate.day;
@@ -368,7 +434,7 @@ class _DateTimePickerSectionState extends State<DateTimePickerSection> {
             height: 40,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: isSelected ? Colors.blue : Colors.grey[200],
+              color: isSelected ? Colors.blue : Appcolors.page,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(
@@ -409,7 +475,21 @@ class _DateTimePickerSectionState extends State<DateTimePickerSection> {
   }
 
   String getMonthName(int month) {
-    const names = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const names = [
+      "",
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
     return names[month];
   }
 }

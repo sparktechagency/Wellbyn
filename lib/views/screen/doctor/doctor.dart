@@ -54,6 +54,7 @@ class Doctor extends StatelessWidget {
           child: Column(
             children: [
               CustomTextField(
+                maxLines: 1,
                 filColor: Appcolors.primary,
                 controller: searchcontroller,
                 hintText: 'Search for a doctor by name or designation...',
