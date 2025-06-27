@@ -41,7 +41,7 @@ class CustomButton extends StatelessWidget {
             shape: RoundedRectangleBorder(
                 side: BorderSide(
                     width: 1.w, color: broderColor ?? BorderColors.normal),
-                borderRadius: BorderRadius.circular(16.r)),
+                borderRadius: BorderRadius.circular(8.r)),
             backgroundColor: color ?? Appcolors.primary,
             minimumSize: Size(width ?? Get.width, height ?? 53.h),
           ),
@@ -55,7 +55,7 @@ class CustomButton extends StatelessWidget {
           )
               : CustomText(
               text: text,
-              fontWeight: FontWeight.w300,
+              fontWeight: FontWeight.w400,
               fontSize: fontSize ?? 14.sp,
               color: textColor ?? Colors.black),
         ));

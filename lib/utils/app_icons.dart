@@ -29,6 +29,10 @@ class AppIcons{
   static String delete02Icon="assets/icons/delete02.svg";
   static String alertIcon="assets/icons/alert_circle.svg";
   static String heart01Icon="assets/icons/heart01.svg";
+  static String appointmentIcon="assets/icons/calendar.svg";
+  static String doctorstethoscope="assets/icons/stethoscope.svg";
+  static String calenderIcon="assets/icons/calendar.svg";
+  static String calenderIcon01="assets/icons/calendar01.svg";
 
 
 

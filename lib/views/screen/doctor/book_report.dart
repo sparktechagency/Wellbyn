@@ -15,6 +15,8 @@ import 'package:speech_to_text/speech_to_text.dart';
 import 'package:wellbyn/controllers/book_report_controller.dart';
 import 'package:wellbyn/utils/app_icons.dart';
 import 'package:wellbyn/views/base/app_button.dart';
+import 'package:wellbyn/views/base/app_text.dart';
+import 'package:wellbyn/views/screen/doctor/book_overview.dart';
 import 'package:wellbyn/views/screen/doctor/widget/animationwave.dart';
 
 import '../../../controllers/speed_controller.dart';
@@ -178,95 +180,154 @@ class _BookReportState extends State<BookReport> {
   }
 
   Widget _buildFileItem(Map<String, dynamic> file, int index) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      // smaller margin
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-      // reduced padding
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey[300]!),
-        borderRadius: BorderRadius.circular(4),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start, // tighter layout
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      file['name'],
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 11, // smaller font
-                        fontFamily: "Satoshi",
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 2), // tighter spacing
-                    Text(
-                      file['size'],
-                      style: const TextStyle(
-                        fontSize: 9,
-                        fontWeight: FontWeight.w300,
-                        fontFamily: "Satoshi",
-                      ),
-                    ),
-                  ],
-                ),
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.only(bottom: 8),
+          padding: const EdgeInsets.only(top: 3,left: 8,),
+          // reduced padding
+          decoration: BoxDecoration(
+            border: Border.all(color: TextColors.neutral900.withOpacity(0.14)),
+            borderRadius: BorderRadius.circular(8),
+            color: Appcolors.primary,
+            boxShadow: [
+              BoxShadow(
+                color: TextColors.neutral900.withOpacity(0.10),
+                offset: Offset(0.2, 0.3),
+                blurRadius: 20,
               ),
-              if (file['isUploading'] != true)
-                IconButton(
-                  padding: EdgeInsets.zero, // remove padding around icon
-                  constraints: const BoxConstraints(),
-                  icon: SvgPicture.asset(
-                    AppIcons.deleteIcon,
-                    color: Colors.red,
-                    height: 16, // reduce icon size
-                    width: 16,
+            ]
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start, // tighter layout
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          file['name'],
+                          style: const TextStyle(
+                            color: TextColors.neutral900,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 14, // smaller font
+                            fontFamily: "Satoshi",
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+
+                        Text(
+                          file['size'],
+                          style: const TextStyle(
+                            fontSize: 10,
+                            color: TextColors.neutral900,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: "Satoshi",
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  onPressed: () => _deleteFile(index),
-                ),
+                  if (file['isUploading'] != true)
+                    IconButton(
+                      padding: EdgeInsets.zero, // remove padding around icon
+                      constraints: const BoxConstraints(),
+                      icon: SvgPicture.asset(
+                        AppIcons.deleteIcon,
+                        color: TextColors.neutral900,
+                        height: 16, // reduce icon size
+                        width: 16,
+                      ),
+                      onPressed: () => _deleteFile(index),
+                    ),
+                ],
+              ),
+
             ],
           ),
-          if (file['isUploading'] == true) ...[
-            const SizedBox(height: 4),
-            LinearProgressIndicator(
-              value: file['progress'],
-              backgroundColor: Colors.grey[200],
-              valueColor: const AlwaysStoppedAnimation<Color>(Colors.blue),
-              minHeight: 4, // smaller height
-            ),
-            const SizedBox(height: 2),
-            Text(
-              '${(file['progress'] * 100).toStringAsFixed(1)}%',
-              style: const TextStyle(fontSize: 10, fontFamily: "Satoshi"),
+        ),
+
+// Usage inside your widget:
+    if (file['isUploading'] == true || file['error'] == true) ...[
+    const SizedBox(height: 4),
+      Container(
+        height: 55,
+        decoration: BoxDecoration(
+          border: Border.all(color: TextColors.neutral900.withOpacity(0.14)),
+          borderRadius: BorderRadius.circular(8),
+          color: Colors.white, // <-- Set to white here
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              offset: const Offset(0, 1),
+              blurRadius: 4,
             ),
           ],
-          if (file['error'] == true)
-            const Padding(
-              padding: EdgeInsets.only(top: 2),
-              child: Text(
-                'Upload failed',
-                style: TextStyle(
-                  color: Colors.red,
-                  fontSize: 10,
-                  fontFamily: "Satoshi",
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      file['name'] ?? 'file.pdf',
+                      style: const TextStyle(fontSize: 12),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      // Handle file remove
+                    },
+                    child: const Icon(
+                      Icons.close,
+                      size: 16,
+                      color: TextColors.neutral500,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              child: LinearProgressIndicator(
+                value: file['progress'] ?? 0.0,
+                minHeight: 4,
+                backgroundColor: Colors.grey[200],
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  getProgressColor(file['progress'] ?? 0.0, file['error'] == true),
                 ),
               ),
             ),
-        ],
+          ],
+        ),
       ),
+
+    ]
+
+
+    ],
     );
+  }
+  Color getProgressColor(double progress, bool hasError) {
+    if (hasError) return Colors.red;
+    if (progress < 0.3) return Colors.blue;
+    if (progress < 0.7) return Colors.orange;
+    return Colors.green;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Appcolors.page,
       appBar: AppBar(
+        backgroundColor: Appcolors.page,
         title: Text(
           "Additional Report",
           style: TextStyle(
@@ -291,9 +352,15 @@ class _BookReportState extends State<BookReport> {
       ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: AppText("Visit Reason",fontSize: 16,color: TextColors.neutral900,),
+            ),
+            SizedBox(height: 8,),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Obx(
                 () => CustomDropdownDialog(
                   items: controller.items,
@@ -304,9 +371,9 @@ class _BookReportState extends State<BookReport> {
                 ),
               ),
             ),
-            SizedBox(height: 12),
+            SizedBox(height: 20),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
@@ -314,15 +381,15 @@ class _BookReportState extends State<BookReport> {
                   color: Appcolors.primary,
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.10),
-                      offset: Offset(0, 0.03),
+                      color: TextColors.neutral900.withOpacity(0.10),
+                      offset: Offset(0.2, 0.3),
                       blurRadius: 20,
                     ),
                   ],
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 15,
+                    horizontal: 8,
                     vertical: 10,
                   ),
                   child: Column(
@@ -464,19 +531,19 @@ class _BookReportState extends State<BookReport> {
             ),
             SizedBox(height: 20),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Documentation',
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 16,
                       fontFamily: "Satoshi",
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
-                  SizedBox(height: 12),
+                  SizedBox(height: 8),
                   ...files
                       .map((file) => _buildFileItem(file, files.indexOf(file)))
                       .toList(),
@@ -485,23 +552,25 @@ class _BookReportState extends State<BookReport> {
                     onTap: pickAndUploadPDF,
                     child: Container(
                       padding: EdgeInsets.symmetric(
-                        vertical: 5,
+                        vertical: 4,
                         horizontal: 10,
                       ),
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.blueAccent),
-                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: TextColors.action,),
+                        borderRadius: BorderRadius.circular(7),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(Icons.add, color: Colors.blue),
-                          SizedBox(width: 8),
+                          Icon(Icons.add, color: TextColors.action),
+                          SizedBox(width: 5),
                           Text(
                             'Add File',
                             style: TextStyle(
-                              color: Colors.blue,
+                              color: TextColors.action,
                               fontFamily: "Satoshi",
+
+                              fontWeight: FontWeight.w500
                             ),
                           ),
                         ],
@@ -512,25 +581,26 @@ class _BookReportState extends State<BookReport> {
               ),
             ),
 
-            SizedBox(height: 10),
+            SizedBox(height: 20),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Align(
                 alignment: Alignment.topLeft,
                 child: Text(
                   'Current Medication',
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
+                    color: TextColors.neutral900,
                     fontFamily: "Satoshi",
                     fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 8),
 
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Align(
                 alignment: Alignment.topLeft,
                 child: GestureDetector(
@@ -539,19 +609,22 @@ class _BookReportState extends State<BookReport> {
                     padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.blue),
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(7),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         SvgPicture.asset(
+                          width: 10,
+                          height: 16,
                           AppIcons.shearIcon,
-                          color: Colors.blue,
+                          color: Appcolors.action,
                         ),
                         SizedBox(width: 8),
                         Text(
                           'Share',
                           style: TextStyle(
+                            fontWeight: FontWeight.w500,
                             color: Colors.blue,
                             fontFamily: "Satoshi",
                           ),
@@ -563,9 +636,9 @@ class _BookReportState extends State<BookReport> {
               ),
             ),
 
-            SizedBox(height: 10),
+            SizedBox(height: 20),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
                   Text(
@@ -573,6 +646,7 @@ class _BookReportState extends State<BookReport> {
                     style: TextStyle(
                       fontFamily: "Satoshi",
                       fontSize: 16,
+                      color: TextColors.neutral900,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -580,6 +654,7 @@ class _BookReportState extends State<BookReport> {
                     "(Optional)",
                     style: TextStyle(
                       fontSize: 14,
+                      color: TextColors.neutral500,
                       fontFamily: "Satoshi",
                       fontWeight: FontWeight.w400,
                     ),
@@ -587,11 +662,12 @@ class _BookReportState extends State<BookReport> {
                 ],
               ),
             ),
-            SizedBox(height: 15),
+            SizedBox(height: 8),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: CustomTextField(
                 maxLines: 6,
+                borderColor: TextColors.neutral500,
                 hintText: 'Search for a doctor by name or designation...',
                 controller: optional,
                 filColor: Appcolors.primary,
@@ -600,17 +676,17 @@ class _BookReportState extends State<BookReport> {
             SizedBox(height: 30),
 
             Container(
-              height: 200,
+              height: 250,
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Appcolors.page,
                 boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.22),
-                    offset: Offset(-2, 0.03),
-                    blurRadius: 10,
-                  ),
-                ],
+               BoxShadow(
+              color: TextColors.neutral900.withOpacity(0.25),
+              offset: Offset(0.3, 0.3),
+              blurRadius: 80,
+            ),
+          ],
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30),
                   topRight: Radius.circular(30),
@@ -630,9 +706,9 @@ class _BookReportState extends State<BookReport> {
                         
                       ),
                   ),
-                  SizedBox(height: 8,),
+                  SizedBox(height: 20,),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Row(
                       children: [
                         CircleAvatar(
@@ -647,7 +723,7 @@ class _BookReportState extends State<BookReport> {
                             Text(
                                 "Dr. Moule Marrk",
                                 style: TextStyle(
-                                  fontSize: 17,
+                                  fontSize: 18,
                                   fontFamily: "Satoshi",
                                   fontWeight: FontWeight.w500,
 
@@ -657,9 +733,9 @@ class _BookReportState extends State<BookReport> {
                                 "Cardiology ",
                                 style: TextStyle(
                                   fontSize: 14,
-                                  color:  TextColors.neutral900,
+                                  color:  TextColors.neutral500,
                                   fontFamily: "Satoshi",
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.w500,
                                 )
                             ),
                             Row(
@@ -686,10 +762,10 @@ class _BookReportState extends State<BookReport> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: 15,),
 
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Row(
                       children: [
                         Text(
@@ -713,24 +789,31 @@ class _BookReportState extends State<BookReport> {
                       ],
                     ),
                   ),
-                  
+
+                  SizedBox(height: 8,),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Row(
                       children: [
+                        SvgPicture.asset(
+                          color: TextColors.neutral900,
+                          AppIcons.calenderIcon,
+                          width: 16,
+                          height: 16,),
+                        SizedBox(width: 5,),
                         Text("16 May 2025"),
                         Spacer(),
                         Text("10:25pm"),
                       ],
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: 18,),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: AppButton(
                         text: "View Overview",
                         onPressed: (){
-
+                          Get.toNamed("/book_overview",id: NavIds.profile);
                     }),
                   ),
 
@@ -776,10 +859,10 @@ class _CustomDropdownDialogState extends State<CustomDropdownDialog> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: Appcolors.warning,
-          title: Text('Select state'),
+        backgroundColor: Appcolors.page,
+          title: Text('Select state',style: TextStyle(fontFamily:"Satoshi" ),),
           content: Container(
-            width: 150,
+            width: 70,
             child: ListView.builder(
               shrinkWrap: true,
               itemCount: widget.items.length,
@@ -795,13 +878,13 @@ class _CustomDropdownDialogState extends State<CustomDropdownDialog> {
                           ? FontWeight.w700
                           : FontWeight.w500,
                       fontSize: 15,
-                      color: isSelected ? Colors.blue : Colors.black,
+                      color: isSelected ? Appcolors.action : Colors.black,
                     ),
                   ),
                   trailing: isSelected
-                      ? Icon(Icons.check, color: Colors.blue, size: 20)
+                      ? Icon(Icons.check, color: Appcolors.action, size: 20)
                       : null,
-                  tileColor: isSelected ? Colors.blue.withOpacity(0.1) : null,
+                  tileColor: isSelected ? Appcolors.action.withOpacity(0.1) : null,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -851,10 +934,10 @@ class _CustomDropdownDialogState extends State<CustomDropdownDialog> {
             borderSide: BorderSide(color: Colors.redAccent, width: 2),
           ),
           suffixIcon: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(12),
             child: SvgPicture.asset(
               AppIcons.arrowdwonIcon,
-              color: Colors.black,
+              color: TextColors.neutral900,
             ),
           ),
         ),

@@ -25,7 +25,7 @@ class _ProfileNavState extends State<ProfileNav> {
         if (settings.name == '/personal_info') {
           return MaterialPageRoute(
             settings: settings,
-            builder: (_) => const PersonalInfo(),
+            builder: (_) =>  PersonalInfo(),
           );
         }
         else if(settings.name == '/support') {

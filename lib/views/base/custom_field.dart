@@ -22,8 +22,7 @@ class CustomTextField extends StatefulWidget {
   final AutovalidateMode? autovalidateMode;
   final ValueChanged<String>? onChanged;
   final int? maxLines;
-
-
+  final bool? enabled;
 
   const CustomTextField({
     super.key,
@@ -41,10 +40,11 @@ class CustomTextField extends StatefulWidget {
     this.obscure = '*',
     this.filColor,
     this.labelText,
-    this.isPassword = false, this.autovalidateMode,
+    this.isPassword = false,
+    this.autovalidateMode,
     this.onChanged,
     this.maxLines,
-
+    this.enabled,
   });
 
   @override
@@ -68,9 +68,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
       maxLines: widget.isPassword ? 1 : widget.maxLines,
       keyboardType: widget.keyboardType,
       obscuringCharacter: widget.obscure!,
+      enabled: widget.enabled ?? true,
       // validator: widget.validator,
-      validator: widget.validator ??
-              (value) {
+      validator:
+          widget.validator ??
+          (value) {
             if (value == null || value.isEmpty) {
               return "Please enter ${widget.hintText?.toLowerCase() ?? 'this field'}";
             }
@@ -97,59 +99,63 @@ class _CustomTextFieldState extends State<CustomTextField> {
       obscureText: widget.isPassword ? obscureText : false,
       onChanged: widget.onChanged,
       style: TextStyle(color: AppColors.textColor, fontSize: 14.sp),
-
       decoration: InputDecoration(
-
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.r),
-          borderSide: BorderSide(
-            color: widget.borderColor ?? BorderColors.secondary, // red border when error and focused
-            width: 2,
-          ),
-        ),
-
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.r),
-          borderSide: BorderSide(
-            color: widget.borderColor ?? BorderColors.secondary,
-          ),
-        ),
-
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.r),
           borderSide: BorderSide(
-            color: widget.borderColor ?? BorderColors.primary, // or a color to show focus
             width: 1.5,
+            color: widget.borderColor ?? BorderColors.primary,
           ),
         ),
 
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.r),
           borderSide: BorderSide(
-            color: widget.borderColor ?? BorderColors.tertiary,
+            width: 1,
+            color: BorderColors.tertiary, // don't use widget.borderColor here
           ),
         ),
+
+        disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.r),
+          borderSide: BorderSide(
+            width: 1,
+            color: BorderColors.disabled, // separate color
+          ),
+        ),
+
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.r),
+          borderSide: BorderSide(color: BorderColors.error),
+        ),
+
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.r),
+          borderSide: BorderSide(color: BorderColors.error, width: 2),
+        ),
+
         contentPadding: EdgeInsets.symmetric(
           horizontal: widget.contentPaddingHorizontal ?? 15.w,
           vertical: widget.contentPaddingVertical ?? 12.w,
         ),
         fillColor: widget.filColor,
+        prefixIconColor: TextColors.neutral900,
         prefixIcon: Padding(
           padding: const EdgeInsets.all(10.0),
           child: widget.prefixIcon,
         ),
-        suffixIcon:
-        widget.isPassword
+        suffixIconColor: TextColors.neutral900,
+        suffixIcon: widget.isPassword
             ? GestureDetector(
-          onTap: toggle,
-          child: _suffixIcon(
-            obscureText ? Icons.visibility_off : Icons.visibility,
-          ),
-        )
+                onTap: toggle,
+                child: _suffixIcon(
+                  obscureText ? Icons.visibility_off : Icons.visibility,
+                ),
+              )
             : widget.suffixIcon,
         prefixIconConstraints: BoxConstraints(minHeight: 20.w, minWidth: 20.w),
         labelText: widget.labelText,
-
+        // Always enabled to keep full custom styling
         hintText: widget.hintText,
         hintStyle: TextStyle(
           fontFamily: 'Satoshi',

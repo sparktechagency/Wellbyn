@@ -4,15 +4,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:wellbyn/views/base/app_button.dart';
 import 'package:wellbyn/views/base/custom_field.dart';
-import 'package:wellbyn/views/screen/auth/login_screen.dart';
 import '../../../utils/app_colors.dart';
 
 import 'forgot.dart';
 
-class CreateAccountPage extends StatelessWidget {
-  final String role;
+class LoginScreen extends StatelessWidget {
 
-  CreateAccountPage({required this.role, Key? key}) : super(key: key);
+  LoginScreen({ Key? key}) : super(key: key);
 
   final TextEditingController emailcontroller = TextEditingController();
   final TextEditingController passwordcontroller = TextEditingController();
@@ -66,13 +64,31 @@ class CreateAccountPage extends StatelessWidget {
                           hintText: 'type a strong password',
                           isPassword: true,
                         ),
-                        SizedBox(height: 16.h),
-                        _buildLabel("Confirm Password"),
-                        CustomTextField(
-                          controller: confirmcontroller,
-                          hintText: 're-type password',
-                          isPassword: true,
-                        ),
+                      ],
+                    ),
+                    SizedBox(height: 8,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                                "Forgot Password?",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: "Satoshi",
+                                  fontWeight: FontWeight.w500,
+                                )
+                            ),
+                            Container(
+                              width: 115,
+                              height: 1,
+                              color: Colors.black,
+                            )
+                          ],
+                        )
+
+
                       ],
                     ),
                     SizedBox(height: 30.h),
@@ -82,23 +98,25 @@ class CreateAccountPage extends StatelessWidget {
                     SizedBox(height: 20.h),
                     GestureDetector(
                       onTap: () {
-                       Get.to(LoginScreen());
-
+                        print('Log In tapped');
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: 20),
                         child: Text.rich(
                           TextSpan(
-                            text: "Already have an account? ",
-                            style: TextStyle(color: TextColors.neutral500,fontFamily: 'Satoshi',fontSize: 16), // optional base style
+                            text: "Don’t have an account?",
+                            style: TextStyle(
+                                color: TextColors.neutral500,
+                                fontFamily: 'Satoshi',
+                                fontSize: 15), // optional base style
                             children: [
                               TextSpan(
-                                text: "Log In",
+                                text: "Create an account",
                                 style: TextStyle(
-                                  fontSize: 16,
+                                  fontSize: 14,
                                   fontFamily: 'Satoshi',
                                   color: Colors.blue,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ],

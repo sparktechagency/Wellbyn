@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:wellbyn/utils/app_icons.dart';
 import 'package:wellbyn/views/screen/doctor/doctor_details.dart';
 
@@ -23,14 +24,16 @@ class Doctor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Appcolors.page,
       appBar: AppBar(
+        backgroundColor: Appcolors.page,
         title: Text(
           "Doctor",
           style: TextStyle(
             fontSize: 24,
             fontFamily: "Satoshi",
             fontWeight: FontWeight.w500,
-            color: TextColors.neutral900,
+            color: HexColor("#3D3D3D"),
           ),
         ),
         centerTitle: true,
@@ -55,7 +58,8 @@ class Doctor extends StatelessWidget {
             children: [
               CustomTextField(
                 maxLines: 1,
-                filColor: Appcolors.primary,
+                borderColor: TextColors.neutral500,
+                filColor:Colors.white,
                 controller: searchcontroller,
                 hintText: 'Search for a doctor by name or designation...',
                 prefixIcon: SvgPicture.asset(AppIcons.searchIcon),
@@ -68,6 +72,7 @@ class Doctor extends StatelessWidget {
                     child: Row(
                       children: List.generate(tabs.length, (index) {
                         return Obx(() {
+
                           bool isSelected =
                               controller.selectedIndex.value == index;
                           return GestureDetector(
@@ -85,15 +90,15 @@ class Doctor extends StatelessWidget {
                                     tabs[index],
                                     style: TextStyle(
                                       overflow: TextOverflow.ellipsis,
-                                      color: isSelected ? Colors.blue : Colors.grey,
-                                      fontWeight: FontWeight.w500,
+                                      color: isSelected ? TextColors.action : TextColors.secondary,
+                                      fontWeight: FontWeight.w400,
                                     ),
                                   ),
                                   SizedBox(height: 4),
                                   Container(
                                     height: 2,
                                     width: 40,
-                                    color: isSelected ? Colors.blue : Colors.transparent,
+                                    color: isSelected ? TextColors.action  : Colors.transparent,
                                   ),
                                 ],
                               ),
@@ -110,43 +115,61 @@ class Doctor extends StatelessWidget {
                     child: Container(
                       margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
                       height: 1,
-                      color: Colors.grey,
+                      color: Appcolors.disabled.withOpacity(0.25),
                     ),
                   ),
                 ],
               ),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  "Available Doctor",
-                  style: TextStyle(
-                    fontFamily: 'Satoshi',
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
+
+              Padding(
+                padding: const EdgeInsets.only(left: 4),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "Available Doctor",
+                    style: TextStyle(
+                      fontFamily: 'Satoshi',
+                      fontSize: 20,
+                      color: HexColor("##3D3D3D"),
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
               ),
+              SizedBox(height: 10,),
+
               Expanded(
                 child: GridView.count(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 2,
-                  mainAxisSpacing: 2,
-                  childAspectRatio: 0.57,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  childAspectRatio: 0.58,
                   children: List.generate(9, (index) {
                     return GestureDetector(
                       onTap: () {
                         Get.toNamed('/doctor_details',
                           id: NavIds.profile,  // this matches nested key
-                          arguments: {'doctorId': 'some-id'},
+                          arguments: {'doctorId': 'a1da1dad136adf4566adf1a'},
                         );
 
                       },
-                      child: Card(
-                        elevation: 4,
-                        color: Colors.white,
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 10, left: 5, right: 5),
-                          child: Column(
+
+                      child: Container(
+                        margin: EdgeInsets.all(2),
+                        padding: EdgeInsets.all(9),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: [
+                            BoxShadow(
+                              color:Appcolors.secondary , // softer effect
+                              blurRadius: 2, // reasonable softness
+                              spreadRadius: 2,
+                              offset: Offset(0.2, 0.2), // downward shadow
+                            ),
+                          ]
+                        ),
+                        child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Stack(
@@ -166,10 +189,10 @@ class Doctor extends StatelessWidget {
                                       padding: const EdgeInsets.all(5),
                                       child: SvgPicture.asset(
                                         "assets/icons/Heart.svg",
-                                        width: 4,
-                                        height: 24,
+                                        width: 20,
+                                        height: 20,
                                         colorFilter: ColorFilter.mode(
-                                          Colors.black,
+                                          TextColors.neutral900,
                                           BlendMode.srcIn,
                                         ),
                                       ),
@@ -178,7 +201,7 @@ class Doctor extends StatelessWidget {
                                 ],
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(top: 12),
+                                padding: const EdgeInsets.only(top: 8),
                                 child: Text(
                                   "Dr. Leo Marwick",
                                   style: TextStyle(
@@ -202,26 +225,28 @@ class Doctor extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
                               ),
-                              SizedBox(height: 5),
+                              SizedBox(height: 8),
                               Row(
                                 children: [
                                   SvgPicture.asset(
                                     AppIcons.hospitallocationIcon,
-                                    width: 4,
-                                    height: 16,
+                                    width: 20,
+                                    height: 20,
                                     colorFilter: ColorFilter.mode(
                                       Appcolors.action,
                                       BlendMode.srcIn,
                                     ),
                                   ),
-                                  const SizedBox(width: 6),
+                                  const SizedBox(width: 4),
                                   Expanded(
                                     child: Text(
                                       "Sylhet Health Center",
                                       style: TextStyle(
                                         fontSize: 14,
                                         fontStyle: FontStyle.italic,
-                                        fontWeight: FontWeight.w400,
+                                        fontFamily: "Satoshi",
+                                        color: TextColors.neutral900,
+                                        fontWeight: FontWeight.w500,
                                       ),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
@@ -233,7 +258,7 @@ class Doctor extends StatelessWidget {
                               Row(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(left: 5.0),
+                                    padding: const EdgeInsets.only(left: 0),
                                     child: Text(
                                       "3 available time",
                                       style: TextStyle(
@@ -247,10 +272,10 @@ class Doctor extends StatelessWidget {
                                   Spacer(),
                                   SvgPicture.asset(
                                     AppIcons.shearIcon,
-                                    width: 4,
-                                    height: 24,
+                                    width: 20,
+                                    height: 20,
                                     colorFilter: ColorFilter.mode(
-                                      Colors.black,
+                                      TextColors.neutral900,
                                       BlendMode.srcIn,
                                     ),
                                   ),
@@ -259,7 +284,7 @@ class Doctor extends StatelessWidget {
                             ],
                           ),
                         ),
-                      ),
+
                     );
                   }),
                 ),
