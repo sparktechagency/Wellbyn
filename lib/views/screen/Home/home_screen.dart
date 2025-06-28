@@ -3,6 +3,7 @@ import 'package:signature/signature.dart';
 import 'package:wellbyn/utils/app_colors.dart';
 
 class HomeScreen extends StatelessWidget {
+
   HomeScreen({Key? key}) : super(key: key);
 
   final SignatureController _controller = SignatureController(
