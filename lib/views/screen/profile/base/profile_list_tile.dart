@@ -27,30 +27,13 @@ class ProfileListTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           color: Appcolors.primary,
           boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.10),
-              offset: Offset(2, 0), // Right
-              blurRadius: 3,
-            ),
-            // Left shadow
-            BoxShadow(
-              color: Colors.black.withOpacity(0.10),
-              offset: Offset(-2, 0), // Left
-              blurRadius: 3,
-            ),
-            BoxShadow(
-              color: Colors.black.withOpacity(0.05),
-              offset: Offset(0, 2),
-              blurRadius: 3,
-            ),
-// Top shadow
-            BoxShadow(
-              color: Colors.black.withOpacity(0.05),
-              offset: Offset(0, -2),
-              blurRadius: 3,
-            ),
-
-          ],
+          BoxShadow(
+          color:Appcolors.secondary , // softer effect
+          blurRadius: 2, // reasonable softness
+          spreadRadius: 2,
+          offset: Offset(0.2, 0.2), // downward shadow
+          ),
+          ]
         ),
         padding: const EdgeInsets.all(8),
         margin: EdgeInsets.all(2),
@@ -68,7 +51,7 @@ class ProfileListTile extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            SvgPicture.asset(trailingIconPath),
+            SvgPicture.asset(trailingIconPath, color: TextColors.neutral900,),
           ],
         ),
       ),

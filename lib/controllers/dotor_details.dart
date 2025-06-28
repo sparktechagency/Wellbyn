@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 
 class DoctorDetailsController extends GetxController{
   RxBool isFavorite = false.obs;
-
+  RxBool isloading = false.obs;
   void toggleFavorite() {
     isFavorite.value = !isFavorite.value;
   }
@@ -42,4 +42,29 @@ class DoctorDetailsController extends GetxController{
  //    selectedTime.value = time;
  //  }
 
+  Future<void> loadDoctordetailesData() async {
+    try {
+      isloading(true);
+
+      // Simulate API call or data loading
+      await Future.delayed(const Duration(seconds: 1));
+
+      // Your actual API calls would go here
+      // await fetchDoctors();
+      // await fetchFavorites();
+
+    } catch (e) {
+      // Handle error
+      print('Error loading doctor data: $e');
+    } finally {
+      isloading(false);
+    }
+  }
+@override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    loadDoctordetailesData();
+
+  }
 }

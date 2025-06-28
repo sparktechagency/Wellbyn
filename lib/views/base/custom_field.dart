@@ -95,10 +95,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
             return null;
           },
 
-      cursorColor: Appcolors.action,
+      cursorColor: TextColors.neutral900,
       obscureText: widget.isPassword ? obscureText : false,
       onChanged: widget.onChanged,
-      style: TextStyle(color: AppColors.textColor, fontSize: 14.sp),
+      style: TextStyle(color: TextColors.neutral900, fontSize: 14,fontWeight: FontWeight.w400),
       decoration: InputDecoration(
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.r),
@@ -161,7 +161,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           fontFamily: 'Satoshi',
           fontWeight: FontWeight.w400,
           fontSize: 16.sp,
-          color: Colors.grey,
+          color: TextColors.secondary,
         ),
       ),
     );

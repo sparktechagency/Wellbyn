@@ -11,6 +11,7 @@ class ConsentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Appcolors.page,
       body: SafeArea(
         minimum: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
         child: Column(
@@ -20,7 +21,12 @@ class ConsentScreen extends StatelessWidget {
             const Center(
               child: Text(
                 'HIPAA Consent',
-                style: TextStyle(fontSize: 22,  fontFamily: 'Satoshi', fontWeight: FontWeight.w500),
+                style: TextStyle(
+                  fontSize: 24,
+                  fontFamily: 'Satoshi',
+                  color: TextColors.neutral900,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
             const SizedBox(height: 32),
@@ -32,9 +38,9 @@ class ConsentScreen extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                   TextSpan(
-                   style: TextStyle(  fontFamily: 'Satoshi',fontSize: 15),
+                    style: TextStyle(fontFamily: 'Satoshi', fontSize: 15),
                     text:
-                    'Before we continue, we just need your OK on how we handle your health information.',
+                        'Before we continue, we just need your OK on how we handle your health information.',
                   ),
                 ],
               ),
@@ -43,37 +49,40 @@ class ConsentScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: const Color(0xFFEFF6FD),
+                color: Appcolors.primary100,
                 borderRadius: BorderRadius.circular(16),
               ),
-              child:  Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    style: TextStyle(  fontFamily: 'Satoshi',fontSize: 15),
+                    style: TextStyle(fontFamily: 'Satoshi', fontSize: 15),
                     'We follow strict HIPAA guidelines to protect your privacy and keep your data secure.',
                   ),
                   SizedBox(height: 12),
                   Text(
-                    style: TextStyle(  fontFamily: 'Satoshi',fontSize: 15),
+                    style: TextStyle(fontFamily: 'Satoshi', fontSize: 15),
                     '📊 To keep improving your experience and help our technology get smarter over time, we may use some of your information — always anonymized and never linked to your name or identity.',
                   ),
                   SizedBox(height: 12),
                   Text(
-                    style: TextStyle(  fontFamily: 'Satoshi',fontSize: 15),
+                    style: TextStyle(fontFamily: 'Satoshi', fontSize: 15),
                     'Your privacy always comes first. You can choose how your data is used and change your preferences anytime.',
                   ),
                   const SizedBox(height: 32),
                   Container(
-                    padding: const EdgeInsets.all(16),
+                    padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 8 ),
                     decoration: BoxDecoration(
-                      color: Appcolors.page,
+                      color: Appcolors.primary,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Tap “I Agree” to continue.',style:TextStyle(  fontFamily: 'Satoshi',fontSize: 15),),
+                        const Text(
+                          'Tap “I Agree” to continue.',
+                          style: TextStyle(fontFamily: 'Satoshi', fontSize: 15),
+                        ),
                         const SizedBox(height: 12),
                         SizedBox(
                           width: double.infinity,
@@ -81,10 +90,16 @@ class ConsentScreen extends StatelessWidget {
                             onPressed: () {
                               // Navigate or handle agreement
                               Get.to(BaseScreen());
-
                             },
                             icon: const Icon(Icons.check, color: Colors.white),
-                            label: const Text('I Agree', style: TextStyle( fontFamily: 'Satoshi',fontSize: 16,color: Appcolors.secondary)),
+                            label: const Text(
+                              'I Agree',
+                              style: TextStyle(
+                                fontFamily: 'Satoshi',
+                                fontSize: 16,
+                                color: Appcolors.secondary,
+                              ),
+                            ),
 
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF2D8BC9),

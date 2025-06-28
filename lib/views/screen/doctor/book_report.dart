@@ -331,7 +331,7 @@ class _BookReportState extends State<BookReport> {
         title: Text(
           "Additional Report",
           style: TextStyle(
-            fontSize: 22,
+            fontSize: 20,
             fontFamily: "Satoshi",
             fontWeight: FontWeight.w500,
             color: TextColors.neutral900,

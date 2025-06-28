@@ -16,6 +16,13 @@ class BottomNavBar extends StatelessWidget {
     'assets/icons/user.svg',
   ];
 
+  static const List<String> _icon = [
+    'assets/icons/home_bold.svg',
+    'assets/icons/doctor_bold.svg',
+    'assets/icons/appointment_bold.svg',
+    'assets/icons/user_bold .svg',
+  ];
+
   static const List<String> _labels = [
     'Home',
     'Doctor',
@@ -72,7 +79,7 @@ class BottomNavBar extends StatelessWidget {
                               duration: const Duration(milliseconds: 100),
                               curve: Curves.easeInOut,
                               child: SvgPicture.asset(
-                                _icons[index],
+                                isSelected ?_icon[index] : _icons[index],
                                 colorFilter: ColorFilter.mode(
                                   isSelected ? selectedColor : unselectedColor,
                                   BlendMode.srcIn,

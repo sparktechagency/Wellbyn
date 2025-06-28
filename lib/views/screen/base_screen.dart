@@ -19,7 +19,7 @@ class BaseScreen extends StatelessWidget {
   const BaseScreen({super.key});
 
   // Step 2: Cache static widgets that don't change
-  static const Widget _homeScreen = HomeScreen();
+  static  Widget _homeScreen = HomeScreen();
   static const Widget _bottomNavBar = BottomNavBar();
 
   @override
@@ -79,7 +79,7 @@ class _BaseScreenWithIndexedStackState extends State<BaseScreenWithIndexedStack>
   void _initializeScreens() {
     if (!_initialized) {
       _screens = [
-        const HomeScreen(),
+         HomeScreen(),
         const OptimizedDoctorNav(),
         const Appointment(),
         const ProfileNav(),

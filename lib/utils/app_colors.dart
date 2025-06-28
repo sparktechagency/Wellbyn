@@ -37,7 +37,7 @@ class Appcolors {
   static const Color secondary = Color(0xFFF3F3F3); // Neutral/100 (guess)
   static const Color background = Color(0xFFE6E6E6); // Neutral/100 (guess)
   static const Color brand222 = Color(0xFF1E1E1E); // Neutral/100 (guess)
-
+  static const Color primary100 = Color(0xFFE4EFFA);
   // Actions
   static const Color action = Color(0xFF2E8BC9); // Primary/500
   static const Color actionLight = Color(0xFFF2F8FD); // Primary/50 (guess)
@@ -58,10 +58,12 @@ class BorderColors {
   static const Color primary = Color(0xFFFFFFFF);        // Neutral/950
   static const Color secondary = Color(0xFFDCDCDC);      // Neutral/300
   static const Color tertiary = Color(0xFFE2E8F0);       // Neutral/200
+  static const Color error700 = Color(0xFFB42121);       // Neutral/200
 
   static const Color action = Color(0xFF2E8BC9);         // Primary/500
   static const Color actionHover = Color(0xFF1565C0);    // Primary/700
   static const Color focus = Color(0xFF90CAF9);          // Primary/300
+  static const Color primary100 = Color(0xFFE4EFFA);           // Primary/300
 
   static const Color disabled = Color(0xFFCBD5E1);       // Neutral/300 again
   static const Color success = Color(0xFF388E3C);        // Success/700

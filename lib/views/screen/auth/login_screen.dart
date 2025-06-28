@@ -19,6 +19,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Appcolors.page,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -28,7 +29,7 @@ class LoginScreen extends StatelessWidget {
               child: IntrinsicHeight(
                 child: Column(
                   children: [
-                    SizedBox(height: 40.h),
+                    SizedBox(height: 35.h),
                     SvgPicture.asset(
                       'assets/icons/logo.svg',
                       width: 150.w,
@@ -38,61 +39,35 @@ class LoginScreen extends StatelessWidget {
                       fit: BoxFit.contain, // control how the image fits
                       alignment: Alignment.center, // position the image
                     ),
-                    SizedBox(height: 20.h),
-                    Text(
-                      "Create an account",
-                      style: TextStyle(
-                        fontFamily: 'Satoshi',
-                        fontSize: 24.sp,
-                        color: TextColors.neutral900,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    SizedBox(height: 30.h),
+                    SizedBox(height: 10.h),
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _buildLabel("Email"),
-                        CustomTextField(
-                          controller: emailcontroller,
-                          hintText: 'email address',
+                        Text(
+                          "Welcome back!",
+                          style: TextStyle(
+                            fontFamily: 'Satoshi',
+                            fontSize: 24,
+                            color: TextColors.neutral900,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                        SizedBox(height: 16.h),
-                        _buildLabel("New Password"),
-                        CustomTextField(
-                          controller: passwordcontroller,
-                          hintText: 'type a strong password',
-                          isPassword: true,
+                        Text(
+                          "To log in, enter your email address.",
+                          style: TextStyle(
+                            fontFamily: 'Satoshi',
+                            fontSize: 15,
+                            color: TextColors.neutral500,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                      ],
-                    ),
-                    SizedBox(height: 8,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Column(
-                          children: [
-                            Text(
-                                "Forgot Password?",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: "Satoshi",
-                                  fontWeight: FontWeight.w500,
-                                )
-                            ),
-                            Container(
-                              width: 115,
-                              height: 1,
-                              color: Colors.black,
-                            )
-                          ],
-                        )
-
-
                       ],
                     ),
                     SizedBox(height: 30.h),
-                    AppButton(text: "Next", onPressed: () {
+                    inputSection(),
+                    SizedBox(height: 8,),
+                    forgotsection(),
+                    SizedBox(height: 30.h),
+                    AppButton(text: "Log in", onPressed: () {
                       Get.to(Forgot());
                     }),
                     SizedBox(height: 20.h),
@@ -124,58 +99,9 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(height: 1.h, color: Colors.grey),
-                        ),
-                        Padding(
-                          padding:
-                          EdgeInsets.symmetric(horizontal: 8.w),
-                          child: Text(
-                            "OR",
-                            style: TextStyle(
-                              fontFamily: 'Satoshi',
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(height: 1.h, color: Colors.grey),
-                        ),
-                      ],
-                    ),
+                    Or(),
                     SizedBox(height: 20.h),
-                    Container(
-                      height: 50.h,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.r),
-                        color: Appcolors.secondary,
-                      ),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SvgPicture.asset(
-                              'assets/icons/google.svg',
-                              width: 24.w,
-                              height: 24.h,
-                            ),
-                            SizedBox(width: 8.w),
-                            Text(
-                              "Continue with Google",
-                              style: TextStyle(
-                                fontFamily: 'Satoshi',
-                                fontSize: 16.sp,
-                                color: Appcolors.action,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    googleButton(),
                     SizedBox(height: 30.h),
                   ],
                 ),
@@ -185,6 +111,116 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Container googleButton() {
+    return Container(
+                    height: 50.h,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8.r),
+                      color: Appcolors.primary,
+                    ),
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            'assets/icons/google.svg',
+                            width: 24.w,
+                            height: 24.h,
+                          ),
+                          SizedBox(width: 8.w),
+                          Text(
+                            "Continue with Google",
+                            style: TextStyle(
+                              fontFamily: 'Satoshi',
+                              fontSize: 16.sp,
+                              color: Appcolors.actionHover,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+  }
+
+  Row Or() {
+    return Row(
+                    children: [
+                      Expanded(
+                        child: Container(height: 1.h, color: TextColors.neutral200),
+                      ),
+                      Padding(
+                        padding:
+                        EdgeInsets.symmetric(horizontal: 8.w),
+                        child: Text(
+                          "OR",
+                          style: TextStyle(
+                            fontFamily: 'Satoshi',
+                            fontSize: 16.sp,
+                            color: TextColors.neutral500,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(height: 1.h, color: TextColors.neutral200),
+                      ),
+                    ],
+                  );
+  }
+
+  Row forgotsection() {
+    return Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Column(
+                        children: [
+                          Text(
+                              "Forgot Password?",
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: TextColors.neutral900,
+                                fontFamily: "Satoshi",
+                                fontWeight: FontWeight.w500,
+                              )
+                          ),
+                          Container(
+                            width: 115,
+                            height: 1,
+                            color: TextColors.neutral900,
+                          )
+                        ],
+                      )
+
+
+                    ],
+                  );
+  }
+
+  Column inputSection() {
+    return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildLabel("Email"),
+                      CustomTextField(
+                        filColor: Appcolors.primary,
+                        borderColor: TextColors.neutral900,
+                        controller: emailcontroller,
+                        hintText: 'email address',
+                      ),
+                      SizedBox(height: 20.h),
+                      _buildLabel("New Password"),
+                      CustomTextField(
+                        filColor: Appcolors.primary,
+                        borderColor: TextColors.neutral900,
+                        controller: passwordcontroller,
+                        hintText: 'type a strong password',
+                        isPassword: true,
+                      ),
+                    ],
+                  );
   }
 
   Widget _buildLabel(String text) {

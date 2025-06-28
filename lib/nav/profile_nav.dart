@@ -40,13 +40,18 @@ class _ProfileNavState extends State<ProfileNav> {
             builder: (_) => CaregiverScreen(),
           );
         }
+        else if(settings.name =="/medical_info"){
+          return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => MedicalInformationScreen(),
+          );
+        }
         else if(settings.name == '/support_send') {
           return MaterialPageRoute(
             settings: settings,
             builder: (_) => SupportSend(),
           );
         }
-
         else {
           return MaterialPageRoute(
             settings: settings,

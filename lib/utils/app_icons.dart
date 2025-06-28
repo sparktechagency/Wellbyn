@@ -33,6 +33,11 @@ class AppIcons{
   static String doctorstethoscope="assets/icons/stethoscope.svg";
   static String calenderIcon="assets/icons/calendar.svg";
   static String calenderIcon01="assets/icons/calendar01.svg";
+  static String cameraIcons="assets/icons/camera_ai.svg";
+  static String rightIcon="assets/icons/check_blue.svg";
+  static String lockIcon="assets/icons/lock.svg";
+  static String editIcon="assets/icons/edit.svg";
+
 
 
 

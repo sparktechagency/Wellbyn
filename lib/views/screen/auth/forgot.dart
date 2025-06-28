@@ -15,6 +15,7 @@ class Forgot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Appcolors.page,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -24,17 +25,17 @@ class Forgot extends StatelessWidget {
               child: IntrinsicHeight(
                 child: Column(
                   children: [
-                    SizedBox(height: 40.h),
+                    SizedBox(height: 35.h),
                     SvgPicture.asset(
                       'assets/icons/logo.svg',
                       width: 150.w,
                       height: 150.h,
-                      color: TextColors.action, // change color dynamically
+                      color: Appcolors.action, // change color dynamically
                       semanticsLabel: 'App Logo', // for accessibility
                       fit: BoxFit.contain, // control how the image fits
                       alignment: Alignment.center, // position the image
                     ),
-                    SizedBox(height: 20.h),
+                    SizedBox(height: 10.h),
                     Text(
                         "Forgot password?",
                          style: TextStyle(
@@ -53,49 +54,14 @@ class Forgot extends StatelessWidget {
                         )
                     ),
                     SizedBox(height: 30.h),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _buildLabel("Email"),
-                        CustomTextField(
-                          controller: emailcontrller,
-                          hintText: 'email address',
-                        ),
-                      ],
-                    ),
+                    nextbutton(),
                     SizedBox(height: 20.h),
                     AppButton(text: "Next", onPressed: () {
                       Get.to(Verify());
 
                     }),
-                    SizedBox(height: 20.h),
-                    GestureDetector(
-                      onTap: (){
-                        Get.back();
-
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(
-                            "assets/icons/back.svg", // Your SVG file
-                          width: 4, // Simplified from 15.999979972839355
-                          height: 24, // For first image
-                          colorFilter: ColorFilter.mode(Colors.black, BlendMode.srcIn), // Optional color
-
-                          ),
-                          SizedBox(width: 12,),
-                          Text(
-                              "Back to login",
-                              style: TextStyle(
-                                fontFamily: 'Satoshi',
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              )
-                          )
-                        ],
-                      ),
-                    ),
+                    SizedBox(height: 25.h),
+                    arrowback(),
 
                     // Row(
                     //   children: [
@@ -155,6 +121,51 @@ class Forgot extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Column nextbutton() {
+    return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildLabel("Email"),
+                      CustomTextField(
+                        borderColor: TextColors.neutral900,
+                        filColor: Appcolors.primary,
+                        controller: emailcontrller,
+                        hintText: 'email address',
+                      ),
+                    ],
+                  );
+  }
+
+  GestureDetector arrowback() {
+    return GestureDetector(
+                    onTap: (){
+                      Get.back();
+
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          "assets/icons/back.svg", // Your SVG file
+                        width: 4, // Simplified from 15.999979972839355
+                        height: 24, // For first image
+                        colorFilter: ColorFilter.mode(Colors.black, BlendMode.srcIn), // Optional color
+
+                        ),
+                        SizedBox(width: 12,),
+                        Text(
+                            "Back to login",
+                            style: TextStyle(
+                              fontFamily: 'Satoshi',
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            )
+                        )
+                      ],
+                    ),
+                  );
   }
 
   Widget _buildLabel(String text) {

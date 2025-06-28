@@ -9,15 +9,17 @@ import 'package:wellbyn/views/screen/auth/set_new_password.dart';
 import '../../../utils/app_colors.dart';
 import '../../base/app_button.dart';
 import 'forgot.dart';
-class Verify extends StatelessWidget {
 
-   Verify({super.key});
-   final TextEditingController _pinController = TextEditingController();
-   String otpCode = '';
+class Verify extends StatelessWidget {
+  Verify({super.key});
+
+  final TextEditingController _pinController = TextEditingController();
+  String otpCode = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Appcolors.page,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -32,19 +34,22 @@ class Verify extends StatelessWidget {
                       'assets/icons/logo.svg',
                       width: 150.w,
                       height: 150.h,
-                      color:  TextColors.action, // change color dynamically
-                      semanticsLabel: 'App Logo', // for accessibility
-                      fit: BoxFit.contain, // control how the image fits
+                      color: TextColors.action,
+                      // change color dynamically
+                      semanticsLabel: 'App Logo',
+                      // for accessibility
+                      fit: BoxFit.contain,
+                      // control how the image fits
                       alignment: Alignment.center, // position the image
                     ),
-                    SizedBox(height: 20.h),
+                    SizedBox(height: 10.h),
                     Text(
-                        "Verify code",
-                        style: TextStyle(
-                          fontFamily: 'Satoshi',
-                          fontSize: 24,
-                          fontWeight: FontWeight.w500,
-                        )
+                      "Verify code",
+                      style: TextStyle(
+                        fontFamily: 'Satoshi',
+                        fontSize: 24,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -52,14 +57,15 @@ class Verify extends StatelessWidget {
                         "We sent OTP code to your email \nexample@gmail.com. Enter the code below to verify.",
                         style: TextStyle(
                           fontFamily: 'Satoshi',
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w400,
+                          fontSize: 15,
+                          color: TextColors.neutral500,
+                          fontWeight: FontWeight.w500,
                         ),
                         textAlign: TextAlign.center,
                       ),
                     ),
 
-                    SizedBox(height: 30.h),
+                    SizedBox(height: 20.h),
                     PinCodeTextField(
                       appContext: context,
                       length: 4,
@@ -72,7 +78,7 @@ class Verify extends StatelessWidget {
                       pinTheme: PinTheme(
                         shape: PinCodeFieldShape.box,
                         borderRadius: BorderRadius.circular(12),
-                        borderWidth: 0.01,
+                        borderWidth: 1,
                         fieldHeight: 55,
                         fieldWidth: 50,
                         inactiveColor: TextColors.neutral300,
@@ -80,7 +86,8 @@ class Verify extends StatelessWidget {
                         activeColor: Appcolors.action,
                       ),
                       animationDuration: const Duration(milliseconds: 100),
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly, // 👈 Reduce space between boxes
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      // 👈 Reduce space between boxes
                       onChanged: (value) {
                         otpCode = value;
                       },
@@ -89,10 +96,13 @@ class Verify extends StatelessWidget {
                         print("Entered Code: $value");
                       },
                     ),
-                    SizedBox(height: 30.h),
-                    AppButton(text: "Next", onPressed: () {
-                      Get.to(SetNewPassword());
-                    }),
+                    SizedBox(height: 20.h),
+                    AppButton(
+                      text: "Next",
+                      onPressed: () {
+                        Get.to(SetNewPassword());
+                      },
+                    ),
                     SizedBox(height: 20.h),
                     GestureDetector(
                       onTap: () {
@@ -103,14 +113,20 @@ class Verify extends StatelessWidget {
                         child: Text.rich(
                           TextSpan(
                             text: "Don’t receive OTP? ",
-                            style: TextStyle(color: TextColors.neutral500,fontFamily: 'Satoshi',fontSize: 16), // optional base style
+                            style: TextStyle(
+                              color: TextColors.neutral500,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: 'Satoshi',
+                              fontSize: 16,
+                            ), // optional base style
                             children: [
                               TextSpan(
                                 text: " Resend again",
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontFamily: 'Satoshi',
-                                  color: Colors.blue,
+                                  color: Appcolors.action,
+
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
@@ -119,11 +135,10 @@ class Verify extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20.h),
+                    SizedBox(height: 10),
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         Get.back();
-
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -132,17 +147,21 @@ class Verify extends StatelessWidget {
                             "assets/icons/back.svg", // Your SVG file
                             width: 4, // Simplified from 15.999979972839355
                             height: 30, // For first image
-                            colorFilter: ColorFilter.mode(TextColors.neutral900, BlendMode.srcIn), // Optional color
-
+                            colorFilter: ColorFilter.mode(
+                              TextColors.neutral900,
+                              BlendMode.srcIn,
+                            ), // Optional color
                           ),
+                          SizedBox(width: 6,),
                           Text(
-                              "Back to login",
-                              style: TextStyle(
-                                fontFamily: 'Satoshi',
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              )
-                          )
+                            "Back to login",
+                            style: TextStyle(
+                              fontFamily: 'Satoshi',
+                              fontSize: 16,
+                              color: TextColors.neutral900,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -155,5 +174,4 @@ class Verify extends StatelessWidget {
       ),
     );
   }
-
 }

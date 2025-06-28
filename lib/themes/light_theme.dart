@@ -5,21 +5,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../utils/app_colors.dart';
 
 
-ThemeData light({Color color = const Color(0xFFFFD400)}) => ThemeData(
+ThemeData light({Color color = Appcolors.page}) => ThemeData(
   fontFamily: 'Poppins',
-  primaryColor: AppColors.textColor,
+  primaryColor: TextColors.neutral900,
   appBarTheme: AppBarTheme(
-      color: Colors.white
+      color: Appcolors.page
   ),
-  scaffoldBackgroundColor: Colors.white,
+  scaffoldBackgroundColor: Appcolors.page,
   secondaryHeaderColor: Color(0xFF1ED7AA),
   disabledColor: Color(0xFFBABFC4),
   brightness: Brightness.light,
   hintColor: Color(0xFF9F9F9F),
-  cardColor: Colors.white,
+  cardColor: Appcolors.page,
   inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: AppColors.fillColor,
+      fillColor: Appcolors.primary,
       hintStyle: TextStyle(color: AppColors.hintColor, fontSize: 16.sp),
       isDense: true,
       contentPadding:
@@ -27,9 +27,9 @@ ThemeData light({Color color = const Color(0xFFFFD400)}) => ThemeData(
       enabledBorder: enableBorder(),
       focusedBorder: focusedBorder(),
       errorBorder: errorBorder()),
-  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
     backgroundColor: Colors.white,
-    unselectedItemColor: AppColors.primaryColor,
+    unselectedItemColor: Appcolors.primary,
     selectedLabelStyle: TextStyle(color: AppColors.primaryColor,), // Force color
     // unselectedLabelStyle: TextStyle(color: Colors.grey, fontWeight: FontWeight.normal),
     elevation: 5,
@@ -43,7 +43,7 @@ OutlineInputBorder enableBorder() {
   return OutlineInputBorder(
     borderRadius: BorderRadius.circular(16.r),
     borderSide: BorderSide(
-      color: AppColors.borderColor,
+      color: TextColors.neutral500,
     ),
   );
 }
@@ -52,7 +52,7 @@ OutlineInputBorder focusedBorder() {
   return OutlineInputBorder(
     borderRadius: BorderRadius.circular(16.r),
     borderSide: BorderSide(
-      color: AppColors.borderColor,
+      color: TextColors.neutral500,
     ),
   );
 }
@@ -61,7 +61,7 @@ OutlineInputBorder errorBorder() {
   return OutlineInputBorder(
     borderRadius: BorderRadius.circular(16.r),
     borderSide: const BorderSide(
-      color: Colors.red,
+      color: Appcolors.error,
     ),
   );
 }

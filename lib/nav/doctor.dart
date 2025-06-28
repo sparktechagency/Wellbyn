@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wellbyn/views/screen/doctor/book_overview.dart';
 import 'package:wellbyn/views/screen/doctor/book_report.dart';
+import 'package:wellbyn/views/screen/profile/base/medical_info.dart';
 
 import '../utils/nab_ids.dart';
 import '../views/screen/doctor/doctor.dart';

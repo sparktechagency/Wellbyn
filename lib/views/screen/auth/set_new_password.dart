@@ -16,6 +16,7 @@ class SetNewPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+     backgroundColor: Appcolors.page,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -40,44 +41,48 @@ class SetNewPassword extends StatelessWidget {
                       "Set new password",
                       style: TextStyle(
                         fontFamily: 'Satoshi',
-                        fontSize: 24.sp,
+                        fontSize: 24,
                         color: TextColors.neutral900,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(2),
                       child: Text(
                           "Set a new password and continue your journey.",
                           style: TextStyle(
                             fontFamily: 'Satoshi',
                             color: TextColors.neutral500,
                             overflow: TextOverflow.ellipsis,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
                           )
                       ),
                     ),
-                    SizedBox(height: 30.h),
+                    SizedBox(height: 8.h),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(height: 16.h),
                         _buildLabel("New Password"),
                         CustomTextField(
+                          borderColor: TextColors.neutral900,
+                          filColor: Appcolors.primary,
                           controller: passwordcontroller,
                           hintText: 'type a strong password',
                         ),
-                        SizedBox(height: 16.h),
+                        SizedBox(height: 20),
                         _buildLabel("Confirm Password"),
                         CustomTextField(
+                          filColor: Appcolors.primary,
+                          borderColor: TextColors.neutral900,
                           controller: confirmcontroller,
                           hintText: 're-type password',
                         ),
 
                       ],
                     ),
-                    SizedBox(height: 30.h),
+                    SizedBox(height: 20.h),
                     AppButton(text: "Save",
                         onPressed: () {
                       Get.to(PasswordChanged());

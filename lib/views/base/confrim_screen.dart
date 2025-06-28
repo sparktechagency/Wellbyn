@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:wellbyn/utils/app_colors.dart';
+import 'package:wellbyn/utils/app_icons.dart';
 
 class ConfirmationScreen extends StatelessWidget {
   final String svgAsset;
@@ -39,10 +41,13 @@ class ConfirmationScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     const Spacer(),
+                    const Spacer(),
+                    const Spacer(),
                     SvgPicture.asset(
-                      svgAsset,
-                      width: 150.w,
-                      height: 150.h,
+                      AppIcons.rightIcon,
+                      // width: 100.w,
+                      // height: 100.h,
+                      color: Appcolors.action,
                       fit: BoxFit.contain,
                       alignment: Alignment.center,
                     ),
@@ -50,9 +55,9 @@ class ConfirmationScreen extends StatelessWidget {
                     Text(
                       title,
                       style: TextStyle(
-                        fontSize: 24.sp,
+                        fontSize: 24,
                         fontWeight: FontWeight.w500,
-                        color: Colors.black87,
+                        color: TextColors.neutral900,
                       ),
                     ),
                     SizedBox(height: 8.h),
@@ -60,9 +65,9 @@ class ConfirmationScreen extends StatelessWidget {
                       message,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 15.sp,
+                        fontSize: 15,
                         fontWeight: FontWeight.w400,
-                        color: Colors.grey[700],
+                        color: TextColors.neutral500,
                       ),
                     ),
                     SizedBox(height: 30.h),

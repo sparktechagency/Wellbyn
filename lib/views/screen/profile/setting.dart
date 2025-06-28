@@ -40,11 +40,13 @@ class Setting extends StatelessWidget {
    @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Appcolors.page,
       appBar: AppBar(
+        backgroundColor: Appcolors.page,
         title: Text(
           "Settings",
           style: TextStyle(
-            fontSize: 24,
+            fontSize: 20,
             fontFamily: "Satoshi",
             fontWeight: FontWeight.w500,
             color: TextColors.neutral900,
@@ -57,8 +59,8 @@ class Setting extends StatelessWidget {
           },
           icon: SvgPicture.asset(
             'assets/icons/arrow-left.svg',
-            width: 30.w,
-            height: 30.h,
+             width: 30.w,
+             height: 30.h,
             color: TextColors.neutral900,
           ),
         ),
@@ -74,6 +76,7 @@ class Setting extends StatelessWidget {
                children: [
 
                  CustomTextField(
+                   borderColor: TextColors.neutral900 ,
                    maxLines: 1,
                    hintText: 'Search for a doctor by name or designation...',
                      controller: textEditingController,
@@ -82,7 +85,7 @@ class Setting extends StatelessWidget {
 
                  ),
 
-                 SizedBox(height: 10,),
+                 SizedBox(height: 20,),
                  buildText("Information"),
                  SizedBox(height: 8,),
              
@@ -108,6 +111,7 @@ class Setting extends StatelessWidget {
                    trailingIconPath: AppIcons.arrorightIcon,
                    onTap: () {
                      // Navigate or do something
+                     Get.toNamed("/medical_info",id: NavIds.profilenav);
                    },
                  ),
                  SizedBox(height: 8,),
@@ -150,7 +154,7 @@ class Setting extends StatelessWidget {
                                 // Navigate or do something
                          },
                         ),
-                      SizedBox(height: 8,),
+                      SizedBox(height: 20,),
                  buildText("Account"),
                  SizedBox(height: 8,),
                  ProfileListTile(
@@ -176,7 +180,6 @@ class Setting extends StatelessWidget {
                    },
                  ),
                  SizedBox(height: 20,),
-
 
                  buildText("Other"),
                  SizedBox(height: 8,),
@@ -212,7 +215,7 @@ class Setting extends StatelessWidget {
                        borderRadius: BorderRadius.circular(8),
                        border: Border.all(
                          width: 1,
-                         color: Colors.red,
+                         color: BorderColors.error700,
                        ),
                      ),child: Row(
                      mainAxisAlignment: MainAxisAlignment.center,
@@ -223,7 +226,7 @@ class Setting extends StatelessWidget {
                            "Log out",
                            style: TextStyle(
                              fontFamily: "Satoshi",
-                             color: Appcolors.error,
+                             color: BorderColors.error700,
                              fontSize: 16,
                              fontWeight: FontWeight.w500,
                            )
