@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wellbyn/nav/appointment_nav.dart';
 import 'package:wellbyn/nav/doctor.dart';
+import 'package:wellbyn/nav/home_nav.dart';
 import 'package:wellbyn/nav/profile_nav.dart';
 import 'package:wellbyn/views/screen/Home/home_screen.dart';
 import 'package:wellbyn/views/screen/appointment/appointment.dart';
@@ -20,6 +22,7 @@ class BaseScreen extends StatelessWidget {
 
   // Step 2: Cache static widgets that don't change
   static  Widget _homeScreen = HomeScreen();
+
   static const Widget _bottomNavBar = BottomNavBar();
 
   @override
@@ -39,11 +42,11 @@ class BaseScreen extends StatelessWidget {
   Widget _buildCurrentScreen(int index) {
     switch (index) {
       case 0:
-        return _homeScreen;
+        return HomeNav();
       case 1:
         return const OptimizedDoctorNav();
       case 2:
-        return const Appointment();
+        return  AppointmentNav();
       case 3:
         return const ProfileNav();
       default:

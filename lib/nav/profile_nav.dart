@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wellbyn/views/screen/profile/base/caregiver_mode.dart';
+import 'package:wellbyn/views/screen/profile/base/insurance_info.dart';
 import 'package:wellbyn/views/screen/profile/base/medical_info.dart';
 import 'package:wellbyn/views/screen/profile/base/personal_info.dart';
 import 'package:wellbyn/views/screen/profile/base/support_send.dart';
@@ -32,6 +33,12 @@ class _ProfileNavState extends State<ProfileNav> {
           return MaterialPageRoute(
             settings: settings,
             builder: (_) => Support(),
+          );
+        }
+        else if(settings.name == '/insurance_info') {
+          return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => InsuranceInfo(),
           );
         }
         else if(settings.name == '/caregiver_mode') {

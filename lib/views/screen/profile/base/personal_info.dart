@@ -403,7 +403,9 @@ class _PersonalInfoState extends State<PersonalInfo> {
               const SizedBox(height: 10),
               _buildLabel("Accepted formats:JPG,PNG. Max file size: 5MB"),
               const SizedBox(height: 20),
-              _buildLabel("Last 4 digits of SSN"),
+              Align(
+                  alignment: Alignment.topLeft,
+                  child: _buildLabel("Last 4 digits of SSN")),
               TextField(
                 controller: emailController,
                 enabled: false,

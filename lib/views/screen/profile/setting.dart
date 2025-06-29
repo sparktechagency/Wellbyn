@@ -121,7 +121,7 @@ class Setting extends StatelessWidget {
                    title: " Insurance Information ",
                    trailingIconPath: AppIcons.arrorightIcon,
                    onTap: () {
-                     // Navigate or do something
+                     Get.toNamed("/insurance_info",id: NavIds.profilenav);
                    },
                  ),
                  SizedBox(height: 8,),
