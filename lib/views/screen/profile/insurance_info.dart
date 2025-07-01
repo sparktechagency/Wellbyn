@@ -5,10 +5,10 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-import '../../../../utils/app_colors.dart';
-import '../../../../utils/app_icons.dart';
-import '../../../../utils/nab_ids.dart';
-import 'madicalinfoheader.dart';
+import '../../../utils/app_colors.dart';
+import '../../../utils/app_icons.dart';
+import '../../../utils/nab_ids.dart';
+import 'base/madicalinfoheader.dart';
 
 class InsuranceInfo extends StatelessWidget {
   const InsuranceInfo({super.key});

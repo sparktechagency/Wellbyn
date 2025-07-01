@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wellbyn/views/screen/profile/base/caregiver_mode.dart';
-import 'package:wellbyn/views/screen/profile/base/insurance_info.dart';
-import 'package:wellbyn/views/screen/profile/base/medical_info.dart';
-import 'package:wellbyn/views/screen/profile/base/personal_info.dart';
-import 'package:wellbyn/views/screen/profile/base/support_send.dart';
+import 'package:wellbyn/views/screen/profile/caregiver_edits.dart';
+import 'package:wellbyn/views/screen/profile/caregiver_mode/caregiver_mode_details.dart';
+import 'package:wellbyn/views/screen/profile/caregiver_mode/start_caregiver.dart';
+import 'package:wellbyn/views/screen/profile/caregiver_mode/caregiver_mode.dart';
+import 'package:wellbyn/views/screen/profile/insurance_info.dart';
+import 'package:wellbyn/views/screen/profile/medicalinfo/medical_info.dart';
+import 'package:wellbyn/views/screen/profile/personal_info.dart';
+import 'package:wellbyn/views/screen/profile/support_send.dart';
 import 'package:wellbyn/views/screen/profile/setting.dart';
 import 'package:wellbyn/views/screen/profile/support.dart';
  // replace with your actual profile screen path
@@ -47,10 +50,29 @@ class _ProfileNavState extends State<ProfileNav> {
             builder: (_) => CaregiverScreen(),
           );
         }
+        else if(settings.name == '/caregiver_edits') {
+          return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => CaregiverEdits(),
+          );
+        }
+        else if(settings.name == '/start_caregiver') {
+          return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => StartCaregiver(),
+          );
+        }
         else if(settings.name =="/medical_info"){
           return MaterialPageRoute(
             settings: settings,
             builder: (_) => MedicalInformationScreen(),
+          );
+        }
+        else if(settings.name =="/caregiver_mode_details"){
+          return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => CaregiverModeDetails(),
+
           );
         }
         else if(settings.name == '/support_send') {

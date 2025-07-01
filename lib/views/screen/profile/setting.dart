@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:wellbyn/views/screen/profile/base/account_switch.dart';
+import 'package:wellbyn/views/screen/profile/account_switch.dart';
 
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_icons.dart';

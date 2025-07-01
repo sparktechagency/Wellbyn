@@ -4,9 +4,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:wellbyn/utils/app_colors.dart';
 import 'package:wellbyn/utils/app_icons.dart';
+import 'package:wellbyn/utils/nab_ids.dart';
 import 'package:wellbyn/views/base/app_text.dart';
 import '../../../../controllers/caregiver_controller.dart';
-import 'logout.dart';
+import '../base/logout.dart';
 
 
 
@@ -126,7 +127,6 @@ class CaregiverScreen extends StatelessWidget {
                 ),
               ),
                 SizedBox(height: 30,),
-
                 AppText("As a caregiver",),
                 SizedBox(height: 10,),
                 Container(
@@ -235,6 +235,7 @@ class CaregiverScreen extends StatelessWidget {
                 GestureDetector(
                 onTap: (){
                   print("Click and add the caregiver");
+                  Get.toNamed("/start_caregiver",id: NavIds.profilenav);
 
                 },
                 child: Container(

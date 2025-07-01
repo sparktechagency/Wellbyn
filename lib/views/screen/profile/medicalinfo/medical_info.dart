@@ -10,7 +10,7 @@ import 'package:wellbyn/views/base/app_text.dart';
 import 'package:wellbyn/views/base/custom_field.dart';
 
 import '../../../../utils/nab_ids.dart';
-import 'madicalinfoheader.dart';
+import '../base/madicalinfoheader.dart';
 
 class MedicalInformationScreen extends StatefulWidget {
   const MedicalInformationScreen({Key? key}) : super(key: key);

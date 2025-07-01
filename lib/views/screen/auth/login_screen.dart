@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:wellbyn/controllers/localization_controller.dart';
 import 'package:wellbyn/views/base/app_button.dart';
 import 'package:wellbyn/views/base/custom_field.dart';
 import '../../../utils/app_colors.dart';
@@ -18,98 +19,102 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Appcolors.page,
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.w),
-          child: SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(minHeight: 1.sh),
-              child: IntrinsicHeight(
-                child: Column(
-                  children: [
-                    SizedBox(height: 35.h),
-                    SvgPicture.asset(
-                      'assets/icons/logo.svg',
-                      width: 150.w,
-                      height: 150.h,
-                      color:  TextColors.action, // change color dynamically
-                      semanticsLabel: 'App Logo', // for accessibility
-                      fit: BoxFit.contain, // control how the image fits
-                      alignment: Alignment.center, // position the image
-                    ),
-                    SizedBox(height: 10.h),
-                    Column(
+    return GetBuilder<LocalizationController>(
+      builder:(_){
+        return Scaffold(
+          backgroundColor: Appcolors.page,
+          body: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              child: SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: 1.sh),
+                  child: IntrinsicHeight(
+                    child: Column(
                       children: [
-                        Text(
-                          "Welcome back!",
-                          style: TextStyle(
-                            fontFamily: 'Satoshi',
-                            fontSize: 24,
-                            color: TextColors.neutral900,
-                            fontWeight: FontWeight.w500,
+                        SizedBox(height: 35.h),
+                        SvgPicture.asset(
+                          'assets/icons/logo.svg',
+                          width: 150.w,
+                          height: 150.h,
+                          color:  TextColors.action, // change color dynamically
+                          semanticsLabel: 'App Logo', // for accessibility
+                          fit: BoxFit.contain, // control how the image fits
+                          alignment: Alignment.center, // position the image
+                        ),
+                        SizedBox(height: 10.h),
+                        Column(
+                          children: [
+                            Text(
+                              "Welcome back!",
+                              style: TextStyle(
+                                fontFamily: 'Satoshi',
+                                fontSize: 24,
+                                color: TextColors.neutral900,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            Text(
+                              "To log in, enter your email address.",
+                              style: TextStyle(
+                                fontFamily: 'Satoshi',
+                                fontSize: 15,
+                                color: TextColors.neutral500,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 30.h),
+                        inputSection(),
+                        SizedBox(height: 8,),
+                        forgotsection(),
+                        SizedBox(height: 30.h),
+                        AppButton(text: "Log in".tr, onPressed: () {
+                          Get.to(Forgot());
+                        }),
+                        SizedBox(height: 20.h),
+                        GestureDetector(
+                          onTap: () {
+                            print('Log In tapped');
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(bottom: 20),
+                            child: Text.rich(
+                              TextSpan(
+                                text: "Don’t have an account?",
+                                style: TextStyle(
+                                    color: TextColors.neutral500,
+                                    fontFamily: 'Satoshi',
+                                    fontSize: 15), // optional base style
+                                children: [
+                                  TextSpan(
+                                    text: "Create an account",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: 'Satoshi',
+                                      color: Colors.blue,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         ),
-                        Text(
-                          "To log in, enter your email address.",
-                          style: TextStyle(
-                            fontFamily: 'Satoshi',
-                            fontSize: 15,
-                            color: TextColors.neutral500,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
+                        Or(),
+                        SizedBox(height: 20.h),
+                        googleButton(),
+                        SizedBox(height: 30.h),
                       ],
                     ),
-                    SizedBox(height: 30.h),
-                    inputSection(),
-                    SizedBox(height: 8,),
-                    forgotsection(),
-                    SizedBox(height: 30.h),
-                    AppButton(text: "Log in", onPressed: () {
-                      Get.to(Forgot());
-                    }),
-                    SizedBox(height: 20.h),
-                    GestureDetector(
-                      onTap: () {
-                        print('Log In tapped');
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 20),
-                        child: Text.rich(
-                          TextSpan(
-                            text: "Don’t have an account?",
-                            style: TextStyle(
-                                color: TextColors.neutral500,
-                                fontFamily: 'Satoshi',
-                                fontSize: 15), // optional base style
-                            children: [
-                              TextSpan(
-                                text: "Create an account",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: 'Satoshi',
-                                  color: Colors.blue,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Or(),
-                    SizedBox(height: 20.h),
-                    googleButton(),
-                    SizedBox(height: 30.h),
-                  ],
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
@@ -203,7 +208,7 @@ class LoginScreen extends StatelessWidget {
     return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _buildLabel("Email"),
+                      _buildLabel("Email".tr),
                       CustomTextField(
                         filColor: Appcolors.primary,
                         borderColor: TextColors.neutral900,

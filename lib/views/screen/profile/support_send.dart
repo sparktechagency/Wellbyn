@@ -4,9 +4,9 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:wellbyn/utils/app_icons.dart';
 import 'package:wellbyn/utils/nab_ids.dart';
 
-import '../../../../utils/app_colors.dart';
-import '../../../base/confrim_screen.dart';
-import '../../auth/Hipaa_Consent.dart';
+import '../../../utils/app_colors.dart';
+import '../../base/confrim_screen.dart';
+import '../auth/Hipaa_Consent.dart';
 class SupportSend extends StatelessWidget {
   const SupportSend({super.key});
 

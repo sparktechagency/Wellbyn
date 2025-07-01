@@ -14,10 +14,10 @@ import 'package:wellbyn/utils/app_icons.dart';
 import 'package:wellbyn/views/base/app_text.dart';
 import 'package:wellbyn/views/base/custom_field.dart';
 
-import '../../../../controllers/dotted_boder.dart';
-import '../../../../utils/app_colors.dart';
-import '../../../../utils/nab_ids.dart';
-import '../../../base/custom_button.dart';
+import '../../../controllers/dotted_boder.dart';
+import '../../../utils/app_colors.dart';
+import '../../../utils/nab_ids.dart';
+import '../../base/custom_button.dart';
 
 class PersonalInfo extends StatefulWidget {
   PersonalInfo({super.key});
