@@ -19,6 +19,7 @@ import 'package:wellbyn/views/base/app_text.dart';
 import 'package:wellbyn/views/screen/doctor/book_overview.dart';
 import 'package:wellbyn/views/screen/doctor/widget/animationwave.dart';
 
+import '../../../controllers/file_upload_controller.dart';
 import '../../../controllers/speed_controller.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/nab_ids.dart';
@@ -38,6 +39,7 @@ class _BookReportState extends State<BookReport> {
   final SpeechToText _speechToText = SpeechToText();
   TextEditingController problem = TextEditingController();
   TextEditingController optional = TextEditingController();
+  final FileUploadController fileController = Get.put(FileUploadController());
 
   late SpeechController speechController;
   List<Map<String, dynamic>> files = [];
@@ -48,122 +50,123 @@ class _BookReportState extends State<BookReport> {
   void initState() {
     super.initState();
     speechController = Get.put(SpeechController(speech: _speechToText));
-    _requestMicPermission();
+    fileController.requestPermissions();
+
   }
 
-  void _requestMicPermission() async {
-    final micStatus = await Permission.microphone.request();
-    final storageStatus = await Permission.storage.request();
-
-    if (!micStatus.isGranted) {
-      print("Mic permission not granted.");
-    }
-    if (!storageStatus.isGranted) {
-      print("Storage permission not granted.");
-    }
-  }
-
-  Future<void> pickAndUploadPDF() async {
-    try {
-      if (Platform.isAndroid) {
-        // Request Storage permission
-        bool storageGranted = await Permission.storage.request().isGranted;
-
-        // For Android 11+, request Manage External Storage permission
-        bool manageGranted = true;
-        if (await Permission.manageExternalStorage.isDenied) {
-          manageGranted = await Permission.manageExternalStorage
-              .request()
-              .isGranted;
-        }
-
-        if (!storageGranted || !manageGranted) {
-          // Show snackbar with message and optionally open settings if permanently denied
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Storage permission is required to select files'),
-              action: SnackBarAction(
-                label: 'Settings',
-                onPressed: () => openAppSettings(),
-              ),
-            ),
-          );
-          return;
-        }
-      }
-
-      // Proceed to pick file
-      FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.any,
-        allowCompression: true,
-        withData: true,
-      );
-
-      if (result != null && result.files.isNotEmpty) {
-        PlatformFile platformFile = result.files.first;
-        if (platformFile.path == null) return;
-
-        File file = File(platformFile.path!);
-        String fileName = platformFile.name;
-        int fileSize = platformFile.size;
-
-        setState(() {
-          files.add({
-            'name': fileName,
-            'size': _formatFileSize(fileSize),
-            'file': file,
-            'isUploading': true,
-            'progress': 0.0,
-          });
-        });
-
-        await _uploadFile(file, fileName, files.length - 1);
-      }
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error picking file: ${e.toString()}')),
-      );
-    }
-  }
-
-  Future<void> _uploadFile(File file, String fileName, int index) async {
-    try {
-      String uploadUrl = 'YOUR_UPLOAD_ENDPOINT'; // Replace with your API
-
-      FormData formData = FormData.fromMap({
-        "file": await MultipartFile.fromFile(file.path, filename: fileName),
-      });
-
-      Dio dio = Dio();
-
-      setState(() {
-        files[index]['isUploading'] = true;
-      });
-
-      await dio.post(
-        uploadUrl,
-        data: formData,
-        onSendProgress: (int sent, int total) {
-          setState(() {
-            files[index]['progress'] = sent / total;
-          });
-        },
-      );
-
-      setState(() {
-        files[index]['isUploading'] = false;
-        files[index]['uploaded'] = true;
-      });
-    } catch (e) {
-      setState(() {
-        files[index]['isUploading'] = false;
-        files[index]['error'] = true;
-      });
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Upload failed: ${e.toString()}')));
-    }
-  }
+  // void _requestMicPermission() async {
+  //   final micStatus = await Permission.microphone.request();
+  //   final storageStatus = await Permission.storage.request();
+  //
+  //   if (!micStatus.isGranted) {
+  //     print("Mic permission not granted.");
+  //   }
+  //   if (!storageStatus.isGranted) {
+  //     print("Storage permission not granted.");
+  //   }
+  // }
+  //
+  // Future<void> pickAndUploadPDF() async {
+  //   try {
+  //     if (Platform.isAndroid) {
+  //       // Request Storage permission
+  //       bool storageGranted = await Permission.storage.request().isGranted;
+  //
+  //       // For Android 11+, request Manage External Storage permission
+  //       bool manageGranted = true;
+  //       if (await Permission.manageExternalStorage.isDenied) {
+  //         manageGranted = await Permission.manageExternalStorage
+  //             .request()
+  //             .isGranted;
+  //       }
+  //
+  //       if (!storageGranted || !manageGranted) {
+  //         // Show snackbar with message and optionally open settings if permanently denied
+  //         ScaffoldMessenger.of(context).showSnackBar(
+  //           SnackBar(
+  //             content: Text('Storage permission is required to select files'),
+  //             action: SnackBarAction(
+  //               label: 'Settings',
+  //               onPressed: () => openAppSettings(),
+  //             ),
+  //           ),
+  //         );
+  //         return;
+  //       }
+  //     }
+  //
+  //     // Proceed to pick file
+  //     FilePickerResult? result = await FilePicker.platform.pickFiles(
+  //       type: FileType.any,
+  //       allowCompression: true,
+  //       withData: true,
+  //     );
+  //
+  //     if (result != null && result.files.isNotEmpty) {
+  //       PlatformFile platformFile = result.files.first;
+  //       if (platformFile.path == null) return;
+  //
+  //       File file = File(platformFile.path!);
+  //       String fileName = platformFile.name;
+  //       int fileSize = platformFile.size;
+  //
+  //       setState(() {
+  //         files.add({
+  //           'name': fileName,
+  //           'size': _formatFileSize(fileSize),
+  //           'file': file,
+  //           'isUploading': true,
+  //           'progress': 0.0,
+  //         });
+  //       });
+  //
+  //       await _uploadFile(file, fileName, files.length - 1);
+  //     }
+  //   } catch (e) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(content: Text('Error picking file: ${e.toString()}')),
+  //     );
+  //   }
+  // }
+  //
+  // Future<void> _uploadFile(File file, String fileName, int index) async {
+  //   try {
+  //     String uploadUrl = 'YOUR_UPLOAD_ENDPOINT'; // Replace with your API
+  //
+  //     FormData formData = FormData.fromMap({
+  //       "file": await MultipartFile.fromFile(file.path, filename: fileName),
+  //     });
+  //
+  //     Dio dio = Dio();
+  //
+  //     setState(() {
+  //       files[index]['isUploading'] = true;
+  //     });
+  //
+  //     await dio.post(
+  //       uploadUrl,
+  //       data: formData,
+  //       onSendProgress: (int sent, int total) {
+  //         setState(() {
+  //           files[index]['progress'] = sent / total;
+  //         });
+  //       },
+  //     );
+  //
+  //     setState(() {
+  //       files[index]['isUploading'] = false;
+  //       files[index]['uploaded'] = true;
+  //     });
+  //   } catch (e) {
+  //     setState(() {
+  //       files[index]['isUploading'] = false;
+  //       files[index]['error'] = true;
+  //     });
+  //     ScaffoldMessenger.of(
+  //       context,
+  //     ).showSnackBar(SnackBar(content: Text('Upload failed: ${e.toString()}')));
+  //   }
+  // }
 
   void _deleteFile(int index) {
     setState(() {
@@ -172,14 +175,16 @@ class _BookReportState extends State<BookReport> {
     // Call your API to delete from server if needed
   }
 
-  String _formatFileSize(int bytes) {
-    if (bytes <= 0) return "0 B";
-    const suffixes = ["B", "KB", "MB", "GB"];
-    int i = (log(bytes) / log(1024)).floor();
-    return '${(bytes / pow(1024, i)).toStringAsFixed(2)} ${suffixes[i]}';
-  }
+  // String _formatFileSize(int bytes) {
+  //   if (bytes <= 0) return "0 B";
+  //   const suffixes = ["B", "KB", "MB", "GB"];
+  //   int i = (log(bytes) / log(1024)).floor();
+  //   return '${(bytes / pow(1024, i)).toStringAsFixed(2)} ${suffixes[i]}';
+  // }
 
   Widget _buildFileItem(Map<String, dynamic> file, int index) {
+    final fileController = Get.find<FileUploadController>();
+
     return Column(
       children: [
         Container(
@@ -241,7 +246,7 @@ class _BookReportState extends State<BookReport> {
                         height: 16, // reduce icon size
                         width: 16,
                       ),
-                      onPressed: () => _deleteFile(index),
+                      onPressed: () => fileController.deleteFile(index),
                     ),
                 ],
               ),
@@ -254,6 +259,7 @@ class _BookReportState extends State<BookReport> {
     if (file['isUploading'] == true || file['error'] == true) ...[
     const SizedBox(height: 4),
       Container(
+        margin: EdgeInsets.only(bottom: 10),
         height: 55,
         decoration: BoxDecoration(
           border: Border.all(color: TextColors.neutral900.withOpacity(0.14)),
@@ -290,10 +296,12 @@ class _BookReportState extends State<BookReport> {
                       size: 16,
                       color: TextColors.neutral500,
                     ),
-                  )
+                  ),
+
                 ],
               ),
             ),
+
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               child: LinearProgressIndicator(
@@ -544,12 +552,19 @@ class _BookReportState extends State<BookReport> {
                     ),
                   ),
                   SizedBox(height: 8),
-                  ...files
-                      .map((file) => _buildFileItem(file, files.indexOf(file)))
-                      .toList(),
+                  Obx(() => Column(
+                    children: [
+                      ...fileController.files.map((file) =>
+                          _buildFileItem(file, fileController.files.indexOf(file))
+                      ).toList(),
+                    ],
+                  )),
+
                   SizedBox(height: 12),
                   GestureDetector(
-                    onTap: pickAndUploadPDF,
+                    onTap: () async {
+                      await fileController.pickAndUploadPDF();
+                    },
                     child: Container(
                       padding: EdgeInsets.symmetric(
                         vertical: 4,
@@ -604,7 +619,7 @@ class _BookReportState extends State<BookReport> {
               child: Align(
                 alignment: Alignment.topLeft,
                 child: GestureDetector(
-                  onTap: pickAndUploadPDF,
+                  onTap: fileController.pickAndUploadPDF,
                   child: Container(
                     padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
                     decoration: BoxDecoration(

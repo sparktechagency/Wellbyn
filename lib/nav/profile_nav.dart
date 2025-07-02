@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wellbyn/views/screen/profile/caregiver_edits.dart';
+import 'package:wellbyn/views/screen/profile/caregiver_mode/caregiver_edits.dart';
 import 'package:wellbyn/views/screen/profile/caregiver_mode/caregiver_mode_details.dart';
 import 'package:wellbyn/views/screen/profile/caregiver_mode/start_caregiver.dart';
 import 'package:wellbyn/views/screen/profile/caregiver_mode/caregiver_mode.dart';
 import 'package:wellbyn/views/screen/profile/insurance_info.dart';
 import 'package:wellbyn/views/screen/profile/medicalinfo/medical_info.dart';
-import 'package:wellbyn/views/screen/profile/personal_info.dart';
-import 'package:wellbyn/views/screen/profile/support_send.dart';
+import 'package:wellbyn/views/screen/profile/personalinfo/personal_info.dart';
+import 'package:wellbyn/views/screen/profile/support/support_send.dart';
 import 'package:wellbyn/views/screen/profile/setting.dart';
-import 'package:wellbyn/views/screen/profile/support.dart';
+import 'package:wellbyn/views/screen/profile/support/support.dart';
+import 'package:wellbyn/views/screen/profile/upload_document_screen/upload_document_screen.dart';
+import 'package:wellbyn/views/screen/profile/waitlist/waitlist_screen.dart';
  // replace with your actual profile screen path
 import '../utils/nab_ids.dart';
 
@@ -48,6 +50,18 @@ class _ProfileNavState extends State<ProfileNav> {
           return MaterialPageRoute(
             settings: settings,
             builder: (_) => CaregiverScreen(),
+          );
+        }
+        else if(settings.name == '/upload_document_screen') {
+          return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => UploadDocumentScreen(),
+          );
+        }
+        else if(settings.name == '/waitlist_screen') {
+          return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => WaitlistScreen(),
           );
         }
         else if(settings.name == '/caregiver_edits') {

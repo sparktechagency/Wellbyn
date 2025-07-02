@@ -28,8 +28,8 @@ class _MedicalInformationScreenState extends State<MedicalInformationScreen> {
   ];
 
   List<Medication> medications = [
-    const Medication(name: 'Lisinopril', frequency: 'Once daily'),
-    const Medication(name: 'Metformin', frequency: 'Twice daily'),
+    const Medication(name: 'Lisinopril', dosage: '10mg', frequency: 'Once daily'),
+    const Medication(name: 'Metformin', dosage: '500mg', frequency: 'Twice daily'),
   ];
 
   Map<String, bool> existingConditions = {
@@ -413,68 +413,270 @@ class _MedicalInformationScreenState extends State<MedicalInformationScreen> {
       medications.removeAt(index);
     });
   }
-
   void _showAddMedicationDialog() {
     final TextEditingController nameController = TextEditingController();
+    final TextEditingController dosageController = TextEditingController();
     final TextEditingController frequencyController = TextEditingController();
+    final _formKey = GlobalKey<FormState>();
 
     showDialog(
       context: context,
       builder: (context) {
-        return AlertDialog(
-          backgroundColor: Appcolors.page,
+        return Dialog(
+          backgroundColor: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          title: const Text('Add Medication'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                controller: nameController,
-                decoration: const InputDecoration(
-                  fillColor: Colors.white,
-                  hintText: 'Enter medication name',
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 12),
+                // Title
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Text(
+                    "Add Medication",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontFamily: "Satoshi",
+                      fontWeight: FontWeight.w500,
+                      color: TextColors.neutral900,
+                    ),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 12),
-              TextField(
-                controller: frequencyController,
-                decoration: const InputDecoration(
-                  hintText: 'e.g. Twice daily',
-                  fillColor: Colors.white,
+                const SizedBox(height: 12),
+                Divider(height: 1, color: TextColors.neutral200),
+                const SizedBox(height: 20),
+
+                // Medication Name
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Text(
+                    "Medication Name",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontFamily: "Satoshi",
+                      fontWeight: FontWeight.w500,
+                      color: TextColors.neutral900,
+                    ),
+                  ),
                 ),
-              ),
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('Cancel'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                if (nameController.text.isNotEmpty &&
-                    frequencyController.text.isNotEmpty) {
-                  setState(() {
-                    medications.add(
-                      Medication(
-                        name: nameController.text,
-                        frequency: frequencyController.text,
+                const SizedBox(height: 8),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: CustomTextField(
+                    maxLines: 1,
+                    hintText: "Enter medication name",
+                    controller: nameController,
+                    borderColor: TextColors.neutral500,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                  ),
+                ),
+                const SizedBox(height: 16),
+
+                // Dosage
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Text(
+                    "Dosage",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontFamily: "Satoshi",
+                      fontWeight: FontWeight.w500,
+                      color: TextColors.neutral900,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: CustomTextField(
+                    maxLines: 1,
+                    hintText: "e.g. 10mg",
+                    controller: dosageController,
+                    borderColor: TextColors.neutral500,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                  ),
+                ),
+                const SizedBox(height: 16),
+
+                // Frequency
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Text(
+                    "Frequency",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontFamily: "Satoshi",
+                      fontWeight: FontWeight.w500,
+                      color: TextColors.neutral900,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: CustomTextField(
+                    maxLines: 1,
+                    hintText: "e.g. Twice daily",
+                    controller: frequencyController,
+                    borderColor: TextColors.neutral500,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                  ),
+                ),
+                const SizedBox(height: 24),
+
+                Divider(height: 1, color: TextColors.neutral200),
+                const SizedBox(height: 16),
+
+                // Buttons
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      GestureDetector(
+                        onTap: () => Navigator.pop(context),
+                        child: Container(
+                          height: 40.h,
+                          width: 80.w,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.r),
+                            border: Border.all(
+                              color: TextColors.neutral500,
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Cancel",
+                              style: TextStyle(fontSize: 14.sp),
+                            ),
+                          ),
+                        ),
                       ),
-                    );
-                  });
-                  Navigator.pop(context);
-                }
-              },
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
-              child: const Text('Add'),
+                      const SizedBox(width: 10),
+                      GestureDetector(
+                        onTap: () {
+                          if (_formKey.currentState!.validate() &&
+                              nameController.text.isNotEmpty &&
+                              dosageController.text.isNotEmpty &&
+                              frequencyController.text.isNotEmpty) {
+                            setState(() {
+                              medications.add(
+                                Medication(
+                                  name: nameController.text.trim(),
+                                  dosage: dosageController.text.trim(),
+                                  frequency: frequencyController.text.trim(),
+                                ),
+                              );
+                            });
+                            Navigator.pop(context);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Medication "${nameController.text.trim()}" added successfully',
+                                ),
+                                backgroundColor: Colors.green,
+                                duration: const Duration(seconds: 2),
+                              ),
+                            );
+                          }
+                        },
+                        child: Container(
+                          height: 40.h,
+                          width: 60.w,
+                          decoration: BoxDecoration(
+                            color: Appcolors.action,
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Add",
+                              style: TextStyle(
+                                color: Appcolors.primary,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14.sp,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 12),
+              ],
             ),
-          ],
+          ),
         );
       },
     );
   }
+
+  // void _showAddMedicationDialogs() {
+  //   final TextEditingController nameController = TextEditingController();
+  //   final TextEditingController frequencyController = TextEditingController();
+  //
+  //   showDialog(
+  //     context: context,
+  //     builder: (context) {
+  //       return AlertDialog(
+  //         backgroundColor: Appcolors.page,
+  //         shape: RoundedRectangleBorder(
+  //           borderRadius: BorderRadius.circular(12),
+  //         ),
+  //         title: const Text('Add Medication'),
+  //         content: Column(
+  //           mainAxisSize: MainAxisSize.min,
+  //           children: [
+  //             TextField(
+  //               controller: nameController,
+  //               decoration: const InputDecoration(
+  //                 fillColor: Colors.white,
+  //                 hintText: 'Enter medication name',
+  //               ),
+  //             ),
+  //             const SizedBox(height: 12),
+  //             TextField(
+  //               controller: frequencyController,
+  //               decoration: const InputDecoration(
+  //                 hintText: 'e.g. Twice daily',
+  //                 fillColor: Colors.white,
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //         actions: [
+  //           TextButton(
+  //             onPressed: () => Navigator.pop(context),
+  //             child: const Text('Cancel'),
+  //           ),
+  //           ElevatedButton(
+  //             onPressed: () {
+  //               if (nameController.text.isNotEmpty &&
+  //                   frequencyController.text.isNotEmpty) {
+  //                 setState(() {
+  //                   medications.add(
+  //                     Medication(
+  //                       name: nameController.text,
+  //                       frequency: frequencyController.text,
+  //                     ),
+  //                   );
+  //                 });
+  //                 Navigator.pop(context);
+  //               }
+  //             },
+  //             style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+  //             child: const Text('Add'),
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
 
   void _showTextInputDialog({
     required String title,
@@ -906,7 +1108,12 @@ class Allergy {
 
 class Medication {
   final String name;
+  final String dosage;
   final String frequency;
 
-  const Medication({required this.name, required this.frequency});
+  const Medication({
+    required this.name,
+    required this.dosage,
+    required this.frequency
+  });
 }

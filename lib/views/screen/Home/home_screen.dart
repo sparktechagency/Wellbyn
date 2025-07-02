@@ -9,6 +9,7 @@ import 'package:signature/signature.dart';
 import 'package:wellbyn/utils/app_colors.dart';
 import 'package:wellbyn/utils/app_icons.dart';
 import 'package:wellbyn/views/base/app_text.dart';
+import 'package:wellbyn/views/screen/doctor/doctor_details.dart';
 
 import '../../../utils/nab_ids.dart';
 import '../../../utils/row_with_tittle.dart';
@@ -166,7 +167,7 @@ class HomeScreen extends StatelessWidget {
                       blurRadius: 5,
                     ),
                   ],
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -302,6 +303,71 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 18),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      child: Row(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color:Appcolors.success50,
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                width: 1,
+                                color:Appcolors.action,
+                              )
+                            ),
+                            height: 40,
+                            width: 130,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset(AppIcons.exchange01Icon),
+                                SizedBox(width: 6,),
+                                const Text(
+                                  "Re-schedule",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: "Satoshi",
+                                    color: TextColors.action,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+
+                              ],
+                            ),
+                          ),
+
+                          Spacer(),
+
+                          const Text(
+                            "OR",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: "Satoshi",
+                              color: TextColors.neutral500,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Spacer(),
+
+                          const Text(
+                            "Cancel",
+                            style: TextStyle(
+                              fontFamily: "Satoshi",
+                              fontSize: 16,
+                              color: BorderColors.error700,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Spacer(),
+                          Spacer(),
+                          Spacer(),
+
+
+                        ],
+                      ),
+                    ),
 
                     const SizedBox(height: 15),
                   ],
@@ -331,13 +397,44 @@ class HomeScreen extends StatelessWidget {
                     children: List.generate(9, (index) {
                       return GestureDetector(
                         onTap: () {
-                          Get.toNamed(
-                            '/doctor_details',
-                            id: NavIds.profile, // this matches nested key
-                            arguments: {
-                              'doctorId': 'a1da1dad136adf4566adf1a',
-                            },
-                          );
+                          // Debug: Print when tapped
+                          print("Doctor card tapped - Index: $index");
+
+                          try {
+                            // Method 1: Try simple navigation first
+                            Get.toNamed('/doctor_details', arguments: {
+                              'doctorId': 'doctor_${index}_id',
+                              'doctorName': 'Dr. Leo Marwick',
+                              'specialization': 'Heart Health Expert',
+                            });
+
+                            print("Navigation called successfully");
+                          } catch (e) {
+                            print("Navigation error: $e");
+
+                            // Method 2: Alternative navigation if the above fails
+                            try {
+
+                              Get.toNamed(
+                                '/doctor_details',
+                                id: NavIds.home, // this matches nested key
+                                arguments: {
+                                  'doctorId': 'a1da1dad136adf4566adf1a',
+                                },
+                              );
+
+                            } catch (e2) {
+                              print("Alternative navigation also failed: $e2");
+
+                              // Method 3: Show snackbar as fallback
+                              Get.snackbar(
+                                "Navigation",
+                                "Doctor details page would open here",
+                                backgroundColor: Colors.blue,
+                                colorText: Colors.white,
+                              );
+                            }
+                          }
                         },
                         child: Container(
                           margin: EdgeInsets.all(2),

@@ -42,6 +42,7 @@ class AppIcons{
   static String Notification="assets/icons/Notification.svg";
   static String Notification02="assets/icons/Notification02.svg";
   static String clockIcon="assets/icons/clock02.svg";
+  static String exchange01Icon="assets/icons/exchange01.svg";
 
 
 

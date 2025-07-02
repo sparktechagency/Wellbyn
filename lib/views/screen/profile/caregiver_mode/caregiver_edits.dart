@@ -7,10 +7,10 @@ import 'package:wellbyn/utils/app_icons.dart';
 import 'package:get/get.dart';
 import 'package:wellbyn/utils/nab_ids.dart';
 import 'package:wellbyn/views/base/custom_button.dart';
-import '../../../utils/app_colors.dart';
-import '../../../utils/app_constants.dart';
-import '../../base/app_text.dart';
-import '../../base/icon_text_button.dart';
+import '../../../../utils/app_colors.dart';
+import '../../../../utils/app_constants.dart';
+import '../../../base/app_text.dart';
+import '../../../base/icon_text_button.dart';
 
 class CaregiverEdits extends StatelessWidget {
   CaregiverEdits({super.key});

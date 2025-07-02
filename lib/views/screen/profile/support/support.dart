@@ -4,12 +4,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-import '../../../utils/app_colors.dart';
-import '../../../utils/app_icons.dart';
-import '../../../utils/nab_ids.dart';
-import '../../base/app_text.dart';
-import '../../base/custom_field.dart';
-import '../../base/icon_text_button.dart';
+import '../../../../utils/app_colors.dart';
+import '../../../../utils/app_icons.dart';
+import '../../../../utils/nab_ids.dart';
+import '../../../base/app_text.dart';
+import '../../../base/custom_field.dart';
+import '../../../base/icon_text_button.dart';
 class Support extends StatelessWidget {
    Support({super.key});
 

@@ -132,6 +132,8 @@ class Setting extends StatelessWidget {
                    trailingIconPath: AppIcons.arrorightIcon,
                    onTap: () {
                      // Navigate or do something
+                     Get.toNamed("/upload_document_screen",id: NavIds.profilenav);
+
                    },
                  ),
                  SizedBox(height: 20,),
@@ -143,6 +145,8 @@ class Setting extends StatelessWidget {
                    trailingIconPath: AppIcons.arrorightIcon,
                    onTap: () {
                      // Navigate or do something
+                     Get.toNamed("/waitlist_screen",id: NavIds.profilenav);
+
                    },
                  ),
                  SizedBox(height: 8,),
