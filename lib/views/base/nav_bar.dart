@@ -13,14 +13,14 @@ class BottomNavBar extends StatelessWidget {
     'assets/icons/home.svg',
     'assets/icons/stethoscope.svg',
     'assets/icons/calendar.svg',
-    'assets/icons/user.svg',
+    'assets/icons/man.svg',
   ];
 
   static const List<String> _icon = [
     'assets/icons/home_bold.svg',
     'assets/icons/doctor_bold.svg',
     'assets/icons/appointment_bold.svg',
-    'assets/icons/user_bold .svg',
+    'assets/icons/uers_bold.svg',
   ];
 
   static const List<String> _labels = [

@@ -37,6 +37,12 @@ class AppIcons{
   static String rightIcon="assets/icons/check_blue.svg";
   static String lockIcon="assets/icons/lock.svg";
   static String editIcon="assets/icons/edit.svg";
+  static String clockIcon="assets/icons/clock02.svg";
+  static String exchange01Icon="assets/icons/exchange01.svg";
+  static String addcaregiverIcon="assets/icons/mentor.svg";
+  static String Notification02="assets/icons/Notification02.svg";
+  static String addIcon="assets/icons/add01.svg";
+  static String addIcon02="assets/icons/add02.svg";
 
 
 

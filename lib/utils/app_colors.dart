@@ -52,6 +52,7 @@ class Appcolors {
   static const Color normalLight = Color(0xFFF0F5FE); // Peace/50 (guess)
   static const Color error = Color(0xFFE94A4A); // Error/500
   static const Color error700 = Color(0xFFB42121); // Error/500
+  static const Color error50 = Color(0xFFFEF2F2); // Error/500
   static const Color warning = Color(0xFFFBF7EB);
   static const Color success50 = Color(0xFFEEFEE7);
 }

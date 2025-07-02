@@ -4,14 +4,22 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:wellbyn/controllers/insurance_controller.dart';
+import 'package:wellbyn/views/base/app_text.dart';
+import 'package:wellbyn/views/base/icon_text_button.dart';
 
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_icons.dart';
 import '../../../../utils/nab_ids.dart';
-import 'madicalinfoheader.dart';
+
+import 'base/infoitem.dart';
+import 'base/madicalinfoheader.dart';
 
 class InsuranceInfo extends StatelessWidget {
-  const InsuranceInfo({super.key});
+   InsuranceInfo({super.key});
+
+   final InsuranceController controller = Get.put(InsuranceController());
+
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +51,7 @@ class InsuranceInfo extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -53,6 +61,25 @@ class InsuranceInfo extends StatelessWidget {
                     'Hi! Please share your personal info to verify your identity and stay connected with your healthcare providers.',
                 iconPath: AppIcons.shieduserIcon,
               ),
+              SizedBox(height: 20,),
+
+              Obx((){
+              return IconTextButton(
+                isLoading: controller.isLoading.value,
+                text: "Add new card",
+                svgAsset: AppIcons.addIcon,
+                backgroundColor:Appcolors.action,
+                textColor: Appcolors.primary,
+                bordercolor: Colors.transparent,
+                height: 50,
+                onTap: () {
+                  // Your logic
+                  print("Button tapped");
+                  controller.startLoading();
+                },
+              );
+
+              }),
 
               ListView.builder(
                 shrinkWrap: true,
@@ -62,14 +89,11 @@ class InsuranceInfo extends StatelessWidget {
                   horizontal: 2,
                 ),
                 itemCount: 5,
+
                 itemBuilder: (context, index) {
                   return Container(
-                    margin: EdgeInsets.only(
-                      top: index == 0 ? 0 : 8,
-                      bottom: 16,
-                    ),
+                    margin: EdgeInsets.symmetric(vertical: 10),
                     width: double.infinity,
-                    height: 450,
                     decoration: BoxDecoration(
                       color: Appcolors.primary,
                       boxShadow: [
@@ -81,20 +105,16 @@ class InsuranceInfo extends StatelessWidget {
                       ],
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            top: 20,
-                            left: 20,
-                            right: 20,
-                          ),
-                          child: Row(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0), // ➤ Right/left padding added here
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 20),
+                          Row(
                             children: [
                               Text(
-                                "Card-1",
+                                "Card-${index + 1}", // ➤ Makes the card label dynamic
                                 style: TextStyle(
                                   color: TextColors.neutral500,
                                   fontSize: 16,
@@ -106,12 +126,10 @@ class InsuranceInfo extends StatelessWidget {
                                 height: 30,
                                 width: 30,
                                 decoration: BoxDecoration(
-                                  color: HexColor("#FEF2F2"),
+                                  color: Appcolors.error50,
                                   boxShadow: [
                                     BoxShadow(
-                                      color: TextColors.neutral500.withOpacity(
-                                        0.25,
-                                      ),
+                                      color: TextColors.neutral500.withOpacity(0.25),
                                       offset: const Offset(0, 0.3),
                                       blurRadius: 5,
                                     ),
@@ -125,13 +143,77 @@ class InsuranceInfo extends StatelessWidget {
                                   color: Appcolors.error,
                                 ),
                               ),
-                              SizedBox(width: 3),
                             ],
                           ),
-                        ),
-                      ],
+                          SizedBox(height: 32),
+                          InfoItem(
+                            title: "Insurance Provider",
+                            value: "ABC Health Insurance",
+                            titleColor: TextColors.neutral500,
+                            valueColor: TextColors.neutral900,
+                          ),
+                          SizedBox(height: 18),
+                          InfoItem(
+                            title: "Policy Number",
+                            value: "H123456789",
+                            titleColor: TextColors.neutral500,
+                            valueColor: TextColors.neutral900,
+                          ),
+                          SizedBox(height: 18),
+                          InfoItem(
+                            title: "Group Number",
+                            value: "G987654321",
+                            titleColor: TextColors.neutral500,
+                            valueColor: TextColors.neutral900,
+                          ),
+                          SizedBox(height: 18),
+                          InfoItem(
+                            title: "Phone",
+                            value: "+1 9999999999",
+                            titleColor: TextColors.neutral500,
+                            valueColor: TextColors.neutral900,
+                          ),
+
+                          SizedBox(height: 18),
+                          AppText("Insurance card",fontSize: 16,color: TextColors.neutral500,),
+                          SizedBox(height: 6),
+                          IconTextButton(
+                            width: 150,
+                            height: 40,
+                            svgAsset: AppIcons.viewIcon,
+                            textColor: Appcolors.action,
+
+                            onTap: () {},
+                            bordercolor: Appcolors.action,
+                            backgroundColor: Colors.transparent,
+                            text: "View card",
+                          ),
+                          SizedBox(height: 15),
+                          Obx((){
+                            return IconTextButton(
+                              height: 50,
+                              isLoading: controller.isLoading.value,
+                              svgAsset: AppIcons.editIcon,
+                              textColor: Appcolors.action,
+                              onTap: () {
+                                controller.startLoading();
+                                Get.toNamed("/add_insurance",id: NavIds.profilenav);
+
+                              },
+                              bordercolor: Appcolors.action,
+                              backgroundColor: Colors.transparent,
+                              text: "Edit details ",
+                            );
+                          }),
+
+                          SizedBox(height: 18),
+
+
+                        ],
+                      ),
                     ),
                   );
+
                 },
               ),
             ],
@@ -141,3 +223,7 @@ class InsuranceInfo extends StatelessWidget {
     );
   }
 }
+
+
+
+
