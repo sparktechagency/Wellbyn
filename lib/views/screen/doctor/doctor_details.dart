@@ -312,6 +312,7 @@ class DoctorDetails extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 10),
+
                         Expanded(
                           child: SizedBox(
                             height: 45,
