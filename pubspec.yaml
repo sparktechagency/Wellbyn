@@ -91,6 +91,9 @@ flutter:
       - assets/image/
       - assets/animations/
       - assets/language/en.json
+      - assets/language/ar.json
+      - assets/language/es.json
+      - assets/language/fr.json
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

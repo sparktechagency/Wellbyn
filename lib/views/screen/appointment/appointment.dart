@@ -134,18 +134,18 @@ class _AppointmentState extends State<Appointment> {
               ),
               const SizedBox(height: 10),
               Expanded(
-                child: PageView(
-                  controller: appointmentController.pageController,
-                  onPageChanged: (index) {
-                    appointmentController.changeTab(index);
-                  },
-                  children:  [
-                    Upcoming(),
-                    Compeleted(),
-                    Canceled(),
-
-                  ],
-                ),
+                child: Obx(() {
+                  switch (appointmentController.selectedIndex.value) {
+                    case 0:
+                      return Upcoming();
+                    case 1:
+                      return Compeleted();
+                    case 2:
+                      return Canceled();
+                    default:
+                      return SizedBox();
+                  }
+                }),
               ),
 
             ]

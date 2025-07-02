@@ -4,21 +4,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:wellbyn/views/base/app_text.dart';
 
-import '../../../../controllers/dotor_details.dart';
 import '../../../../utils/app_colors.dart';
-import '../../../../utils/app_constants.dart';
 import '../../../../utils/app_icons.dart';
 import '../../../../utils/nab_ids.dart';
-import '../../../base/icon_text_button.dart';
-import 'infoitem.dart';
 import 'madicalinfoheader.dart';
 
 class InsuranceInfo extends StatelessWidget {
-   InsuranceInfo({super.key});
-  final DoctorDetailsController controller = Get.put(DoctorDetailsController());
- TextEditingController name = TextEditingController();
+  const InsuranceInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -60,14 +53,6 @@ class InsuranceInfo extends StatelessWidget {
                     'Hi! Please share your personal info to verify your identity and stay connected with your healthcare providers.',
                 iconPath: AppIcons.shieduserIcon,
               ),
-              SizedBox(height: 30,),
-              IconTextButton(
-                text: "Add new Card",
-                backgroundColor: Appcolors.action,
-                svgAsset: AppIcons.addIcon,
-                onTap: () {
-                },),
-              SizedBox(height: 10,),
 
               ListView.builder(
                 shrinkWrap: true,
@@ -79,13 +64,12 @@ class InsuranceInfo extends StatelessWidget {
                 itemCount: 5,
                 itemBuilder: (context, index) {
                   return Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
                     margin: EdgeInsets.only(
                       top: index == 0 ? 0 : 8,
                       bottom: 16,
                     ),
                     width: double.infinity,
-                    height: 520,
+                    height: 450,
                     decoration: BoxDecoration(
                       color: Appcolors.primary,
                       boxShadow: [
@@ -99,11 +83,15 @@ class InsuranceInfo extends StatelessWidget {
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-
-                        SizedBox(height: 20,),
-                        Row(
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 20,
+                            left: 20,
+                            right: 20,
+                          ),
+                          child: Row(
                             children: [
                               Text(
                                 "Card-1",
@@ -138,91 +126,9 @@ class InsuranceInfo extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(width: 3),
-
                             ],
                           ),
-                        SizedBox(height: 24,),
-                        InfoItem(
-                          titleFontSize: 14,
-                          valueFontSize: 16,
-                          title: "Insurance Provider",
-                          value: "ABC Health Insurance",
-                          titleColor: TextColors.neutral500,
-                          valueColor: TextColors.neutral900,
                         ),
-                        SizedBox(height: 20,),
-
-                        InfoItem(
-                  titleFontSize: 14,
-                  valueFontSize: 16,
-                  title: "Policy Number ",
-                  value: "H123456789",
-                  titleColor: TextColors.neutral500,
-                  valueColor: TextColors.neutral900,
-                  ),
-                        SizedBox(height: 20,),
-                        InfoItem(
-                          titleFontSize: 14,
-                          valueFontSize: 16,
-                          title: "Grope Number ",
-                          value: "G987654321",
-                          titleColor: TextColors.neutral500,
-                          valueColor: TextColors.neutral900,
-                        ),
-                        SizedBox(height: 20,),
-                        InfoItem(
-                          titleFontSize: 14,
-                          valueFontSize: 16,
-                          title: "Phone  ",
-                          value: "+011414412",
-                          titleColor: TextColors.neutral500,
-                          valueColor: TextColors.neutral900,
-                        ),
-
-                        SizedBox(height: 15,),
-                        Text(
-                            "Insurance Card ",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                            )
-                        ),
-                        SizedBox(height: 4,),
-
-                       Obx((){
-                        return IconTextButton(
-                        isLoading: controller.isloading.value,
-                   //lottieAsset: "assets/animations/loading.json",
-                   text: "Edit details ",
-                  width: 150,
-                  height: 40,
-                  textColor: Appcolors.action,
-                  bordercolor: Appcolors.action,
-                  backgroundColor: Appcolors.primary,
-                  svgAsset: AppIcons.viewIcon,
-                  onTap: () {
-                 // controller.loadDoctordetailesData();
-
-                  },);
-                        }) ,
-                        SizedBox(height: 15,),
-
-                        Obx((){
-                        return IconTextButton(
-                          isLoading: controller.isloading.value,
-                          text: "Edit details ",
-                          //lottieAsset: "assets/animations/loading.json",
-                          textColor: Appcolors.action,
-                          bordercolor: Appcolors.action,
-                          backgroundColor: Appcolors.primary,
-                          svgAsset: AppIcons.editIcon,
-                          onTap: () {
-                            controller.loadDoctordetailesData();
-                            Get.toNamed("/add_insurance",id: NavIds.profilenav);
-
-                          },);
-                        })
-
                       ],
                     ),
                   );
@@ -235,4 +141,3 @@ class InsuranceInfo extends StatelessWidget {
     );
   }
 }
-

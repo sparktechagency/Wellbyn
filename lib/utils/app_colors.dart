@@ -43,6 +43,7 @@ class Appcolors {
   static const Color actionLight = Color(0xFFF2F8FD); // Primary/50 (guess)
   static const Color actionHover = Color(0xFF1A588A); // Primary/700
   static const Color actionHoverLight = Color(0xFFF2F8FD); // Primary/50 (again)
+  static const Color actionPrimary100 = Color(0xFFE4EFFA); // Primary/50 (again)
 
   // States
   static const Color disabled = Color(0xFFBDBDBD); // Neutral/300
@@ -50,7 +51,9 @@ class Appcolors {
   static const Color errorLight = Color(0xFFFEF2F2); // Error/50 (guess)
   static const Color normalLight = Color(0xFFF0F5FE); // Peace/50 (guess)
   static const Color error = Color(0xFFE94A4A); // Error/500
+  static const Color error700 = Color(0xFFB42121); // Error/500
   static const Color warning = Color(0xFFFBF7EB);
+  static const Color success50 = Color(0xFFEEFEE7);
 }
 
 class BorderColors {
