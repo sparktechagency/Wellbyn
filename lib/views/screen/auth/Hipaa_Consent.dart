@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:wellbyn/views/screen/base_screen.dart';
 
 import '../../../utils/app_colors.dart';
+import '../profile_setting_start/setting_personal_info.dart';
 
 class ConsentScreen extends StatelessWidget {
   const ConsentScreen({super.key});
@@ -34,7 +35,7 @@ class ConsentScreen extends StatelessWidget {
               TextSpan(
                 children: [
                   TextSpan(
-                    text: 'Hey 👋\n',
+                    text: 'Hey !\n',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                   TextSpan(
@@ -62,7 +63,7 @@ class ConsentScreen extends StatelessWidget {
                   SizedBox(height: 12),
                   Text(
                     style: TextStyle(fontFamily: 'Satoshi', fontSize: 15),
-                    '📊 To keep improving your experience and help our technology get smarter over time, we may use some of your information — always anonymized and never linked to your name or identity.',
+                    'To keep improving your experience and help our technology get smarter over time, we may use some of your information — always anonymized and never linked to your name or identity.',
                   ),
                   SizedBox(height: 12),
                   Text(
@@ -89,7 +90,8 @@ class ConsentScreen extends StatelessWidget {
                           child: ElevatedButton.icon(
                             onPressed: () {
                               // Navigate or handle agreement
-                              Get.to(BaseScreen());
+                            Get.to(SettingPersonalInfo());
+
                             },
                             icon: const Icon(Icons.check, color: Colors.white),
                             label: const Text(

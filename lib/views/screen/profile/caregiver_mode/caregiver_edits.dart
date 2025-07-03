@@ -69,6 +69,7 @@ class CaregiverEdits extends StatelessWidget {
               SizedBox(height: 20),
               Obx(() => LabeledDropdownField(
                 label: "Relation",
+                titile: "Relation",
                 items: item,
                 selectedValue: caregiverController.selectedValue.value.isEmpty
                     ? null
@@ -155,6 +156,7 @@ class CaregiverEdits extends StatelessWidget {
               SizedBox(height: 20),
               Obx(() => LabeledDropdownField(
                 label: "Permission",
+                titile: "Permission",
                 items: items,
                 selectedValue: caregiverController.selectedControll.value.isEmpty
                     ? null
@@ -800,6 +802,7 @@ void showCustomDatePicker({
 class CustomDropdownDialogs extends StatefulWidget {
   final List<String> items;
   final String? selectedValue;
+  final String titile;
   final ValueChanged<String> onChanged;
 
   const CustomDropdownDialogs({
@@ -807,6 +810,7 @@ class CustomDropdownDialogs extends StatefulWidget {
     required this.items,
     this.selectedValue,
     required this.onChanged,
+    required this.titile,
   }) : super(key: key);
 
   @override
@@ -828,7 +832,7 @@ class _CustomDropdownDialogState extends State<CustomDropdownDialogs> {
       builder: (context) {
         return AlertDialog(
           backgroundColor: Appcolors.page,
-          title: Text('Select Relation',style: TextStyle(fontFamily:"Satoshi" ),),
+          title: Text(widget.titile,style: TextStyle(fontFamily:"Satoshi" ),),
           content: Container(
             width: 70,
             color: Appcolors.page,
@@ -927,12 +931,14 @@ class _CustomDropdownDialogState extends State<CustomDropdownDialogs> {
 
 class LabeledDropdownField extends StatelessWidget {
   final String label;
+  final String titile;
   final String? selectedValue;
   final List<String> items;
   final ValueChanged<String> onChanged;
 
   const LabeledDropdownField({
     super.key,
+    required this.titile,
     required this.label,
     required this.items,
     this.selectedValue,
@@ -952,6 +958,7 @@ class LabeledDropdownField extends StatelessWidget {
         SizedBox(height: 6.h),
         CustomDropdownDialogs(
           items: items,
+          titile: titile,
           selectedValue: selectedValue,
           onChanged: onChanged,
         ),
