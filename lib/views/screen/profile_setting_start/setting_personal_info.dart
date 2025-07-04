@@ -1,13 +1,16 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:wellbyn/controllers/profile_setting_controller.dart';
+import 'package:wellbyn/views/screen/profile_setting_start/setting_medical_info.dart';
+import '../../../controllers/dotted_boder.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_constants.dart';
 import '../../../utils/app_icons.dart';
 import '../../base/app_text.dart';
-import '../profile/caregiver_mode/caregiver_edits.dart'; // You should define your color constants here
+
 
 enum Gender { male, female, other }
 
@@ -16,9 +19,11 @@ class SettingPersonalInfo extends StatelessWidget {
 
   TextEditingController name = TextEditingController();
   TextEditingController date = TextEditingController();
-  ProfileSettingContrller _contrller = Get.put(ProfileSettingContrller());
+  ProfileSettingController _contrller = Get.put(ProfileSettingController());
 
   List<String> bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
+  List<String> state = ["AO", "AI", "BI", "CD", "HI+", "CO-", "HO", "KA"];
+
   String? selectedGender;
 
   List<String> marital = [
@@ -64,7 +69,6 @@ class SettingPersonalInfo extends StatelessWidget {
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
-
               //--------------uper row
               Row(
                 children: [
@@ -157,6 +161,7 @@ class SettingPersonalInfo extends StatelessWidget {
                     borderColor: TextColors.neutral900,
                     label: "Full Name",
                     controller: name,
+                    next: true,
                     maxline: 1,
                     hintText: "First Name",
                   ),
@@ -165,6 +170,7 @@ class SettingPersonalInfo extends StatelessWidget {
                     children: [
                       Expanded(
                         child: CustomTextFielde(
+                          next: true,
                           controller: name,
                           hintText: "Middle",
                           keyboardType: TextInputType.name,
@@ -177,6 +183,7 @@ class SettingPersonalInfo extends StatelessWidget {
 
                       Expanded(
                         child: CustomTextFielde(
+                          next: true,
                           controller: name,
                           hintText: "Last",
                           keyboardType: TextInputType.name,
@@ -259,11 +266,27 @@ class SettingPersonalInfo extends StatelessWidget {
 
                   Row(
                     children: [
-                      Text("Number of Children",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500,color: TextColors.neutral900,fontFamily: "Satoshi"),),
-                      Text(" (optional)",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,color: TextColors.neutral500,fontFamily: "Satoshi"),),
+                      Text(
+                        "Number of Children",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: TextColors.neutral900,
+                          fontFamily: "Satoshi",
+                        ),
+                      ),
+                      Text(
+                        " (optional)",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: TextColors.neutral500,
+                          fontFamily: "Satoshi",
+                        ),
+                      ),
                     ],
                   ),
-                  SizedBox(height: 8,),
+                  SizedBox(height: 8),
                   CustomTextFielde(
                     borderColor: TextColors.neutral900,
 
@@ -274,150 +297,297 @@ class SettingPersonalInfo extends StatelessWidget {
                 ],
               ),
 
-              //======= divided by all 
+              //======= divided by all
               const SizedBox(height: 20),
               Divider(height: 1, color: TextColors.neutral200),
               const SizedBox(height: 20),
-// --------------------------------------------------------------
+              // --------------------------------------------------------------
               _buildSectionContainer(
-                  title: "Contact info",
-                  children: [
-
-                 LabeledTextField(
-                  borderColor: TextColors.neutral900,
-                  label: "Email",
-                  controller: name,
-                  maxline: 1,
-                  hintText: "name@gmail.com",
-                ),
-                SizedBox(height: 20,),
-                LabeledTextField(
-                  borderColor: TextColors.neutral900,
-                  label: "Phone",
-                  controller: name,
-                  keyboardType: TextInputType.number,
-                  maxline: 1,
-                  hintText: "+02154555585",
-                ),
-
-              ]),
-
-
+                title: "Contact info",
+                children: [
+                  LabeledTextField(
+                    next: true,
+                    borderColor: TextColors.neutral900,
+                    label: "Email",
+                    controller: name,
+                    maxline: 1,
+                    hintText: "name@gmail.com",
+                  ),
+                  SizedBox(height: 20),
+                  LabeledTextField(
+                    next: true,
+                    borderColor: TextColors.neutral900,
+                    label: "Phone",
+                    controller: name,
+                    keyboardType: TextInputType.number,
+                    maxline: 1,
+                    hintText: "+02154555585",
+                  ),
+                ],
+              ),
 
               //======= divided by all
               const SizedBox(height: 20),
               Divider(height: 1, color: TextColors.neutral200),
               const SizedBox(height: 20),
-// --------------------------------------------------------------
+              // --------------------------------------------------------------
               _buildSectionContainer(
-                  title: "Address",
-                  children: [
-                    LabeledTextField(
-                      borderColor: TextColors.neutral900,
-                      label: "Address Line 1",
-                      controller: name,
-                      maxline: 1,
-                      hintText: "Street address",
-                    ),
-                    SizedBox(height: 20,),
-                    Row(
-                      children: [
-                        Text("Address Line 2 ",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500,color: TextColors.neutral900,fontFamily: "Satoshi"),),
-                        Text(" (optional)",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,color: TextColors.neutral500,fontFamily: "Satoshi"),),
-                      ],
-                    ),
-
-                    SizedBox(height: 8,),
-
-                    CustomTextFielde(
-                      borderColor: TextColors.neutral900,
-                      controller: name,
-                      hintText: "Apartment, suite, unit, etc.",
-                      keyboardType: TextInputType.text,
-                    ),
-
-                    SizedBox(height: 20,),
-                    // Replace your existing address row section with this fixed version
-
-                    Row(
-                      children: [
-                        // City Text Field
-                        Expanded(
-                          flex: 2,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              AppText("City", fontSize: 16, color: TextColors.neutral900),
-                              SizedBox(height: 8.h),
-                              CustomTextFieldeses(
-                                borderColor: TextColors.neutral900,
-                                controller: name,
-                                hintText: "City",
-                                keyboardType: TextInputType.text,
-                                contentPaddingVertical: 12, // Consistent padding
-                              ),
-                            ],
-                          ),
+                title: "Address",
+                children: [
+                  LabeledTextField(
+                    next: true,
+                    borderColor: TextColors.neutral900,
+                    label: "Address Line 1",
+                    controller: name,
+                    maxline: 1,
+                    hintText: "Street address",
+                  ),
+                  SizedBox(height: 20),
+                  Row(
+                    children: [
+                      Text(
+                        "Address Line 2 ",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: TextColors.neutral900,
+                          fontFamily: "Satoshi",
                         ),
-                        SizedBox(width: 8.w),
+                      ),
+                      Text(
+                        " (optional)",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: TextColors.neutral500,
+                          fontFamily: "Satoshi",
+                        ),
+                      ),
+                    ],
+                  ),
 
-                        // State Dropdown Field
-                        Expanded(
-                          flex: 2,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              AppText("State", fontSize: 16, color: TextColors.neutral900),
-                              SizedBox(height: 8.h),
-                              CustomTextFieldeses(
-                                suffixSvgAsset: AppIcons.arrowdwonIcon,
-                                borderColor: TextColors.neutral200,
-                                readOnly: true,
-                                controller: name,
-                                maxLines: 1,
-                                //hintText: "state",
-                                contentPaddingVertical: 12, // Consistent padding
-                                onTap: () {
-                                  // Add your state selection logic here
+                  SizedBox(height: 8),
+
+                  CustomTextFielde(
+                    borderColor: TextColors.neutral900,
+                    controller: name,
+                    hintText: "Apartment, suite, unit, etc.",
+                    keyboardType: TextInputType.text,
+                  ),
+
+                  SizedBox(height: 20),
+
+                  // Replace your existing address row section with this fixed version
+                  Row(
+                    children: [
+                      // City Text Field
+                      Expanded(
+                        flex: 2,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AppText(
+                              "City",
+                              fontSize: 16,
+                              color: TextColors.neutral900,
+                            ),
+                            SizedBox(height: 8.h),
+                            CustomTextFieldeses(
+                              borderColor: TextColors.neutral900,
+                              controller: name,
+                              maxLines: 1,
+                              // Make sure you have a cityController
+                              hintText: "City",
+                              keyboardType: TextInputType.text,
+                              contentPaddingVertical: 13,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(width: 8.w),
+
+                      // State Dropdown Field - CORRECTED VERSION
+                      Expanded(
+                        flex: 2,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AppText(
+                              "State",
+                              fontSize: 16,
+                              color: TextColors.neutral900,
+                            ),
+                            SizedBox(height: 8.h),
+                            Obx(
+                              () => CustomDropdownDialogss(
+                                items: state,
+                                // Make sure this is your states list
+                                titile: "Select State",
+                                selectedValue:
+                                    _contrller.selectedState.value.isEmpty
+                                    ? null
+                                    : _contrller.selectedState.value,
+                                onChanged: (value) {
+                                  _contrller.selecteStated(value);
                                 },
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
+                      ),
 
-                        SizedBox(width: 8.w),
+                      SizedBox(width: 8.w),
 
-                        // ZIP Text Field
-                        Expanded(
-                          flex: 2,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              AppText("ZIP", fontSize: 16, color: TextColors.neutral900),
-                              SizedBox(height: 8.h),
-                              CustomTextFieldeses(
-                                borderColor: TextColors.neutral900,
-                                controller: name,
-                                hintText: "ZIP code",
-                                keyboardType: TextInputType.number,
-                                contentPaddingVertical: 12, // Consistent padding
-                              ),
-                            ],
-                          ),
+                      // ZIP Text Field
+
+                      Expanded(
+                        flex: 2,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AppText(
+                              "ZIP",
+                              fontSize: 16,
+                              color: TextColors.neutral900,
+                            ),
+                            SizedBox(height: 8.h),
+                            CustomTextFieldeses(
+                              borderColor: TextColors.neutral900,
+                              controller: name,
+                              // Make sure you have a zipController
+                              hintText: "ZIP code",
+                              maxLines: 1,
+                              keyboardType: TextInputType.number,
+                              contentPaddingVertical: 13,
+                            ),
+                          ],
                         ),
-                      ],
-                    )
-
-                  ]),
-
+                      ),
+                    ],
+                  ),
+                ],
+              ),
 
               //======= divided by all
               const SizedBox(height: 20),
               Divider(height: 1, color: TextColors.neutral200),
               const SizedBox(height: 20),
-// --------------------------------------------------------------
+
+              // --------------------------------------------------------------
+              _buildSectionContainer(
+                title: "Additional info",
+                children: [
+                  LabeledTextField(
+                    next: true,
+                    borderColor: TextColors.neutral900,
+                    label: "Employer",
+                    controller: name,
+                    maxline: 1,
+                    hintText: "Company name",
+                  ),
+                  SizedBox(height: 20),
+                  LabeledTextField(
+                    next: true,
+                    borderColor: TextColors.neutral900,
+                    label: "Driver's License",
+                    controller: name,
+                    maxline: 1,
+                    hintText: "License number",
+                  ),
+                  SizedBox(height: 20),
+                  _buildLabel("Upload Driver's License Images"),
+                  const SizedBox(height: 5),
+                  _buildImageUploadSection(),
+                  const SizedBox(height: 10),
+                  Text(
+                    "Accepted formats: JPG, PNG. Max file size: 5MB",
+                    style: TextStyle(
+                      fontFamily: "Satoshi",
+                      fontWeight: FontWeight.w500,
+                      color: TextColors.neutral500,
+                      fontSize: 14,
+                    ),
+                  ),
+
+                  SizedBox(height: 20,),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: _buildLabel("Last 4 digits of SSN"),
+                  ),
+                  SizedBox(height: 8,),
+                  CustomTextFielde(
+                    borderColor: TextColors.neutral900,
+                    suffixSvgAsset: AppIcons.viewIcon,
+                    suffixSvgColor: TextColors.neutral500,
+                    hintText: "45454",
+                    prefixIcon: AppIcons.lockIcon,
+                    controller: name,
+                  ),
+                  SizedBox(height: 8,),
+                  Align(
+                    alignment:Alignment.topLeft,
+                    child: Text(
+                        "For identification purposes only",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontFamily: "Satoshi",
+                          color: TextColors.neutral500,
+                          fontWeight: FontWeight.w500,
+                        )
+                    ),
+                  ),
+                ],
+              ),
+
+              SizedBox(height: 50,),
 
 
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: InkWell(
+                      onTap: (){
+                        Get.back();
+                      },
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Appcolors.primary,
+
+                          border: Border.all(
+                            width: 1,
+                            color: TextColors.neutral900,
+
+                          )
+                        ),
+                        child: Center(child: Text("Previous",style: TextStyle(fontFamily: "Satoshi",fontSize: 16,color: TextColors.neutral900,fontWeight: FontWeight.w500),)),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 115,),
+                  Expanded(
+                    child: InkWell(
+                      onTap: (){
+                        Get.to(SettingMedicalInfo());
+                        print("click");
+                      },
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Appcolors.action,
+                        ),
+                        child: Center(child: Text("Next",style: TextStyle(fontFamily: "Satoshi",fontSize: 16,color: Appcolors.primary,fontWeight: FontWeight.w500),)),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+
+              SizedBox(height: 35,),
 
 
             ],
@@ -427,8 +597,75 @@ class SettingPersonalInfo extends StatelessWidget {
     );
   }
 
-  Widget _buildGenderButton(String label) {
+  Widget _buildImageUploadSection() {
+    return Column(
+      children: [
+        const SizedBox(height: 16),
 
+        // Front License Upload (whole dotted container is clickable)
+        Obx(() => GestureDetector(
+          onTap: () => _contrller.pickLicenseImage(isFront: true),
+          child: DottedBorderContainer(
+            child: AspectRatio(
+              aspectRatio: 16 / 7,
+              child: _contrller.frontLicenseImage.value != null
+                  ? Image.memory(
+                _contrller.frontLicenseImage.value!,
+                fit: BoxFit.cover,
+              )
+                  : _uploadLicenseContent(isFront: true),
+            ),
+          ),
+        )),
+
+        const SizedBox(height: 10),
+
+        // Back License Upload (whole dotted container is clickable)
+        Obx(() => GestureDetector(
+          onTap: () => _contrller.pickLicenseImage(isFront: false),
+          child: DottedBorderContainer(
+            child: AspectRatio(
+              aspectRatio: 16 / 7,
+              child: _contrller.backLicenseImage.value != null
+                  ? Image.memory(
+                _contrller.backLicenseImage.value!,
+                fit: BoxFit.cover,
+              )
+                  : _uploadLicenseContent(isFront: false),
+            ),
+          ),
+        )),
+      ],
+    );
+  }
+
+  Widget _uploadLicenseContent({required bool isFront}) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SvgPicture.asset(AppIcons.cameraIcons),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AppText(
+                fontSize: 16,
+                'Upload/capture License ',
+                color: TextColors.neutral500,
+              ),
+              AppText(
+                fontSize: 16,
+                isFront ? 'Front' : 'Back',
+                color: TextColors.action,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildGenderButton(String label) {
     return Obx(() {
       bool isSelected = _contrller.selectedGender.value == label;
       return GestureDetector(
@@ -709,12 +946,16 @@ class _CustomDropdownDialogState extends State<CustomDropdownDialogss> {
       child: InputDecorator(
         decoration: InputDecoration(
           filled: true,
-
           fillColor: Appcolors.primary,
-          contentPadding: EdgeInsets.only(left: 10,right: 15,top: 4,bottom: 4),
+          contentPadding: EdgeInsets.only(
+            left: 10,
+            right: 15,
+            top: 4,
+            bottom: 4,
+          ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: TextColors.neutral200),
+            borderSide: BorderSide(color: BorderColors.tertiary),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
@@ -792,7 +1033,7 @@ class CustomTextFielde extends StatefulWidget {
   final Color? borderColor;
   final String? obscure;
   final Color? filColor;
-  final Widget? prefixIcon;
+  final String? prefixIcon;
   final String? labelText;
   final String? hintText;
   final VoidCallback? onTap; // 👈 Add this
@@ -809,6 +1050,7 @@ class CustomTextFielde extends StatefulWidget {
   final bool? enabled;
   final String? suffixSvgAsset;
   final Color? suffixSvgColor;
+  final bool next;
 
   const CustomTextFielde({
     super.key,
@@ -817,6 +1059,7 @@ class CustomTextFielde extends StatefulWidget {
     this.hintText,
     this.borderColor,
     this.prefixIcon,
+    this.next=false,
     this.suffixIcon,
     this.validator,
     this.isEmail,
@@ -859,6 +1102,15 @@ class _CustomTextFieldState extends State<CustomTextFielde> {
       keyboardType: widget.keyboardType,
       obscuringCharacter: widget.obscure!,
       enabled: widget.enabled ?? true,
+      textInputAction: widget.next ? TextInputAction.next : TextInputAction.done,
+      onFieldSubmitted: (_) {
+        if (widget.next) {
+          FocusScope.of(context).nextFocus();
+        } else {
+          FocusScope.of(context).unfocus(); // or call submit logic
+        }
+      },
+
       readOnly: widget.readOnly ?? false,
       onTap: widget.onTap,
       // validator: widget.validator,
@@ -895,6 +1147,23 @@ class _CustomTextFieldState extends State<CustomTextFielde> {
             color: widget.borderColor ?? BorderColors.primary,
           ),
         ),
+
+        prefixIcon: widget.prefixIcon != null
+            ? Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          child: SvgPicture.asset(
+            color: TextColors.neutral500,
+            widget.prefixIcon! as String,
+            width: 16.w,
+            height: 16.w,
+            colorFilter: const ColorFilter.mode(
+              TextColors.neutral500,
+              BlendMode.srcIn,
+            ),
+          ),
+        )
+            : null,
+
 
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.r),
@@ -976,9 +1245,10 @@ class LabeledTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final String? suffixSvgAsset;
   final Color? suffixSvgColor;
-  final Widget? prefixIcon;
+  final String? prefixIcon;
   final Color? borderColor; // Add this
   final int? maxline;
+  final bool next;
 
   const LabeledTextField({
     super.key,
@@ -987,6 +1257,7 @@ class LabeledTextField extends StatelessWidget {
     this.hintText,
     this.isPassword = false,
     this.isEmail,
+    this.next=false,
     this.keyboardType,
     this.suffixIcon,
     this.suffixSvgAsset,
@@ -1014,6 +1285,7 @@ class LabeledTextField extends StatelessWidget {
           suffixSvgColor: suffixSvgColor,
           prefixIcon: prefixIcon,
           maxLines: maxline,
+          next: next,
           borderColor: borderColor, // Pass borderColor here
         ),
       ],
@@ -1129,7 +1401,7 @@ class _CustomTextFieldStates extends State<CustomTextFieldeses> {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.r),
           borderSide: BorderSide(
-            width: 1.5,
+            width: 1,
             color: widget.borderColor ?? BorderColors.primary,
           ),
         ),
@@ -1146,7 +1418,7 @@ class _CustomTextFieldStates extends State<CustomTextFieldeses> {
           borderRadius: BorderRadius.circular(8.r),
           borderSide: BorderSide(
             width: 1,
-            color: BorderColors.disabled, // separate color
+            color: BorderColors.primary, // separate color
           ),
         ),
         contentPadding: EdgeInsets.symmetric(

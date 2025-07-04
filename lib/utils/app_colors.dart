@@ -30,6 +30,7 @@ class AppColors{
 class Appcolors {
 
   static const Color primary = Color(0xFFFFFFFF); // Neutral/White
+  static const Color primary50 = Color(0xFFF2F8FD); // Neutral/White
   static const Color primaryInverted = Color(0xFF292929); // Neutral/950 (guess)
   static const Color page = Color(0xFFF5F7F9); // Neutral/25
   static const Color dashboardPage = Color(0xFFFFFFFF); // #FFFFFF

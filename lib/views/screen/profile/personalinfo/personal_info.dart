@@ -406,6 +406,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
               Align(
                   alignment: Alignment.topLeft,
                   child: _buildLabel("Last 4 digits of SSN")),
+
               TextField(
                 controller: emailController,
                 enabled: false,

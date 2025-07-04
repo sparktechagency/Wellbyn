@@ -35,7 +35,9 @@ class AppIcons{
   static String calenderIcon01="assets/icons/calendar01.svg";
   static String cameraIcons="assets/icons/camera_ai.svg";
   static String rightIcon="assets/icons/check_blue.svg";
-  static String lockIcon="assets/icons/lock.svg";
+
+  static String lockIcon="assets/icons/square_lock.svg";
+
   static String editIcon="assets/icons/edit.svg";
   static String clockIcon="assets/icons/clock02.svg";
   static String exchange01Icon="assets/icons/exchange01.svg";
