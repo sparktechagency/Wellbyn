@@ -14,6 +14,7 @@ class Verify extends StatelessWidget {
   Verify({super.key});
 
   final TextEditingController _pinController = TextEditingController();
+
   String otpCode = '';
 
   @override
@@ -28,6 +29,7 @@ class Verify extends StatelessWidget {
               constraints: BoxConstraints(minHeight: 1.sh),
               child: IntrinsicHeight(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(height: 40.h),
                     SvgPicture.asset(
@@ -53,15 +55,36 @@ class Verify extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.w),
-                      child: Text(
-                        "We sent OTP code to your email \nexample@gmail.com. Enter the code below to verify.",
-                        style: TextStyle(
-                          fontFamily: 'Satoshi',
-                          fontSize: 15,
-                          color: TextColors.neutral500,
-                          fontWeight: FontWeight.w500,
-                        ),
+                      child: RichText(
                         textAlign: TextAlign.center,
+                        text: TextSpan(
+                          text: "We sent OTP code to your email\n",
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: TextColors.neutral900,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: "Satoshi",
+                          ),children: [
+                            TextSpan(
+                              text: "example@gmail.com.",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: TextColors.neutral900,
+                                fontWeight: FontWeight.w600,
+                                fontFamily: "Satoshi",
+                              ),
+                            ),
+                          TextSpan(
+                            text: "Enter the code below to verify.",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: TextColors.neutral900,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: "Satoshi",
+                            ),
+                          ),
+                        ]
+                        ),
                       ),
                     ),
 
@@ -69,19 +92,30 @@ class Verify extends StatelessWidget {
                     PinCodeTextField(
                       appContext: context,
                       length: 4,
+                      enableActiveFill: true,
                       showCursor: true,
                       cursorColor: Appcolors.action,
                       obscureText: false,
+                      textStyle: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                        color: TextColors.action,
+                        fontFamily: "Satoshi",
+                      ),
                       controller: _pinController,
-                      animationType: AnimationType.fade,
+                      animationType: AnimationType.scale,
                       keyboardType: TextInputType.number,
                       pinTheme: PinTheme(
                         shape: PinCodeFieldShape.box,
                         borderRadius: BorderRadius.circular(12),
-                        borderWidth: 1,
+                        borderWidth: 0,
                         fieldHeight: 55,
                         fieldWidth: 50,
+                        fieldOuterPadding: EdgeInsets.symmetric(horizontal: 4),
                         inactiveColor: TextColors.neutral300,
+                        inactiveFillColor:Appcolors.primary,
+                        selectedFillColor: Appcolors.primary,
+                        activeFillColor: Appcolors.primary,
                         selectedColor: Appcolors.action,
                         activeColor: Appcolors.action,
                       ),
@@ -96,6 +130,8 @@ class Verify extends StatelessWidget {
                         print("Entered Code: $value");
                       },
                     ),
+
+
                     SizedBox(height: 20.h),
                     AppButton(
                       text: "Next",
@@ -121,12 +157,11 @@ class Verify extends StatelessWidget {
                             ), // optional base style
                             children: [
                               TextSpan(
-                                text: " Resend again",
+                                text: "Resend again",
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontFamily: 'Satoshi',
                                   color: Appcolors.action,
-
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
@@ -152,7 +187,7 @@ class Verify extends StatelessWidget {
                               BlendMode.srcIn,
                             ), // Optional color
                           ),
-                          SizedBox(width: 6,),
+                          SizedBox(width: 6),
                           Text(
                             "Back to login",
                             style: TextStyle(

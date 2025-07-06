@@ -35,11 +35,18 @@ class ConsentScreen extends StatelessWidget {
               TextSpan(
                 children: [
                   TextSpan(
-                    text: 'Hey !\n',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    text: 'Hey!\n',
+                    style: TextStyle(
+                        fontFamily: "Satoshi",
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20),
                   ),
                   TextSpan(
-                    style: TextStyle(fontFamily: 'Satoshi', fontSize: 15),
+                    style: TextStyle(
+
+                        fontFamily: 'Satoshi',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16),
                     text:
                         'Before we continue, we just need your OK on how we handle your health information.',
                   ),
@@ -57,17 +64,29 @@ class ConsentScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    style: TextStyle(fontFamily: 'Satoshi', fontSize: 15),
+                    style: TextStyle(
+
+                        fontFamily: 'Satoshi',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16),
                     'We follow strict HIPAA guidelines to protect your privacy and keep your data secure.',
                   ),
                   SizedBox(height: 12),
                   Text(
-                    style: TextStyle(fontFamily: 'Satoshi', fontSize: 15),
+                    style: TextStyle(
+
+                        fontFamily: 'Satoshi',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16),
                     'To keep improving your experience and help our technology get smarter over time, we may use some of your information — always anonymized and never linked to your name or identity.',
                   ),
                   SizedBox(height: 12),
                   Text(
-                    style: TextStyle(fontFamily: 'Satoshi', fontSize: 15),
+                    style: TextStyle(
+
+                        fontFamily: 'Satoshi',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16),
                     'Your privacy always comes first. You can choose how your data is used and change your preferences anytime.',
                   ),
                   const SizedBox(height: 32),
@@ -82,7 +101,11 @@ class ConsentScreen extends StatelessWidget {
                       children: [
                         const Text(
                           'Tap “I Agree” to continue.',
-                          style: TextStyle(fontFamily: 'Satoshi', fontSize: 15),
+                          style: TextStyle(
+
+                              fontFamily: 'Satoshi',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 16),
                         ),
                         const SizedBox(height: 12),
                         SizedBox(
@@ -99,6 +122,7 @@ class ConsentScreen extends StatelessWidget {
                               style: TextStyle(
                                 fontFamily: 'Satoshi',
                                 fontSize: 16,
+                                fontWeight: FontWeight.w500,
                                 color: Appcolors.secondary,
                               ),
                             ),

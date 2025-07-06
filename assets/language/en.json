@@ -1,3 +1,13 @@
 {
-  "app_name": "Test theme and language"
+  "Welcome back!": "Welcome back!",
+  "To log in, enter your email address.": "To log in, enter your email address.",
+  "Email": "Email",
+  "Email Address": "Email Address",
+  "Password": "Password",
+  "Forgot Password?": "Forgot Password?",
+  "Log in": "Log in",
+  "Don’t have an account?": "Don’t have an account?",
+  "Create an account": "Create an account",
+  "OR": "OR",
+  "Continue with Google": "Continue with Google"
 }

@@ -8,6 +8,7 @@ import 'package:wellbyn/views/screen/auth/password_changed.dart';
 import '../../../utils/app_colors.dart';
 import '../../base/app_button.dart';
 import '../../base/custom_field.dart';
+import '../profile_setting_start/widget/labeledtextfield.dart';
 import 'forgot.dart';
 class SetNewPassword extends StatelessWidget {
    SetNewPassword({super.key});
@@ -54,7 +55,7 @@ class SetNewPassword extends StatelessWidget {
                             fontFamily: 'Satoshi',
                             color: TextColors.neutral500,
                             overflow: TextOverflow.ellipsis,
-                            fontSize: 15,
+                            fontSize: 16,
                             fontWeight: FontWeight.w500,
                           )
                       ),
@@ -64,25 +65,27 @@ class SetNewPassword extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(height: 16.h),
-                        _buildLabel("New Password"),
-                        CustomTextField(
+                        LabeledTextFielded(
                           borderColor: TextColors.neutral900,
-                          filColor: Appcolors.primary,
-                          controller: passwordcontroller,
-                          hintText: 'type a strong password',
-                        ),
-                        SizedBox(height: 20),
-                        _buildLabel("Confirm Password"),
-                        CustomTextField(
-                          filColor: Appcolors.primary,
-                          borderColor: TextColors.neutral900,
+                          label: "New Password",
                           controller: confirmcontroller,
-                          hintText: 're-type password',
+                          next: true,
+                          maxline: 1,
+                          hintText: "Type a strong password",
+                        ),
+                        SizedBox(height: 24.h),
+                        LabeledTextFielded(
+                          borderColor: TextColors.neutral900,
+                          label: "Confirm Password",
+                          controller: confirmcontroller,
+                          next: true,
+                          maxline: 1,
+                          hintText: "Re-type password",
                         ),
 
                       ],
                     ),
-                    SizedBox(height: 20.h),
+                    SizedBox(height: 24.h),
                     AppButton(text: "Save",
                         onPressed: () {
                       Get.to(PasswordChanged());

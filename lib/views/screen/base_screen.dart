@@ -44,7 +44,7 @@ class BaseScreen extends StatelessWidget {
       case 0:
         return HomeNav();
       case 1:
-        return const OptimizedDoctorNav();
+        return DoctorNav();
       case 2:
         return  AppointmentNav();
       case 3:

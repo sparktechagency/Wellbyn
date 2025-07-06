@@ -22,16 +22,16 @@ class ProfileListTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 60.h,
+        height: 60,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           color: Appcolors.primary,
           boxShadow: [
           BoxShadow(
-          color:Appcolors.secondary , // softer effect
-          blurRadius: 2, // reasonable softness
-          spreadRadius: 2,
-          offset: Offset(0.2, 0.2), // downward shadow
+          color:Colors.black12 , // softer effect
+          blurRadius: 1, // reasonable softness
+          spreadRadius: 1,
+          offset: Offset(0, 0.3), // downward shadow
           ),
           ]
         ),

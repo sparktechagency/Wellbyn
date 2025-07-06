@@ -11,6 +11,7 @@ import '../../../utils/app_constants.dart';
 import '../../../utils/nab_ids.dart';
 import '../../base/app_text.dart';
 import '../../base/icon_text_button.dart';
+
 class AddInsurance extends StatelessWidget {
   AddInsurance({super.key});
 
@@ -45,7 +46,7 @@ class AddInsurance extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        child:Padding(
+        child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,7 +67,8 @@ class AddInsurance extends StatelessWidget {
                 maxline: 1,
                 hintText: "Enter insurance name",
               ),
-              SizedBox(height: 20), LabeledTextField(
+              SizedBox(height: 20),
+              LabeledTextField(
                 borderColor: TextColors.neutral900,
                 label: "Insurance Provider",
                 controller: name,
@@ -118,29 +120,35 @@ class AddInsurance extends StatelessWidget {
               ),
               SizedBox(height: 12.h),
               IconTextButton(
-           // isLoading: controller.isLoading.value,
-            text: "Upload card",
-            svgAsset: AppIcons.addIcon,
-            backgroundColor:Appcolors.primary,
-            textColor: Appcolors.action,
-            bordercolor: Appcolors.action,
-            height: 40,
-            width: 145,
-            onTap: () {
-              // Your logic
-              print("Button tapped");
-             // controller.startLoading();
-            },
-          ),
+                // isLoading: controller.isLoading.value,
+                text: "Upload card",
+                svgAsset: AppIcons.addIcon,
+                backgroundColor: Appcolors.primary,
+                textColor: Appcolors.action,
+                bordercolor: Appcolors.action,
+                height: 40,
+                width: 145,
+                onTap: () {
+                  // Your logic
+                  print("Button tapped");
+                  // controller.startLoading();
+                },
+              ),
               SizedBox(height: 20),
-              CustomButton(onTap: (){}, text: "Save Change",broderColor: Colors.transparent,color: TextColors.action,fontSize: 16,textColor: Appcolors.primary,)
+              CustomButton(
+                onTap: () {},
+                text: "Save Change",
+                broderColor: Colors.transparent,
+                color: TextColors.action,
+                fontSize: 16,
+                textColor: Appcolors.primary,
+              ),
             ],
           ),
         ),
       ),
     );
   }
-
 }
 
 class CustomTextFielde extends StatefulWidget {
@@ -168,7 +176,6 @@ class CustomTextFielde extends StatefulWidget {
   final String? suffixSvgAsset;
   final Color? suffixSvgColor;
 
-
   const CustomTextFielde({
     super.key,
     this.contentPaddingHorizontal,
@@ -194,7 +201,6 @@ class CustomTextFielde extends StatefulWidget {
     this.suffixSvgColor,
     this.onTap,
     this.readOnly,
-
   });
 
   @override
@@ -224,8 +230,8 @@ class _CustomTextFieldState extends State<CustomTextFielde> {
 
       // validator: widget.validator,
       validator:
-      widget.validator ??
-              (value) {
+          widget.validator ??
+          (value) {
             if (value == null || value.isEmpty) {
               return "Please enter ${widget.hintText?.toLowerCase() ?? 'this field'}";
             }
@@ -234,7 +240,6 @@ class _CustomTextFieldState extends State<CustomTextFielde> {
               if (!isValidEmail) {
                 return "Please check your email!";
               }
-
             }
 
             return null;
@@ -243,7 +248,11 @@ class _CustomTextFieldState extends State<CustomTextFielde> {
       cursorColor: TextColors.neutral900,
       obscureText: widget.isPassword ? obscureText : false,
       onChanged: widget.onChanged,
-      style: TextStyle(color: TextColors.neutral900, fontSize: 14,fontWeight: FontWeight.w400),
+      style: TextStyle(
+        color: TextColors.neutral900,
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+      ),
       decoration: InputDecoration(
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.r),
@@ -275,24 +284,24 @@ class _CustomTextFieldState extends State<CustomTextFielde> {
         ),
         suffixIcon: widget.isPassword
             ? GestureDetector(
-          onTap: toggle,
-          child: _suffixIcon(
-            obscureText ? Icons.visibility_off : Icons.visibility,
-          ),
-        )
+                onTap: toggle,
+                child: _suffixIcon(
+                  obscureText ? Icons.visibility_off : Icons.visibility,
+                ),
+              )
             : widget.suffixSvgAsset != null
             ? Padding(
-          padding: const EdgeInsets.all(12),
-          child: SvgPicture.asset(
-            widget.suffixSvgAsset!,
-            width: 20.w,
-            height: 20.w,
-            colorFilter: ColorFilter.mode(
-              widget.suffixSvgColor ?? TextColors.neutral900,
-              BlendMode.srcIn,
-            ),
-          ),
-        )
+                padding: const EdgeInsets.all(12),
+                child: SvgPicture.asset(
+                  widget.suffixSvgAsset!,
+                  width: 20.w,
+                  height: 20.w,
+                  colorFilter: ColorFilter.mode(
+                    widget.suffixSvgColor ?? TextColors.neutral900,
+                    BlendMode.srcIn,
+                  ),
+                ),
+              )
             : widget.suffixIcon,
 
         focusedErrorBorder: OutlineInputBorder(
@@ -321,7 +330,6 @@ class _CustomTextFieldState extends State<CustomTextFielde> {
   _suffixIcon(IconData icon) {
     return Padding(padding: const EdgeInsets.all(10.0), child: Icon(icon));
   }
-
 }
 
 class LabeledTextField extends StatelessWidget {
@@ -335,9 +343,8 @@ class LabeledTextField extends StatelessWidget {
   final String? suffixSvgAsset;
   final Color? suffixSvgColor;
   final Widget? prefixIcon;
-  final Color? borderColor;  // Add this
+  final Color? borderColor; // Add this
   final int? maxline;
-
 
   const LabeledTextField({
     super.key,
@@ -352,7 +359,7 @@ class LabeledTextField extends StatelessWidget {
     this.suffixSvgColor,
     this.prefixIcon,
     this.maxline,
-    this.borderColor,  // Add this to constructor
+    this.borderColor, // Add this to constructor
   });
 
   @override
@@ -360,11 +367,7 @@ class LabeledTextField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppText(
-          label,
-          fontSize: 16,
-          color: TextColors.neutral900,
-        ),
+        AppText(label, fontSize: 16, color: TextColors.neutral900),
         SizedBox(height: 8.h),
         CustomTextFielde(
           controller: controller,

@@ -7,7 +7,9 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:wellbyn/utils/app_colors.dart';
 import 'package:wellbyn/utils/app_icons.dart';
 import 'package:wellbyn/views/base/custom_field.dart';
+import 'package:wellbyn/views/screen/profile_setting_start/setting_insurance_info.dart';
 import 'package:wellbyn/views/screen/profile_setting_start/setting_personal_info.dart' show LabeledTextFields;
+import 'package:wellbyn/views/screen/profile_setting_start/widget/circle.dart';
 import '../../../controllers/profile_setting_controller.dart';
 import 'package:wellbyn/models/medication.dart';
 import 'package:wellbyn/models/allergies.dart';
@@ -23,16 +25,13 @@ class SettingMedicalInfo extends StatefulWidget {
 
 class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
   ProfileSettingController _controller = Get.put(ProfileSettingController());
-  // Data models
+
 
 
 
   @override
   Widget build(BuildContext context) {
-    print("rebuild");
-
     return Scaffold(
-
       backgroundColor: Appcolors.page,
       appBar: AppBar(
         backgroundColor: Appcolors.page,
@@ -67,11 +66,32 @@ class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
 
               Row(
                 children: [
-                  _buildStep(isActive: false, step: '1'),
+                  StepCircle(
+                    isActive: false,
+                    step: '1',
+                    activeColor: Appcolors.action,
+                    inactiveColor: Colors.white,
+                    activeTextColor: Colors.white,
+                    inactiveTextColor: TextColors.neutral900,
+                  ),
                   _buildLine(),
-                  _buildStep(isActive: true, step: '2'),
+                  StepCircle(
+                    isActive: true,
+                    step: '2',
+                    activeColor: Appcolors.action,
+                    inactiveColor: Colors.white,
+                    activeTextColor: Colors.white,
+                    inactiveTextColor: TextColors.neutral900,
+                  ),
                   _buildLine(),
-                  _buildStep(isActive: false, step: '3'),
+                  StepCircle(
+                    isActive: false,
+                    step: '3',
+                    activeColor: Appcolors.action,
+                    inactiveColor: Colors.white,
+                    activeTextColor: Colors.white,
+                    inactiveTextColor: TextColors.neutral900,
+                  ),
                 ],
               ),
               SizedBox(height: 8),
@@ -179,24 +199,26 @@ class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
                   SizedBox(width: 115,),
                   Expanded(
                     child: InkWell(
-                      onTap: (){
-                        final selected = _controller.selectedLifestyleFactors;
-                        final selectedExtisting = _controller.selectedexistingConditions;
-                        final allergies = _controller.allergies;
-                        final medication = _controller.medications;
+                      onTap: () {
+                        // final selected = _controller.selectedLifestyleFactors ?? [];
+                        // final selectedExtisting = _controller.selectedexistingConditions ?? [];
+                        // final allergies = _controller.allergies ?? [];
+                        // final medication = _controller.medications ?? [];
+                        //
+                        // print("Selected Lifestyle Factors: $selected");
+                        // print("Selected Existing Condition Factors: $selectedExtisting");
+                        //
+                        // print("All Allergies:");
+                        // for (var allergy in allergies) {
+                        //   print("• ${allergy.name} - Severity: ${allergy.severity}");
+                        // }
+                        //
+                        // print("All Medication:");
+                        // for (var m in medication) {
+                        //   print("• ${m.name} - dosage: ${m.dosage}");
+                        // }
 
-
-                        print("Selected Lifestyle Factors: $selected");
-                        print("Selected Existing Condition Factors: $selectedExtisting");
-
-                        print("All Allergies:");
-                        for (var allergy in allergies) {
-                          print("• ${allergy.name} - Severity: ${allergy.severity}");
-                        }
-                        print("All Mdedication :");
-                        for (var medication in medication) {
-                          print("• ${medication.name} - dosage: ${medication.dosage}");
-                        }
+                        Get.to(() => SettingInsuranceInfo());
 
 
                       },
@@ -842,25 +864,6 @@ class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
 
 
   // Helper widget for step circle
-  Widget _buildStep({required bool isActive, required String step}) {
-    return Container(
-      width: 46.w,
-      height: 46.h,
-      decoration: BoxDecoration(
-        color: isActive ? Appcolors.action : Colors.white,
-        shape: BoxShape.circle,
-      ),
-      alignment: Alignment.center,
-      child: Text(
-        step,
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 16.sp,
-          color: isActive ? Colors.white : TextColors.neutral900,
-        ),
-      ),
-    );
-  }
 
   // Helper widget for line between steps
   Widget _buildLine() {

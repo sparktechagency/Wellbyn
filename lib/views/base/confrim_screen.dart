@@ -52,7 +52,7 @@ class ConfirmationScreen extends StatelessWidget {
                       fit: BoxFit.contain,
                       alignment: Alignment.center,
                     ),
-                    SizedBox(height: 20.h),
+                    SizedBox(height: 24.h),
                     Text(
                       title,
                       style: TextStyle(
@@ -66,7 +66,7 @@ class ConfirmationScreen extends StatelessWidget {
                       message,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize: 16,
                         fontWeight: FontWeight.w400,
                         color: TextColors.neutral500,
                       ),
@@ -84,7 +84,7 @@ class ConfirmationScreen extends StatelessWidget {
                         label: Text(
                           buttonText,
                           style: TextStyle(
-                            fontSize: 16.sp,
+                            fontSize: 16,
                             fontWeight: FontWeight.w500,
                             color: buttonTextColor,
                           ),

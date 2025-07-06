@@ -6,6 +6,7 @@ import 'package:wellbyn/utils/app_colors.dart';
 import 'package:wellbyn/views/screen/auth/verify.dart';
 import '../../base/app_button.dart';
 import '../../base/custom_field.dart';
+import '../profile_setting_start/widget/labeledtextfield.dart';
 
 class Forgot extends StatelessWidget {
    Forgot({super.key});
@@ -50,17 +51,17 @@ class Forgot extends StatelessWidget {
                           fontFamily: 'Satoshi',
                           color: TextColors.neutral500,
                           fontSize: 16,
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.w500,
                         )
                     ),
                     SizedBox(height: 30.h),
                     nextbutton(),
-                    SizedBox(height: 20.h),
+                    SizedBox(height: 24.h),
                     AppButton(text: "Next", onPressed: () {
                       Get.to(Verify());
 
                     }),
-                    SizedBox(height: 25.h),
+                    SizedBox(height: 24),
                     arrowback(),
 
                     // Row(
@@ -113,6 +114,7 @@ class Forgot extends StatelessWidget {
                     //   ),
                     // ),
                     // SizedBox(height: 30.h),
+
                   ],
                 ),
               ),
@@ -127,12 +129,13 @@ class Forgot extends StatelessWidget {
     return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _buildLabel("Email"),
-                      CustomTextField(
+                      LabeledTextFielded(
                         borderColor: TextColors.neutral900,
-                        filColor: Appcolors.primary,
+                        label: "Email",
                         controller: emailcontrller,
-                        hintText: 'email address',
+                        next: true,
+                        maxline: 1,
+                        hintText: "Email Address",
                       ),
                     ],
                   );

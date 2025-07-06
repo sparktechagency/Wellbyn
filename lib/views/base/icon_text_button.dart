@@ -12,6 +12,7 @@ class IconTextButton extends StatelessWidget {
   final Color bordercolor;
   final double height;
   final double? width;
+  final Color? svgAssetcolor;
   final bool isLoading;
   final String? lottieAsset; // ✅ optional Lottie animation
 
@@ -24,6 +25,7 @@ class IconTextButton extends StatelessWidget {
     this.textColor = Colors.white,
     this.height = 45,
     this.width,
+    this.svgAssetcolor,
     this.bordercolor = Colors.transparent,
     this.isLoading = false,
     this.lottieAsset, // ✅
@@ -78,7 +80,7 @@ class IconTextButton extends StatelessWidget {
                     SvgPicture.asset(
                       svgAsset,
                       width: 16.w,
-                      height: 24.h,
+                      height: 22.h,
                       colorFilter: ColorFilter.mode(textColor, BlendMode.srcIn),
                     ),
                     SizedBox(width: 6.w),

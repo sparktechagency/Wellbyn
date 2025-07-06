@@ -7,6 +7,7 @@ import 'package:wellbyn/views/base/custom_field.dart';
 import 'package:wellbyn/views/screen/auth/login_screen.dart';
 import '../../../utils/app_colors.dart';
 
+import '../profile_setting_start/widget/labeledtextfield.dart';
 import 'forgot.dart';
 
 class CreateAccountPage extends StatelessWidget {
@@ -36,9 +37,12 @@ class CreateAccountPage extends StatelessWidget {
                       'assets/icons/logo.svg',
                       width: 150.w,
                       height: 150.h,
-                      color:  Appcolors.action, // change color dynamically
-                      semanticsLabel: 'App Logo', // for accessibility
-                      fit: BoxFit.contain, // control how the image fits
+                      color: Appcolors.action,
+                      // change color dynamically
+                      semanticsLabel: 'App Logo',
+                      // for accessibility
+                      fit: BoxFit.contain,
+                      // control how the image fits
                       alignment: Alignment.center, // position the image
                     ),
                     SizedBox(height: 10.h),
@@ -54,9 +58,12 @@ class CreateAccountPage extends StatelessWidget {
                     SizedBox(height: 20.h),
                     inputMethod(),
                     SizedBox(height: 20.h),
-                    AppButton(text: "Next", onPressed: () {
-                      Get.to(Forgot());
-                    }),
+                    AppButton(
+                      text: "Next",
+                      onPressed: () {
+                        Get.to(Forgot());
+                      },
+                    ),
                     SizedBox(height: 20.h),
                     allreadyHaveAcount(),
                     oR(),
@@ -75,121 +82,126 @@ class CreateAccountPage extends StatelessWidget {
 
   Column inputMethod() {
     return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildLabel("Email"),
-                      CustomTextField(
-                        filColor: Appcolors.primary,
-                        controller: emailcontroller,
-                        hintText: 'email address',
-                      ),
-                      SizedBox(height: 16.h),
-                      _buildLabel("New Password"),
-                      CustomTextField(
-                        filColor: Appcolors.primary,
-                        borderColor: TextColors.neutral900,
-                        controller: passwordcontroller,
-                        hintText: 'type a strong password',
-                        isPassword: true,
-                      ),
-                      SizedBox(height: 16.h),
-                      _buildLabel("Confirm Password"),
-                      CustomTextField(
-                        filColor: Appcolors.primary,
-                        borderColor: TextColors.neutral900,
-                        controller: confirmcontroller,
-                        hintText: 're-type password',
-                        isPassword: true,
-                      ),
-                    ],
-                  );
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        LabeledTextFielded(
+          borderColor: TextColors.neutral900,
+          label: "Email Address",
+          controller: passwordcontroller,
+          next: true,
+          maxline: 1,
+          hintText: "Email Address",
+        ),
+        SizedBox(height: 16.h),
+        LabeledTextFielded(
+          borderColor: TextColors.neutral900,
+          label: "New Password",
+          controller: passwordcontroller,
+          next: true,
+          maxline: 1,
+          hintText: "Type a strong password",
+        ),
+        SizedBox(height: 16.h),
+        LabeledTextFielded(
+          borderColor: TextColors.neutral900,
+          label: "Confirm Password",
+          controller: passwordcontroller,
+          next: true,
+          maxline: 1,
+          hintText: "Re-type password",
+        ),
+      ],
+    );
   }
 
   GestureDetector allreadyHaveAcount() {
     return GestureDetector(
-                    onTap: () {
-                     Get.to(LoginScreen());
-
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 20),
-                      child: Text.rich(
-                        TextSpan(
-                          text: "Already have an account? ",
-                          style: TextStyle(color: TextColors.neutral500,fontFamily: 'Satoshi',fontSize: 16), // optional base style
-                          children: [
-                            TextSpan(
-                              text: "Log In",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontFamily: 'Satoshi',
-                                color: Colors.blue,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
+      onTap: () {
+        Get.to(LoginScreen());
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 20),
+        child: Text.rich(
+          TextSpan(
+            text: "Already have an account? ",
+            style: TextStyle(
+              color: TextColors.neutral500,
+              fontFamily: 'Satoshi',
+              fontWeight: FontWeight.w500,
+              fontSize: 16,
+            ),
+            children: [
+              TextSpan(
+                text: "Login",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'Satoshi',
+                  color: Appcolors.action,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   Row oR() {
     return Row(
-                    children: [
-                      Expanded(
-                        child: Container(height: 1.h, color:  TextColors.neutral200),
-                      ),
-                      Padding(
-                        padding:
-                        EdgeInsets.symmetric(horizontal: 8.w),
-                        child: Text(
-                          "OR",
-                          style: TextStyle(
-                            fontFamily: 'Satoshi',
-                            fontSize: 16.sp,
-                            color: TextColors.neutral500,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(height: 1.h, color: TextColors.neutral200),
-                      ),
-                    ],
-                  );
+      children: [
+        Expanded(
+          child: Container(height: 1.h, color: TextColors.neutral200),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8.w),
+          child: Text(
+            "OR",
+            style: TextStyle(
+              fontFamily: 'Satoshi',
+              fontSize: 16,
+              color: TextColors.neutral500,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+        Expanded(
+          child: Container(height: 1.h, color: TextColors.neutral200),
+        ),
+      ],
+    );
   }
 
   Container googlebutton() {
     return Container(
-                    height: 50.h,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.r),
-                      color: Appcolors.primary,
-                    ),
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(
-                            'assets/icons/google.svg',
-                            width: 24.w,
-                            height: 24.h,
-                          ),
-                          SizedBox(width: 8.w),
-                          Text(
-                            "Continue with Google",
-                            style: TextStyle(
-                              fontFamily: 'Satoshi',
-                              fontSize: 16.sp,
-                              color: Appcolors.actionHover,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
+      height: 50.h,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.r),
+        color: Appcolors.primary,
+      ),
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SvgPicture.asset(
+              'assets/icons/google.svg',
+              width: 24.w,
+              height: 24.h,
+            ),
+            SizedBox(width: 8.w),
+            Text(
+              "Continue with Google",
+              style: TextStyle(
+                fontFamily: 'Satoshi',
+                fontSize: 16,
+                color: Appcolors.actionHover,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _buildLabel(String text) {

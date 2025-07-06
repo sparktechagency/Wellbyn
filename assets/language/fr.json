@@ -1,7 +1,13 @@
 {
-  "login": "Connexion",
-  "hello": "Bonjour",
-  "settings": "Paramètres",
-  "name": "Nom",
-  "Email": "E-mail"
+  "Welcome back!": "Content de te revoir!",
+  "To log in, enter your email address.": "Pour vous connecter, entrez votre adresse email.",
+  "Email": "E-mail",
+  "Email Address": "Adresse email",
+  "Password": "Mot de passe",
+  "Forgot Password?": "Mot de passe oublié ?",
+  "Log in": "Se connecter",
+  "Don’t have an account?": "Vous n’avez pas de compte ?",
+  "Create an account": "Créer un compte",
+  "OR": "OU",
+  "Continue with Google": "Continuer avec Google"
 }

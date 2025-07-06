@@ -16,7 +16,7 @@ class CustomConfirmationDialog extends StatelessWidget {
   const CustomConfirmationDialog({
     super.key,
     required this.iconAsset,
-    this.iconColor = Colors.red,
+    this.iconColor = Appcolors.error700,
     required this.title,
     required this.description,
     this.confirmText = "Yes",
@@ -31,7 +31,7 @@ class CustomConfirmationDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       backgroundColor: Colors.white,
       child: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(16),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,8 +50,9 @@ class CustomConfirmationDialog extends StatelessWidget {
               title,
               style: const TextStyle(
                 fontFamily: "Satoshi",
+                color: TextColors.neutral900,
                 fontWeight: FontWeight.w500,
-                fontSize: 16,
+                fontSize: 18,
               ),
             ),
             const SizedBox(height: 6),
@@ -59,8 +60,9 @@ class CustomConfirmationDialog extends StatelessWidget {
               description,
               style: const TextStyle(
                 fontSize: 14,
+                fontFamily: "Satoshi",
                 color: TextColors.neutral500,
-                fontWeight: FontWeight.w400,
+                fontWeight: FontWeight.w500,
               ),
             ),
             const SizedBox(height: 10),
@@ -72,7 +74,7 @@ class CustomConfirmationDialog extends StatelessWidget {
                   confirmText,
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.red,
+                    color: Appcolors.error700,
                     fontWeight: FontWeight.w500,
                     fontFamily: "Satoshi",
                   ),

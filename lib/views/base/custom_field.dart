@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:wellbyn/utils/app_icons.dart';
 import '../../utils/app_colors.dart';
 import '../../utils/app_constants.dart';
 
@@ -83,13 +85,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               if (!isValidEmail) {
                 return "Please check your email!";
               }
-              // } else if (widget.isPassword) {
-              //   // Password validation
-              //   bool isValidPassword = AppConstants.passwordValidator.hasMatch(value);
-              //   if (!isValidPassword) {
-              //     return "Insecure password detected.";
-              //   }
-              // }
+
             }
 
             return null;
@@ -140,26 +136,33 @@ class _CustomTextFieldState extends State<CustomTextField> {
         ),
         fillColor: widget.filColor,
         prefixIconColor: TextColors.neutral900,
-        prefixIcon: Padding(
+        prefixIcon: widget.prefixIcon != null
+            ? Padding(
           padding: const EdgeInsets.all(10.0),
           child: widget.prefixIcon,
-        ),
+        )
+            : null,
+        prefixIconConstraints: widget.prefixIcon != null
+            ? BoxConstraints(minHeight: 20.w, minWidth: 20.w)
+            : null,
+
         suffixIconColor: TextColors.neutral900,
         suffixIcon: widget.isPassword
             ? GestureDetector(
-                onTap: toggle,
-                child: _suffixIcon(
-                  obscureText ? Icons.visibility_off : Icons.visibility,
-                ),
-              )
+          onTap: toggle,
+          child: _svgSuffixIcon(
+            obscureText
+                ? AppIcons.viewIcon  // e.g., 'assets/icons/eye_closed.svg'
+                : AppIcons.viewIcon,  // e.g., 'assets/icons/eye_open.svg'
+          ),
+        )
             : widget.suffixIcon,
-        prefixIconConstraints: BoxConstraints(minHeight: 20.w, minWidth: 20.w),
         labelText: widget.labelText,
         // Always enabled to keep full custom styling
         hintText: widget.hintText,
         hintStyle: TextStyle(
           fontFamily: 'Satoshi',
-          fontWeight: FontWeight.w400,
+          fontWeight: FontWeight.w500,
           fontSize: 16.sp,
           color: TextColors.secondary,
         ),
@@ -167,7 +170,16 @@ class _CustomTextFieldState extends State<CustomTextField> {
     );
   }
 
-  _suffixIcon(IconData icon) {
-    return Padding(padding: const EdgeInsets.all(10.0), child: Icon(icon));
+  Widget _svgSuffixIcon(String assetPath) {
+    return Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: SvgPicture.asset(
+        assetPath,
+        width: 16.w,
+        height: 16.w,
+        colorFilter: const ColorFilter.mode(TextColors.neutral900, BlendMode.srcIn),
+      ),
+    );
   }
+
 }

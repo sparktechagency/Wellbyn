@@ -392,6 +392,7 @@ class SettingPersonalInfo extends StatelessWidget {
                               color: TextColors.neutral900,
                             ),
                             SizedBox(height: 8.h),
+
                             CustomTextFieldeses(
                               borderColor: TextColors.neutral900,
                               controller: name,

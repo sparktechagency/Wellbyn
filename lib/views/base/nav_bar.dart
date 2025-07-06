@@ -42,10 +42,10 @@ class BottomNavBar extends StatelessWidget {
       final selectedIndex = controller.currentIndex.value;
 
       return Container(
-        height: 80,
+        height: 70,
         decoration: const BoxDecoration(
           color: Appcolors.primary,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
           boxShadow: [
             BoxShadow(
               color: Colors.black26,

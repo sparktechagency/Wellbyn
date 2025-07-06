@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wellbyn/views/screen/doctor/book_overview.dart';
 import 'package:wellbyn/views/screen/doctor/book_report.dart';
+import 'package:wellbyn/views/screen/doctro_message/doctor_message.dart';
 
 import '../utils/nab_ids.dart';
 import '../views/screen/doctor/doctor.dart';
@@ -19,7 +20,14 @@ class DoctorNav extends StatelessWidget {
             settings: settings,
             builder: (_) => DoctorDetails(doctorId: args?['doctorId'] ?? ''),
           );
-        }else if(settings.name =="/book_report"){
+        }
+        else if(settings.name =="/book_report"){
+          return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => BookReport(),
+          );
+        }
+        else if(settings.name =="/book_report"){
           return MaterialPageRoute(
             settings: settings,
             builder: (_) => BookReport(),
@@ -28,6 +36,12 @@ class DoctorNav extends StatelessWidget {
           return MaterialPageRoute(
             settings: settings,
             builder: (_) => BookOverview(),
+          );
+        }
+        else if(settings.name =="/doctor_message"){
+          return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => DoctorMessage(),
           );
         }
         else {

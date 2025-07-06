@@ -10,6 +10,7 @@ import 'package:wellbyn/utils/app_icons.dart';
 import 'package:wellbyn/views/screen/doctor/book_report.dart';
 import 'package:get/get.dart';
 import 'package:wellbyn/views/screen/doctor/doctor.dart';
+import 'package:wellbyn/views/screen/doctro_message/doctor_message.dart';
 
 import '../../../controllers/date_picker_controller.dart';
 import '../../../controllers/doctor.dart';
@@ -179,7 +180,15 @@ class DoctorDetails extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            _iconButton(AppIcons.chatIcon, Appcolors.action),
+                            GestureDetector(
+                              onTap:(){
+                                Get.to(DoctorMessage());
+
+
+                              },
+                                child: _iconButton(
+                                    AppIcons.chatIcon,
+                                    Appcolors.action)),
                             const SizedBox(width: 8),
                             GestureDetector(
                               onTap: _shareText,

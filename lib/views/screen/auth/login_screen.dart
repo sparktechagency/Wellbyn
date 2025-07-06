@@ -4,24 +4,51 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:wellbyn/controllers/localization_controller.dart';
 import 'package:wellbyn/views/base/app_button.dart';
+import 'package:wellbyn/views/base/app_text.dart';
 import 'package:wellbyn/views/base/custom_field.dart';
 import '../../../utils/app_colors.dart';
 
+import '../../../utils/app_constants.dart';
+import '../../../utils/app_icons.dart';
+import '../profile_setting_start/widget/labeledtextfield.dart';
 import 'forgot.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
 
   LoginScreen({ Key? key}) : super(key: key);
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+
   final TextEditingController emailcontroller = TextEditingController();
+
   final TextEditingController passwordcontroller = TextEditingController();
+
   final TextEditingController confirmcontroller = TextEditingController();
+
+  LocalizationController localizationController = Get.find<LocalizationController>();
+
+  final List<String> language = ['English', 'Franch'];
+
+  String? selectedLanguage;
+
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Future.delayed(Duration.zero,(){
+      setState(() {
+        selectedLanguage = language[localizationController.selectedIndex];
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<LocalizationController>(
-      builder:(_){
-        return Scaffold(
+    return  Scaffold(
           backgroundColor: Appcolors.page,
           body: SafeArea(
             child: Padding(
@@ -32,7 +59,67 @@ class LoginScreen extends StatelessWidget {
                   child: IntrinsicHeight(
                     child: Column(
                       children: [
-                        SizedBox(height: 35.h),
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 5),
+                          child: Align(
+                            alignment: Alignment.topRight,
+                            child: Container(
+                              width: 120.w,
+                              padding: EdgeInsets.symmetric(horizontal: 16.w),
+                              decoration: BoxDecoration(
+                                color: Appcolors.secondary,
+                                borderRadius: BorderRadius.circular(8),
+                                border:
+                                Border.all(color: Appcolors.action, width: 1),
+                              ),
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButton<String>(
+                                  focusColor: Colors.white,
+                                  value: selectedLanguage ?? language[0],
+                                  dropdownColor: Appcolors.primary,
+                                  style: TextStyle(
+                                    color: Appcolors.action,
+                                    fontSize: 14.sp,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.r),
+                                  hint: AppText(
+                                    'Language'.tr,
+                                    fontSize: 16.sp,
+                                  ),
+                                  icon: SvgPicture.asset(
+                                    AppIcons.arrowdwonIcon,
+                                    color: Appcolors.action,
+                                  ),
+                                  isExpanded: true,
+                                  items: language.map((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: AppText(
+                                        value,
+                                        fontSize: 16.sp,
+                                      ),
+                                    );
+                                  }).toList(),
+                                  onChanged: (newValue) {
+                                    if (newValue != null) {
+                                      int selectedIndex = language.indexOf(newValue);
+                                      if (selectedIndex != -1) {
+                                        Locale newLocale = Locale(
+                                          AppConstants.languages[selectedIndex].languageCode,
+                                          AppConstants.languages[selectedIndex].countryCode,
+                                        );
+                                        setState(() {
+                                          localizationController.setLanguage(newLocale);
+                                          selectedLanguage = language[selectedIndex];
+                                        });
+                                      }
+                                    }
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                         SvgPicture.asset(
                           'assets/icons/logo.svg',
                           width: 150.w,
@@ -46,7 +133,7 @@ class LoginScreen extends StatelessWidget {
                         Column(
                           children: [
                             Text(
-                              "Welcome back!",
+                              "Welcome back!".tr,
                               style: TextStyle(
                                 fontFamily: 'Satoshi',
                                 fontSize: 24,
@@ -55,10 +142,10 @@ class LoginScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "To log in, enter your email address.",
+                              "To log in, enter your email address.".tr,
                               style: TextStyle(
                                 fontFamily: 'Satoshi',
-                                fontSize: 15,
+                                fontSize: 16,
                                 color: TextColors.neutral500,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -82,18 +169,20 @@ class LoginScreen extends StatelessWidget {
                             padding: const EdgeInsets.only(bottom: 20),
                             child: Text.rich(
                               TextSpan(
-                                text: "Don’t have an account?",
+                                text: "Don’t have an account?".tr,
                                 style: TextStyle(
+                                  fontWeight: FontWeight.w500,
                                     color: TextColors.neutral500,
                                     fontFamily: 'Satoshi',
-                                    fontSize: 15), // optional base style
+                                    fontSize: 16,
+                                ), // optional base style
                                 children: [
                                   TextSpan(
-                                    text: "Create an account",
+                                    text: "Create an account".tr,
                                     style: TextStyle(
-                                      fontSize: 14,
+                                      fontSize: 16,
                                       fontFamily: 'Satoshi',
-                                      color: Colors.blue,
+                                      color: Appcolors.action,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
@@ -113,8 +202,6 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
           ),
-        );
-      },
     );
   }
 
@@ -136,10 +223,10 @@ class LoginScreen extends StatelessWidget {
                           ),
                           SizedBox(width: 8.w),
                           Text(
-                            "Continue with Google",
+                            "Continue with Google".tr,
                             style: TextStyle(
                               fontFamily: 'Satoshi',
-                              fontSize: 16.sp,
+                              fontSize: 16,
                               color: Appcolors.actionHover,
                               fontWeight: FontWeight.w500,
                             ),
@@ -160,7 +247,7 @@ class LoginScreen extends StatelessWidget {
                         padding:
                         EdgeInsets.symmetric(horizontal: 8.w),
                         child: Text(
-                          "OR",
+                          "OR".tr,
                           style: TextStyle(
                             fontFamily: 'Satoshi',
                             fontSize: 16.sp,
@@ -180,21 +267,24 @@ class LoginScreen extends StatelessWidget {
     return Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Column(
+                      Stack(
                         children: [
                           Text(
-                              "Forgot Password?",
+                              "Forgot Password?".tr,
                               style: TextStyle(
-                                fontSize: 14,
+                                fontSize: 16,
                                 color: TextColors.neutral900,
                                 fontFamily: "Satoshi",
                                 fontWeight: FontWeight.w500,
                               )
                           ),
-                          Container(
-                            width: 115,
-                            height: 1,
-                            color: TextColors.neutral900,
+                          Positioned(
+                            top: 20,
+                            child: Container(
+                              width: 150,
+                              height: 1,
+                              color: TextColors.neutral900,
+                            ),
                           )
                         ],
                       )
@@ -205,23 +295,25 @@ class LoginScreen extends StatelessWidget {
   }
 
   Column inputSection() {
-    return Column(
+       return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _buildLabel("Email".tr),
-                      CustomTextField(
-                        filColor: Appcolors.primary,
+
+                      LabeledTextFielded(
                         borderColor: TextColors.neutral900,
-                        controller: emailcontroller,
-                        hintText: 'email address',
+                        label: "Email".tr,
+                        controller: passwordcontroller,
+                        next: true,
+                        maxline: 1,
+                        hintText: "Email Address".tr,
                       ),
                       SizedBox(height: 20.h),
-                      _buildLabel("New Password"),
+                      _buildLabel("Password".tr),
                       CustomTextField(
                         filColor: Appcolors.primary,
                         borderColor: TextColors.neutral900,
                         controller: passwordcontroller,
-                        hintText: 'type a strong password',
+                        hintText: 'Password'.tr,
                         isPassword: true,
                       ),
                     ],
@@ -232,7 +324,7 @@ class LoginScreen extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(bottom: 8.h),
       child: Text(
-        text,
+        text.tr,
         style: TextStyle(
           fontFamily: 'Satoshi',
           fontSize: 16.sp,
