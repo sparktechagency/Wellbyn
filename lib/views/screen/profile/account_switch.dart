@@ -18,21 +18,21 @@ class _AccountBottomSheetState extends State<AccountBottomSheet> {
       "label": "Caregiver",
       "avatar": "Sa",
       "avatarColor": Colors.brown,
-      "labelColor": Colors.brown,
+      "labelColor": BorderColors.warning50,
     },
     {
       "name": "Kamal",
       "label": "Caregiver",
       "avatar": "Ka",
-      "avatarColor": Colors.brown,
-      "labelColor": Colors.brown,
+      "avatarColor":  Colors.brown,
+      "labelColor":BorderColors.warning50,
     },
     {
       "name": "Kamal",
       "label": "Caregiver",
       "avatar": "Ka",
-      "avatarColor": Colors.brown,
-      "labelColor": Colors.brown,
+      "avatarColor":  Colors.brown,
+      "labelColor": BorderColors.warning50,
     },
   ];
 
@@ -43,8 +43,8 @@ class _AccountBottomSheetState extends State<AccountBottomSheet> {
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(16),
-          topRight: Radius.circular(16),
+          topLeft: Radius.circular(25),
+          topRight: Radius.circular(25),
         ),
       ),
       child: Column(
@@ -59,28 +59,31 @@ class _AccountBottomSheetState extends State<AccountBottomSheet> {
               borderRadius: BorderRadius.circular(10),
             ),
           ),
-          Text('Switch account'),
+          Text(
+            "Switch account",
+            style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20,fontFamily: "Satoshi",color: TextColors.neutral900),
+          ),
           const SizedBox(height: 12),
           const Align(
             alignment: Alignment.centerLeft,
             child: Text(
               'Personal account',
-              style: TextStyle(fontWeight: FontWeight.w500),
+              style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20,fontFamily: "Satoshi",color: TextColors.neutral900),
             ),
           ),
           const _AccountTile(
             name: 'Mahmud',
             label: 'Personal',
             avatar: 'Ma',
-            avatarColor: Colors.blue,
-            labelColor: Colors.blue,
+            avatarColor: Appcolors.action,
+            labelColor: Appcolors.action,
           ),
           const SizedBox(height: 8),
           const Align(
             alignment: Alignment.centerLeft,
             child: Text(
               'As a caregiver',
-              style: TextStyle(fontWeight: FontWeight.w500),
+              style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20,fontFamily: "Satoshi",color: TextColors.neutral900),
             ),
           ),
           SizedBox(
@@ -157,7 +160,7 @@ class _AccountTile extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 4),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: label == 'Caregiver' ? Colors.orange.shade50 : Colors.blue.shade50,
+        color: label == 'Caregiver' ? Colors.orange.shade50 : Appcolors.actionHoverLight,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
@@ -179,13 +182,13 @@ class _AccountTile extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
             decoration: BoxDecoration(
-              border: Border.all(color: labelColor),
+              border: Border.all(color: avatarColor),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
               label,
               style: TextStyle(
-                color: labelColor,
+                color: avatarColor,
                 fontWeight: FontWeight.w600,
               ),
             ),

@@ -249,11 +249,11 @@ class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
       title: 'Allergies',
       onAdd: _showAddAllergyDialog,
       child: Obx(() => Container( // <-- THIS is important
-        padding: EdgeInsets.only(left: 1, right: 1, top: 1, bottom: 0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          border: Border.all(width: 1, color: TextColors.neutral200),
-        ),
+          padding: EdgeInsets.only(left: 1, right: 1, top: 1, bottom: 0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            border: Border.all(width: 1, color: TextColors.neutral200),
+          ),
         child: Column(
           children: [
             _buildTableHeader(['Name', 'Severity', 'Action']),

@@ -3,9 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:wellbyn/views/screen/appointment/canceled.dart';
-import 'package:wellbyn/views/screen/appointment/compeleted.dart';
-import 'package:wellbyn/views/screen/appointment/upcoming.dart';
+import 'package:wellbyn/views/screen/canceled/canceled.dart';
+import 'package:wellbyn/views/screen/compiled/compeleted.dart';
+import 'package:wellbyn/views/screen/upcoming/upcoming.dart';
 
 import '../../../controllers/appointment.dart';
 import '../../../utils/app_colors.dart';

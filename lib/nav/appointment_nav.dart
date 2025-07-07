@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wellbyn/views/screen/Home/home_screen.dart';
 import 'package:wellbyn/views/screen/appointment/appointment.dart';
+import 'package:wellbyn/views/screen/compiled/appoinetment_details.dart';
 
 import '../utils/nab_ids.dart';
 
@@ -18,7 +19,13 @@ class AppointmentNav extends StatelessWidget {
             settings: settings,
             builder: (_) =>  Appointment(),
           );
-        } else {
+        } else if(settings.name =="/appoinetment_details"){
+          return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => AppoinetmentDetails(),
+          );
+        }
+        else {
           return MaterialPageRoute(
             settings: settings,
             builder: (_) =>  Appointment(),

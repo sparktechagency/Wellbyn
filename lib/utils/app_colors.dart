@@ -41,6 +41,7 @@ class Appcolors {
   static const Color primary100 = Color(0xFFE4EFFA);
   // Actions
   static const Color action = Color(0xFF2E8BC9); // Primary/500
+  static const Color primary700 = Color(0xFF2E8BC9); // Primary/500
   static const Color actionLight = Color(0xFFF2F8FD); // Primary/50 (guess)
   static const Color actionHover = Color(0xFF1A588A); // Primary/700
   static const Color actionHoverLight = Color(0xFFF2F8FD); // Primary/50 (again)
@@ -75,6 +76,8 @@ class BorderColors {
   static const Color normal = Color(0xFF2563EB);         // Peace/700 (guessed)
   static const Color error = Color(0xFFD32F2F);          // Error/700
   static const Color warning = Color(0xFFFB8C00);        // Warning/600
+  static const Color warning50 = Color(0xFFFBF7EB);        // Warning/600
+  static const Color warning700 = Color(0xFF93531F);        // Warning/600
 }
 class TextColors{
   // Neutral colors

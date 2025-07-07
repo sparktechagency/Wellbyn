@@ -29,7 +29,6 @@ class Compeleted extends StatelessWidget {
           width: double.infinity,
           decoration: BoxDecoration(
             color: Appcolors.page,
-
             boxShadow: [
               BoxShadow(
                 color: TextColors.neutral500.withOpacity(0.25),
@@ -179,7 +178,8 @@ class Compeleted extends StatelessWidget {
                 child: AppButton(
                   text: "View details",
                   onPressed: () {
-                   //Get.toNamed("/book_overview", id: NavIds.profile);
+                   Get.toNamed('/appoinetment_details',id: NavIds.appointment);
+
                     print("clicl");
 
                   },
