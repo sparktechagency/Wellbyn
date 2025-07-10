@@ -11,6 +11,7 @@ import '../utils/nab_ids.dart';
 import '../views/screen/profile/caregiver_mode/caregiver_mode.dart';
 import '../views/screen/profile/insurance_info.dart';
 import '../views/screen/profile/medicalinfo/medical_info.dart';
+import '../views/screen/profile/medication/medicationsetting.dart';
 import '../views/screen/profile/personalinfo/personal_info.dart';
 import '../views/screen/profile/setting.dart';
 import '../views/screen/profile/support/support.dart';
@@ -45,6 +46,12 @@ class _ProfileNavState extends State<ProfileNav> {
           return MaterialPageRoute(
             settings: settings,
             builder: (_) => InsuranceInfo(),
+          );
+        }
+        else if(settings.name == '/medicationsetting') {
+          return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => MedicationSetting(),
           );
         }
         else if(settings.name == '/add_insurance') {

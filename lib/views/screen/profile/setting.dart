@@ -156,6 +156,8 @@ class Setting extends StatelessWidget {
                    trailingIconPath: AppIcons.arrorightIcon,
                        onTap: () {
                                 // Navigate or do something
+                         Get.toNamed('/medicationsetting',id: NavIds.profilenav);
+                         print("helo");
                          },
                         ),
                       SizedBox(height: 20,),
@@ -177,7 +179,7 @@ class Setting extends StatelessWidget {
                  SizedBox(height: 8,),
                  ProfileListTile(
                    leadingIconPath: AppIcons.userswitchIcon,
-                   title: " Medications",
+                   title: " Caregiver",
                    trailingIconPath: AppIcons.arrorightIcon,
                    onTap: () {
                      // Navigate or do something

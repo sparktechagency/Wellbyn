@@ -48,4 +48,10 @@ class SpeechController extends GetxController {
       }
     }
   }
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    toggleListening();
+    super.onInit();
+  }
 }

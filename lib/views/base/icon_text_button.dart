@@ -83,12 +83,12 @@ class IconTextButton extends StatelessWidget {
                       height: 22.h,
                       colorFilter: ColorFilter.mode(textColor, BlendMode.srcIn),
                     ),
-                    SizedBox(width: 6.w),
+                    SizedBox(width: 8.w),
                     Text(
                       text,
                       style: TextStyle(
                         fontFamily: 'Satoshi',
-                        fontSize: 14,
+                        fontSize: 15,
                         color: textColor,
                         fontWeight: FontWeight.w500,
                       ),

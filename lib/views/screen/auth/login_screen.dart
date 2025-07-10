@@ -54,10 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.w),
               child: SingleChildScrollView(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(minHeight: 1.sh),
-                  child: IntrinsicHeight(
-                    child: Column(
+                child: Column(
                       children: [
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 5),
@@ -129,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           fit: BoxFit.contain, // control how the image fits
                           alignment: Alignment.center, // position the image
                         ),
-                        SizedBox(height: 10.h),
+                        const SizedBox(height: 10),
                         Column(
                           children: [
                             Text(
@@ -152,11 +149,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 30.h),
+                        const SizedBox(height: 30),
                         inputSection(),
                         SizedBox(height: 8,),
                         forgotsection(),
-                        SizedBox(height: 30.h),
+                        const SizedBox(height: 30),
                         AppButton(text: "Log in".tr, onPressed: () {
                           Get.to(Forgot());
                         }),
@@ -168,7 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Padding(
                             padding: const EdgeInsets.only(bottom: 20),
                             child: Text.rich(
-                              TextSpan(
+                               TextSpan(
                                 text: "Don’t have an account?".tr,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
@@ -192,16 +189,15 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         Or(),
-                        SizedBox(height: 20.h),
+                        const  SizedBox(height: 20),
                         googleButton(),
-                        SizedBox(height: 30.h),
+                        const SizedBox(height: 30),
                       ],
                     ),
                   ),
                 ),
               ),
-            ),
-          ),
+
     );
   }
 
@@ -221,8 +217,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             width: 24.w,
                             height: 24.h,
                           ),
-                          SizedBox(width: 8.w),
-                          Text(
+                         const SizedBox(width: 8),
+                            Text(
                             "Continue with Google".tr,
                             style: TextStyle(
                               fontFamily: 'Satoshi',

@@ -74,12 +74,12 @@ class CustomTextFielded extends StatefulWidget {
   final String? prefixIcon;
   final String? labelText;
   final String? hintText;
-  final VoidCallback? onTap; // 👈 Add this
-  final bool? readOnly; // 👈 Optional to control editability
+  final VoidCallback? onTap;
+  final bool? readOnly;
   final double? contentPaddingHorizontal;
   final double? contentPaddingVertical;
   final Widget? suffixIcon;
-  final FormFieldValidator? validator;
+  final FormFieldValidator<String>? validator;
   final bool isPassword;
   final bool? isEmail;
   final AutovalidateMode? autovalidateMode;
@@ -92,16 +92,14 @@ class CustomTextFielded extends StatefulWidget {
 
   const CustomTextFielded({
     super.key,
-    this.contentPaddingHorizontal,
-    this.contentPaddingVertical,
+    required this.controller,
     this.hintText,
     this.borderColor,
     this.prefixIcon,
-    this.next=false,
+    this.next = false,
     this.suffixIcon,
     this.validator,
     this.isEmail,
-    required this.controller,
     this.keyboardType = TextInputType.text,
     this.isObscureText = false,
     this.obscure = '*',
@@ -116,16 +114,72 @@ class CustomTextFielded extends StatefulWidget {
     this.suffixSvgColor,
     this.onTap,
     this.readOnly,
+    this.contentPaddingHorizontal,
+    this.contentPaddingVertical,
   });
 
   @override
-  State<CustomTextFielded> createState() => _CustomTextFieldState();
+  State<CustomTextFielded> createState() => _CustomTextFieldedState();
 }
 
-class _CustomTextFieldState extends State<CustomTextFielded> {
-  bool obscureText = true;
+class _CustomTextFieldedState extends State<CustomTextFielded> {
+  late bool obscureText;
+  Widget? cachedPrefixIcon;
+  Widget? cachedSuffixIcon;
 
-  void toggle() {
+  @override
+  void initState() {
+    super.initState();
+    obscureText = widget.isPassword;
+
+    if (widget.prefixIcon != null) {
+      cachedPrefixIcon = Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        child: SvgPicture.asset(
+          widget.prefixIcon!,
+          width: 16.w,
+          height: 16.w,
+          colorFilter: const ColorFilter.mode(
+            TextColors.neutral500,
+            BlendMode.srcIn,
+          ),
+        ),
+      );
+    }
+
+    if (widget.suffixSvgAsset != null) {
+      cachedSuffixIcon = Padding(
+        padding: const EdgeInsets.all(12),
+        child: SvgPicture.asset(
+          widget.suffixSvgAsset!,
+          width: 20.w,
+          height: 20.w,
+          colorFilter: ColorFilter.mode(
+            widget.suffixSvgColor ?? TextColors.neutral900,
+            BlendMode.srcIn,
+          ),
+        ),
+      );
+    }
+  }
+
+  OutlineInputBorder get focusedBorder => OutlineInputBorder(
+    borderRadius: BorderRadius.circular(8.r),
+    borderSide: BorderSide(
+      width: 1.5,
+      color: widget.borderColor ?? BorderColors.primary,
+    ),
+  );
+
+  OutlineInputBorder get enabledBorder => OutlineInputBorder(
+    borderRadius: BorderRadius.circular(8.r),
+    borderSide: const BorderSide(
+      width: 1,
+      color: BorderColors.tertiary,
+    ),
+  );
+
+  void togglePassword() {
     setState(() {
       obscureText = !obscureText;
     });
@@ -134,140 +188,78 @@ class _CustomTextFieldState extends State<CustomTextFielded> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      autovalidateMode: widget.autovalidateMode ?? AutovalidateMode.disabled,
       controller: widget.controller,
-      maxLines: widget.isPassword ? 1 : widget.maxLines,
       keyboardType: widget.keyboardType,
-      obscuringCharacter: widget.obscure!,
-      enabled: widget.enabled ?? true,
-      textInputAction: widget.next ? TextInputAction.next : TextInputAction.done,
-      onFieldSubmitted: (_) {
-        if (widget.next) {
-          FocusScope.of(context).nextFocus();
-        } else {
-          FocusScope.of(context).unfocus(); // or call submit logic
-        }
-      },
-
+      obscureText: widget.isPassword ? obscureText : false,
+      obscuringCharacter: widget.obscure ?? '*',
       readOnly: widget.readOnly ?? false,
+      enabled: widget.enabled ?? true,
+      autovalidateMode: widget.autovalidateMode ?? AutovalidateMode.disabled,
+      textInputAction:
+      widget.next ? TextInputAction.next : TextInputAction.done,
+      maxLines: widget.isPassword ? 1 : widget.maxLines,
+      cursorColor: TextColors.neutral900,
       onTap: widget.onTap,
-      // validator: widget.validator,
-      validator:
-      widget.validator ??
+      onChanged: widget.onChanged,
+      validator: widget.validator ??
               (value) {
             if (value == null || value.isEmpty) {
               return "Please enter ${widget.hintText?.toLowerCase() ?? 'this field'}";
             }
             if (widget.isEmail == true) {
-              bool isValidEmail = AppConstants.emailValidator.hasMatch(value);
-              if (!isValidEmail) {
+              if (!AppConstants.emailValidator.hasMatch(value)) {
                 return "Please check your email!";
               }
             }
             return null;
           },
-
-      cursorColor: TextColors.neutral900,
-      obscureText: widget.isPassword ? obscureText : false,
-      onChanged: widget.onChanged,
-      style: TextStyle(
+      style: const TextStyle(
         color: TextColors.neutral900,
         fontSize: 16,
         fontFamily: "Satoshi",
         fontWeight: FontWeight.w500,
       ),
       decoration: InputDecoration(
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.r),
-          borderSide: BorderSide(
-            width: 1.5,
-            color: widget.borderColor ?? BorderColors.primary,
-          ),
-        ),
-
-        prefixIcon: widget.prefixIcon != null
-            ? Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          child: SvgPicture.asset(
-            color: TextColors.neutral500,
-            widget.prefixIcon! as String,
-            width: 16.w,
-            height: 16.w,
-            colorFilter: const ColorFilter.mode(
-              TextColors.neutral500,
-              BlendMode.srcIn,
-            ),
-          ),
-        )
-            : null,
-
-
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.r),
-          borderSide: BorderSide(
-            width: 1,
-            color: BorderColors.tertiary, // don't use widget.borderColor here
-          ),
-        ),
-
-        disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.r),
-          borderSide: BorderSide(
-            width: 1,
-            color: BorderColors.disabled, // separate color
-          ),
-        ),
-
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.r),
-          borderSide: BorderSide(color: BorderColors.error),
-        ),
-        suffixIcon: widget.isPassword
-            ? GestureDetector(
-          onTap: toggle,
-          child: _suffixIcon(
-            obscureText ? Icons.visibility_off : Icons.visibility,
-          ),
-        )
-            : widget.suffixSvgAsset != null
-            ? Padding(
-          padding: const EdgeInsets.all(12),
-          child: SvgPicture.asset(
-            widget.suffixSvgAsset!,
-            width: 20.w,
-            height: 20.w,
-            colorFilter: ColorFilter.mode(
-              widget.suffixSvgColor ?? TextColors.neutral900,
-              BlendMode.srcIn,
-            ),
-          ),
-        )
-            : widget.suffixIcon,
-
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.r),
-          borderSide: BorderSide(color: BorderColors.error, width: 2),
-        ),
-
-        contentPadding: EdgeInsets.symmetric(
-          horizontal: widget.contentPaddingHorizontal ?? 8.w,
-          vertical: widget.contentPaddingVertical ?? 12.w,
-        ),
-        fillColor: widget.filColor,
-        prefixIconColor: TextColors.neutral900,
-
         hintText: widget.hintText,
-        hintStyle: TextStyle(
+        hintStyle: const TextStyle(
           fontFamily: 'Satoshi',
           fontWeight: FontWeight.w500,
           fontSize: 14,
           color: TextColors.secondary,
         ),
+        contentPadding: EdgeInsets.symmetric(
+          horizontal: widget.contentPaddingHorizontal ?? 8.w,
+          vertical: widget.contentPaddingVertical ?? 12.w,
+        ),
+        fillColor: widget.filColor,
+        prefixIcon: cachedPrefixIcon,
+        suffixIcon: widget.isPassword
+            ? GestureDetector(
+          onTap: togglePassword,
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Icon(
+              obscureText ? Icons.visibility_off : Icons.visibility,
+              color: TextColors.neutral500,
+            ),
+          ),
+        )
+            : cachedSuffixIcon ?? widget.suffixIcon,
+        focusedBorder: focusedBorder,
+        enabledBorder: enabledBorder,
+        disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.r),
+          borderSide: const BorderSide(color: BorderColors.disabled),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.r),
+          borderSide: const BorderSide(color: BorderColors.error),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.r),
+          borderSide: const BorderSide(color: BorderColors.error, width: 2),
+        ),
       ),
     );
-  }
-
-  _suffixIcon(IconData icon) {
-    return Padding(padding: const EdgeInsets.all(10.0), child: Icon(icon));
   }
 }

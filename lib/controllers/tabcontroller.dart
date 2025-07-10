@@ -7,7 +7,6 @@ class TabControllerX extends GetxController {
     selectedIndex.value = index;
     if(selectedIndex.value==0){
       Get.snackbar("title", "message");
-
     }
   }
 }

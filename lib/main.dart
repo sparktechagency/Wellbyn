@@ -43,9 +43,9 @@ class MyApp extends StatelessWidget {
                 locale: localizeController.locale,
                 translations: Messages(languages: languages),
                 fallbackLocale: Locale(AppConstants.languages[0].languageCode, AppConstants.languages[0].countryCode),
-                transitionDuration: const Duration(milliseconds: 500),
+                transitionDuration: const Duration(milliseconds: 300),
                 getPages: AppRoutes.page,
-                initialRoute: AppRoutes.loginScreen,
+                initialRoute: AppRoutes.Splash,
               );
             }
         );
