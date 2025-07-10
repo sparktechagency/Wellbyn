@@ -5,6 +5,7 @@ import 'package:wellbyn/views/screen/appointment/appointment.dart';
 import 'package:wellbyn/views/screen/compiled/appoinetment_details.dart';
 
 import '../utils/nab_ids.dart';
+import '../views/screen/upcoming/chekIn_appointment.dart';
 
 class AppointmentNav extends StatelessWidget {
   AppointmentNav({super.key});
@@ -23,6 +24,11 @@ class AppointmentNav extends StatelessWidget {
           return MaterialPageRoute(
             settings: settings,
             builder: (_) => AppoinetmentDetails(),
+          );
+        }else if(settings.name =="/chekIn_appointment"){
+          return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => ChekinAppointment(),
           );
         }
         else {

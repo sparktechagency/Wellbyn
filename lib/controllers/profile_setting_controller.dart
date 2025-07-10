@@ -393,5 +393,23 @@ class ProfileSettingController extends GetxController {
     isSignatureNotEmpty.value = false;
   }
 
+  var symptoms = <String, bool>{
+    'Bleeding gums': false,
+    'Loose tooth': false,
+    'Tooth sensitivity': false,
+    'Jaw pain or clicking': false,
+  }.obs;
 
+  var checkin = <String, bool>{
+    'Yes': false,
+    'No': false,
+  }.obs;
+  void toggleSymptom(String key) {
+    symptoms[key] = !(symptoms[key] ?? false);
+  }
+  void togglecheck(String key){
+    checkin[key]= !(checkin[key] ??false);
+    checkin.refresh();
+
+  }
 }

@@ -67,14 +67,14 @@ class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
               Row(
                 children: [
                   StepCircle(
-                    isActive: false,
+                    isActive: true,
                     step: '1',
                     activeColor: Appcolors.action,
                     inactiveColor: Colors.white,
                     activeTextColor: Colors.white,
                     inactiveTextColor: TextColors.neutral900,
                   ),
-                  _buildLine(),
+                  _buildLine(isHalfColor: true),
                   StepCircle(
                     isActive: true,
                     step: '2',
@@ -83,7 +83,7 @@ class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
                     activeTextColor: Colors.white,
                     inactiveTextColor: TextColors.neutral900,
                   ),
-                  _buildLine(),
+                  _buildLine(isHalfColor: false),
                   StepCircle(
                     isActive: false,
                     step: '3',
@@ -866,8 +866,8 @@ class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
   // Helper widget for step circle
 
   // Helper widget for line between steps
-  Widget _buildLine() {
-    return Expanded(child: Container(height: 1, color: TextColors.neutral200));
+  Widget _buildLine({required bool isHalfColor}) {
+    return Expanded(child: Container(height: 1, color:isHalfColor ? TextColors.action : TextColors.neutral200));
   }
 
   void _showAddAllergyDialog() {

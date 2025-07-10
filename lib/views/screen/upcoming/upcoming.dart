@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:wellbyn/utils/app_colors.dart';
+import 'package:wellbyn/utils/nab_ids.dart';
 import 'package:wellbyn/views/base/app_text.dart';
 import 'package:wellbyn/views/base/icon_text_button.dart';
 
@@ -177,7 +178,11 @@ class Upcoming extends StatelessWidget {
                           textColor: BorderColors.warning700,
                           svgAsset: AppIcons.locationcheckIcon,
                           svgAssetcolor: BorderColors.warning700,
-                          onTap: (){},),
+                          onTap: (){
+                            Get.toNamed("/chekIn_appointment",id: NavIds.appointment);
+
+
+                          },),
                       ),
                       const SizedBox(height: 12),
                       Padding(

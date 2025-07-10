@@ -31,36 +31,6 @@ class SettingInsuranceInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: SizedBox(
-        width: double.infinity,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 4),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              CustomButton(
-                color: Appcolors.action,
-                width: 100,
-                textColor: Appcolors.primary,
-                fontSize: 16,
-                onTap: () => Get.back(),
-                text: "Previous",
-              ),
-              CustomButton(
-                textColor: Appcolors.primary,
-                fontSize: 16,
-                color: Appcolors.action,
-                width: 100,
-                onTap: (){
-                  Get.to(BaseScreen());
-                },
-                text: "Next",
-              ),
-            ],
-          ),
-        ),
-      ),
       backgroundColor: Appcolors.page,
       appBar: AppBar(
         backgroundColor: Appcolors.page,
@@ -94,23 +64,23 @@ class SettingInsuranceInfo extends StatelessWidget {
               Row(
                 children: [
                   StepCircle(
-                    isActive: false,
+                    isActive: true,
                     step: '1',
                     activeColor: Appcolors.action,
                     inactiveColor: Colors.white,
                     activeTextColor: Colors.white,
                     inactiveTextColor: TextColors.neutral900,
                   ),
-                  _buildLine(),
+                  _buildLine(isHalfColor: true),
                   StepCircle(
-                    isActive: false,
+                    isActive: true,
                     step: '2',
                     activeColor: Appcolors.action,
                     inactiveColor: Colors.white,
                     activeTextColor: Colors.white,
                     inactiveTextColor: TextColors.neutral900,
                   ),
-                  _buildLine(),
+                  _buildLine(isHalfColor: true),
                   StepCircle(
                     isActive: true,
                     step: '3',
@@ -233,15 +203,31 @@ class SettingInsuranceInfo extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Text(
-                              "Primary Card",
-                              // ➤ Makes the card label dynamic
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontFamily: "Satoshi",
-                                color: TextColors.neutral500,
-                                fontSize: 16,
-                              ),
+
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Insurance Name",
+                                  // ➤ Makes the card label dynamic
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: "Satoshi",
+                                    color: TextColors.neutral500,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                Text(
+                                  "Bluesky ",
+                                  // ➤ Makes the card label dynamic
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: "Satoshi",
+                                    color: TextColors.neutral900,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ],
                             ),
                             Spacer(),
                             GestureDetector(
@@ -276,31 +262,8 @@ class SettingInsuranceInfo extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(height: 30),
-                        AppText(
-                          "Policy Holder Info",
-                          color: TextColors.neutral500,
-                          fontSize: 22,
-                        ),
-                        SizedBox(height: 32),
-
-                        LabelValueText(
-                          label: "Type",
-                          value: "Selected",
-                          labelStyle: TextStyle(
-                            fontSize: 14,
-                            color: TextColors.neutral500,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: "Satoshi",
-                          ),
-                          valueStyle: TextStyle(
-                            fontSize: 16,
-                            color: TextColors.neutral900,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: "Satoshi",
-                          ),
-                        ),
                         SizedBox(height: 20),
+
                         LabelValueText(
                           label: "Insurance id",
                           value: "G987654321",
@@ -378,12 +341,6 @@ class SettingInsuranceInfo extends StatelessWidget {
                           margin: EdgeInsets.symmetric(vertical: 16),
                         ),
                         SizedBox(height: 8),
-                        AppText(
-                          "Insured",
-                          color: TextColors.neutral500,
-                          fontSize: 22,
-                        ),
-                        SizedBox(height: 20),
                         LabelValueText(
                           label: "Patient Relationship to Insured",
                           value: "Father",
@@ -612,6 +569,33 @@ class SettingInsuranceInfo extends StatelessWidget {
                   );
                 },
               ),
+
+              SizedBox(height: 32,),
+               Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomButton(
+                      color: Appcolors.primary,
+                      broderColor: TextColors.neutral900,
+                      width: 100,
+                      textColor: TextColors.neutral900,
+                      fontSize: 16,
+                      onTap: () => Get.back(),
+                      text: "Previous",
+                    ),
+                    CustomButton(
+                      textColor: Appcolors.primary,
+                      fontSize: 16,
+                      color: Appcolors.action,
+                      width: 100,
+                      onTap: (){
+                        Get.to(BaseScreen());
+                      },
+                      text: "Next",
+                    ),
+                  ],
+                ),
+              SizedBox(height: 32,),
             ],
           ),
         ),
@@ -619,8 +603,8 @@ class SettingInsuranceInfo extends StatelessWidget {
     );
   }
 
-  Widget _buildLine() {
-    return Expanded(child: Container(height: 1, color: TextColors.neutral200));
+  Widget _buildLine({required bool isHalfColor}) {
+    return Expanded(child: Container(height: 1, color:isHalfColor? TextColors.action : TextColors.neutral200));
   }
 
   void _showCustomLogoutDialog(BuildContext context) {

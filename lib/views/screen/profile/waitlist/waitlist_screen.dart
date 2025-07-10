@@ -27,7 +27,7 @@ class WaitlistScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Appcolors.page,
         title: Text(
-          "Caregiver Mode",
+          "Your Waitlist",
           style: TextStyle(
             fontSize: 20,
             fontFamily: "Satoshi",

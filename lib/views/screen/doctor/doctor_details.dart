@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:lottie/lottie.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:wellbyn/controllers/dotor_details.dart';
@@ -262,10 +263,18 @@ class DoctorDetails extends StatelessWidget {
                                           vertical: 8),
                                       width: 98,
                                       height: 40,
+
                                       decoration: BoxDecoration(
-                                        color: isSelected ? Colors.blue : Colors
-                                            .grey.shade200,
+                                        color: isSelected ? TextColors.action : Appcolors.natral25,
                                         borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: TextColors.neutral500.withOpacity(0.15),
+                                            blurRadius: 6,
+                                            offset: const Offset(0, 2),
+                                            spreadRadius: 0,
+                                          ),
+                                        ],
                                       ),
                                       child: Center(
                                         child: Row(
@@ -281,6 +290,9 @@ class DoctorDetails extends StatelessWidget {
                                             Text(
                                               time,
                                               style: TextStyle(
+                                                fontFamily: "Satoshi",
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w500,
                                                 color: isSelected
                                                     ? Colors.white
                                                     : Colors.black,
@@ -305,14 +317,14 @@ class DoctorDetails extends StatelessWidget {
                           child: OutlinedButton.icon(
                             onPressed: () {},
                             icon: SvgPicture.asset(AppIcons.alarmIcon,
-                                color: Colors.blue),
+                                color: Appcolors.action),
                             label: const Text(
                               "Waitlist",
                               style: TextStyle(
-                                  fontFamily: 'Satoshi', color: Colors.blue),
+                                  fontFamily: 'Satoshi', color:Appcolors.action),
                             ),
                             style: OutlinedButton.styleFrom(
-                              side: const BorderSide(color: Colors.blue),
+                              side: const BorderSide(color: Appcolors.action),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
                               ),
@@ -338,6 +350,8 @@ class DoctorDetails extends StatelessWidget {
                               child: Text(
                                 "Next",
                                 style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
                                   fontFamily: 'Satoshi',
                                   color: Appcolors.primary,
                                 ),
@@ -519,16 +533,24 @@ class _DateTimePickerSectionState extends State<DateTimePickerSection> {
 
   Widget buildArrowButton(IconData icon, VoidCallback onTap) {
     return Container(
-      height: 30,
-      width: 35,
+      height: 25,
+      width: 25,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color:TextColors.neutral100
+        // boxShadow: [
+        //   BoxShadow(
+        //     color: TextColors.neutral500.withOpacity(0.20),
+        //     offset: Offset(0, 0.3),
+        //     blurRadius: 4
+        //   )
+        // ],
+        borderRadius: BorderRadius.circular(5),
+        color:TextColors.neutral300.withOpacity(0.30)
       ),
+
       child: InkWell(
         borderRadius: BorderRadius.circular(8),
         onTap: onTap,
-        child: Icon(icon, color: Appcolors.action, size: 16),
+        child: Icon(icon, color: Appcolors.action, size: 13),
       ),
     );
   }
@@ -580,30 +602,162 @@ class _DateTimePickerSectionState extends State<DateTimePickerSection> {
     );
   }
 
-  Widget buildTimeSlots(String selectedTime) {
+  // Option 1: Using Container with BoxShadow
+//   Widget buildTimeSlots(String selectedTime) {
+//     return Wrap(
+//       spacing: 8,
+//       runSpacing: 8,
+//       children: controller.timeSlots.map((time) {
+//         final isSelected = selectedTime == time;
+//         return Container(
+//           decoration: BoxDecoration(
+//             borderRadius: BorderRadius.circular(8),
+//             boxShadow: [
+//               BoxShadow(
+//                 color: TextColors.neutral900.withOpacity(0.2),
+//                 blurRadius: 8,
+//                 offset: const Offset(0, 4),
+//                 spreadRadius: 0,
+//               ),
+//             ],
+//           ),
+//           child: RawChip(
+//             labelPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+//             avatar: isSelected
+//                 ? const Icon(Icons.check, size: 16, color: Colors.white)
+//                 : null,
+//             label: Text(
+//               time,
+//               style: TextStyle(
+//                 fontSize: 14,
+//                 fontFamily: "Satoshi",
+//                 fontWeight: FontWeight.w600,
+//                 color: isSelected ? Colors.white : Colors.black,
+//               ),
+//             ),
+//             selected: isSelected,
+//             backgroundColor: Appcolors.primary,
+//             selectedColor: TextColors.primary,
+//             shape: RoundedRectangleBorder(
+//               borderRadius: BorderRadius.circular(8),
+//             ),
+//             onSelected: (_) => controller.selectTime(time),
+//           ),
+//         );
+//       }).toList(),
+//     );
+//   }
+//
+// // Option 2: Using Material widget with elevation
+// // Working solution with Container and BoxShadow
+// //   Widget buildTimeSlots(String selectedTime) {
+// //     return Wrap(
+// //       spacing: 8,
+// //       runSpacing: 8,
+// //       children: controller.timeSlots.map((time) {
+// //         final isSelected = selectedTime == time;
+// //         return Container(
+// //           decoration: BoxDecoration(
+// //             borderRadius: BorderRadius.circular(8),
+// //             boxShadow: [
+// //               BoxShadow(
+// //                 color: TextColors.neutral900.withOpacity(0.15),
+// //                 blurRadius: 6,
+// //                 offset: const Offset(0, 2),
+// //                 spreadRadius: 0,
+// //               ),
+// //             ],
+// //           ),
+// //           child: RawChip(
+// //             labelPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+// //             avatar: isSelected
+// //                 ? const Icon(Icons.check, size: 16, color: Colors.white)
+// //                 : null,
+// //             label: Text(
+// //               time,
+// //               style: TextStyle(
+// //                 fontSize: 15,
+// //                 fontFamily: "Satoshi",
+// //                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+// //                 color: isSelected ? Colors.white : Colors.black,
+// //               ),
+// //             ),
+// //             selected: isSelected,
+// //             backgroundColor: Appcolors.natral25,
+// //             selectedColor: TextColors.primary,
+// //             shape: RoundedRectangleBorder(
+// //               borderRadius: BorderRadius.circular(8),
+// //             ),
+// //             onSelected: (_) => controller.selectTime(time),
+// //           ),
+// //         );
+// //       }).toList(),
+// //     );
+// //   }
+//
+// // Alternative: Custom InkWell approach (if you want more control)
+  Widget buildTimeSlotsCustom(String selectedTime) {
     return Wrap(
       spacing: 8,
       runSpacing: 8,
       children: controller.timeSlots.map((time) {
         final isSelected = selectedTime == time;
-        return ChoiceChip(
-          label: Text(
-            time,
-            style: TextStyle(color: isSelected ? Colors.white : Colors.black),
-          ),
-          selected: isSelected,
-          selectedColor: TextColors.primary,
-          backgroundColor: Appcolors.secondary,
-          shape: RoundedRectangleBorder(
+        return Container(
+          decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            side: BorderSide(width: 0, color: Colors.transparent),
+            boxShadow: [
+              BoxShadow(
+                color: TextColors.neutral900.withOpacity(0.15),
+                blurRadius: 6,
+                offset: const Offset(0, 2),
+                spreadRadius: 0,
+              ),
+            ],
           ),
-          onSelected: (_) => controller.selectTime(time),
+          child: Material(
+            color: Appcolors.page,
+            borderRadius: BorderRadius.circular(8),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(8),
+              onTap: () => controller.selectTime(time),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                decoration: BoxDecoration(
+                  color: isSelected ? TextColors.primary : Appcolors.natral25,
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: [
+                    BoxShadow(
+                      color: TextColors.neutral500,
+                      offset: Offset(0, 0.3),
+                      blurRadius: 10,
+                    )
+                  ]
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (isSelected) ...[
+                      const Icon(Icons.check, size: 16, color: Colors.white),
+                      const SizedBox(width: 8),
+                    ],
+                    Text(
+                      time,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontFamily: "Satoshi",
+                        fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                        color: isSelected ? Colors.white : Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
         );
       }).toList(),
     );
   }
-
   String getMonthName(int month) {
     const names = [
       "",

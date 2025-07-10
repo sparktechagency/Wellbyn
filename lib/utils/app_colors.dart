@@ -57,6 +57,7 @@ class Appcolors {
   static const Color error50 = Color(0xFFFEF2F2); // Error/500
   static const Color warning = Color(0xFFFBF7EB);
   static const Color success50 = Color(0xFFEEFEE7);
+  static const Color natral25 = Color(0xFFF5F7F9);
 }
 
 class BorderColors {

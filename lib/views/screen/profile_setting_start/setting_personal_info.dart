@@ -73,9 +73,9 @@ class SettingPersonalInfo extends StatelessWidget {
               Row(
                 children: [
                   _buildStep(isActive: true, step: '1'),
-                  _buildLine(),
+                  _buildLine(ishalfColor: true),
                   _buildStep(isActive: false, step: '2'),
-                  _buildLine(),
+                  _buildLine(ishalfColor: false),
                   _buildStep(isActive: false, step: '3'),
                 ],
               ),
@@ -774,8 +774,8 @@ class SettingPersonalInfo extends StatelessWidget {
   }
 
   // Helper widget for line between steps
-  Widget _buildLine() {
-    return Expanded(child: Container(height: 1, color: TextColors.neutral200));
+  Widget _buildLine({required bool  ishalfColor}) {
+    return Expanded(child: Container(height: 1, color:ishalfColor? TextColors.action: TextColors.neutral200));
   }
 }
 

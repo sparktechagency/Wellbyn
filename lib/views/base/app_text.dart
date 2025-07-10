@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wellbyn/utils/app_colors.dart';
 class AppText extends StatelessWidget {
   final String text;
   final Color? color;
@@ -19,7 +20,7 @@ class AppText extends StatelessWidget {
         fontSize: fontSize ?? 20,
         fontFamily: "Satoshi",
         fontWeight: FontWeight.w500,
-        color: color ?? Colors.black,
+        color: color ?? TextColors.neutral900,
       ),
     );
   }
