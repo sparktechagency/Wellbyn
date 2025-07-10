@@ -10,15 +10,26 @@ import '../../../utils/app_colors.dart';
 import '../profile_setting_start/widget/labeledtextfield.dart';
 import 'forgot.dart';
 
-class CreateAccountPage extends StatelessWidget {
+class CreateAccountPage extends StatefulWidget {
   final String role;
 
   CreateAccountPage({required this.role, Key? key}) : super(key: key);
 
+  @override
+  State<CreateAccountPage> createState() => _CreateAccountPageState();
+}
+
+class _CreateAccountPageState extends State<CreateAccountPage> {
   final TextEditingController emailcontroller = TextEditingController();
   final TextEditingController passwordcontroller = TextEditingController();
   final TextEditingController confirmcontroller = TextEditingController();
-
+  @override
+  void dispose() {
+    emailcontroller.dispose();
+    passwordcontroller.dispose();
+    confirmcontroller.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,12 +38,10 @@ class CreateAccountPage extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.w),
           child: SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(minHeight: 1.sh),
-              child: IntrinsicHeight(
-                child: Column(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
                   children: [
-                    SizedBox(height: 35.h),
+                   const SizedBox(height: 35),
                     SvgPicture.asset(
                       'assets/icons/logo.svg',
                       width: 150.w,
@@ -45,8 +54,8 @@ class CreateAccountPage extends StatelessWidget {
                       // control how the image fits
                       alignment: Alignment.center, // position the image
                     ),
-                    SizedBox(height: 10.h),
-                    Text(
+                    const  SizedBox(height: 10),
+                    const  Text(
                       "Create an account",
                       style: TextStyle(
                         fontFamily: 'Satoshi',
@@ -55,28 +64,27 @@ class CreateAccountPage extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    SizedBox(height: 20.h),
-                    inputMethod(),
-                    SizedBox(height: 20.h),
+                    const SizedBox(height: 20),
+                      inputMethod(),
+                    const SizedBox(height: 20),
                     AppButton(
                       text: "Next",
                       onPressed: () {
                         Get.to(Forgot());
                       },
                     ),
-                    SizedBox(height: 20.h),
-                    allreadyHaveAcount(),
+                   const SizedBox(height: 20),
+                    const AlreadyHaveAccountText(),
+
                     oR(),
-                    SizedBox(height: 20.h),
+                   const SizedBox(height: 20),
                     googlebutton(),
-                    SizedBox(height: 20.h),
+                    const  SizedBox(height: 20),
                   ],
                 ),
               ),
             ),
           ),
-        ),
-      ),
     );
   }
 
@@ -87,26 +95,23 @@ class CreateAccountPage extends StatelessWidget {
         LabeledTextFielded(
           borderColor: TextColors.neutral900,
           label: "Email Address",
-          controller: passwordcontroller,
-          next: true,
+          controller: emailcontroller,
           maxline: 1,
           hintText: "Email Address",
         ),
-        SizedBox(height: 16.h),
+     const SizedBox(height: 16),
         LabeledTextFielded(
           borderColor: TextColors.neutral900,
           label: "New Password",
           controller: passwordcontroller,
-          next: true,
           maxline: 1,
           hintText: "Type a strong password",
         ),
-        SizedBox(height: 16.h),
+        const SizedBox(height: 16),
         LabeledTextFielded(
           borderColor: TextColors.neutral900,
           label: "Confirm Password",
-          controller: passwordcontroller,
-          next: true,
+          controller: confirmcontroller,
           maxline: 1,
           hintText: "Re-type password",
         ),
@@ -114,38 +119,6 @@ class CreateAccountPage extends StatelessWidget {
     );
   }
 
-  GestureDetector allreadyHaveAcount() {
-    return GestureDetector(
-      onTap: () {
-        Get.to(LoginScreen());
-      },
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: 20),
-        child: Text.rich(
-          TextSpan(
-            text: "Already have an account? ",
-            style: TextStyle(
-              color: TextColors.neutral500,
-              fontFamily: 'Satoshi',
-              fontWeight: FontWeight.w500,
-              fontSize: 16,
-            ),
-            children: [
-              TextSpan(
-                text: "Login",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: 'Satoshi',
-                  color: Appcolors.action,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 
   Row oR() {
     return Row(
@@ -155,7 +128,7 @@ class CreateAccountPage extends StatelessWidget {
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.w),
-          child: Text(
+          child:const Text(
             "OR",
             style: TextStyle(
               fontFamily: 'Satoshi',
@@ -183,13 +156,13 @@ class CreateAccountPage extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset(
+           SvgPicture.asset(
               'assets/icons/google.svg',
               width: 24.w,
               height: 24.h,
             ),
-            SizedBox(width: 8.w),
-            Text(
+           const SizedBox(width: 8),
+          const Text(
               "Continue with Google",
               style: TextStyle(
                 fontFamily: 'Satoshi',
@@ -203,18 +176,42 @@ class CreateAccountPage extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildLabel(String text) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 8.h),
-      child: Text(
-        text,
-        style: TextStyle(
-          fontFamily: 'Satoshi',
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w500,
+
+class AlreadyHaveAccountText extends StatelessWidget {
+  const AlreadyHaveAccountText({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => Get.to(() => LoginScreen()),
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 20),
+        child: const Text.rich(
+          TextSpan(
+            text: "Already have an account? ",
+            style: TextStyle(
+              color: TextColors.neutral500,
+              fontFamily: 'Satoshi',
+              fontWeight: FontWeight.w500,
+              fontSize: 16,
+            ),
+            children: [
+              TextSpan(
+                text: "Login",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'Satoshi',
+                  color: Appcolors.action,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
+
