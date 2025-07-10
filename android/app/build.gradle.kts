@@ -42,3 +42,11 @@ android {
 flutter {
     source = "../.."
 }
+// File: android/build.gradle
+
+
+
+
+
+
+

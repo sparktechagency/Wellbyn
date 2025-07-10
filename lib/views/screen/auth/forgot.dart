@@ -21,12 +21,10 @@ class Forgot extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.w),
           child: SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(minHeight: 1.sh),
-              child: IntrinsicHeight(
-                child: Column(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
                   children: [
-                    SizedBox(height: 35.h),
+                    const   SizedBox(height: 35),
                     SvgPicture.asset(
                       'assets/icons/logo.svg',
                       width: 150.w,
@@ -37,7 +35,7 @@ class Forgot extends StatelessWidget {
                       alignment: Alignment.center, // position the image
                     ),
                     SizedBox(height: 10.h),
-                    Text(
+                    const  Text(
                         "Forgot password?",
                          style: TextStyle(
                           fontFamily: 'Satoshi',
@@ -45,7 +43,7 @@ class Forgot extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                         )
                     ),
-                    Text(
+                    const  Text(
                         "Enter your email to reset your password.",
                         style: TextStyle(
                           fontFamily: 'Satoshi',
@@ -54,14 +52,13 @@ class Forgot extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                         )
                     ),
-                    SizedBox(height: 30.h),
+                    const SizedBox(height: 30),
                     nextbutton(),
-                    SizedBox(height: 24.h),
+                    const   SizedBox(height: 24),
                     AppButton(text: "Next", onPressed: () {
                       Get.to(Verify());
-
                     }),
-                    SizedBox(height: 24),
+                   const SizedBox(height: 24),
                     arrowback(),
 
                     // Row(
@@ -119,9 +116,7 @@ class Forgot extends StatelessWidget {
                 ),
               ),
             ),
-          ),
         ),
-      ),
     );
   }
 
@@ -138,13 +133,13 @@ class Forgot extends StatelessWidget {
                         hintText: "Email Address",
                       ),
                     ],
-                  );
-  }
+                );
+         }
 
   GestureDetector arrowback() {
     return GestureDetector(
                     onTap: (){
-                      Get.back();
+                    Get.back();
 
                     },
                     child: Row(
@@ -158,7 +153,7 @@ class Forgot extends StatelessWidget {
 
                         ),
                         SizedBox(width: 12,),
-                        Text(
+                       const Text(
                             "Back to login",
                             style: TextStyle(
                               fontFamily: 'Satoshi',
@@ -170,18 +165,4 @@ class Forgot extends StatelessWidget {
                     ),
                   );
   }
-
-  Widget _buildLabel(String text) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 8.h),
-      child: Text(
-        text,
-        style: TextStyle(
-          fontFamily: 'Satoshi',
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-    );
-  }
-}
+        }
