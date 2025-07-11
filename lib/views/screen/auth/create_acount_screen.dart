@@ -78,7 +78,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
                     oR(),
                    const SizedBox(height: 20),
-                    googlebutton(),
+                    GoogleButton(),
                     const  SizedBox(height: 20),
                   ],
                 ),
@@ -130,12 +130,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
           padding: EdgeInsets.symmetric(horizontal: 8.w),
           child:const Text(
             "OR",
-            style: TextStyle(
-              fontFamily: 'Satoshi',
-              fontSize: 16,
-              color: TextColors.neutral500,
-              fontWeight: FontWeight.w500,
-            ),
+            style:Styles.labelStyle,
           ),
         ),
         Expanded(
@@ -145,7 +140,22 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
     );
   }
 
-  Container googlebutton() {
+}
+
+class Styles {
+  static const TextStyle labelStyle = TextStyle(
+    fontFamily: 'Satoshi',
+    fontSize: 16,
+    color: TextColors.neutral500,
+    fontWeight: FontWeight.w500,
+  );
+}
+
+
+class GoogleButton extends StatelessWidget {
+  const GoogleButton({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
     return Container(
       height: 50.h,
       decoration: BoxDecoration(
@@ -156,13 +166,13 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-           SvgPicture.asset(
+            SvgPicture.asset(
               'assets/icons/google.svg',
               width: 24.w,
               height: 24.h,
             ),
-           const SizedBox(width: 8),
-          const Text(
+            const SizedBox(width: 8),
+            const Text(
               "Continue with Google",
               style: TextStyle(
                 fontFamily: 'Satoshi',
@@ -177,6 +187,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
     );
   }
 }
+
 
 
 class AlreadyHaveAccountText extends StatelessWidget {
