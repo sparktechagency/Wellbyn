@@ -70,14 +70,7 @@ class _AppointmentState extends State<Appointment> {
                           bool isSelected = appointmentController.selectedIndex.value == index;
                           return GestureDetector(
                             behavior: HitTestBehavior.opaque,
-                            onTap: () {
-                              appointmentController.changeTab(index);
-                              appointmentController.pageController.animateToPage(
-                                index,
-                                duration: const Duration(milliseconds: 200),
-                                curve: Curves.easeOut,
-                              );
-                            },
+                            onTap: ()=> appointmentController.changeTab(index),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 8,

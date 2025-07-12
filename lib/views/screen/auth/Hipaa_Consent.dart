@@ -113,7 +113,7 @@ class ConsentScreen extends StatelessWidget {
                           child: ElevatedButton.icon(
                             onPressed: () {
                               // Navigate or handle agreement
-                            Get.to(SettingPersonalInfo());
+                              Get.to(() => SettingPersonalInfo(), transition: Transition.zoom);
 
                             },
                             icon: const Icon(Icons.check, color: Colors.white),

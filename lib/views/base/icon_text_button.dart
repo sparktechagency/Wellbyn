@@ -14,87 +14,80 @@ class IconTextButton extends StatelessWidget {
   final double? width;
   final Color? svgAssetcolor;
   final bool isLoading;
-  final String? lottieAsset; // ✅ optional Lottie animation
+  final String? lottieAsset;
 
   const IconTextButton({
     super.key,
     required this.onTap,
     this.text = "Back to login",
     this.svgAsset = "assets/icons/back.svg",
-    this.backgroundColor = const Color(0xFF0055FF), // default example
+    this.backgroundColor = const Color(0xFF0055FF),
     this.textColor = Colors.white,
     this.height = 45,
     this.width,
     this.svgAssetcolor,
     this.bordercolor = Colors.transparent,
     this.isLoading = false,
-    this.lottieAsset, // ✅
+    this.lottieAsset,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: isLoading ? null : onTap, // prevent tap during loading
       child: Container(
         height: height.h,
-        width: width?.w,
-        padding: const EdgeInsets.all(8),
+        width: width != null ? width!.w : double.infinity, // full width fallback
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
         decoration: BoxDecoration(
-          border: Border.all(width: 1, color: bordercolor),
+          border: Border.all(width: 1.w, color: bordercolor),
           color: backgroundColor,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(12.r),
         ),
         child: Center(
           child: isLoading
-          ?  Text(
-            "Loading...",
-            style: TextStyle(
-              fontFamily: 'Satoshi',
-              fontSize: 14,
-              color: textColor,
-              fontWeight: FontWeight.w500,
+              ? lottieAsset != null
+              ? Lottie.asset(
+            lottieAsset!,
+            width: 24.w,
+            height: 24.w,
+          )
+              : SizedBox(
+            height: 24.w,
+            width: 24.w,
+            child: CircularProgressIndicator(
+              strokeWidth: 2.w,
+              valueColor: AlwaysStoppedAnimation<Color>(textColor),
             ),
           )
-              // ? lottieAsset != null
-              //       ? Lottie.asset(
-              //           lottieAsset!,
-              //           width: 30,
-              //           height: 30,
-              //           fit: BoxFit.fitHeight, // ✅ Use contain to center properly
-              //           repeat: true,
-              //           animate: true,
-              //
-              //         )
-              //       : SizedBox(
-              //           height: 20.w,
-              //           width: 20.w,
-              //           child: CircularProgressIndicator(
-              //             strokeWidth: 2,
-              //             valueColor: AlwaysStoppedAnimation<Color>(textColor),
-              //           ),
-              //         )
               : Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SvgPicture.asset(
-                      svgAsset,
-                      width: 16.w,
-                      height: 22.h,
-                      colorFilter: ColorFilter.mode(textColor, BlendMode.srcIn),
-                    ),
-                    SizedBox(width: 8.w),
-                    Text(
-                      text,
-                      style: TextStyle(
-                        fontFamily: 'Satoshi',
-                        fontSize: 15,
-                        color: textColor,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SvgPicture.asset(
+                svgAsset,
+                width: 18.w,
+                height: 18.w,
+                colorFilter: ColorFilter.mode(
+                  svgAssetcolor ?? textColor,
+                  BlendMode.srcIn,
                 ),
+              ),
+              SizedBox(width: 8.w),
+              Flexible(
+                child: Text(
+                  text,
+                  style: TextStyle(
+                    fontFamily: 'Satoshi',
+                    fontSize: 14.sp,
+                    color: textColor,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

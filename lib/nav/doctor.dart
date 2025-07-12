@@ -26,13 +26,7 @@ class DoctorNav extends StatelessWidget {
             settings: settings,
             builder: (_) => BookReport(),
           );
-        }
-        else if(settings.name =="/book_report"){
-          return MaterialPageRoute(
-            settings: settings,
-            builder: (_) => BookReport(),
-          );
-        }else if(settings.name =="/book_overview"){
+        } else if(settings.name =="/book_overview"){
           return MaterialPageRoute(
             settings: settings,
             builder: (_) => BookOverview(),

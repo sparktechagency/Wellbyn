@@ -14,6 +14,10 @@ import 'package:wellbyn/models/allergies.dart';
 
 class ProfileSettingController extends GetxController {
 
+  RxBool showText = false.obs;
+  toggleText(){
+    showText.value =!showText.value;
+  }
 
    //----------------------------Here can to do the profile setting patient information all details collect started add method and other info ---------------------------//
   //====================================================================================================================================================================//
@@ -25,6 +29,7 @@ class ProfileSettingController extends GetxController {
   }
 
   final RxString selectedMarital = ''.obs;
+  final RxString selectedBloodGroup = ''.obs;
 
   void selectecMarital(String? value) {
     if (value != null) {

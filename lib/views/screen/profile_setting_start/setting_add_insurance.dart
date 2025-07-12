@@ -2,27 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:signature/signature.dart';
 import 'package:wellbyn/views/base/app_text.dart';
 import 'package:wellbyn/views/base/custom_button.dart';
+import 'package:wellbyn/views/base/icon_text_button.dart';
+import 'package:wellbyn/controllers/profile_setting_controller.dart';
+import 'package:wellbyn/utils/app_colors.dart';
+import 'package:wellbyn/utils/app_icons.dart';
 import 'package:wellbyn/views/screen/profile_setting_start/setting_personal_info.dart';
 import 'package:wellbyn/views/screen/profile_setting_start/widget/labeledtextfield.dart';
 
-import '../../../controllers/profile_setting_controller.dart';
-import '../../../utils/app_colors.dart';
-import '../../../utils/app_icons.dart';
-import 'package:get/get.dart';
-import '../../base/icon_text_button.dart';
+
 class SettingAddInsurance extends StatelessWidget {
-   SettingAddInsurance({super.key});
+  SettingAddInsurance({super.key});
 
-  List<String> bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
-  List<String> state = ["AO", "AI", "BI", "CD", "HI+", "CO-", "HO", "KA"];
-
-  String? selectedGender;
-
-  List<String> marital = [
+  final List<String> marital = [
     "Single",
     "Marride",
     "Divorced",
@@ -31,22 +25,19 @@ class SettingAddInsurance extends StatelessWidget {
     "Unknown",
   ];
 
-   ProfileSettingController _contrller = Get.put(ProfileSettingController());
-   TextEditingController name= TextEditingController();
-   final signatureCtrl = Get.put(ProfileSettingController());
+  final ProfileSettingController _controller = Get.put(ProfileSettingController());
+  final TextEditingController name = TextEditingController();
 
-
-
-   @override
+  @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       backgroundColor: Appcolors.page,
       appBar: AppBar(
         backgroundColor: Appcolors.page,
         title: Text(
           "Add New Insurance Info",
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 20.sp,
             fontFamily: "Satoshi",
             fontWeight: FontWeight.w500,
             color: TextColors.neutral900,
@@ -54,40 +45,39 @@ class SettingAddInsurance extends StatelessWidget {
         ),
         centerTitle: true,
         leading: IconButton(
-          onPressed: () {
-            Get.back();
-          },
+          onPressed: () => Get.back(),
           icon: SvgPicture.asset(
             'assets/icons/arrow-left.svg',
-            width: 30.w,
-            height: 30.h,
+            width: 24.w,
+            height: 24.h,
             color: TextColors.neutral900,
           ),
         ),
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+        padding: EdgeInsets.symmetric(horizontal: 20.w),
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppText("Policy Holder Info",fontSize: 20,color: TextColors.neutral500,),
-            SizedBox(height: 20),
+            SizedBox(height: 16.h),
+            AppText(
+              "Policy Holder Info",
+              fontSize: 20.sp,
+              color: TextColors.neutral500,
+            ),
+            SizedBox(height: 20.h),
             Obx(
                   () => LabeledDropdownFieldes(
                 titile: "Type Selected",
                 label: "Type",
                 items: marital,
-                selectedValue: _contrller.selectedMarital.value.isEmpty
+                selectedValue: _controller.selectedMarital.value.isEmpty
                     ? null
-                    : _contrller.selectedMarital.value,
-                onChanged: (value) {
-                  _contrller.selectecMarital(value);
-                },
+                    : _controller.selectedMarital.value,
+                onChanged: (value) => _controller.selectecMarital(value),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 20.h),
             LabeledTextFielded(
               borderColor: TextColors.neutral900,
               label: "Insurance ID",
@@ -108,57 +98,54 @@ class SettingAddInsurance extends StatelessWidget {
             SizedBox(height: 20.h),
             LabeledTextFielded(
               borderColor: TextColors.neutral900,
-              label:"Phone",
+              label: "Phone",
               controller: name,
               next: true,
               maxline: 1,
               hintText: "+01579859888",
             ),
             SizedBox(height: 20.h),
-
             Obx(
                   () => LabeledDropdownFieldes(
                 titile: "Plan Name",
                 label: "Selected Plan",
                 items: marital,
-                selectedValue: _contrller.selectedMarital.value.isEmpty
+                selectedValue: _controller.selectedMarital.value.isEmpty
                     ? null
-                    : _contrller.selectedMarital.value,
-                onChanged: (value) {
-                  _contrller.selectecMarital(value);
-                },
+                    : _controller.selectedMarital.value,
+                onChanged: (value) => _controller.selectecMarital(value),
               ),
             ),
-
-
-            const SizedBox(height: 24),
-            Divider(height: 1, color: TextColors.neutral200),
-            const SizedBox(height: 24),
-            AppText("Insured",fontSize: 20,color: TextColors.neutral500,),
-            const SizedBox(height: 24),
+            SizedBox(height: 24.h),
+            Divider(height: 1.h, color: TextColors.neutral200),
+            SizedBox(height: 24.h),
+            AppText(
+              "Insured",
+              fontSize: 20.sp,
+              color: TextColors.neutral500,
+            ),
+            SizedBox(height: 24.h),
             Obx(
                   () => LabeledDropdownFieldes(
-                    titile: "Selected Plan ",
-                    label: "Plan Name",
+                titile: "Selected Plan ",
+                label: "Plan Name",
                 items: marital,
-                selectedValue: _contrller.selectedMarital.value.isEmpty
+                selectedValue: _controller.selectedMarital.value.isEmpty
                     ? null
-                    : _contrller.selectedMarital.value,
-                onChanged: (value) {
-                  _contrller.selectecMarital(value);
-                },
+                    : _controller.selectedMarital.value,
+                onChanged: (value) => _controller.selectecMarital(value),
               ),
             ),
             SizedBox(height: 20.h),
             LabeledTextFielded(
               borderColor: TextColors.neutral900,
-              label:"Full Name",
+              label: "Full Name",
               controller: name,
               next: true,
               maxline: 1,
               hintText: "First Name",
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 8.h),
             Row(
               children: [
                 Expanded(
@@ -168,12 +155,10 @@ class SettingAddInsurance extends StatelessWidget {
                     hintText: "Middle",
                     keyboardType: TextInputType.name,
                     maxLines: 1,
-                    borderColor:
-                    TextColors.neutral900, // Pass borderColor here
+                    borderColor: TextColors.neutral900,
                   ),
                 ),
-                SizedBox(width: 8),
-
+                SizedBox(width: 8.w),
                 Expanded(
                   child: CustomTextFielde(
                     next: true,
@@ -181,8 +166,7 @@ class SettingAddInsurance extends StatelessWidget {
                     hintText: "Last",
                     keyboardType: TextInputType.name,
                     maxLines: 1,
-                    borderColor:
-                    TextColors.neutral900, // Pass borderColor here
+                    borderColor: TextColors.neutral900,
                   ),
                 ),
               ],
@@ -190,111 +174,113 @@ class SettingAddInsurance extends StatelessWidget {
             SizedBox(height: 20.h),
             LabeledTextFielded(
               borderColor: TextColors.neutral900,
-              label:"Group-policy",
+              label: "Group-policy",
               controller: name,
               next: true,
               maxline: 1,
               hintText: "G987654321",
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24.h),
             Obx(
                   () => LabeledDropdownFieldes(
                 titile: "Selected Plan ",
                 label: "Plan Name",
                 items: marital,
-                selectedValue: _contrller.selectedMarital.value.isEmpty
+                selectedValue: _controller.selectedMarital.value.isEmpty
                     ? null
-                    : _contrller.selectedMarital.value,
-                onChanged: (value) {
-                  _contrller.selectecMarital(value);
-                },
+                    : _controller.selectedMarital.value,
+                onChanged: (value) => _controller.selectecMarital(value),
               ),
             ),
-            const SizedBox(height: 24),
-            Divider(height: 1, color: TextColors.neutral200),
-            const SizedBox(height: 24),
-
+            SizedBox(height: 24.h),
+            Divider(height: 1.h, color: TextColors.neutral200),
+            SizedBox(height: 24.h),
             AppText(
               "Insuranced Card",
+              fontSize: 16.sp,
               color: TextColors.neutral900,
-              fontSize: 16,
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 8.h),
             IconTextButton(
               onTap: () {},
-              height: 40,
-              width: 145,
+              height: 46.h,
+              width: 150.w,
               text: "Upload Card",
               svgAsset: AppIcons.addIcon02,
               backgroundColor: Appcolors.primary,
               bordercolor: Appcolors.action,
               textColor: Appcolors.action,
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 20.h),
             AppText(
               "Digital Signature ",
+              fontSize: 16.sp,
               color: TextColors.neutral900,
-              fontSize: 16,
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 8.h),
             IconTextButton(
               onTap: () {},
-              height: 40,
-              width: 180,
+              height: 46.h,
+              width: 185.w,
               text: "Upload Signature",
               svgAsset: AppIcons.addIcon02,
               backgroundColor: Appcolors.primary,
               bordercolor: Appcolors.action,
               textColor: Appcolors.action,
             ),
-            SizedBox(height: 12,),
+            SizedBox(height: 12.h),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                AppText("OR",fontSize: 16,color: TextColors.neutral500,),
-                const SizedBox(width: 6,),
-                Expanded(child: Divider(height: 1, color: TextColors.neutral200)),
+                AppText(
+                  "OR",
+                  fontSize: 16.sp,
+                  color: TextColors.neutral500,
+                ),
+                SizedBox(width: 6.w),
+                Expanded(
+                  child: Divider(
+                    height: 1.h,
+                    color: TextColors.neutral200,
+                  ),
+                ),
               ],
             ),
-
-            SizedBox(height: 20),
+            SizedBox(height: 20.h),
             AppText(
               "Draw Signature ",
+              fontSize: 16.sp,
               color: TextColors.neutral900,
-              fontSize: 16,
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 8.h),
             Stack(
               children: [
                 Container(
-                  padding: const EdgeInsets.all(1),
+                  padding: EdgeInsets.all(1.w),
                   decoration: BoxDecoration(
                     color: Appcolors.primary,
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12.r),
                     border: Border.all(
                       color: TextColors.neutral200,
-                      width: 1,
+                      width: 1.w,
                     ),
                   ),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(8.r),
                     child: Signature(
-                      controller: signatureCtrl.signatureController,
+                      controller: _controller.signatureController,
                       backgroundColor: Colors.white,
-                      height: 120,
+                      height: 120.h,
                     ),
                   ),
                 ),
-                // 🔁 Reactive clear button
-                if(signatureCtrl.signatureController.isNotEmpty)
+                if (_controller.signatureController.isNotEmpty)
                   Positioned(
-                    top: 4,
-                    right: 4,
+                    top: 4.h,
+                    right: 4.w,
                     child: GestureDetector(
-                      onTap: signatureCtrl.clearSignature,
+                      onTap: _controller.clearSignature,
                       child: Container(
-                        padding: const EdgeInsets.all(4),
+                        padding: EdgeInsets.all(4.w),
                         decoration: const BoxDecoration(
                           color: Colors.white,
                           shape: BoxShape.circle,
@@ -305,9 +291,9 @@ class SettingAddInsurance extends StatelessWidget {
                             )
                           ],
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.clear,
-                          size: 18,
+                          size: 18.sp,
                           color: Colors.red,
                         ),
                       ),
@@ -315,21 +301,16 @@ class SettingAddInsurance extends StatelessWidget {
                   ),
               ],
             ),
-            const SizedBox(height: 24,),
-
+            SizedBox(height: 24.h),
             CustomButton(
-              fontSize: 16,
+              fontSize: 16.sp,
               textColor: Appcolors.primary,
               color: Appcolors.action,
-                onTap: (){},
-                text: "Save Change"),
-
-
-
-            const SizedBox(height: 35,),
-
+              onTap: () {},
+              text: "Save Change",
+            ),
+            SizedBox(height: 35.h),
           ],
-        ),
         ),
       ),
     );

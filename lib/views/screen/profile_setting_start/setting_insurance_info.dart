@@ -8,6 +8,7 @@ import 'package:signature/signature.dart';
 import 'package:wellbyn/controllers/profile_setting_controller.dart';
 import 'package:wellbyn/views/screen/base_screen.dart';
 import 'package:wellbyn/views/screen/profile_setting_start/setting_add_insurance.dart';
+import 'package:wellbyn/views/screen/profile_setting_start/setting_personal_info.dart';
 import 'package:wellbyn/views/screen/profile_setting_start/widget/circle.dart';
 import 'package:wellbyn/views/screen/profile_setting_start/widget/labevalue.dart';
 
@@ -80,7 +81,7 @@ class SettingInsuranceInfo extends StatelessWidget {
                     activeTextColor: Colors.white,
                     inactiveTextColor: TextColors.neutral900,
                   ),
-                  _buildLine(isHalfColor: true),
+                  Expanded(child: AnimatedLine(isHalfColor: true)),
                   StepCircle(
                     isActive: true,
                     step: '3',
@@ -103,7 +104,7 @@ class SettingInsuranceInfo extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
-                          color: TextColors.neutral500,
+                          color: TextColors.action,
                           fontFamily: "Satoshi",
                         ),
                       ),
@@ -118,7 +119,7 @@ class SettingInsuranceInfo extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
-                          color: TextColors.neutral500,
+                          color: TextColors.action,
                           fontFamily: "Satoshi",
                         ),
                       ),
@@ -128,15 +129,18 @@ class SettingInsuranceInfo extends StatelessWidget {
                   SizedBox(
                     width: 46.w,
                     child: Center(
-                      child: Text(
-                        "Step ",
+                      child: TypingTextWidget(
+                        text: "Step",
+                        speed: const Duration(milliseconds: 100),
+                        delay: const Duration(milliseconds: 500), // typing starts after 1.2s
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
-                          color: TextColors.neutral500,
+                          color: TextColors.action,
                           fontFamily: "Satoshi",
                         ),
                       ),
+
                     ),
                   ),
                 ],

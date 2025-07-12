@@ -29,7 +29,8 @@ class CustomConfirmationDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      backgroundColor: Colors.white,
+      backgroundColor: Appcolors.page,
+
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(

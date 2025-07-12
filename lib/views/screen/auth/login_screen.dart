@@ -55,67 +55,70 @@ class _LoginScreenState extends State<LoginScreen> {
               child: SingleChildScrollView(
                 child: Column(
                       children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 5),
-                          child: Align(
-                            alignment: Alignment.topRight,
-                            child: Container(
-                              width: 120.w,
-                              padding: EdgeInsets.symmetric(horizontal: 16.w),
-                              decoration: BoxDecoration(
-                                color: Appcolors.secondary,
-                                borderRadius: BorderRadius.circular(8),
-                                border:
-                                Border.all(color: Appcolors.action, width: 1),
-                              ),
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton<String>(
-                                  focusColor: Colors.white,
-                                  value: selectedLanguage ?? language[0],
-                                  dropdownColor: Appcolors.primary,
-                                  style: TextStyle(
-                                    color: Appcolors.action,
-                                    fontSize: 14.sp,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.r),
-                                  hint: AppText(
-                                    'Language'.tr,
-                                    fontSize: 16.sp,
-                                  ),
-                                  icon: SvgPicture.asset(
-                                    AppIcons.arrowdwonIcon,
-                                    color: Appcolors.action,
-                                  ),
-                                  isExpanded: true,
-                                  items: language.map((String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: AppText(
-                                        value,
-                                        fontSize: 16.sp,
-                                      ),
-                                    );
-                                  }).toList(),
-                                  onChanged: (newValue) {
-                                    if (newValue != null) {
-                                      int selectedIndex = language.indexOf(newValue);
-                                      if (selectedIndex != -1) {
-                                        Locale newLocale = Locale(
-                                          AppConstants.languages[selectedIndex].languageCode,
-                                          AppConstants.languages[selectedIndex].countryCode,
-                                        );
-                                        setState(() {
-                                          localizationController.setLanguage(newLocale);
-                                          selectedLanguage = language[selectedIndex];
-                                        });
-                                      }
-                                    }
-                                  },
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        // Padding(
+                        //   padding: EdgeInsets.symmetric(vertical: 5),
+                        //   child: Align(
+                        //     alignment: Alignment.topRight,
+                        //     child: Container(
+                        //       width: 120.w,
+                        //       padding: EdgeInsets.symmetric(horizontal: 16.w),
+                        //       decoration: BoxDecoration(
+                        //         color: Appcolors.secondary,
+                        //         borderRadius: BorderRadius.circular(8),
+                        //         border:
+                        //         Border.all(color: Appcolors.action, width: 1),
+                        //       ),
+                        //       child: DropdownButtonHideUnderline(
+                        //         child: DropdownButton<String>(
+                        //           focusColor: Colors.white,
+                        //           value: selectedLanguage ?? language[0],
+                        //           dropdownColor: Appcolors.primary,
+                        //           style: TextStyle(
+                        //             color: Appcolors.action,
+                        //             fontSize: 14.sp,
+                        //           ),
+                        //           borderRadius: BorderRadius.circular(8.r),
+                        //           hint: AppText(
+                        //             'Language'.tr,
+                        //             fontSize: 16.sp,
+                        //           ),
+                        //           icon: SvgPicture.asset(
+                        //             AppIcons.arrowdwonIcon,
+                        //             color: Appcolors.action,
+                        //           ),
+                        //           isExpanded: true,
+                        //           items: language.map((String value) {
+                        //             return DropdownMenuItem<String>(
+                        //               value: value,
+                        //               child: AppText(
+                        //                 value,
+                        //                 fontSize: 16.sp,
+                        //               ),
+                        //             );
+                        //           }).toList(),
+                        //           onChanged: (newValue) {
+                        //             if (newValue != null) {
+                        //               int selectedIndex = language.indexOf(newValue);
+                        //               if (selectedIndex != -1) {
+                        //                 Locale newLocale = Locale(
+                        //                   AppConstants.languages[selectedIndex].languageCode,
+                        //                   AppConstants.languages[selectedIndex].countryCode,
+                        //                 );
+                        //                 setState(() {
+                        //                   localizationController.setLanguage(newLocale);
+                        //                   selectedLanguage = language[selectedIndex];
+                        //                 });
+                        //               }
+                        //             }
+                        //           },
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+
+                        const   SizedBox(height: 60),
+
                         SvgPicture.asset(
                           'assets/icons/logo.svg',
                           width: 150.w,
@@ -174,9 +177,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ), // optional base style
                                 children: [
                                   TextSpan(
-                                    text: "Create an account".tr,
+
+                                    text: " Create an account".tr,
                                     style: TextStyle(
-                                      fontSize: 16,
+                                      fontSize: 15,
                                       fontFamily: 'Satoshi',
                                       color: Appcolors.action,
                                       fontWeight: FontWeight.w500,

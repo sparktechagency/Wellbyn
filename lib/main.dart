@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 navigatorKey: Get.key,
                  theme: themeController.darkTheme ? dark(): light(),
-                defaultTransition: Transition.topLevel,
+                defaultTransition: Transition.rightToLeft,
                 locale: localizeController.locale,
                 translations: Messages(languages: languages),
                 fallbackLocale: Locale(AppConstants.languages[0].languageCode, AppConstants.languages[0].countryCode),

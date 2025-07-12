@@ -8,7 +8,7 @@ import 'package:wellbyn/utils/app_colors.dart';
 import 'package:wellbyn/utils/app_icons.dart';
 import 'package:wellbyn/views/base/custom_field.dart';
 import 'package:wellbyn/views/screen/profile_setting_start/setting_insurance_info.dart';
-import 'package:wellbyn/views/screen/profile_setting_start/setting_personal_info.dart' show LabeledTextFields;
+import 'package:wellbyn/views/screen/profile_setting_start/setting_personal_info.dart' show LabeledTextFields, AnimatedLine, TypingTextWidget, TypingTextController;
 import 'package:wellbyn/views/screen/profile_setting_start/widget/circle.dart';
 import '../../../controllers/profile_setting_controller.dart';
 import 'package:wellbyn/models/medication.dart';
@@ -25,6 +25,7 @@ class SettingMedicalInfo extends StatefulWidget {
 
 class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
   ProfileSettingController _controller = Get.put(ProfileSettingController());
+
 
 
 
@@ -74,7 +75,7 @@ class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
                     activeTextColor: Colors.white,
                     inactiveTextColor: TextColors.neutral900,
                   ),
-                  _buildLine(isHalfColor: true),
+                  Expanded(child: AnimatedLine(isHalfColor: true,onAnimationComplete: _controller.toggleText,)),
                   StepCircle(
                     isActive: true,
                     step: '2',
@@ -106,7 +107,7 @@ class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
-                          color: TextColors.neutral500,
+                          color: TextColors.action,
                           fontFamily: "Satoshi",
                         ),
                       ),
@@ -116,17 +117,25 @@ class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
                   SizedBox(
                     width: 46.w,
                     child: Center(
-                      child: Text(
-                        "Step ",
+                      child: Obx(() => _controller.showText.value
+                          ? TypingTextWidget(
+                        text: "Step",
+                        speed: const Duration(milliseconds: 200),
+                        // onComplete: () {
+                        //   _controller.showText.value = false;
+                        // },
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
-                          color: TextColors.neutral500,
+                          color: TextColors.action,
                           fontFamily: "Satoshi",
                         ),
-                      ),
+                      )
+                          : const SizedBox()),
                     ),
                   ),
+
+
                   Expanded(child: Container()),
                   SizedBox(
                     width: 46.w,
@@ -136,7 +145,7 @@ class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
-                          color: TextColors.neutral500,
+                          color: TextColors.neutral900,
                           fontFamily: "Satoshi",
                         ),
                       ),
