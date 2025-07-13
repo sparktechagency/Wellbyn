@@ -14,22 +14,29 @@ class HomeNav extends StatelessWidget {
       key: Get.nestedKey(NavIds.home),
       onGenerateRoute: (settings) {
         if (settings.name == '/home/details') {
-          return MaterialPageRoute(
+          return GetPageRoute(
             settings: settings,
-            builder: (_) =>  HomeScreen(),
+            transition: Transition.rightToLeft,
+            page: () =>  HomeScreen(),
+            transitionDuration: Duration(milliseconds: 400),
+
           );
         }
 
         if (settings.name == '/doctor_details') {
           final args = settings.arguments as Map<String, dynamic>?;
-          return MaterialPageRoute(
+          return GetPageRoute(
             settings: settings,
-            builder: (_) => DoctorDetails(doctorId: args?['doctorId'] ?? ''),
+            transitionDuration: Duration(milliseconds: 400),
+            transition: Transition.rightToLeft,
+            page: () => DoctorDetails(doctorId: args?['doctorId'] ?? ''),
           );
         } else {
-          return MaterialPageRoute(
+          return GetPageRoute(
             settings: settings,
-            builder: (_) =>  HomeScreen(),
+            transitionDuration: Duration(milliseconds: 400),
+            transition: Transition.rightToLeft,
+            page: () =>  HomeScreen(),
           );
         }
 

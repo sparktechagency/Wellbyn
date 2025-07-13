@@ -2,6 +2,7 @@ import 'dart:typed_data'; // Add this import at the top of your file
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -10,16 +11,27 @@ import 'package:signature/signature.dart';
 
 import 'package:wellbyn/models/medication.dart';
 import 'package:wellbyn/models/allergies.dart';
-
+import 'package:wellbyn/utils/app_colors.dart';
 
 class ProfileSettingController extends GetxController {
-
-  RxBool showText = false.obs;
-  toggleText(){
-    showText.value =!showText.value;
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
   }
 
-   //----------------------------Here can to do the profile setting patient information all details collect started add method and other info ---------------------------//
+  RxBool showText = false.obs;
+  RxBool isStep2Active = false.obs;
+
+  toggleText() {
+    showText.value = !showText.value;
+  }
+
+  void activateStep2() {
+    isStep2Active.value = true;
+  }
+
+  //----------------------------Here can to do the profile setting patient information all details collect started add method and other info ---------------------------//
   //====================================================================================================================================================================//
   var selectedGender = 'Male'.obs;
 
@@ -75,7 +87,9 @@ class ProfileSettingController extends GetxController {
 
   Future<File> compressImage(File file) async {
     final targetPath = file.path.replaceFirst(
-        RegExp(r'\.(jpg|jpeg|png|webp|heic)$'), '_compressed.jpg');
+      RegExp(r'\.(jpg|jpeg|png|webp|heic)$'),
+      '_compressed.jpg',
+    );
     final result = await FlutterImageCompress.compressAndGetFile(
       file.absolute.path,
       targetPath,
@@ -92,7 +106,8 @@ class ProfileSettingController extends GetxController {
   Future<void> pickLicenseImage({required bool isFront}) async {
     final File? image = await pickAddImage(ImageSource.gallery);
     if (image != null) {
-      final Uint8List bytes = await image.readAsBytes(); // Removed unnecessary cast
+      final Uint8List bytes = await image
+          .readAsBytes(); // Removed unnecessary cast
       if (isFront) {
         frontLicenseImage.value = bytes;
         frontLicenseFile.value = image;
@@ -108,6 +123,30 @@ class ProfileSettingController extends GetxController {
 
   Future<DateTime?> pickDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: Appcolors.action,           // Header color, selected date circle
+              onPrimary: Appcolors.page,           // Text on header
+              onSurface: TextColors.neutral900,    // Default text color (body)
+            ),
+            iconTheme: IconThemeData(
+              color: Appcolors.action,             // Calendar & arrow icons
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+
+                foregroundColor: Appcolors.action, // OK / CANCEL button color
+              ),
+            ),
+            dialogBackgroundColor: Appcolors.page,
+            // Background color of the dialog
+          ),
+          child: child!,
+        );
+
+      },
       context: context,
       initialDate: selectedDate.value,
       firstDate: DateTime(2000),
@@ -123,19 +162,17 @@ class ProfileSettingController extends GetxController {
     return null;
   }
 
-
   //------------------------------here and the all getx controller in use the profile setting all and end the profile section details page edn ------------------------------//
   //=========================================================================================================================================================================//
 
-
   final RxList<Allergy> allergies = <Allergy>[
-     Allergy(name: 'Penicillin', severity: 'Moderate',),
-     Allergy(name: 'Shellfish', severity: 'Severe',),
+    Allergy(name: 'Penicillin', severity: 'Moderate'),
+    Allergy(name: 'Shellfish', severity: 'Severe'),
   ].obs;
 
   final RxList<Medication> medications = <Medication>[
-     Medication(name: 'Lisinopril', dosage: '10mg', frequency: 'Once daily'),
-     Medication(name: 'Metformin', dosage: '500mg', frequency: 'Twice daily'),
+    Medication(name: 'Lisinopril', dosage: '10mg', frequency: 'Once daily'),
+    Medication(name: 'Metformin', dosage: '500mg', frequency: 'Twice daily'),
   ].obs;
 
   final RxMap<String, bool> existingConditions = <String, bool>{
@@ -163,13 +200,10 @@ class ProfileSettingController extends GetxController {
       .map((entry) => entry.key)
       .toList();
 
-
-
-
-
   // Form controllers
   final TextEditingController allergyNameController = TextEditingController();
-  final TextEditingController medicationNameController = TextEditingController();
+  final TextEditingController medicationNameController =
+      TextEditingController();
   final TextEditingController dosageController = TextEditingController();
   final TextEditingController frequencyController = TextEditingController();
   final TextEditingController conditionController = TextEditingController();
@@ -183,6 +217,7 @@ class ProfileSettingController extends GetxController {
 
   // Selected severity for allergy dialog
   final RxString selectedSeverity = 'Mild'.obs;
+
   void toggleCondition(String key, bool value) {
     existingConditions[key] = value;
   }
@@ -192,6 +227,7 @@ class ProfileSettingController extends GetxController {
       existingConditions[value] = false;
     }
   }
+
   void addMedication(Medication med) {
     medications.add(med);
   }
@@ -222,8 +258,7 @@ class ProfileSettingController extends GetxController {
     lifestyleFactors[value] = false;
   }
 
-
-// Methods for Allergies
+  // Methods for Allergies
   // void addAllergy() {
   //   if (allergyFormKey.currentState!.validate() &&
   //       allergyNameController.text.isNotEmpty) {
@@ -392,7 +427,6 @@ class ProfileSettingController extends GetxController {
 
   var isSignatureNotEmpty = false.obs;
 
-
   void clearSignature() {
     signatureController.clear();
     isSignatureNotEmpty.value = false;
@@ -405,16 +439,14 @@ class ProfileSettingController extends GetxController {
     'Jaw pain or clicking': false,
   }.obs;
 
-  var checkin = <String, bool>{
-    'Yes': false,
-    'No': false,
-  }.obs;
+  var checkin = <String, bool>{'Yes': false, 'No': false}.obs;
+
   void toggleSymptom(String key) {
     symptoms[key] = !(symptoms[key] ?? false);
   }
-  void togglecheck(String key){
-    checkin[key]= !(checkin[key] ??false);
-    checkin.refresh();
 
+  void togglecheck(String key) {
+    checkin[key] = !(checkin[key] ?? false);
+    checkin.refresh();
   }
 }

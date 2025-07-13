@@ -12,39 +12,49 @@ class DoctorNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Navigator(
-      key: Get.nestedKey(NavIds.profile),  // unique nested key for nested navigator
+      key: Get.nestedKey(NavIds.profile),
       onGenerateRoute: (settings) {
         if (settings.name == '/doctor_details') {
           final args = settings.arguments as Map<String, dynamic>?;
-          return MaterialPageRoute(
+
+          return GetPageRoute(
             settings: settings,
-            builder: (_) => DoctorDetails(doctorId: args?['doctorId'] ?? ''),
+            page: () => DoctorDetails(doctorId: args?['doctorId'] ?? ''),
+            transition: Transition.rightToLeft,
+            transitionDuration: Duration(milliseconds: 400),
           );
-        }
-        else if(settings.name =="/book_report"){
-          return MaterialPageRoute(
+        } else if (settings.name == "/book_report") {
+          return GetPageRoute(
             settings: settings,
-            builder: (_) => BookReport(),
+            page: () => BookReport(),
+            transition: Transition.rightToLeft,
+            transitionDuration: Duration(milliseconds: 400),
           );
-        } else if(settings.name =="/book_overview"){
-          return MaterialPageRoute(
+        } else if (settings.name == "/book_overview") {
+          return GetPageRoute(
             settings: settings,
-            builder: (_) => BookOverview(),
+            page: () => BookOverview(),
+            transition: Transition.rightToLeft,
+            transitionDuration: Duration(milliseconds: 400),
           );
-        }
-        else if(settings.name =="/doctor_message"){
-          return MaterialPageRoute(
+        } else if (settings.name == "/doctor_message") {
+          return GetPageRoute(
             settings: settings,
-            builder: (_) => DoctorMessage(),
+            page: () => DoctorMessage(),
+            transition: Transition.rightToLeft,
+            transitionDuration: Duration(milliseconds: 400),
           );
-        }
-        else {
-          return MaterialPageRoute(
+        } else {
+          return GetPageRoute(
             settings: settings,
-            builder: (_) => Doctor(),
+            page: () => Doctor(),
+            transition: Transition.rightToLeft,
+            transitionDuration: Duration(milliseconds: 400),
           );
         }
       },
     );
+
+
   }
 }

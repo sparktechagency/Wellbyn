@@ -1,13 +1,16 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:wellbyn/controllers/profile_setting_controller.dart';
+import 'package:wellbyn/controllers/scrollController.dart';
 import 'package:wellbyn/views/screen/profile_setting_start/setting_medical_info.dart';
 import 'package:wellbyn/views/screen/profile_setting_start/widget/circle.dart';
 import '../../../controllers/dotted_boder.dart';
+import '../../../controllers/stepcontroller.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_constants.dart';
 import '../../../utils/app_icons.dart';
@@ -67,10 +70,6 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
   late final TextEditingController _ssnController;
   late final TextEditingController _numboroffchlid;
 
-  late final ProfileSettingController _controller = Get.put(
-    ProfileSettingController(),
-  );
-
   @override
   void initState() {
     super.initState();
@@ -109,6 +108,11 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
     super.dispose();
   }
 
+  final ProfileSettingController _controller = Get.put(
+    ProfileSettingController(),
+  );
+  final ScrollControllerGetX scroll = Get.put(ScrollControllerGetX());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -116,21 +120,66 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
       appBar: _buildAppBar(),
       body: Padding(
         padding: const EdgeInsets.all(20),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildProgressIndicator(),
-              _buildPatientInfoSection(),
-              _buildPersonalInfoSection(),
-              _buildContactInfoSection(),
-              _buildAddressSection(),
-              _buildAdditionalInfoSection(),
-              const SizedBox(height: 52),
-              _buildNavigationButtons(),
-              const SizedBox(height: 35),
-            ],
-          ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+
+            Obx(() => AnimatedSize(
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeInOut,
+      child: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 500),
+        switchInCurve: Curves.easeInOutSine,
+        switchOutCurve: Curves.easeInOutCubic,
+        transitionBuilder: (child, animation) {
+          final offsetAnimation = Tween<Offset>(
+            begin: const Offset(0, -0.3),
+            end: Offset.zero,
+          ).animate(animation);
+
+          return FadeTransition(
+            opacity: animation,
+            child: SlideTransition(
+              position: offsetAnimation,
+              child: child,
+            ),
+          );
+        },
+        child: scroll.isProgressVisible.value
+            ? Container(
+          key: const ValueKey('progress'),
+          child: _buildProgressIndicator(),
+        )
+            : Container(
+          key: const ValueKey('empty'),
+          height: 0,
+          width: double.infinity,
+        ),
+      ),
+    )),
+
+    Flexible(
+             child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  controller: scroll.scrollController,
+                  // Use the controller's scrollController here
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildPatientInfoSection(),
+                      _buildPersonalInfoSection(),
+                      _buildContactInfoSection(),
+                      _buildAddressSection(),
+                      _buildAdditionalInfoSection(),
+                      const SizedBox(height: 52),
+                      _buildNavigationButtons(),
+                      const SizedBox(height: 35),
+                    ],
+                  ),
+                ),
+           ),
+            
+          ],
         ),
       ),
     );
@@ -202,13 +251,15 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
             SizedBox(
               width: 46.w,
               child: Center(
-                child: TypingTextWidget(text: "Step",
+                child: Text(
+                  "Step ",
                   style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color: TextColors.action,
-                  fontFamily: "Satoshi",
-                ),)
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: TextColors.action,
+                    fontFamily: "Satoshi",
+                  ),
+                ),
               ),
             ),
             Expanded(child: Container()),
@@ -873,7 +924,6 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
       ),
     );
   }
-
 }
 
 // Keep all your other widget classes (CustomDropdownDialogss, LabeledDropdownFieldes,
@@ -1624,12 +1674,14 @@ class LabeledTextFields extends StatelessWidget {
   }
 }
 
+
+// FIXED: Updated AnimatedLine to prevent re-animation
 class AnimatedLine extends StatefulWidget {
   final bool isHalfColor;
   final double height;
   final Duration duration;
   final Duration delay;
-  final VoidCallback? onAnimationComplete; // NEW
+  final VoidCallback? onAnimationComplete;
 
   const AnimatedLine({
     Key? key,
@@ -1637,7 +1689,7 @@ class AnimatedLine extends StatefulWidget {
     this.height = 1.0,
     this.duration = const Duration(milliseconds: 1000),
     this.delay = const Duration(milliseconds: 400),
-    this.onAnimationComplete, // NEW
+    this.onAnimationComplete,
   }) : super(key: key);
 
   @override
@@ -1648,25 +1700,43 @@ class _AnimatedLineState extends State<AnimatedLine>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _animation;
+  bool _hasAnimated = false;
 
   @override
   void initState() {
     super.initState();
-
     _controller = AnimationController(
       vsync: this,
       duration: widget.duration,
     );
-
     _animation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
     );
 
+    // Check if animation should run
+    try {
+      final controller = Get.find<StepController>();
+      if (controller.hasAnimated.value) {
+        // Animation already completed, set to end state immediately
+        _controller.value = 1.0;
+        _hasAnimated = true;
+      } else {
+        // Start animation only if not already animated
+        _startAnimation();
+      }
+    } catch (e) {
+      // If controller not found, start animation normally
+      _startAnimation();
+    }
+  }
+
+  void _startAnimation() {
     Future.delayed(widget.delay, () {
-      if (mounted) {
+      if (mounted && !_hasAnimated) {
         _controller.forward().whenComplete(() {
+          _hasAnimated = true;
           if (widget.onAnimationComplete != null) {
-            widget.onAnimationComplete!(); // Trigger callback
+            widget.onAnimationComplete!();
           }
         });
       }
@@ -1705,7 +1775,116 @@ class _AnimatedLineState extends State<AnimatedLine>
     );
   }
 }
-
+//
+// class AnimatedLine extends StatefulWidget {
+//   final bool isHalfColor;
+//   final double height;
+//   final Duration duration;
+//   final Duration delay;
+//   final VoidCallback? onAnimationComplete; // NEW
+//
+//   const AnimatedLine({
+//     Key? key,
+//     required this.isHalfColor,
+//     this.height = 1.0,
+//     this.duration = const Duration(milliseconds: 1000),
+//     this.delay = const Duration(milliseconds: 400),
+//     this.onAnimationComplete, // NEW
+//   }) : super(key: key);
+//
+//   @override
+//   _AnimatedLineState createState() => _AnimatedLineState();
+// }
+//
+// class _AnimatedLineState extends State<AnimatedLine>
+//     with SingleTickerProviderStateMixin {
+//   late final AnimationController _controller;
+//   late final Animation<double> _animation;
+//   bool _hasAnimated = false; // Track if animation has completed
+//   Timer? _delayTimer;
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//
+//     _controller = AnimationController(vsync: this, duration: widget.duration);
+//
+//     _animation = Tween<double>(
+//       begin: 0,
+//       end: 1,
+//     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+//
+//     // Start animation with proper timer management
+//     _startAnimationWithDelay();
+//   }
+//
+//   void _startAnimationWithDelay() {
+//     // Only start animation if it hasn't been started yet
+//     if (!_hasAnimated && mounted) {
+//       _delayTimer = Timer(widget.delay, () {
+//         if (mounted && !_hasAnimated) {
+//           _controller.forward().whenComplete(() {
+//             if (mounted && !_hasAnimated) {
+//               _hasAnimated = true; // Set flag before calling callback
+//               widget.onAnimationComplete?.call();
+//             }
+//           });
+//         }
+//       });
+//     }
+//   }
+//
+//
+//   @override
+//   void didUpdateWidget(AnimatedLine oldWidget) {
+//     super.didUpdateWidget(oldWidget);
+//
+//     // Only restart animation if widget properties changed significantly
+//     // and animation hasn't completed yet
+//     if (!_hasAnimated &&
+//         (oldWidget.isHalfColor != widget.isHalfColor ||
+//             oldWidget.duration != widget.duration ||
+//             oldWidget.delay != widget.delay)) {
+//       _controller.reset();
+//       _delayTimer?.cancel();
+//       _startAnimationWithDelay();
+//     }
+//   }
+//
+//   @override
+//   void dispose() {
+//     _delayTimer?.cancel(); // Cancel timer to prevent memory leaks
+//     _controller.dispose();
+//     super.dispose();
+//   }
+//   @override
+//   Widget build(BuildContext context) {
+//     return SizedBox(
+//       height: widget.height,
+//       child: Stack(
+//         children: [
+//           // Background line
+//           Container(
+//             color: Colors.grey[300],
+//             width: double.infinity,
+//             height: widget.height,
+//           ),
+//           // Animated line
+//           AnimatedBuilder(
+//             animation: _animation,
+//             builder: (context, child) {
+//               return Container(
+//                 width: MediaQuery.of(context).size.width * _animation.value,
+//                 height: widget.height,
+//                 color: widget.isHalfColor ? Colors.blue : Colors.grey,
+//               );
+//             },
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 //
 // class TypingTextWidget extends StatelessWidget {
@@ -1756,7 +1935,6 @@ class _AnimatedLineState extends State<AnimatedLine>
 //     super.onClose();
 //   }
 // }
-
 
 // Controller
 class TypingTextController extends GetxController {
@@ -1842,7 +2020,6 @@ class _TypingTextWidgetState extends State<TypingTextWidget> {
 
     controller.startTyping();
   }
-
 
   @override
   void dispose() {

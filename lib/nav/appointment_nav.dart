@@ -16,25 +16,33 @@ class AppointmentNav extends StatelessWidget {
       key: Get.nestedKey(NavIds.appointment),
       onGenerateRoute: (settings) {
         if (settings.name == '/appointment/details') {
-          return MaterialPageRoute(
+          return GetPageRoute(
             settings: settings,
-            builder: (_) =>  Appointment(),
+            page: () =>  Appointment(),
+            transition: Transition.rightToLeft,
+            transitionDuration: Duration(milliseconds: 400),
+
           );
         } else if(settings.name =="/appoinetment_details"){
-          return MaterialPageRoute(
+          return GetPageRoute(
             settings: settings,
-            builder: (_) => AppoinetmentDetails(),
+            page: () => AppoinetmentDetails(),
+            transitionDuration: Duration(milliseconds: 400),
+            transition: Transition.rightToLeft,
           );
         }else if(settings.name =="/chekIn_appointment"){
-          return MaterialPageRoute(
+          return GetPageRoute(
             settings: settings,
-            builder: (_) => ChekinAppointment(),
+            page: () => ChekinAppointment(),
+            transition: Transition.rightToLeft,
           );
         }
         else {
-          return MaterialPageRoute(
+          return GetPageRoute(
             settings: settings,
-            builder: (_) =>  Appointment(),
+            page: () =>  Appointment(),
+            transition: Transition.rightToLeft,
+            transitionDuration: Duration(milliseconds: 400),
           );
         }
       },

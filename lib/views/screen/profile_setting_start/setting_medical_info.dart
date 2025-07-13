@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:wellbyn/controllers/stepcontroller.dart';
 import 'package:wellbyn/utils/app_colors.dart';
 import 'package:wellbyn/utils/app_icons.dart';
 import 'package:wellbyn/views/base/custom_field.dart';
@@ -13,6 +14,7 @@ import 'package:wellbyn/views/screen/profile_setting_start/widget/circle.dart';
 import '../../../controllers/profile_setting_controller.dart';
 import 'package:wellbyn/models/medication.dart';
 import 'package:wellbyn/models/allergies.dart';
+import '../../../controllers/scrollController.dart';
 import '../profile/base/madicalinfoheader.dart';
 
 class SettingMedicalInfo extends StatefulWidget {
@@ -25,8 +27,17 @@ class SettingMedicalInfo extends StatefulWidget {
 
 class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
   ProfileSettingController _controller = Get.put(ProfileSettingController());
+  late ScrollControllerGetX scroll=Get.put(ScrollControllerGetX());
+  late final StepController controller;
 
-
+  @override
+  void initState() {
+    super.initState();
+    Get.lazyPut(() => StepController());
+    controller = Get.find<StepController>();
+    controller.resetForNewPage(); // Reset when page opens
+    // Remove the startAnimationSequence call - animation starts automatically
+  }
 
 
 
@@ -58,198 +69,242 @@ class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
+      body:  Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Obx(() => AnimatedSize(
+                duration: const Duration(milliseconds: 400),
+                curve: Curves.easeInOut,
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 500),
+                  switchInCurve: Curves.easeInOutSine,
+                  switchOutCurve: Curves.easeInOutCubic,
+                  transitionBuilder: (child, animation) {
+                    final offsetAnimation = Tween<Offset>(
+                      begin: const Offset(0, -0.4),
+                      end: Offset.zero,
+                    ).animate(animation);
 
-              Row(
-                children: [
-                  StepCircle(
-                    isActive: true,
-                    step: '1',
-                    activeColor: Appcolors.action,
-                    inactiveColor: Colors.white,
-                    activeTextColor: Colors.white,
-                    inactiveTextColor: TextColors.neutral900,
-                  ),
-                  Expanded(child: AnimatedLine(isHalfColor: true,onAnimationComplete: _controller.toggleText,)),
-                  StepCircle(
-                    isActive: true,
-                    step: '2',
-                    activeColor: Appcolors.action,
-                    inactiveColor: Colors.white,
-                    activeTextColor: Colors.white,
-                    inactiveTextColor: TextColors.neutral900,
-                  ),
-                  _buildLine(isHalfColor: false),
-                  StepCircle(
-                    isActive: false,
-                    step: '3',
-                    activeColor: Appcolors.action,
-                    inactiveColor: Colors.white,
-                    activeTextColor: Colors.white,
-                    inactiveTextColor: TextColors.neutral900,
-                  ),
-                ],
-              ),
-              SizedBox(height: 8),
-              //_________________________________________________
-              Row(
-                children: [
-                  SizedBox(
-                    width: 46.w,
-                    child: Center(
-                      child: Text(
-                        "Step ",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: TextColors.action,
-                          fontFamily: "Satoshi",
-                        ),
+                    return FadeTransition(
+                      opacity: animation,
+                      child: SlideTransition(
+                        position: offsetAnimation,
+                        child: child,
                       ),
-                    ),
-                  ),
-                  Expanded(child: Container()),
-                  SizedBox(
-                    width: 46.w,
-                    child: Center(
-                      child: Obx(() => _controller.showText.value
-                          ? TypingTextWidget(
-                        text: "Step",
-                        speed: const Duration(milliseconds: 200),
-                        // onComplete: () {
-                        //   _controller.showText.value = false;
-                        // },
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: TextColors.action,
-                          fontFamily: "Satoshi",
-                        ),
-                      )
-                          : const SizedBox()),
-                    ),
-                  ),
-
-
-                  Expanded(child: Container()),
-                  SizedBox(
-                    width: 46.w,
-                    child: Center(
-                      child: Text(
-                        "Step ",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: TextColors.neutral900,
-                          fontFamily: "Satoshi",
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 25),
-
-              // Header text
-              MedicalInfoHeader(
-                title: "Medical Information",
-                description:
-                'Hi! Please share your personal info to verify your identity and stay connected with your healthcare providers.',
-                iconPath: AppIcons.medicalfileIcon,
-              ),
-
-              const SizedBox(height: 24),
-
-              // Allergies Section
-              _buildAllergiesSection(),
-              const SizedBox(height: 24),
-
-              // Current Medications Section
-              _buildMedicationsSection(),
-              const SizedBox(height: 24),
-
-              // Existing Conditions Section
-              _buildExistingConditionsSection(),
-              const SizedBox(height: 24),
-
-              // Lifestyle Factors Section
-              _buildLifestyleFactorsSection(),
-              SizedBox(height: 50,),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Expanded(
-                    child: InkWell(
-                      onTap: (){
-                        Get.back();
-                      },
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Appcolors.primary,
-
-                            border: Border.all(
-                              width: 1,
-                              color: TextColors.neutral900,
-
-                            )
-                        ),
-                        child: Center(child: Text("Previous",style: TextStyle(fontFamily: "Satoshi",fontSize: 16,color: TextColors.neutral900,fontWeight: FontWeight.w500),)),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 115,),
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {
-                        // final selected = _controller.selectedLifestyleFactors ?? [];
-                        // final selectedExtisting = _controller.selectedexistingConditions ?? [];
-                        // final allergies = _controller.allergies ?? [];
-                        // final medication = _controller.medications ?? [];
-                        //
-                        // print("Selected Lifestyle Factors: $selected");
-                        // print("Selected Existing Condition Factors: $selectedExtisting");
-                        //
-                        // print("All Allergies:");
-                        // for (var allergy in allergies) {
-                        //   print("• ${allergy.name} - Severity: ${allergy.severity}");
-                        // }
-                        //
-                        // print("All Medication:");
-                        // for (var m in medication) {
-                        //   print("• ${m.name} - dosage: ${m.dosage}");
-                        // }
-
-                        Get.to(() => SettingInsuranceInfo());
-
-
-                      },
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Appcolors.action,
-                        ),
-                        child: Center(child: Text("Next",style: TextStyle(fontFamily: "Satoshi",fontSize: 16,color: Appcolors.primary,fontWeight: FontWeight.w500),)),
-                      ),
-                    ),
+                    );
+                  },
+                  child: scroll.isProgressVisible1.value
+                      ? Container(
+                    key: const ValueKey('progress'),
+                    child: _buildProgressIndicator(),
                   )
-                ],
-              ),
+                      : Container(
+                    key: const ValueKey('empty'),
+                    height: 0,
+                    width: double.infinity,
+                  ),
+                ),
+              )),
 
-              SizedBox(height: 35,),
+              //_________________________________________________
+              Flexible(
+                  child: SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
+                    controller: scroll.scrollController1,
+                    child: Column(
+                      children: [
+                        SizedBox(height: 25),
+
+                        // Header text
+                        MedicalInfoHeader(
+                          title: "Medical Information",
+                          description:
+                          'Hi! Please share your personal info to verify your identity and stay connected with your healthcare providers.',
+                          iconPath: AppIcons.medicalfileIcon,
+                        ),
+
+                        const SizedBox(height: 24),
+
+                        // Allergies Section
+                        _buildAllergiesSection(),
+                        const SizedBox(height: 24),
+
+                        // Current Medications Section
+                        _buildMedicationsSection(),
+                        const SizedBox(height: 24),
+
+                        // Existing Conditions Section
+                        _buildExistingConditionsSection(),
+                        const SizedBox(height: 24),
+
+                        // Lifestyle Factors Section
+                        _buildLifestyleFactorsSection(),
+                        SizedBox(height: 50,),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: InkWell(
+                                onTap: (){
+                                  Get.back();
+                                },
+                                child: Container(
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Appcolors.primary,
+
+                                      border: Border.all(
+                                        width: 1,
+                                        color: TextColors.neutral900,
+
+                                      )
+                                  ),
+                                  child: Center(child: Text("Previous",style: TextStyle(fontFamily: "Satoshi",fontSize: 16,color: TextColors.neutral900,fontWeight: FontWeight.w500),)),
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 115,),
+                            Expanded(
+                              child: InkWell(
+                                onTap: () {
+                                  Get.to(() => SettingInsuranceInfo());
+
+
+                                },
+                                child: Container(
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Appcolors.action,
+                                  ),
+                                  child: Center(child: Text("Next",style: TextStyle(fontFamily: "Satoshi",fontSize: 16,color: Appcolors.primary,fontWeight: FontWeight.w500),)),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+
+                        SizedBox(height: 35,),
+                      ],
+                    ),
+
+              )),
+
 
             ],
           ),
         ),
-      ),
+    );
+  }
+  Widget _buildProgressIndicator() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            StepCircle(
+              isActive: true,
+              step: '1',
+              activeColor: Appcolors.action,
+              inactiveColor: Colors.white,
+              activeTextColor: Colors.white,
+              inactiveTextColor: TextColors.neutral900,
+            ),
+            // FIXED: Create AnimatedLine with unique key to prevent recreation
+            Expanded(
+              child: AnimatedLine(
+                key: ValueKey('animated_line_step1_to_step2'), // Add unique key
+                isHalfColor: true,
+                onAnimationComplete: () {
+                  controller.onLineAnimationComplete();
+                },
+              ),
+            ),
+            Obx(() => AnimatedContainer(
+              duration: Duration(milliseconds: 500),
+              curve: Curves.linear,
+              child: StepCircle(
+                isActive: controller.isStep2Active.value,
+                step: '2',
+                activeColor: Appcolors.action,
+                inactiveColor: Colors.white,
+                activeTextColor: Colors.white,
+                inactiveTextColor: TextColors.neutral900,
+              ),
+            )),
+            Expanded(
+              child: Container(
+                height: 1,
+                color: TextColors.neutral200,
+              ),
+            ),
+            StepCircle(
+              isActive: false,
+              step: '3',
+              activeColor: Appcolors.action,
+              inactiveColor: Colors.white,
+              activeTextColor: Colors.white,
+              inactiveTextColor: TextColors.neutral900,
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        Row(
+          children: [
+            SizedBox(
+              width: 46.w,
+              child: Center(
+                child: Text(
+                  "Step", // Fixed: Added step number
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: TextColors.action,
+                    fontFamily: "Satoshi",
+                  ),
+                ),
+              ),
+            ),
+            Expanded(child: Container()),
+            SizedBox(
+              width: 46.w,
+              child: Center(
+                child: Obx(() => controller.isStep2Active.value
+                    ? Text(
+                  "Step", // Fixed: Added step number
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: TextColors.action,
+                    fontFamily: "Satoshi",
+                  ),
+                )
+                    : SizedBox.shrink() // Fixed: Use SizedBox.shrink() instead of null
+                ),
+              ),
+            ),
+            Expanded(child: Container()),
+            SizedBox(
+              width: 46.w,
+              child: Center(
+                child: Text(
+                  "Step", // Fixed: Added step number
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: TextColors.neutral500,
+                    fontFamily: "Satoshi",
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 
