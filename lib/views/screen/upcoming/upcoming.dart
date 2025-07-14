@@ -32,6 +32,7 @@ class Upcoming extends StatelessWidget {
             Expanded(
               child: ListView.builder(
                 itemCount: 2,
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: (context,index){
                 return Container(
                   margin: EdgeInsets.only(bottom: 20),

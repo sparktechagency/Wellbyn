@@ -55,6 +55,7 @@ class CaregiverEdits extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Column(
             crossAxisAlignment:CrossAxisAlignment.start,
             children: [

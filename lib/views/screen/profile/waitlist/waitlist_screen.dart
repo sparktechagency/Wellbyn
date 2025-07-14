@@ -49,8 +49,10 @@ class WaitlistScreen extends StatelessWidget {
         ),
       ),
       body: ListView.builder(
+        cacheExtent: 500,
+        physics: const BouncingScrollPhysics(),
         shrinkWrap: true,
-        itemCount: 5,
+        itemCount: 20,
         itemBuilder: (context, index) {
           return Container(
             margin: EdgeInsets.symmetric(horizontal: 20, vertical: 8),

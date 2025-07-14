@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -53,152 +54,91 @@ class _LoginScreenState extends State<LoginScreen> {
          body: Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.w),
               child: SingleChildScrollView(
-                child: Column(
-                      children: [
-                        // Padding(
-                        //   padding: EdgeInsets.symmetric(vertical: 5),
-                        //   child: Align(
-                        //     alignment: Alignment.topRight,
-                        //     child: Container(
-                        //       width: 120.w,
-                        //       padding: EdgeInsets.symmetric(horizontal: 16.w),
-                        //       decoration: BoxDecoration(
-                        //         color: Appcolors.secondary,
-                        //         borderRadius: BorderRadius.circular(8),
-                        //         border:
-                        //         Border.all(color: Appcolors.action, width: 1),
-                        //       ),
-                        //       child: DropdownButtonHideUnderline(
-                        //         child: DropdownButton<String>(
-                        //           focusColor: Colors.white,
-                        //           value: selectedLanguage ?? language[0],
-                        //           dropdownColor: Appcolors.primary,
-                        //           style: TextStyle(
-                        //             color: Appcolors.action,
-                        //             fontSize: 14.sp,
-                        //           ),
-                        //           borderRadius: BorderRadius.circular(8.r),
-                        //           hint: AppText(
-                        //             'Language'.tr,
-                        //             fontSize: 16.sp,
-                        //           ),
-                        //           icon: SvgPicture.asset(
-                        //             AppIcons.arrowdwonIcon,
-                        //             color: Appcolors.action,
-                        //           ),
-                        //           isExpanded: true,
-                        //           items: language.map((String value) {
-                        //             return DropdownMenuItem<String>(
-                        //               value: value,
-                        //               child: AppText(
-                        //                 value,
-                        //                 fontSize: 16.sp,
-                        //               ),
-                        //             );
-                        //           }).toList(),
-                        //           onChanged: (newValue) {
-                        //             if (newValue != null) {
-                        //               int selectedIndex = language.indexOf(newValue);
-                        //               if (selectedIndex != -1) {
-                        //                 Locale newLocale = Locale(
-                        //                   AppConstants.languages[selectedIndex].languageCode,
-                        //                   AppConstants.languages[selectedIndex].countryCode,
-                        //                 );
-                        //                 setState(() {
-                        //                   localizationController.setLanguage(newLocale);
-                        //                   selectedLanguage = language[selectedIndex];
-                        //                 });
-                        //               }
-                        //             }
-                        //           },
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
-
-                        const   SizedBox(height: 60),
-
-                        SvgPicture.asset(
-                          'assets/icons/logo.svg',
-                          width: 150.w,
-                          height: 150.h,
-                          color:  TextColors.action, // change color dynamically
-                          semanticsLabel: 'App Logo', // for accessibility
-                          fit: BoxFit.contain, // control how the image fits
-                          alignment: Alignment.center, // position the image
-                        ),
-                        const SizedBox(height: 10),
-                        Column(
-                          children: [
-                            Text(
-                              "Welcome back!".tr,
-                              style: TextStyle(
-                                fontFamily: 'Satoshi',
-                                fontSize: 24,
-                                color: TextColors.neutral900,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            Text(
-                              "To log in, enter your email address.".tr,
-                              style: TextStyle(
-                                fontFamily: 'Satoshi',
-                                fontSize: 16,
-                                color: TextColors.neutral500,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 30),
-                        inputSection(),
-                        SizedBox(height: 8,),
-                        forgotsection(),
-                        const SizedBox(height: 30),
-                        AppButton(text: "Log in".tr, onPressed: () {
-                          Get.to(Forgot());
-                        }),
-                        SizedBox(height: 20.h),
-                        GestureDetector(
-                          onTap: () {
-                            print('Log In tapped');
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.only(bottom: 20),
-                            child: Text.rich(
-                               TextSpan(
-                                text: "Don’t have an account?".tr,
+                  physics: const BouncingScrollPhysics(),
+                  child: Column(
+                        children: [
+                          const   SizedBox(height: 60),
+                          SvgPicture.asset(
+                            'assets/icons/logo.svg',
+                            width: 150.w,
+                            height: 150.h,
+                            color:  TextColors.action, // change color dynamically
+                            semanticsLabel: 'App Logo', // for accessibility
+                            fit: BoxFit.contain, // control how the image fits
+                            alignment: Alignment.center, // position the image
+                          ),
+                          const SizedBox(height: 10),
+                          Column(
+                            children: [
+                              Text(
+                                "Welcome back!".tr,
                                 style: TextStyle(
+                                  fontFamily: 'Satoshi',
+                                  fontSize: 24,
+                                  color: TextColors.neutral900,
                                   fontWeight: FontWeight.w500,
-                                    color: TextColors.neutral500,
-                                    fontFamily: 'Satoshi',
-                                    fontSize: 16,
-                                ), // optional base style
-                                children: [
-                                  TextSpan(
-
-                                    text: " Create an account".tr,
-                                    style: TextStyle(
-                                      fontSize: 15,
+                                ),
+                              ),
+                              Text(
+                                "To log in, enter your email address.".tr,
+                                style: TextStyle(
+                                  fontFamily: 'Satoshi',
+                                  fontSize: 16,
+                                  color: TextColors.neutral500,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 30),
+                          inputSection(),
+                          SizedBox(height: 8,),
+                          forgotsection(),
+                          const SizedBox(height: 30),
+                          AppButton(text: "Log in".tr, onPressed: () {
+                            Get.to(Forgot());
+                          }),
+                          SizedBox(height: 20.h),
+                          GestureDetector(
+                            onTap: () {
+                              print('Log In tapped');
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 20),
+                              child: Text.rich(
+                                 TextSpan(
+                                  text: "Don’t have an account?".tr,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                      color: TextColors.neutral500,
                                       fontFamily: 'Satoshi',
-                                      color: Appcolors.action,
-                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16,
+                                  ), // optional base style
+                                  children: [
+                                    TextSpan(
+                
+                                      text: " Create an account".tr,
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        fontFamily: 'Satoshi',
+                                        color: Appcolors.action,
+                                        fontWeight: FontWeight.w500,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Or(),
-                        const  SizedBox(height: 20),
-                        googleButton(),
-                        const SizedBox(height: 30),
-                      ],
+                          Or(),
+                          const  SizedBox(height: 20),
+                          googleButton(),
+                          const SizedBox(height: 30),
+                        ],
+                      ),
                     ),
-                  ),
-                ),
+              ),
+
 
 
     );

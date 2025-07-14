@@ -22,6 +22,7 @@ class SetNewPassword extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.w),
           child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
             child: ConstrainedBox(
               constraints: BoxConstraints(minHeight: 1.sh),
               child: IntrinsicHeight(

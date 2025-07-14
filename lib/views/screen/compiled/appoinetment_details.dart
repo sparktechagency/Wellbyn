@@ -43,6 +43,7 @@ class AppoinetmentDetails extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
           child:Container(

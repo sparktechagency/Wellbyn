@@ -14,6 +14,7 @@ class Canceled extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      physics: const BouncingScrollPhysics(),
       // Remove container padding and add ListView padding instead
       padding: const EdgeInsets.symmetric(vertical: 16,horizontal: 2),
       itemCount: 5, // Add itemCount for demo
@@ -140,7 +141,7 @@ class Canceled extends StatelessWidget {
                     Row(
                       children: [
                         Icon(Icons.check,color: Appcolors.error700,size: 14,),
-                        AppText("Complete",color: Appcolors.error700,fontSize: 14,),
+                        AppText("Canceled",color: Appcolors.error700,fontSize: 14,),
                       ],
                     )
                   ],

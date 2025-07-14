@@ -359,6 +359,7 @@ class _BookReportState extends State<BookReport> {
         ),
       ),
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -697,7 +698,7 @@ class _BookReportState extends State<BookReport> {
                 color: Appcolors.page,
                 boxShadow: [
                BoxShadow(
-              color: TextColors.neutral900.withOpacity(0.25),
+              color: TextColors.neutral500.withOpacity(0.25),
               offset: Offset(0.3, 0.3),
               blurRadius: 80,
             ),

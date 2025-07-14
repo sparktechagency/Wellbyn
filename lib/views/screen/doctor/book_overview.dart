@@ -59,6 +59,7 @@ class BookOverview extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20),
         child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

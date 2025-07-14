@@ -14,6 +14,7 @@ class IconTextButton extends StatelessWidget {
   final double? width;
   final Color? svgAssetcolor;
   final bool isLoading;
+  final int fontsize;
   final String? lottieAsset;
 
   const IconTextButton({
@@ -25,6 +26,7 @@ class IconTextButton extends StatelessWidget {
     this.textColor = Colors.white,
     this.height = 45,
     this.width,
+    this.fontsize=14,
     this.svgAssetcolor,
     this.bordercolor = Colors.transparent,
     this.isLoading = false,
@@ -79,7 +81,7 @@ class IconTextButton extends StatelessWidget {
                   text,
                   style: TextStyle(
                     fontFamily: 'Satoshi',
-                    fontSize: 14.sp,
+                    fontSize:fontsize.h,
                     color: textColor,
                     fontWeight: FontWeight.w500,
                   ),

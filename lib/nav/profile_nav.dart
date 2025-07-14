@@ -4,6 +4,7 @@ import 'package:wellbyn/views/screen/profile/add_insurance.dart';
 import 'package:wellbyn/views/screen/profile/caregiver_mode/caregiver_edits.dart';
 import 'package:wellbyn/views/screen/profile/caregiver_mode/caregiver_mode_details.dart';
 import 'package:wellbyn/views/screen/profile/caregiver_mode/start_caregiver.dart';
+import 'package:wellbyn/views/screen/profile/medication/medication_edit.dart';
 import 'package:wellbyn/views/screen/profile/upload_document_screen/upload_document_screen.dart';
 import 'package:wellbyn/views/screen/profile/waitlist/waitlist_screen.dart';
  // replace with your actual profile screen path
@@ -46,6 +47,12 @@ class _ProfileNavState extends State<ProfileNav> {
           return MaterialPageRoute(
             settings: settings,
             builder: (_) => InsuranceInfo(),
+          );
+        }
+        else if(settings.name == '/medication_edit') {
+          return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => MedicationEdit(),
           );
         }
         else if(settings.name == '/medicationsetting') {
@@ -104,6 +111,12 @@ class _ProfileNavState extends State<ProfileNav> {
           return MaterialPageRoute(
             settings: settings,
             builder: (_) => SupportSend(),
+          );
+        }
+        else if(settings.name == '/setting') {
+          return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => Setting(),
           );
         }
         else {

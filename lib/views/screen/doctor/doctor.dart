@@ -160,157 +160,160 @@ class Doctor extends StatelessWidget {
                   SizedBox(height: 10),
 
                   Expanded(
-                    child: GridView.count(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
-                      childAspectRatio: 0.58,
-                      children: List.generate(9, (index) {
-                        return GestureDetector(
-                          onTap: () {
-                            Get.toNamed(
-                              '/doctor_details',
-                              id: NavIds.profile, // this matches nested key
-                              arguments: {
-                                'doctorId': 'a1da1dad136adf4566adf1a',
-                              },
-                            );
-                          },
-                          child: Container(
-                            margin: EdgeInsets.all(2),
-                            padding: EdgeInsets.all(9),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Appcolors.secondary,
-                                  // softer effect
-                                  blurRadius: 2,
-                                  // reasonable softness
-                                  spreadRadius: 2,
-                                  offset: Offset(0.2, 0.2), // downward shadow
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Stack(
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(8),
-                                      child: Image.asset(
-                                        "assets/image/doctor_image.png",
-                                        height: 140.h,
-                                        width: double.infinity,
-                                        fit: BoxFit.cover,
-                                      ),
+                    child: GridView.builder(
+                      physics: const  BouncingScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                          mainAxisSpacing: 8,
+                          crossAxisSpacing: 8,
+                          mainAxisExtent: 290.h,
+                        ),
+
+                        itemBuilder: (context,index){
+                      return  GestureDetector(
+                        onTap: () {
+                          Get.toNamed(
+                            '/doctor_details',
+                            id: NavIds.profile, // this matches nested key
+                            arguments: {
+                              'doctorId': 'a1da1dad136adf4566adf1a',
+                            },
+                          );
+                        },
+                        child: Container(
+                          margin: EdgeInsets.all(2),
+                          padding: EdgeInsets.all(9),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Appcolors.secondary,
+                                // softer effect
+                                blurRadius: 2,
+                                // reasonable softness
+                                spreadRadius: 2,
+                                offset: Offset(0.2, 0.2), // downward shadow
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Stack(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Image.asset(
+                                      "assets/image/doctor_image.png",
+                                      height: 140.h,
+                                      width: double.infinity,
+                                      fit: BoxFit.cover,
                                     ),
-                                    Positioned(
-                                      right: 0,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(5),
-                                        child: SvgPicture.asset(
-                                          "assets/icons/Heart.svg",
-                                          width: 20,
-                                          height: 20,
-                                          colorFilter: ColorFilter.mode(
-                                            TextColors.neutral900,
-                                            BlendMode.srcIn,
-                                          ),
+                                  ),
+                                  Positioned(
+                                    right: 0,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: SvgPicture.asset(
+                                        "assets/icons/Heart.svg",
+                                        width: 20,
+                                        height: 20,
+                                        colorFilter: ColorFilter.mode(
+                                          TextColors.neutral900,
+                                          BlendMode.srcIn,
                                         ),
                                       ),
                                     ),
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 8),
-                                  child: Text(
-                                    "Dr. Leo Marwick",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      color: TextColors.neutral900,
-                                      fontFamily: 'Satoshi',
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 1,
                                   ),
-                                ),
-                                Text(
-                                  "Heart Health Expert",
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 8),
+                                child: Text(
+                                  "Dr. Leo Marwick",
                                   style: TextStyle(
-                                    color: TextColors.neutral500,
+                                    fontSize: 18,
+                                    color: TextColors.neutral900,
                                     fontFamily: 'Satoshi',
-                                    fontSize: 12,
                                     fontWeight: FontWeight.w500,
                                   ),
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
                                 ),
-                                SizedBox(height: 8),
-                                Row(
-                                  children: [
-                                    SvgPicture.asset(
-                                      AppIcons.hospitallocationIcon,
-                                      width: 20,
-                                      height: 20,
-                                      colorFilter: ColorFilter.mode(
-                                        Appcolors.action,
-                                        BlendMode.srcIn,
-                                      ),
-                                    ),
-                                    const SizedBox(width: 4),
-                                    Expanded(
-                                      child: Text(
-                                        "Sylhet Health Center",
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontStyle: FontStyle.italic,
-                                          fontFamily: "Satoshi",
-                                          color: TextColors.neutral900,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ),
-                                  ],
+                              ),
+                              Text(
+                                "Heart Health Expert",
+                                style: TextStyle(
+                                  color: TextColors.neutral500,
+                                  fontFamily: 'Satoshi',
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
                                 ),
-                                SizedBox(height: 14),
-                                Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 0),
-                                      child: Text(
-                                        "3 available time",
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          color: TextColors.neutral900,
-                                          fontFamily: 'Satoshi',
-                                          fontWeight: FontWeight.w500,
-                                        ),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                              ),
+                              SizedBox(height: 8),
+                              Row(
+                                children: [
+                                  SvgPicture.asset(
+                                    AppIcons.hospitallocationIcon,
+                                    width: 20,
+                                    height: 20,
+                                    colorFilter: ColorFilter.mode(
+                                      Appcolors.action,
+                                      BlendMode.srcIn,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Expanded(
+                                    child: Text(
+                                      "Sylhet Health Center",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontStyle: FontStyle.italic,
+                                        fontFamily: "Satoshi",
+                                        color: TextColors.neutral900,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 14),
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 0),
+                                    child: Text(
+                                      "3 available time",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        color: TextColors.neutral900,
+                                        fontFamily: 'Satoshi',
+                                        fontWeight: FontWeight.w500,
                                       ),
                                     ),
-                                    Spacer(),
-                                    SvgPicture.asset(
-                                      AppIcons.shearIcon,
-                                      width: 20,
-                                      height: 20,
-                                      colorFilter: ColorFilter.mode(
-                                        TextColors.neutral900,
-                                        BlendMode.srcIn,
-                                      ),
+                                  ),
+                                  Spacer(),
+                                  SvgPicture.asset(
+                                    AppIcons.shearIcon,
+                                    width: 20,
+                                    height: 20,
+                                    colorFilter: ColorFilter.mode(
+                                      TextColors.neutral900,
+                                      BlendMode.srcIn,
                                     ),
-                                  ],
-                                ),
-                              ],
-                            ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
-                        );
-                      }),
-                    ),
+                        ),
+                      );
+                        })
                   ),
                 ],
               ),

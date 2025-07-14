@@ -158,7 +158,7 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
       ),
     )),
 
-    Flexible(
+             Flexible(
              child: SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
                   controller: scroll.scrollController,

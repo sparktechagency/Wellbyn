@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -70,181 +71,185 @@ class Setting extends StatelessWidget {
         behavior: HitTestBehavior.opaque,
         child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-         child: SingleChildScrollView(
-             child: Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-
-                 CustomTextField(
-                   borderColor: TextColors.neutral900 ,
-                   maxLines: 1,
-                   hintText: 'Search for a doctor by name or designation...',
-                     controller: textEditingController,
-                     filColor: Appcolors.primary,
-                     prefixIcon: SvgPicture.asset(AppIcons.searchIcon),
-
-                 ),
-
-                 SizedBox(height: 20,),
-                 buildText("Information"),
-                 SizedBox(height: 8,),
-             
-             
-                 ProfileListTile(
-                   leadingIconPath: AppIcons.settingIcon,
-                   title: ' Personal Information',
-                   trailingIconPath: AppIcons.arrorightIcon,
-                   onTap: () {
-                     // Navigate or do something
-                     Get.toNamed(
-                       '/personal_info',
-                       id: NavIds.profilenav,
-                     );
-
-
-                   },
-                 ),
-                 SizedBox(height: 8,),
-                 ProfileListTile(
-                   leadingIconPath: AppIcons.medicalfileIcon,
-                   title: ' Medical Information',
-                   trailingIconPath: AppIcons.arrorightIcon,
-                   onTap: () {
-                     // Navigate or do something
-                     Get.toNamed("/medical_info",id: NavIds.profilenav);
-                   },
-                 ),
-                 SizedBox(height: 8,),
-             
-                 ProfileListTile(
-                   leadingIconPath: AppIcons.shieduserIcon,
-                   title: " Insurance Information ",
-                   trailingIconPath: AppIcons.arrorightIcon,
-                   onTap: () {
-                     Get.toNamed("/insurance_info",id: NavIds.profilenav);
-                   },
-                 ),
-                 SizedBox(height: 8,),
-             
-                 ProfileListTile(
-                   leadingIconPath: AppIcons.fileuploadtIcon,
-                   title: ' Upload document',
-                   trailingIconPath: AppIcons.arrorightIcon,
-                   onTap: () {
-                     // Navigate or do something
-                     Get.toNamed("/upload_document_screen",id: NavIds.profilenav);
-
-                   },
-                 ),
-                 SizedBox(height: 20,),
-                 buildText("Quick"),
-                 SizedBox(height: 8,),
-                 ProfileListTile(
-                   leadingIconPath: AppIcons.alamclock1Icon,
-                   title: " Waitlist",
-                   trailingIconPath: AppIcons.arrorightIcon,
-                   onTap: () {
-                     // Navigate or do something
-                     Get.toNamed("/waitlist_screen",id: NavIds.profilenav);
-
-                   },
-                 ),
-                 SizedBox(height: 8,),
-                 ProfileListTile(
-                   leadingIconPath: AppIcons.givepillIcon,
-                   title: " Medications",
-                   trailingIconPath: AppIcons.arrorightIcon,
-                       onTap: () {
-                                // Navigate or do something
-                         Get.toNamed('/medicationsetting',id: NavIds.profilenav);
-                         print("helo");
-                         },
-                        ),
-                      SizedBox(height: 20,),
-                 buildText("Account"),
-                 SizedBox(height: 8,),
-                 ProfileListTile(
-                   leadingIconPath: AppIcons.userswitchIcon,
-                   title: " Switch account",
-                   trailingIconPath: AppIcons.arrorightIcon,
-                   onTap: () {
-                     showModalBottomSheet(
-                       context: context,
-                       isScrollControlled: true,
-                       backgroundColor: Colors.transparent,
-                       builder: (_) => const AccountBottomSheet(),
-                     );
-                   },
-                 ),
-                 SizedBox(height: 8,),
-                 ProfileListTile(
-                   leadingIconPath: AppIcons.userswitchIcon,
-                   title: " Caregiver",
-                   trailingIconPath: AppIcons.arrorightIcon,
-                   onTap: () {
-                     // Navigate or do something
-                   },
-                 ),
-                 SizedBox(height: 20,),
-
-                 buildText("Other"),
-                 SizedBox(height: 8,),
-                 ProfileListTile(
-                   leadingIconPath: AppIcons.documentIcon,
-                   title: " HIPAA Consent",
-                   trailingIconPath: AppIcons.arrorightIcon,
-                   onTap: () {
-                     // Navigate or do something
-                   },
-                 ),
-                 SizedBox(height: 8,),
-                 ProfileListTile(
-                   leadingIconPath: AppIcons.helpIcon,
-                   title: " Support",
-                   trailingIconPath: AppIcons.arrorightIcon,
-                   onTap: () {
-                     Get.toNamed('/support',id: NavIds.profilenav);
-
-                   },
-                 ),
-                 SizedBox(height: 25,),
-
-                 GestureDetector(
-                   onTap: (){
-                     _showCustomLogoutDialog(context);
-
-                   },
-                   child: Container(
-                     height: 45,
-                     padding: EdgeInsets.all(10),
-                     decoration: BoxDecoration(
-                       borderRadius: BorderRadius.circular(8),
-                       border: Border.all(
-                         width: 1,
-                         color: BorderColors.error700,
-                       ),
-                     ),child: Row(
-                     mainAxisAlignment: MainAxisAlignment.center,
-                     children: [
-                       SvgPicture.asset(AppIcons.logoutIcon),
-                       SizedBox(width: 8,),
-                       Text(
-                           "Log out",
-                           style: TextStyle(
-                             fontFamily: "Satoshi",
-                             color: BorderColors.error700,
-                             fontSize: 16,
-                             fontWeight: FontWeight.w500,
-                           )
-                       )
-                     ],
+         child: ScrollConfiguration(
+           behavior: const CupertinoScrollBehavior(),
+             child: SingleChildScrollView(
+                 physics: const BouncingScrollPhysics(),
+               child: Column(
+                 crossAxisAlignment: CrossAxisAlignment.start,
+                 children: [
+               
+                   CustomTextField(
+                     borderColor: TextColors.neutral900 ,
+                     maxLines: 1,
+                     hintText: 'Search for a doctor by name or designation...',
+                       controller: textEditingController,
+                       filColor: Appcolors.primary,
+                       prefixIcon: SvgPicture.asset(AppIcons.searchIcon),
+               
                    ),
+               
+                   SizedBox(height: 20,),
+                   buildText("Information"),
+                   SizedBox(height: 8,),
+               
+               
+                   ProfileListTile(
+                     leadingIconPath: AppIcons.settingIcon,
+                     title: ' Personal Information',
+                     trailingIconPath: AppIcons.arrorightIcon,
+                     onTap: () {
+                       // Navigate or do something
+                       Get.toNamed(
+                         '/personal_info',
+                         id: NavIds.profilenav,
+                       );
+               
+               
+                     },
                    ),
-                 ),
-                 SizedBox(height: 25,),
-
-
-               ],
+                   SizedBox(height: 8,),
+                   ProfileListTile(
+                     leadingIconPath: AppIcons.medicalfileIcon,
+                     title: ' Medical Information',
+                     trailingIconPath: AppIcons.arrorightIcon,
+                     onTap: () {
+                       // Navigate or do something
+                       Get.toNamed("/medical_info",id: NavIds.profilenav);
+                     },
+                   ),
+                   SizedBox(height: 8,),
+               
+                   ProfileListTile(
+                     leadingIconPath: AppIcons.shieduserIcon,
+                     title: " Insurance Information ",
+                     trailingIconPath: AppIcons.arrorightIcon,
+                     onTap: () {
+                       Get.toNamed("/insurance_info",id: NavIds.profilenav);
+                     },
+                   ),
+                   SizedBox(height: 8,),
+               
+                   ProfileListTile(
+                     leadingIconPath: AppIcons.fileuploadtIcon,
+                     title: ' Upload document',
+                     trailingIconPath: AppIcons.arrorightIcon,
+                     onTap: () {
+                       // Navigate or do something
+                       Get.toNamed("/upload_document_screen",id: NavIds.profilenav);
+               
+                     },
+                   ),
+                   SizedBox(height: 20,),
+                   buildText("Quick"),
+                   SizedBox(height: 8,),
+                   ProfileListTile(
+                     leadingIconPath: AppIcons.alamclock1Icon,
+                     title: " Waitlist",
+                     trailingIconPath: AppIcons.arrorightIcon,
+                     onTap: () {
+                       // Navigate or do something
+                       Get.toNamed("/waitlist_screen",id: NavIds.profilenav);
+               
+                     },
+                   ),
+                   SizedBox(height: 8,),
+                   ProfileListTile(
+                     leadingIconPath: AppIcons.givepillIcon,
+                     title: " Medications",
+                     trailingIconPath: AppIcons.arrorightIcon,
+                         onTap: () {
+                                  // Navigate or do something
+                           Get.toNamed('/medicationsetting',id: NavIds.profilenav);
+                           print("helo");
+                           },
+                          ),
+                        SizedBox(height: 20,),
+                   buildText("Account"),
+                   SizedBox(height: 8,),
+                   ProfileListTile(
+                     leadingIconPath: AppIcons.userswitchIcon,
+                     title: " Switch account",
+                     trailingIconPath: AppIcons.arrorightIcon,
+                     onTap: () {
+                       showModalBottomSheet(
+                         context: context,
+                         isScrollControlled: true,
+                         backgroundColor: Colors.transparent,
+                         builder: (_) => const AccountBottomSheet(),
+                       );
+                     },
+                   ),
+                   SizedBox(height: 8,),
+                   ProfileListTile(
+                     leadingIconPath: AppIcons.userswitchIcon,
+                     title: " Caregiver",
+                     trailingIconPath: AppIcons.arrorightIcon,
+                     onTap: () {
+                       // Navigate or do something
+                     },
+                   ),
+                   SizedBox(height: 20,),
+               
+                   buildText("Other"),
+                   SizedBox(height: 8,),
+                   ProfileListTile(
+                     leadingIconPath: AppIcons.documentIcon,
+                     title: " HIPAA Consent",
+                     trailingIconPath: AppIcons.arrorightIcon,
+                     onTap: () {
+                       // Navigate or do something
+                     },
+                   ),
+                   SizedBox(height: 8,),
+                   ProfileListTile(
+                     leadingIconPath: AppIcons.helpIcon,
+                     title: " Support",
+                     trailingIconPath: AppIcons.arrorightIcon,
+                     onTap: () {
+                       Get.toNamed('/support',id: NavIds.profilenav);
+               
+                     },
+                   ),
+                   SizedBox(height: 25,),
+               
+                   GestureDetector(
+                     onTap: (){
+                       _showCustomLogoutDialog(context);
+               
+                     },
+                     child: Container(
+                       height: 45,
+                       padding: EdgeInsets.all(10),
+                       decoration: BoxDecoration(
+                         borderRadius: BorderRadius.circular(8),
+                         border: Border.all(
+                           width: 1,
+                           color: BorderColors.error700,
+                         ),
+                       ),child: Row(
+                       mainAxisAlignment: MainAxisAlignment.center,
+                       children: [
+                         SvgPicture.asset(AppIcons.logoutIcon),
+                         SizedBox(width: 8,),
+                         Text(
+                             "Log out",
+                             style: TextStyle(
+                               fontFamily: "Satoshi",
+                               color: BorderColors.error700,
+                               fontSize: 16,
+                               fontWeight: FontWeight.w500,
+                             )
+                         )
+                       ],
+                     ),
+                     ),
+                   ),
+                   SizedBox(height: 25,),
+               
+               
+                 ],
+               ),
              ),
            ),
          ),

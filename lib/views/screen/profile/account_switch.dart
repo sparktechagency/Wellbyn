@@ -89,6 +89,7 @@ class _AccountBottomSheetState extends State<AccountBottomSheet> {
           SizedBox(
             height: 140, // Set height so it fits in bottom sheet
             child: ListView.builder(
+              physics: const BouncingScrollPhysics(),
               shrinkWrap: true,
               itemCount: caregivers.length,
               itemBuilder: (context, index) {

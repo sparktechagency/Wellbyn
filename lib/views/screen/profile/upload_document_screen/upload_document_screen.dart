@@ -43,6 +43,7 @@ class UploadDocumentScreen extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: Column(

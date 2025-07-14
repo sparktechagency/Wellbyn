@@ -565,7 +565,7 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                             color: Appcolors.action,
                             width: 100,
                             onTap: (){
-                              Get.to(BaseScreen());
+                              Get.to(() => BaseScreen());
                             },
                             text: "Next",
                           ),

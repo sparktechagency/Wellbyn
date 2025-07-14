@@ -16,7 +16,7 @@ class DoctorController extends GetxController {
       isLoading(true);
 
       // Simulate API call or data loading
-      await Future.delayed(const Duration(seconds: 1));
+      await Future.delayed(const Duration(milliseconds: 300));
 
       // Your actual API calls would go here
       // await fetchDoctors();
