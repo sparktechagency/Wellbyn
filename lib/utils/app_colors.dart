@@ -117,4 +117,5 @@ class TextColors{
 class ShadowColor{
   static const shadowcolor= Color(0xFFE4EFFA);
   static const shadowColors1= Color(0xFF1A4060);
+  static const shadowColors2= Color(0xFF67869A21);
 }

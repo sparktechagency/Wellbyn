@@ -122,8 +122,8 @@ flutter:
   fonts:
       - family: Satoshi
         fonts:
-          - asset: assets/fonts/Satoshi-Regular.ttf
-          - asset: assets/fonts/Satoshi-Bold.ttf
+          - asset: assets/fonts/Satoshi-Regular.otf
+          - asset: assets/fonts/Satoshi-Bold.otf
             weight: 700
 
       - family: Inter

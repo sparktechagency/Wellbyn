@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+
+import '../../utils/app_colors.dart';
 
 class IconTextButton extends StatelessWidget {
   final VoidCallback onTap;
@@ -40,11 +43,19 @@ class IconTextButton extends StatelessWidget {
       child: Container(
         height: height.h,
         width: width != null ? width!.w : double.infinity, // full width fallback
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+        padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 8.h),
         decoration: BoxDecoration(
-          border: Border.all(width: 1.w, color: bordercolor),
           color: backgroundColor,
-          borderRadius: BorderRadius.circular(12.r),
+          borderRadius: BorderRadius.circular(8.r),
+          boxShadow: [
+            BoxShadow(
+                color: ShadowColor.shadowColors1.withOpacity(0.10), // Shadow color
+                blurRadius: 4, // Softness
+                spreadRadius: 0,
+                offset: Offset(0, 3), // Position of shadow
+                blurStyle: BlurStyle.normal
+            ),
+          ],
         ),
         child: Center(
           child: isLoading
@@ -80,7 +91,7 @@ class IconTextButton extends StatelessWidget {
                 child: Text(
                   text,
                   style: TextStyle(
-                    fontFamily: 'Satoshi',
+                    fontFamily: AppConstants.FONT_FAMILY,
                     fontSize:fontsize.h,
                     color: textColor,
                     fontWeight: FontWeight.w500,

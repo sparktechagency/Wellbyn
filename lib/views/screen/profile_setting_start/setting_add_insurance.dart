@@ -3,14 +3,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:signature/signature.dart';
+import 'package:wellbyn/utils/app_constants.dart';
 import 'package:wellbyn/views/base/Apptext/app_text.dart';
 import 'package:wellbyn/views/base/custom_button.dart';
 import 'package:wellbyn/views/base/icon_text_button.dart';
 import 'package:wellbyn/controllers/profile_setting_controller.dart';
 import 'package:wellbyn/utils/app_colors.dart';
 import 'package:wellbyn/utils/app_icons.dart';
-import 'package:wellbyn/views/screen/profile_setting_start/setting_personal_info.dart';
-import 'package:wellbyn/views/screen/profile_setting_start/widget/labeledtextfield.dart';
+
+
+import '../../../controllers/TextField/textfield_Controller.dart';
+import '../../base/LabelTextField/labelTextField.dart';
+import '../../base/LableDropDownFielded/lableDropDownFielded.dart';
 
 
 class SettingAddInsurance extends StatelessWidget {
@@ -28,6 +32,7 @@ class SettingAddInsurance extends StatelessWidget {
   final ProfileSettingController _controller = Get.put(ProfileSettingController());
   final TextEditingController name = TextEditingController();
 
+  final DropdownController  dropdownController = Get.put(DropdownController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,8 +43,8 @@ class SettingAddInsurance extends StatelessWidget {
           "Add New Insurance Info",
           style: TextStyle(
             fontSize: 20.sp,
-            fontFamily: "Satoshi",
-            fontWeight: FontWeight.w500,
+            fontFamily: AppConstants.FONT_FAMILY,
+            fontWeight: FontWeight.w600,
             color: TextColors.neutral900,
           ),
         ),
@@ -49,7 +54,7 @@ class SettingAddInsurance extends StatelessWidget {
           icon: SvgPicture.asset(
             'assets/icons/arrow-left.svg',
             width: 24.w,
-            height: 24.h,
+            height: 30.h,
             color: TextColors.neutral900,
           ),
         ),
@@ -60,28 +65,27 @@ class SettingAddInsurance extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 16.h),
-            AppText(
-              "Policy Holder Info",
-              fontSize: 20.sp,
-              color: TextColors.neutral500,
-            ),
-            SizedBox(height: 20.h),
-            Obx(
-                  () => LabeledDropdownFieldes(
-                titile: "Type Selected",
-                label: "Type",
-                items: marital,
-                selectedValue: _controller.selectedMarital.value.isEmpty
-                    ? null
-                    : _controller.selectedMarital.value,
-                onChanged: (value) => _controller.selectecMarital(value),
-              ),
+            LabeledDropdownFielded(
+              label: "Insurance Name",
+              titile: "Marital Status",
+              items: [
+                "Single",
+                "Married",
+                "Divorced",
+                "Widowed",
+                "Separated",
+                "Unknown",
+              ],
+              selectedValue: dropdownController.maritialValue,
+              onChanged: (value) {
+                // Optional additional logic
+                print("Selected: $value");
+              },
             ),
             SizedBox(height: 20.h),
             LabeledTextFielded(
               borderColor: TextColors.neutral900,
-              label: "Insurance ID",
+              label: "Contact ID",
               controller: name,
               next: true,
               maxline: 1,
@@ -90,52 +94,31 @@ class SettingAddInsurance extends StatelessWidget {
             SizedBox(height: 20.h),
             LabeledTextFielded(
               borderColor: TextColors.neutral900,
-              label: "Group-policy",
+              label: "Group Number",
               controller: name,
               next: true,
               maxline: 1,
               hintText: "G987654321",
             ),
             SizedBox(height: 20.h),
-            LabeledTextFielded(
-              borderColor: TextColors.neutral900,
-              label: "Phone",
-              controller: name,
-              next: true,
-              maxline: 1,
-              hintText: "+01579859888",
-            ),
-            SizedBox(height: 20.h),
-            Obx(
-                  () => LabeledDropdownFieldes(
-                titile: "Plan Name",
-                label: "Selected Plan",
-                items: marital,
-                selectedValue: _controller.selectedMarital.value.isEmpty
-                    ? null
-                    : _controller.selectedMarital.value,
-                onChanged: (value) => _controller.selectecMarital(value),
-              ),
-            ),
-            SizedBox(height: 24.h),
             Divider(height: 1.h, color: TextColors.neutral200),
-            SizedBox(height: 24.h),
-            AppText(
-              "Insured",
-              fontSize: 20.sp,
-              color: TextColors.neutral500,
-            ),
-            SizedBox(height: 24.h),
-            Obx(
-                  () => LabeledDropdownFieldes(
-                titile: "Selected Plan ",
-                label: "Plan Name",
-                items: marital,
-                selectedValue: _controller.selectedMarital.value.isEmpty
-                    ? null
-                    : _controller.selectedMarital.value,
-                onChanged: (value) => _controller.selectecMarital(value),
-              ),
+            SizedBox(height: 20.h),
+            LabeledDropdownFielded(
+              label: "Patient Relationship To Insured",
+              titile: "Marital Status",
+              items: [
+                "Single",
+                "Married",
+                "Divorced",
+                "Widowed",
+                "Separated",
+                "Unknown",
+              ],
+              selectedValue: dropdownController.maritialValue,
+              onChanged: (value) {
+                // Optional additional logic
+                print("Selected: $value");
+              },
             ),
             SizedBox(height: 20.h),
             LabeledTextFielded(
@@ -150,7 +133,7 @@ class SettingAddInsurance extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: CustomTextFielde(
+                  child: CustomTextFielded(
                     next: true,
                     controller: name,
                     hintText: "Middle",
@@ -161,7 +144,7 @@ class SettingAddInsurance extends StatelessWidget {
                 ),
                 SizedBox(width: 8.w),
                 Expanded(
-                  child: CustomTextFielde(
+                  child: CustomTextFielded(
                     next: true,
                     controller: name,
                     hintText: "Last",
@@ -175,27 +158,113 @@ class SettingAddInsurance extends StatelessWidget {
             SizedBox(height: 20.h),
             LabeledTextFielded(
               borderColor: TextColors.neutral900,
-              label: "Group-policy",
+              label: "Contract ID",
               controller: name,
               next: true,
               maxline: 1,
               hintText: "G987654321",
             ),
-            SizedBox(height: 24.h),
-            Obx(
-                  () => LabeledDropdownFieldes(
-                titile: "Selected Plan ",
-                label: "Plan Name",
-                items: marital,
-                selectedValue: _controller.selectedMarital.value.isEmpty
-                    ? null
-                    : _controller.selectedMarital.value,
-                onChanged: (value) => _controller.selectecMarital(value),
-              ),
+            SizedBox(height: 20.h),
+            LabeledTextFielded(
+              borderColor: TextColors.neutral900,
+              label: "Address Line 1",
+              controller: name,
+              next: true,
+              maxline: 1,
+              hintText: "Street address",
             ),
-            SizedBox(height: 24.h),
-            Divider(height: 1.h, color: TextColors.neutral200),
-            SizedBox(height: 24.h),
+            SizedBox(height: 20.h),
+
+            Row(
+              children: [
+                Expanded(
+                  child: LabeledTextFielded(
+                    next: true,
+                    borderColor: TextColors.neutral900,
+                    label: "City",
+                    controller: name,
+                    keyboardType: TextInputType.number,
+                    maxline: 1,
+                    hintText: "",
+                  ),
+                ),
+                SizedBox(width: 8.w,),
+                Expanded(
+                  child:   LabeledDropdownFielded(
+                    label: "State",
+                    titile: "State",
+                    items:[
+                      "AO",
+                      "AI",
+                      "BI",
+                      "CD",
+                      "HI+",
+                      "CO-",
+                      "HO",
+                      "KA",
+                    ],
+                    selectedValue: dropdownController.state,
+                    onChanged: (value) {
+                      // Optional additional logic
+                      print("Selected: $value");
+                    },
+                  ),
+                ),
+                SizedBox(width: 8.w,),
+                Expanded(
+                  child: LabeledTextFielded(
+                    next: true,
+                    borderColor: TextColors.neutral900,
+                    label: "Zip",
+                    controller: name,
+                    keyboardType: TextInputType.number,
+                    maxline: 1,
+                    hintText: "",
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 20.h),
+            LabeledTextFielded(
+              borderColor: TextColors.neutral900,
+              label: "Employer Name",
+              controller: name,
+              next: true,
+              maxline: 1,
+              hintText: "Company name",
+            ),
+            SizedBox(height: 24.h,),
+
+            LabeledDropdownFielded(
+              label: "Sex",
+              titile: "City",
+              items: ["Male", "Female", "Other"],
+              selectedValue: dropdownController.selectedValue,
+              onChanged: (value) {
+                // Optional additional logic
+                print("Selected: $value");
+              },
+            ),
+
+            SizedBox(height: 24.h,),
+
+
+            Obx(() => LabeledTextFielded(
+              maxline: 1,
+              borderColor: TextColors.neutral200,
+              label: "Date of birth ",
+              controller: TextEditingController(
+                text: _controller.formattedDate.value,
+              ),
+              readOnly: true,
+              onTap: () => _controller.pickDate(Get.context!),
+              suffixSvgAsset: AppIcons.calenderIcon01,
+              suffixSvgColor: Appcolors.action,
+              hintText: "mm/dd/yyyy",
+            ),),
+
+
+
             AppText(
               "Insuranced Card",
               fontSize: 16.sp,
@@ -205,8 +274,9 @@ class SettingAddInsurance extends StatelessWidget {
             IconTextButton(
               onTap: () {},
               height: 46.h,
-              width: 150.w,
+              width: 160,
               text: "Upload Card",
+              fontsize: 16,
               svgAsset: AppIcons.addIcon02,
               backgroundColor: Appcolors.primary,
               bordercolor: Appcolors.action,
@@ -222,7 +292,8 @@ class SettingAddInsurance extends StatelessWidget {
             IconTextButton(
               onTap: () {},
               height: 46.h,
-              width: 185.w,
+              width: 190,
+              fontsize: 16,
               text: "Upload Signature",
               svgAsset: AppIcons.addIcon02,
               backgroundColor: Appcolors.primary,
@@ -234,8 +305,9 @@ class SettingAddInsurance extends StatelessWidget {
               children: [
                 AppText(
                   "OR",
-                  fontSize: 16.sp,
-                  color: TextColors.neutral500,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: TextColors.neutral900,
                 ),
                 SizedBox(width: 6.w),
                 Expanded(
@@ -249,7 +321,8 @@ class SettingAddInsurance extends StatelessWidget {
             SizedBox(height: 20.h),
             AppText(
               "Draw Signature ",
-              fontSize: 16.sp,
+              fontSize: 16,
+
               color: TextColors.neutral900,
             ),
             SizedBox(height: 8.h),

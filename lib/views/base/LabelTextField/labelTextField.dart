@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:wellbyn/utils/app_icons.dart';
 
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_constants.dart';
@@ -20,6 +21,9 @@ class LabeledTextFielded extends StatelessWidget {
   final Color? borderColor; // Add this
   final int? maxline;
   final bool next;
+  final VoidCallback? onTap;
+  final bool? readOnly;
+
 
   const LabeledTextFielded({
     super.key,
@@ -35,6 +39,8 @@ class LabeledTextFielded extends StatelessWidget {
     this.suffixSvgColor,
     this.prefixIcon,
     this.maxline,
+    this.onTap,
+    this.readOnly,
     this.borderColor, // Add this to constructor
   });
 
@@ -48,6 +54,9 @@ class LabeledTextFielded extends StatelessWidget {
         CustomTextFielded(
           controller: controller,
           hintText: hintText,
+          onTap: onTap,
+
+          readOnly: readOnly,
           isPassword: isPassword,
           isEmail: isEmail,
           keyboardType: keyboardType,
@@ -229,14 +238,12 @@ class _CustomTextFieldedState extends State<CustomTextFielded> {
             },
         style: const TextStyle(
           color: TextColors.neutral900,
-          fontSize: 16,
-          fontFamily: "Satoshi",
+          fontSize: 14,
           fontWeight: FontWeight.w500,
         ),
         decoration: InputDecoration(
           hintText: widget.hintText,
           hintStyle: const TextStyle(
-            fontFamily: 'Satoshi',
             fontWeight: FontWeight.w500,
             fontSize: 14,
             color: TextColors.secondary,
@@ -252,13 +259,21 @@ class _CustomTextFieldedState extends State<CustomTextFielded> {
             onTap: togglePassword,
             child: Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Icon(
-                obscureText ? Icons.visibility_off : Icons.visibility,
-                color: TextColors.neutral500,
+              child: SvgPicture.asset(
+                obscureText
+                    ? AppIcons.lockIcon // Replace with your "hidden" icon path
+                    : AppIcons.lockIcon,   // Replace with your "visible" icon path
+                width: 20.w,
+                height: 20.w,
+                colorFilter: const ColorFilter.mode(
+                  TextColors.neutral500,
+                  BlendMode.srcIn,
+                ),
               ),
             ),
           )
               : cachedSuffixIcon ?? widget.suffixIcon,
+
           focusedBorder: focusedBorder,
           enabledBorder: enabledBorder,
           disabledBorder: OutlineInputBorder(

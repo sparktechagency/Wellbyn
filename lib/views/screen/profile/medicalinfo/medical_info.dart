@@ -633,7 +633,7 @@ class _MedicalInformationScreenState extends State<MedicalInformationScreen> {
   //         content: Column(
   //           mainAxisSize: MainAxisSize.min,
   //           children: [
-  //             TextField(
+  //             TextFieldC(
   //               controller: nameController,
   //               decoration: const InputDecoration(
   //                 fillColor: Colors.white,

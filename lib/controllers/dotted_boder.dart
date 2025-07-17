@@ -14,10 +14,13 @@ class DottedBorderContainer extends StatelessWidget {
       strokeWidth: 1.w,
       borderType: BorderType.RRect,
       radius: Radius.circular(10.r),
-      dashPattern: [6, 3],
+      dashPattern: [6, 3, 5, 3],
       child: ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(8.r)),
-        child: child,
+        child: Container(
+          color: Appcolors.actionHoverLight,
+          child: child,
+        ),
       ),
     );
   }

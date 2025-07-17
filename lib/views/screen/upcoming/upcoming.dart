@@ -12,6 +12,7 @@ import 'package:wellbyn/views/base/icon_text_button.dart';
 import '../../../controllers/profile_setting_controller.dart';
 import '../../../models/allergies.dart';
 import '../../../utils/app_icons.dart';
+import '../../base/LabelTextField/labelTextField.dart';
 import '../profile_setting_start/setting_personal_info.dart';
 class Upcoming extends StatelessWidget {
    Upcoming({super.key});
@@ -188,7 +189,7 @@ class Upcoming extends StatelessWidget {
                       const SizedBox(height: 12),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: LabeledTextFields(
+                        child: LabeledTextFielded(
                           maxline: 1,
                           borderColor: TextColors.neutral200,
                           label: "Visit Reason",
@@ -205,7 +206,7 @@ class Upcoming extends StatelessWidget {
                       const SizedBox(height: 12),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: LabeledTextFields(
+                        child: LabeledTextFielded(
                           maxline: 2,
                           borderColor: TextColors.neutral200,
                           label: "Summary",

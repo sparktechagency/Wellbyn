@@ -243,8 +243,8 @@ class _CustomTextFieldedState extends State<CustomTextFielded> {
           hintStyle: const TextStyle(
             fontFamily: AppConstants.FONT_FAMILY,
             fontWeight: FontWeight.w500,
-            fontSize: 14,
-            color: TextColors.secondary,
+            fontSize: 15,
+            color: TextColors.neutral500,
           ),
           contentPadding: EdgeInsets.symmetric(
             horizontal: widget.contentPaddingHorizontal ?? 8.w,

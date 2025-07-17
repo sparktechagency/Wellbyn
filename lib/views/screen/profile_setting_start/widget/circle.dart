@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:wellbyn/utils/app_constants.dart';
 
 class StepCircle extends StatelessWidget {
   final bool isActive;
@@ -32,8 +33,9 @@ class StepCircle extends StatelessWidget {
       child: Text(
         step,
         style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 16.sp,
+          fontFamily: AppConstants.FONT_FAMILY,
+          fontWeight: FontWeight.w500,
+          fontSize: 16,
           color: isActive ? activeTextColor : inactiveTextColor,
         ),
       ),

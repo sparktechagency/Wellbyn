@@ -50,9 +50,10 @@ class Verify extends StatelessWidget {
 
                     SizedBox(height: 20.h),
                     PinCodeEnter(context),
-
-
                     SizedBox(height: 20.h),
+
+                    //=================> AppButton <=======================//
+
                     AppButton(
                       text: "Next",
                       onPressed: () {
@@ -60,7 +61,6 @@ class Verify extends StatelessWidget {
                       },
                     ),
                     SizedBox(height: 20.h),
-
                     AlreadyHaveAccountText(onTap: (){
                       //Get.to(CreateAccountPage(role: "petient"));
                     },
@@ -70,6 +70,7 @@ class Verify extends StatelessWidget {
                     SizedBox(height: 10),
 
                     //=================> logo text <=======================//
+
                     BackButtonWithText(
                       text: "Back To Sign In",
                       iconColor: TextColors.neutral900,
@@ -80,6 +81,7 @@ class Verify extends StatelessWidget {
                         Get.back();
                       },
                     )
+
                   ],
                 ),
               ),

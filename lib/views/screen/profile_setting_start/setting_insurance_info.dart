@@ -6,6 +6,32 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:http/http.dart';
 import 'package:signature/signature.dart';
 import 'package:wellbyn/controllers/profile_setting_controller.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
 import 'package:wellbyn/views/screen/base_screen.dart';
 import 'package:wellbyn/views/screen/profile_setting_start/setting_add_insurance.dart';
 import 'package:wellbyn/views/screen/profile_setting_start/setting_personal_info.dart';
@@ -55,7 +81,7 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
           "Profile Setting",
           style: TextStyle(
             fontSize: 20,
-            fontFamily: "Satoshi",
+            fontFamily: AppConstants.FONT_FAMILY,
             fontWeight: FontWeight.w500,
             color: TextColors.neutral900,
           ),
@@ -128,22 +154,27 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                       ),
                       SizedBox(height: 20),
                       IconTextButton(
+                        bordercolor: Appcolors.action,
                         onTap: () {
                           Get.to(SettingAddInsurance());
                         },
                         text: "App Primary Card",
                         svgAsset: AppIcons.addIcon02,
+                        fontsize: 16,
+                        height: 50,
                         backgroundColor: Appcolors.action,
                         textColor: Appcolors.primary,
                       ),
                       SizedBox(height: 10),
                       IconTextButton(
+                        height: 50,
                         bordercolor: Appcolors.action,
                         onTap: () {
                           Get.to(SettingAddInsurance());
                         },
                         text: "App Other Card",
                         svgAsset: AppIcons.addIcon02,
+                        fontsize: 16,
                         backgroundColor: Appcolors.primary,
                         textColor: Appcolors.action,
                       ),
@@ -166,9 +197,11 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                             decoration: BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
-                                  color: TextColors.neutral300.withOpacity(0.25),
-                                  offset: const Offset(0, 0.3),
-                                  blurRadius: 5,
+                                    color: ShadowColor.shadowColors1.withOpacity(0.10), // Shadow color
+                                    blurRadius: 4, // Softness
+                                    spreadRadius: 0,
+                                    offset: Offset(0, 3), // Position of shadow
+                                    blurStyle: BlurStyle.normal
                                 ),
                               ],
                               color: Appcolors.primary,
@@ -188,7 +221,7 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                           // ➤ Makes the card label dynamic
                                           style: TextStyle(
                                             fontWeight: FontWeight.w500,
-                                            fontFamily: "Satoshi",
+                                            fontFamily: AppConstants.FONT_FAMILY,
                                             color: TextColors.neutral500,
                                             fontSize: 14,
                                           ),
@@ -198,7 +231,7 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                           // ➤ Makes the card label dynamic
                                           style: TextStyle(
                                             fontWeight: FontWeight.w500,
-                                            fontFamily: "Satoshi",
+                                            fontFamily: AppConstants.FONT_FAMILY,
                                             color: TextColors.neutral900,
                                             fontSize: 16,
                                           ),
@@ -219,11 +252,11 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                           color: Appcolors.error50,
                                           boxShadow: [
                                             BoxShadow(
-                                              color: TextColors.neutral500.withOpacity(
-                                                0.25,
-                                              ),
-                                              offset: const Offset(0, 0.3),
-                                              blurRadius: 5,
+                                                color: ShadowColor.shadowColors1.withOpacity(0.10), // Shadow color
+                                                blurRadius: 4, // Softness
+                                                spreadRadius: 0,
+                                                offset: Offset(0, 3), // Position of shadow
+                                                blurStyle: BlurStyle.normal
                                             ),
                                           ],
                                           borderRadius: BorderRadius.circular(8),
@@ -247,13 +280,13 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                     fontSize: 14,
                                     color: TextColors.neutral500,
                                     fontWeight: FontWeight.w500,
-                                    fontFamily: "Satoshi",
+                                    fontFamily: AppConstants.FONT_FAMILY,
                                   ),
                                   valueStyle: TextStyle(
                                     fontSize: 16,
                                     color: TextColors.neutral900,
                                     fontWeight: FontWeight.w500,
-                                    fontFamily: "Satoshi",
+                                    fontFamily: AppConstants.FONT_FAMILY,
                                   ),
                                 ),
 
@@ -266,13 +299,13 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                     fontSize: 14,
                                     color: TextColors.neutral500,
                                     fontWeight: FontWeight.w500,
-                                    fontFamily: "Satoshi",
+                                    fontFamily: AppConstants.FONT_FAMILY,
                                   ),
                                   valueStyle: TextStyle(
                                     fontSize: 16,
                                     color: TextColors.neutral900,
                                     fontWeight: FontWeight.w500,
-                                    fontFamily: "Satoshi",
+                                    fontFamily: AppConstants.FONT_FAMILY,
                                   ),
                                 ),
                                 SizedBox(height: 20),
@@ -284,13 +317,13 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                     fontSize: 14,
                                     color: TextColors.neutral500,
                                     fontWeight: FontWeight.w500,
-                                    fontFamily: "Satoshi",
+                                    fontFamily: AppConstants.FONT_FAMILY,
                                   ),
                                   valueStyle: TextStyle(
                                     fontSize: 16,
                                     color: TextColors.neutral900,
                                     fontWeight: FontWeight.w500,
-                                    fontFamily: "Satoshi",
+                                    fontFamily: AppConstants.FONT_FAMILY,
                                   ),
                                 ),
                                 SizedBox(height: 20),
@@ -301,13 +334,13 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                     fontSize: 14,
                                     color: TextColors.neutral500,
                                     fontWeight: FontWeight.w500,
-                                    fontFamily: "Satoshi",
+                                    fontFamily: AppConstants.FONT_FAMILY,
                                   ),
                                   valueStyle: TextStyle(
                                     fontSize: 16,
                                     color: TextColors.neutral900,
                                     fontWeight: FontWeight.w500,
-                                    fontFamily: "Satoshi",
+                                    fontFamily: AppConstants.FONT_FAMILY,
                                   ),
                                 ),
                                 SizedBox(height: 8),
@@ -324,13 +357,13 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                     fontSize: 15,
                                     color: TextColors.neutral500,
                                     fontWeight: FontWeight.w500,
-                                    fontFamily: "Satoshi",
+                                    fontFamily: AppConstants.FONT_FAMILY,
                                   ),
                                   valueStyle: TextStyle(
                                     fontSize: 16,
                                     color: TextColors.neutral900,
                                     fontWeight: FontWeight.w500,
-                                    fontFamily: "Satoshi",
+                                    fontFamily: AppConstants.FONT_FAMILY,
                                   ),
                                 ),
                                 SizedBox(height: 20),
@@ -346,13 +379,13 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                           fontSize: 15,
                                           color: TextColors.neutral500,
                                           fontWeight: FontWeight.w500,
-                                          fontFamily: "Satoshi",
+                                          fontFamily: AppConstants.FONT_FAMILY,
                                         ),
                                         valueStyle: TextStyle(
                                           fontSize: 16,
                                           color: TextColors.neutral900,
                                           fontWeight: FontWeight.w500,
-                                          fontFamily: "Satoshi",
+                                          fontFamily: AppConstants.FONT_FAMILY,
                                         ),
                                       ),
                                     ),
@@ -365,13 +398,13 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                           fontSize: 15,
                                           color: TextColors.neutral500,
                                           fontWeight: FontWeight.w500,
-                                          fontFamily: "Satoshi",
+                                          fontFamily: AppConstants.FONT_FAMILY,
                                         ),
                                         valueStyle: TextStyle(
                                           fontSize: 16,
                                           color: TextColors.neutral900,
                                           fontWeight: FontWeight.w500,
-                                          fontFamily: "Satoshi",
+                                          fontFamily: AppConstants.FONT_FAMILY,
                                         ),
                                       ),
                                     ),
@@ -385,13 +418,13 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                           fontSize: 15,
                                           color: TextColors.neutral500,
                                           fontWeight: FontWeight.w500,
-                                          fontFamily: "Satoshi",
+                                          fontFamily: AppConstants.FONT_FAMILY,
                                         ),
                                         valueStyle: TextStyle(
                                           fontSize: 16,
                                           color: TextColors.neutral900,
                                           fontWeight: FontWeight.w500,
-                                          fontFamily: "Satoshi",
+                                          fontFamily: AppConstants.FONT_FAMILY,
                                         ),
                                       ),
                                     ),
@@ -405,13 +438,13 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                     fontSize: 15,
                                     color: TextColors.neutral500,
                                     fontWeight: FontWeight.w500,
-                                    fontFamily: "Satoshi",
+                                    fontFamily: AppConstants.FONT_FAMILY,
                                   ),
                                   valueStyle: TextStyle(
                                     fontSize: 16,
                                     color: TextColors.neutral900,
                                     fontWeight: FontWeight.w500,
-                                    fontFamily: "Satoshi",
+                                    fontFamily: AppConstants.FONT_FAMILY,
                                   ),
                                 ),
                                 SizedBox(height: 20),
@@ -422,13 +455,13 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                     fontSize: 15,
                                     color: TextColors.neutral500,
                                     fontWeight: FontWeight.w500,
-                                    fontFamily: "Satoshi",
+                                    fontFamily: AppConstants.FONT_FAMILY,
                                   ),
                                   valueStyle: TextStyle(
                                     fontSize: 16,
                                     color: TextColors.neutral900,
                                     fontWeight: FontWeight.w500,
-                                    fontFamily: "Satoshi",
+                                    fontFamily: AppConstants.FONT_FAMILY,
                                   ),
                                 ),
                                 SizedBox(height: 8),
@@ -649,7 +682,7 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                     color: TextColors.action,
-                    fontFamily: "Satoshi",
+                    fontFamily: AppConstants.FONT_FAMILY,
                   ),
                 ),
               ),
@@ -664,7 +697,7 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                     color: TextColors.action,
-                    fontFamily: "Satoshi",
+                    fontFamily: AppConstants.FONT_FAMILY,
                   ),
                 ),
               ),
@@ -679,7 +712,7 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                     color: TextColors.action,
-                    fontFamily: "Satoshi",
+                    fontFamily: AppConstants.FONT_FAMILY,
                   ),
                 ): SizedBox.shrink())
               ),
