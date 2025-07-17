@@ -11,8 +11,8 @@ import '../../../utils/app_colors.dart';
 import '../../../utils/app_icons.dart';
 
 import '../../../utils/nab_ids.dart';
-import '../../base/app_button.dart';
-import '../../base/app_text.dart';
+import '../../base/AppButton/app_button.dart';
+import '../../base/Apptext/app_text.dart';
 import '../../base/custom_field.dart';
 import '../profile/base/logout.dart';
 import 'book_report.dart';

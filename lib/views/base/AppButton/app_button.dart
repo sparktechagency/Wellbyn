@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:wellbyn/utils/app_constants.dart';
 
 enum ButtonVariant { filled, outlined }
 
@@ -68,6 +69,7 @@ class AppButton extends StatelessWidget {
               style: TextStyle(
                 color: textColor,
                 fontSize: 16,
+                fontFamily: AppConstants.FONT_FAMILY,
                 fontWeight: FontWeight.w500,
               ),
             ),

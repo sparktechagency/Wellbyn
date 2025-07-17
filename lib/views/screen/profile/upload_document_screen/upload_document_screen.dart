@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:wellbyn/controllers/dotted_boder.dart';
 import 'package:wellbyn/utils/app_icons.dart';
-import 'package:wellbyn/views/base/app_text.dart';
+import 'package:wellbyn/views/base/Apptext/app_text.dart';
 
 import '../../../../controllers/file_upload_controller.dart';
 import '../../../../utils/app_colors.dart';

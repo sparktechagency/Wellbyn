@@ -3,21 +3,27 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:wellbyn/views/base/Apptext/app_text.dart';
 import 'package:wellbyn/views/screen/auth/password_changed.dart';
 
 import '../../../utils/app_colors.dart';
-import '../../base/app_button.dart';
+import '../../../utils/app_constants.dart';
+import '../../base/AppButton/app_button.dart';
+import '../../base/LogoHeader/logoHeader.dart';
 import '../../base/custom_field.dart';
 import '../profile_setting_start/widget/labeledtextfield.dart';
 import 'forgot.dart';
+
 class SetNewPassword extends StatelessWidget {
-   SetNewPassword({super.key});
+  SetNewPassword({super.key});
+
   final TextEditingController passwordcontroller = TextEditingController();
   final TextEditingController confirmcontroller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     backgroundColor: Appcolors.page,
+      backgroundColor: Appcolors.page,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -29,71 +35,40 @@ class SetNewPassword extends StatelessWidget {
                 child: Column(
                   children: [
                     SizedBox(height: 40.h),
-                    SvgPicture.asset(
-                      'assets/icons/logo.svg',
-                      width: 150.w,
-                      height: 150.h,
-                      color:  TextColors.action, // change color dynamically
-                      semanticsLabel: 'App Logo', // for accessibility
-                      fit: BoxFit.contain, // control how the image fits
-                      alignment: Alignment.center, // position the image
+
+                    //=================> logo header <=======================//
+
+                    LogoHeader(
+                      imagePath: 'assets/icons/logo.svg',
+                      title: 'Verify code',
                     ),
-                    SizedBox(height: 20.h),
+
+                    //=================> logo header <=======================//
                     Text(
-                      "Set new password",
+                      overflow: TextOverflow.ellipsis,
+                      "Set a new password and continue your journey.",
                       style: TextStyle(
-                        fontFamily: 'Satoshi',
-                        fontSize: 24,
-                        color: TextColors.neutral900,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(2),
-                      child: Text(
-                          "Set a new password and continue your journey.",
-                          style: TextStyle(
-                            fontFamily: 'Satoshi',
-                            color: TextColors.neutral500,
-                            overflow: TextOverflow.ellipsis,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          )
+                        fontWeight: FontWeight.w400,
+                        color: TextColors.neutral500,
+                        fontSize: 16,
                       ),
                     ),
                     SizedBox(height: 8.h),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 16.h),
-                        LabeledTextFielded(
-                          borderColor: TextColors.neutral900,
-                          label: "New Password",
-                          controller: confirmcontroller,
-                          next: true,
-                          maxline: 1,
-                          hintText: "Type a strong password",
-                        ),
-                        SizedBox(height: 24.h),
-                        LabeledTextFielded(
-                          borderColor: TextColors.neutral900,
-                          label: "Confirm Password",
-                          controller: confirmcontroller,
-                          next: true,
-                          maxline: 1,
-                          hintText: "Re-type password",
-                        ),
 
-                      ],
-                    ),
+                    //=================> input Section <=======================//
+
+                    inputSection(),
                     SizedBox(height: 24.h),
-                    AppButton(text: "Save",
-                        onPressed: () {
-                      Get.to(PasswordChanged());
 
-                    }),
+                    //=================> Save Button <=======================//
+
+                    AppButton(
+                      text: "Save",
+                      onPressed: () {
+                        Get.to(PasswordChanged());
+                      },
+                    ),
                     SizedBox(height: 20.h),
-
                   ],
                 ),
               ),
@@ -104,17 +79,29 @@ class SetNewPassword extends StatelessWidget {
     );
   }
 
-  Widget _buildLabel(String text) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 8.h),
-      child: Text(
-        text,
-        style: TextStyle(
-          fontFamily: 'Satoshi',
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-    );
+  Column inputSection() {
+    return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 16.h),
+                      LabeledTextFielded(
+                        borderColor: TextColors.neutral900,
+                        label: "New Password",
+                        controller: confirmcontroller,
+                        next: true,
+                        maxline: 1,
+                        hintText: "Type a strong password",
+                      ),
+                      SizedBox(height: 24.h),
+                      LabeledTextFielded(
+                        borderColor: TextColors.neutral900,
+                        label: "Confirm Password",
+                        controller: confirmcontroller,
+                        next: true,
+                        maxline: 1,
+                        hintText: "Re-type password",
+                      ),
+                    ],
+                  );
   }
 }

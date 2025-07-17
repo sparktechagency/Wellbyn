@@ -118,16 +118,27 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
 
+
   fonts:
       - family: Satoshi
         fonts:
-          - asset: assets/fonts/Satoshi-Regular.otf
-          - asset: assets/fonts/Satoshi-Medium.otf
-            weight: 500
-          - asset: assets/fonts/Satoshi-Bold.otf
+          - asset: assets/fonts/Satoshi-Regular.ttf
+          - asset: assets/fonts/Satoshi-Bold.ttf
             weight: 700
-          - asset: assets/fonts/Satoshi-Black.otf
-            weight: 900
+
+      - family: Inter
+        fonts:
+          - asset: assets/fonts/Inter_18pt-Regular.ttf
+            weight: 500
+          - asset: assets/fonts/Inter_18pt-Bold.ttf
+            weight: 700
+          - asset: assets/fonts/Inter_18pt-Italic.ttf
+            weight: 500
+            style: italic
+          - asset: assets/fonts/Inter_18pt-SemiBold.ttf
+            weight: 400
+
+
 
 
     # fonts:

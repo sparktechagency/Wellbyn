@@ -7,7 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:wellbyn/views/base/app_text.dart';
+import 'package:wellbyn/views/base/Apptext/app_text.dart';
 import 'package:wellbyn/views/base/custom_button.dart';
 import 'package:wellbyn/views/screen/profile/add_insurance.dart';
 

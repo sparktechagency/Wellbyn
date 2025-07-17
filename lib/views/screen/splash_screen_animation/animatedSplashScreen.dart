@@ -17,14 +17,14 @@ class _AnimatedSplashScreenState extends State<AnimatedSplashScreen> {
       backgroundColor: Colors.white,
       body: Center(
         child: Lottie.asset(
-          'assets/animations/Success_Check.json',
-          onLoaded: (composition) {
-            Future.delayed(composition.duration, () {
-              Get.offAll(() => CreateAccountPage(role: "doctor"));
-            });
-          },
+            'assets/animations/data.json',
+            onLoaded: (composition) {
+              Future.delayed(composition.duration, () {
+                Get.offAll(() => CreateAccountPage(role: "doctor"));
+              });
+            },
+          ),
         ),
-      ),
     );
   }
 }

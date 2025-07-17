@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:wellbyn/controllers/insurance_controller.dart';
-import 'package:wellbyn/views/base/app_text.dart';
+import 'package:wellbyn/views/base/Apptext/app_text.dart';
 import 'package:wellbyn/views/base/icon_text_button.dart';
 
 import '../../../../utils/app_colors.dart';

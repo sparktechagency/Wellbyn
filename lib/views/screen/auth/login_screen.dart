@@ -4,13 +4,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:wellbyn/controllers/localization_controller.dart';
-import 'package:wellbyn/views/base/app_button.dart';
-import 'package:wellbyn/views/base/app_text.dart';
+import 'package:wellbyn/views/base/AppButton/app_button.dart';
+import 'package:wellbyn/views/base/Apptext/app_text.dart';
 import 'package:wellbyn/views/base/custom_field.dart';
+import 'package:wellbyn/views/screen/auth/create_acount_screen.dart';
 import '../../../utils/app_colors.dart';
 
 import '../../../utils/app_constants.dart';
 import '../../../utils/app_icons.dart';
+import '../../base/AlReadyHaveAcountText/alreadyHaveAcountText.dart';
+import '../../base/GoogleButton/google_button.dart';
+import '../../base/LogoHeader/logoHeader.dart';
+import '../../base/OrDivided/orDivided.dart';
 import '../profile_setting_start/widget/labeledtextfield.dart';
 import 'forgot.dart';
 
@@ -25,13 +30,9 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
 
   final TextEditingController emailcontroller = TextEditingController();
-
   final TextEditingController passwordcontroller = TextEditingController();
-
   final TextEditingController confirmcontroller = TextEditingController();
-
   LocalizationController localizationController = Get.find<LocalizationController>();
-
   final List<String> language = ['English', 'Franch'];
 
   String? selectedLanguage;
@@ -57,83 +58,56 @@ class _LoginScreenState extends State<LoginScreen> {
                   physics: const BouncingScrollPhysics(),
                   child: Column(
                         children: [
-                          const   SizedBox(height: 60),
-                          SvgPicture.asset(
-                            'assets/icons/logo.svg',
-                            width: 150.w,
-                            height: 150.h,
-                            color:  TextColors.action, // change color dynamically
-                            semanticsLabel: 'App Logo', // for accessibility
-                            fit: BoxFit.contain, // control how the image fits
-                            alignment: Alignment.center, // position the image
+                          const SizedBox(height: 60),
+
+                          //=================> logo header <=======================//
+                          LogoHeader(
+                            imagePath: 'assets/icons/logo.svg',
+                            title: 'Welcome back!',
+
                           ),
+
                           const SizedBox(height: 10),
-                          Column(
-                            children: [
-                              Text(
-                                "Welcome back!".tr,
-                                style: TextStyle(
-                                  fontFamily: 'Satoshi',
-                                  fontSize: 24,
-                                  color: TextColors.neutral900,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              Text(
-                                "To log in, enter your email address.".tr,
-                                style: TextStyle(
-                                  fontFamily: 'Satoshi',
-                                  fontSize: 16,
-                                  color: TextColors.neutral500,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
-                          ),
+                          //=================> logo text <=======================//
+                          AppText("To sign in, enter your email address",
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: TextColors.neutral500,),
+
                           const SizedBox(height: 30),
+                          //=================> input section <=======================//
                           inputSection(),
+
                           SizedBox(height: 8,),
+
+                          //=================> forgot <=======================//
                           forgotsection(),
-                          const SizedBox(height: 30),
-                          AppButton(text: "Log in".tr, onPressed: () {
+
+                          const SizedBox(height: 20),
+                          //=================> Sign In button <=======================//
+                          AppButton(text: "Sign In".tr, onPressed: () {
                             Get.to(Forgot());
                           }),
+
                           SizedBox(height: 20.h),
-                          GestureDetector(
-                            onTap: () {
-                              print('Log In tapped');
+                           AlreadyHaveAccountText(onTap: (){
+                            Get.to(CreateAccountPage(role: "petient"));
                             },
-                            child: Padding(
-                              padding: const EdgeInsets.only(bottom: 20),
-                              child: Text.rich(
-                                 TextSpan(
-                                  text: "Don’t have an account?".tr,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                      color: TextColors.neutral500,
-                                      fontFamily: 'Satoshi',
-                                      fontSize: 16,
-                                  ), // optional base style
-                                  children: [
-                                    TextSpan(
-                
-                                      text: " Create an account".tr,
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontFamily: 'Satoshi',
-                                        color: Appcolors.action,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Or(),
+                             leadingText: "Don’t have an account?".tr,
+                             actionText: " Create an account".tr,
+                             fontFamily: AppConstants.FONT_FAMILY,),
+
+                          //=================> OR Divider section    <=======================//
+                          OrDivider(),
+
+                          const SizedBox(height: 20),
+
+                          //=================> gooogle buttton   <=======================//
+
+                          GoogleButton(onPressed: () {
+                            print("Google account ");
+                          },),
                           const  SizedBox(height: 20),
-                          googleButton(),
-                          const SizedBox(height: 30),
                         ],
                       ),
                     ),
@@ -145,13 +119,13 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Container googleButton() {
-    return Container(
+        return Container(
                     height: 50.h,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.r),
                       color: Appcolors.primary,
                     ),
-                    child: Center(
+                     child: Center(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -174,10 +148,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   );
-  }
+            }
 
-  Row Or() {
-    return Row(
+   Row Or() {
+                return Row(
                     children: [
                       Expanded(
                         child: Container(height: 1.h, color: TextColors.neutral200),
@@ -208,20 +182,22 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       Stack(
                         children: [
+
                           Text(
                               "Forgot Password?".tr,
                               style: TextStyle(
                                 fontSize: 16,
                                 color: TextColors.neutral900,
-                                fontFamily: "Satoshi",
+                                fontFamily: AppConstants.FONT_FAMILY,
                                 fontWeight: FontWeight.w500,
                               )
                           ),
+
                           Positioned(
                             top: 20,
                             child: Container(
-                              width: 150,
-                              height: 1,
+                              width: 150.h,
+                              height: 1.2.h,
                               color: TextColors.neutral900,
                             ),
                           )
@@ -241,35 +217,25 @@ class _LoginScreenState extends State<LoginScreen> {
                       LabeledTextFielded(
                         borderColor: TextColors.neutral900,
                         label: "Email".tr,
-                        controller: passwordcontroller,
+                        controller: emailcontroller,
                         next: true,
                         maxline: 1,
                         hintText: "Email Address".tr,
                       ),
+
                       SizedBox(height: 20.h),
-                      _buildLabel("Password".tr),
-                      CustomTextField(
-                        filColor: Appcolors.primary,
-                        borderColor: TextColors.neutral900,
-                        controller: passwordcontroller,
-                        hintText: 'Password'.tr,
+
+                      LabeledTextFielded(
+                        suffixSvgAsset: AppIcons.viewIcon,
+                        suffixSvgColor: TextColors.neutral500,
                         isPassword: true,
+                        borderColor: TextColors.neutral900,
+                        label: "New Password",
+                        controller: passwordcontroller,
+                        maxline: 1,
+                        hintText: "Password ",
                       ),
                     ],
                   );
-  }
-
-  Widget _buildLabel(String text) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 8.h),
-      child: Text(
-        text.tr,
-        style: TextStyle(
-          fontFamily: 'Satoshi',
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-    );
   }
 }

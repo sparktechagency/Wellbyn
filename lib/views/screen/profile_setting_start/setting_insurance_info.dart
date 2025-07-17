@@ -16,7 +16,7 @@ import '../../../controllers/scrollController.dart';
 import '../../../controllers/stepcontroller.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_icons.dart';
-import '../../base/app_text.dart';
+import '../../base/Apptext/app_text.dart';
 import '../../base/custom_button.dart';
 import '../../base/icon_text_button.dart';
 import '../profile/base/infoitem.dart';

@@ -11,7 +11,7 @@ import '../../../../controllers/dotted_boder.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_icons.dart';
 import '../../../../utils/nab_ids.dart';
-import '../../../base/app_text.dart';
+import '../../../base/Apptext/app_text.dart';
 
 class WaitlistScreen extends StatelessWidget {
   const WaitlistScreen({super.key});

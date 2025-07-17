@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:signature/signature.dart';
-import 'package:wellbyn/views/base/app_text.dart';
+import 'package:wellbyn/views/base/Apptext/app_text.dart';
 import 'package:wellbyn/views/base/custom_button.dart';
 import 'package:wellbyn/views/base/icon_text_button.dart';
 import 'package:wellbyn/controllers/profile_setting_controller.dart';

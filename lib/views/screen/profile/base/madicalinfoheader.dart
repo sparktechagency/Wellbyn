@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../utils/app_colors.dart';
-import '../../../base/app_text.dart';
+import '../../../base/Apptext/app_text.dart';
 class MedicalInfoHeader extends StatelessWidget {
   final String title;
   final String description;

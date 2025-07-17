@@ -14,7 +14,7 @@ import '../../../controllers/stepcontroller.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_constants.dart';
 import '../../../utils/app_icons.dart';
-import '../../base/app_text.dart';
+import '../../base/Apptext/app_text.dart';
 
 enum Gender { male, female, other }
 

@@ -9,7 +9,7 @@ import 'package:wellbyn/utils/nab_ids.dart';
 import 'package:wellbyn/views/base/custom_button.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_constants.dart';
-import '../../../base/app_text.dart';
+import '../../../base/Apptext/app_text.dart';
 import '../../../base/icon_text_button.dart';
 
 class CaregiverEdits extends StatelessWidget {

@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_constants.dart';
-import '../../../base/Apptext/app_text.dart';
+import '../Apptext/app_text.dart';
 
 class LabeledTextFielded extends StatelessWidget {
   final String label;
@@ -16,8 +16,6 @@ class LabeledTextFielded extends StatelessWidget {
   final Widget? suffixIcon;
   final String? suffixSvgAsset;
   final Color? suffixSvgColor;
-  final double? contentPaddingHorizontal;
-  final double? contentPaddingVertical;
   final String? prefixIcon;
   final Color? borderColor; // Add this
   final int? maxline;
@@ -38,8 +36,6 @@ class LabeledTextFielded extends StatelessWidget {
     this.prefixIcon,
     this.maxline,
     this.borderColor, // Add this to constructor
-    this.contentPaddingHorizontal,
-    this.contentPaddingVertical,
   });
 
   @override
@@ -56,8 +52,6 @@ class LabeledTextFielded extends StatelessWidget {
           isEmail: isEmail,
           keyboardType: keyboardType,
           suffixIcon: suffixIcon,
-          contentPaddingVertical: contentPaddingVertical,
-          contentPaddingHorizontal: contentPaddingHorizontal,
           suffixSvgAsset: suffixSvgAsset,
           suffixSvgColor: suffixSvgColor,
           prefixIcon: prefixIcon,
@@ -203,6 +197,7 @@ class _CustomTextFieldedState extends State<CustomTextFielded> {
             blurRadius: 4, // Softness
             spreadRadius: 0,
             offset: Offset(0, 3), // Position of shadow
+            blurStyle: BlurStyle.normal
           ),
         ],
       ),
@@ -235,13 +230,13 @@ class _CustomTextFieldedState extends State<CustomTextFielded> {
         style: const TextStyle(
           color: TextColors.neutral900,
           fontSize: 16,
-          fontFamily: AppConstants.FONT_FAMILY,
+          fontFamily: "Satoshi",
           fontWeight: FontWeight.w500,
         ),
         decoration: InputDecoration(
           hintText: widget.hintText,
           hintStyle: const TextStyle(
-            fontFamily: AppConstants.FONT_FAMILY,
+            fontFamily: 'Satoshi',
             fontWeight: FontWeight.w500,
             fontSize: 14,
             color: TextColors.secondary,
@@ -256,15 +251,14 @@ class _CustomTextFieldedState extends State<CustomTextFielded> {
               ? GestureDetector(
             onTap: togglePassword,
             child: Padding(
-              padding: const EdgeInsets.all(4.0),
+              padding: const EdgeInsets.all(10.0),
               child: Icon(
-                size: 24,
-                obscureText ? Icons.visibility_off_outlined : Icons.visibility_outlined,
-                color: TextColors.neutral900.withOpacity(0.90),
+                obscureText ? Icons.visibility_off : Icons.visibility,
+                color: TextColors.neutral500,
               ),
             ),
           )
-              : (cachedSuffixIcon ?? widget.suffixIcon),
+              : cachedSuffixIcon ?? widget.suffixIcon,
           focusedBorder: focusedBorder,
           enabledBorder: enabledBorder,
           disabledBorder: OutlineInputBorder(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/views/base/Apptext/app_text.dart';
 import 'package:wellbyn/views/screen/Home/home_screen.dart';
 import 'package:get/get.dart';
 import 'package:wellbyn/views/screen/base_screen.dart';
@@ -19,19 +21,11 @@ class ConsentScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 24),
-            const Center(
-              child: Text(
-                'HIPAA Consent',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontFamily: 'Satoshi',
-                  color: TextColors.neutral900,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
+             Center(
+              child:AppText("HIPAA Consent",fontSize: 24,fontWeight: FontWeight.w500,)
             ),
             const SizedBox(height: 32),
-            const Text.rich(
+            Text.rich(
               TextSpan(
                 children: [
                   TextSpan(
@@ -43,8 +37,8 @@ class ConsentScreen extends StatelessWidget {
                   ),
                   TextSpan(
                     style: TextStyle(
-
-                        fontFamily: 'Satoshi',
+                      color: TextColors.neutral900,
+                        fontFamily: AppConstants.FONT_FAMILY,
                         fontWeight: FontWeight.w400,
                         fontSize: 16),
                     text:
@@ -65,8 +59,7 @@ class ConsentScreen extends StatelessWidget {
                 children: [
                   Text(
                     style: TextStyle(
-
-                        fontFamily: 'Satoshi',
+                        fontFamily: AppConstants.FONT_FAMILY,
                         fontWeight: FontWeight.w400,
                         fontSize: 16),
                     'We follow strict HIPAA guidelines to protect your privacy and keep your data secure.',
@@ -74,8 +67,7 @@ class ConsentScreen extends StatelessWidget {
                   SizedBox(height: 12),
                   Text(
                     style: TextStyle(
-
-                        fontFamily: 'Satoshi',
+                        fontFamily: AppConstants.FONT_FAMILY,
                         fontWeight: FontWeight.w400,
                         fontSize: 16),
                     'To keep improving your experience and help our technology get smarter over time, we may use some of your information — always anonymized and never linked to your name or identity.',
@@ -83,8 +75,7 @@ class ConsentScreen extends StatelessWidget {
                   SizedBox(height: 12),
                   Text(
                     style: TextStyle(
-
-                        fontFamily: 'Satoshi',
+                        fontFamily: AppConstants.FONT_FAMILY,
                         fontWeight: FontWeight.w400,
                         fontSize: 16),
                     'Your privacy always comes first. You can choose how your data is used and change your preferences anytime.',
@@ -103,7 +94,7 @@ class ConsentScreen extends StatelessWidget {
                           'Tap “I Agree” to continue.',
                           style: TextStyle(
 
-                              fontFamily: 'Satoshi',
+                              fontFamily: AppConstants.FONT_FAMILY,
                               fontWeight: FontWeight.w400,
                               fontSize: 16),
                         ),
@@ -120,7 +111,7 @@ class ConsentScreen extends StatelessWidget {
                             label: const Text(
                               'I Agree',
                               style: TextStyle(
-                                fontFamily: 'Satoshi',
+                                fontFamily: AppConstants.FONT_FAMILY,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
                                 color: Appcolors.secondary,
@@ -134,7 +125,6 @@ class ConsentScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               textStyle: const TextStyle(
-                                fontFamily: 'Satoshi',
                                 fontWeight: FontWeight.w500,
                                 fontSize: 16,
                               ),

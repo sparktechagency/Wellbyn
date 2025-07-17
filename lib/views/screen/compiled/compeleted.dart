@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:wellbyn/views/base/app_text.dart';
+import 'package:wellbyn/views/base/Apptext/app_text.dart';
 
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_icons.dart';
 import '../../../utils/nab_ids.dart';
-import '../../base/app_button.dart';
+import '../../base/AppButton/app_button.dart';
 
 class Compeleted extends StatelessWidget {
   const Compeleted({super.key});

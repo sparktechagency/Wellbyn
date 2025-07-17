@@ -99,6 +99,7 @@ class TextColors{
   static const peace700 = Color(0xFF0288D1); // or any peace color you prefer
   static const error700 = Color(0xFF2B4DCA);
   static const warning600 = Color(0xFF93531F);
+  static const primary2 = Color(0xFF000000);
 
   // Semantic colors
   static const primary = primary500;
@@ -115,4 +116,5 @@ class TextColors{
 
 class ShadowColor{
   static const shadowcolor= Color(0xFFE4EFFA);
+  static const shadowColors1= Color(0xFF1A4060);
 }

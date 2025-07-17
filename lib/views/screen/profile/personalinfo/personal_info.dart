@@ -11,7 +11,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:wellbyn/controllers/personal_info.dart';
 import 'package:wellbyn/controllers/profile_controller.dart';
 import 'package:wellbyn/utils/app_icons.dart';
-import 'package:wellbyn/views/base/app_text.dart';
+import 'package:wellbyn/views/base/Apptext/app_text.dart';
 import 'package:wellbyn/views/base/custom_field.dart';
 
 import '../../../../controllers/dotted_boder.dart';

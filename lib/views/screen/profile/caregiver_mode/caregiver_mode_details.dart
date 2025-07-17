@@ -9,7 +9,7 @@ import 'package:wellbyn/utils/app_icons.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_constants.dart';
 import '../../../../utils/nab_ids.dart';
-import '../../../base/app_text.dart';
+import '../../../base/Apptext/app_text.dart';
 import '../../../base/icon_text_button.dart';
 class CaregiverModeDetails extends StatelessWidget {
    CaregiverModeDetails({super.key});
