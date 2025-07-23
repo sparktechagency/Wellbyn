@@ -28,10 +28,10 @@ class ProfileListTile extends StatelessWidget {
           color: Appcolors.primary,
           boxShadow: [
           BoxShadow(
-          color:Colors.black12 , // softer effect
-          blurRadius: 1, // reasonable softness
-          spreadRadius: 1,
-          offset: Offset(0, 0.3), // downward shadow
+          color:ShadowColor.shadowColors1.withOpacity(0.10) , // softer effect
+          blurRadius: 4, // reasonable softness
+          spreadRadius: 0,
+          offset: Offset(0, 3), // downward shadow
           ),
           ]
         ),
@@ -44,7 +44,7 @@ class ProfileListTile extends StatelessWidget {
             Text(
               title,
               style: const TextStyle(
-                fontFamily: 'Satoshi',
+                fontFamily: 'Inter',
                 color: TextColors.neutral900,
                  fontWeight:  FontWeight.w500,
                 fontSize: 16,

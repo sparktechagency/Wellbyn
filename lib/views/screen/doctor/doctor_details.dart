@@ -7,6 +7,25 @@ import 'package:share_plus/share_plus.dart';
 import 'package:wellbyn/controllers/dotor_details.dart';
 import 'package:wellbyn/utils/app_colors.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
 import 'package:wellbyn/utils/app_icons.dart';
 import 'package:wellbyn/views/screen/doctor/book_report.dart';
 import 'package:get/get.dart';
@@ -16,6 +35,7 @@ import 'package:wellbyn/views/screen/doctro_message/doctor_message.dart';
 import '../../../controllers/date_picker_controller.dart';
 import '../../../controllers/doctor.dart';
 import '../../../utils/nab_ids.dart';
+import '../../base/icon_text_button.dart';
 
 class DoctorDetails extends StatelessWidget {
   final String doctorId;
@@ -37,6 +57,7 @@ class DoctorDetails extends StatelessWidget {
       ShareParams(text: 'Check out my website https://example.com'),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -165,17 +186,18 @@ class DoctorDetails extends StatelessWidget {
                             const Text(
                               "Dr. Moule Marrk",
                               style: TextStyle(
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.w600,
                                 fontSize: 20,
                                 color: TextColors.neutral900,
-                                fontFamily: 'Satoshi',
+                                fontFamily: AppConstants.FONT_FAMILY,
                               ),
                             ),
                             const Text(
                               "Cardiology",
                               style: TextStyle(
                                 color: TextColors.neutral500,
-                                fontFamily: 'Satoshi',
+                                fontSize: 16,
+                                fontFamily: AppConstants.FONT_FAMILY,
                               ),
                             ),
                           ],
@@ -185,22 +207,21 @@ class DoctorDetails extends StatelessWidget {
                             GestureDetector(
                               onTap:(){
                                 Get.to(DoctorMessage());
-
-
                               },
                                 child: _iconButton(
                                     AppIcons.chatIcon,
                                     Appcolors.action)),
                             const SizedBox(width: 8),
+
                             GestureDetector(
                               onTap: _shareText,
                               child: _iconButton(
                                 AppIcons.shearIcon,
                                 Appcolors.secondary,
-                                borderColor: Appcolors.action,
                                 iconColor: Appcolors.action,
                               ),
                             ),
+
                           ],
                         ),
                       ],
@@ -219,7 +240,7 @@ class DoctorDetails extends StatelessWidget {
                             color: TextColors.neutral500,
                             fontWeight: FontWeight.w500,
                             fontSize: 18,
-                            fontFamily: 'Satoshi',
+                            fontFamily: AppConstants.FONT_FAMILY,
                           ),
                         ),
                       ],
@@ -230,8 +251,8 @@ class DoctorDetails extends StatelessWidget {
                         "Calle Ceiba #142, Urb. Alturas de Monte Verde, Trujillo Alto, PR 00976",
                         style: TextStyle(
                           fontStyle: FontStyle.italic,
-                          fontSize: 12,
-                          fontFamily: "Satoshi",
+                          fontSize: 14,
+                          fontFamily: AppConstants.FONT_FAMILY,
                           fontWeight: FontWeight.w500,
                           color: TextColors.secondary,
                         ),
@@ -270,9 +291,9 @@ class DoctorDetails extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(8),
                                         boxShadow: [
                                           BoxShadow(
-                                            color: TextColors.neutral500.withOpacity(0.15),
-                                            blurRadius: 6,
-                                            offset: const Offset(0, 2),
+                                            color: Color(0xFF0000001A).withOpacity(0.10),
+                                            blurRadius: 4,
+                                            offset: const Offset(0, 3),
                                             spreadRadius: 0,
                                           ),
                                         ],
@@ -291,7 +312,7 @@ class DoctorDetails extends StatelessWidget {
                                             Text(
                                               time,
                                               style: TextStyle(
-                                                fontFamily: "Satoshi",
+                                                fontFamily: AppConstants.FONT_FAMILY,
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.w500,
                                                 color: isSelected
@@ -315,51 +336,91 @@ class DoctorDetails extends StatelessWidget {
                     Row(
                       children: [
                         Expanded(
-                          child: OutlinedButton.icon(
-                            onPressed: () {},
-                            icon: SvgPicture.asset(AppIcons.alarmIcon,
-                                color: Appcolors.action),
-                            label: const Text(
-                              "Waitlist",
-                              style: TextStyle(
-                                  fontFamily: 'Satoshi', color:Appcolors.action),
-                            ),
-                            style: OutlinedButton.styleFrom(
-                              side: const BorderSide(color: Appcolors.action),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
+                          child:InkWell(
+                            onTap: () {
+                              Get.back();
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 24),
+                              // padding controls width
+                              height: 45,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Appcolors.primary,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: ShadowColor.shadowColors1.withOpacity(
+                                      0.10,
+                                    ),
+                                    blurRadius: 4,
+                                    spreadRadius: 0,
+                                    offset: Offset(0, 3),
+                                    blurStyle: BlurStyle.normal,
+                                  ),
+                                ],
                               ),
-                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              alignment: Alignment.center,
+                              child: Row(
+                                children: [
+                                  SvgPicture.asset(AppIcons.alamclock1Icon,color: Appcolors.action,),
+                                  SizedBox(width: 6,),
+                                  Text(
+                                    "Waitlist",
+                                    style: TextStyle(
+                                      fontFamily: AppConstants.FONT_FAMILY,
+                                      fontSize: 16,
+                                      color: TextColors.action,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
                         const SizedBox(width: 10),
 
                         Expanded(
-                          child: SizedBox(
-                            height: 45,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Get.toNamed('/book_report', id: NavIds.profile);
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Appcolors.action,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
+                          child: InkWell(
+                            onTap: () {
+                              Get.toNamed('/book_report', id: NavIds.profile);
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 24),
+                              height: 45,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Appcolors.action,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: ShadowColor.shadowColors1.withOpacity(0.10),
+                                    blurRadius: 4,
+                                    spreadRadius: 0,
+                                    offset: Offset(0, 3),
+                                    blurStyle: BlurStyle.normal,
+                                  ),
+                                ],
                               ),
-                              child: Text(
-                                "Next",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 16,
-                                  fontFamily: 'Satoshi',
-                                  color: Appcolors.primary,
-                                ),
+                              alignment: Alignment.center,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    "Next",
+                                    style: TextStyle(
+                                      fontFamily: AppConstants.FONT_FAMILY,
+                                      fontSize: 14,
+                                      color: TextColors.neutral200,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
                         ),
+
                       ],
                     ),
                     const SizedBox(height: 20),
@@ -375,20 +436,27 @@ class DoctorDetails extends StatelessWidget {
     );
   }
 
-  Widget _iconButton(String iconAsset, Color bgColor, {Color? borderColor, Color? iconColor}) {
+  Widget _iconButton(String iconAsset, Color bgColor, {Color? iconColor}) {
     return Container(
-      height: 36,
-      width: 36,
+      height: 40,
+      width: 40,
       decoration: BoxDecoration(
         color: bgColor,
-        border: borderColor != null ? Border.all(color: borderColor) : null,
         borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(
+            color: ShadowColor.shadowColors1.withOpacity(0.10),
+            blurRadius: 4,
+            offset: Offset(0, 3),
+            spreadRadius: 0,
+          )
+        ]
       ),
       child: Center(
         child: SvgPicture.asset(
           iconAsset,
-          height: 20,
-          width: 20,
+          height: 24,
+          width: 24,
           color: iconColor,
         ),
       ),
@@ -428,11 +496,11 @@ class _DateTimePickerSectionState extends State<DateTimePickerSection> {
             child: Row(
               children: [
                 Text(
-                  "Select your date ",
+                  "Selected Date",
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 18,
-                    fontFamily: "Satoshi",
+                    fontFamily: "Inter",
                     color: TextColors.neutral900,
 
                   ),
@@ -446,60 +514,7 @@ class _DateTimePickerSectionState extends State<DateTimePickerSection> {
           const SizedBox(height: 8),
           const SizedBox(height: 8),
 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: const [
-              Text(
-                "Sun",
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontFamily: "Satoshi",
-                ),
-              ),
-              Text(
-                "Mon",
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontFamily: "Satoshi",
-                ),
-              ),
-              Text(
-                "Tue",
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontFamily: "Satoshi",
-                ),
-              ),
-              Text(
-                "Wed",
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontFamily: "Satoshi",
-                ),
-              ),
-              Text(
-                "Thu",
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontFamily: "Satoshi",
-                ),
-              ),
-              Text(
-                "Fri",
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontFamily: "Satoshi",
-                ),
-              ),
-              Text(
-                "Sat",
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontFamily: "Satoshi",
-                ),
-              ),
-            ],
-          ),
+          day(),
           const SizedBox(height: 6),
           buildCalendarGrid(currentMonth, selectedDate),
           const SizedBox(height: 10),
@@ -507,6 +522,65 @@ class _DateTimePickerSectionState extends State<DateTimePickerSection> {
         ],
       );
     });
+  }
+
+  Row day() {
+    return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: const [
+            Text(
+              "Sun",
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                fontFamily: AppConstants.FONT_FAMILY,
+              ),
+            ),
+            Text(
+              "Mon",
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                fontFamily: AppConstants.FONT_FAMILY,
+              ),
+            ),
+            Text(
+              "Tue",
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontFamily: AppConstants.FONT_FAMILY,
+              ),
+            ),
+            Text(
+              "Wed",
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontFamily: AppConstants.FONT_FAMILY,
+              ),
+            ),
+            Text(
+              "Thu",
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontFamily: AppConstants.FONT_FAMILY,
+              ),
+            ),
+            Text(
+              "Fri",
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontFamily: AppConstants.FONT_FAMILY,
+              ),
+            ),
+            Text(
+              "Sat",
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontFamily: AppConstants.FONT_FAMILY,
+              ),
+            ),
+          ],
+        );
   }
 
 
@@ -581,20 +655,20 @@ class _DateTimePickerSectionState extends State<DateTimePickerSection> {
         return GestureDetector(
           onTap: () => controller.selectDate(date),
           child: Container(
-            width: 40,
-            height: 30,
+            width: 40.h,
+            height: 30.h,
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: isSelected ? Appcolors.action : Colors.transparent,
-              borderRadius: BorderRadius.circular(5),
+              borderRadius: BorderRadius.circular(4.r),
             ),
             child: Text(
               date.day.toString(),
               style: TextStyle(
-
-                fontFamily: "Satoshi",
+                fontFamily: AppConstants.FONT_FAMILY,
+                fontSize: 16,
                 color: isSelected ? Colors.white : TextColors.neutral900,
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ),
@@ -603,100 +677,6 @@ class _DateTimePickerSectionState extends State<DateTimePickerSection> {
     );
   }
 
-  // Option 1: Using Container with BoxShadow
-//   Widget buildTimeSlots(String selectedTime) {
-//     return Wrap(
-//       spacing: 8,
-//       runSpacing: 8,
-//       children: controller.timeSlots.map((time) {
-//         final isSelected = selectedTime == time;
-//         return Container(
-//           decoration: BoxDecoration(
-//             borderRadius: BorderRadius.circular(8),
-//             boxShadow: [
-//               BoxShadow(
-//                 color: TextColors.neutral900.withOpacity(0.2),
-//                 blurRadius: 8,
-//                 offset: const Offset(0, 4),
-//                 spreadRadius: 0,
-//               ),
-//             ],
-//           ),
-//           child: RawChip(
-//             labelPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-//             avatar: isSelected
-//                 ? const Icon(Icons.check, size: 16, color: Colors.white)
-//                 : null,
-//             label: Text(
-//               time,
-//               style: TextStyle(
-//                 fontSize: 14,
-//                 fontFamily: "Satoshi",
-//                 fontWeight: FontWeight.w600,
-//                 color: isSelected ? Colors.white : Colors.black,
-//               ),
-//             ),
-//             selected: isSelected,
-//             backgroundColor: Appcolors.primary,
-//             selectedColor: TextColors.primary,
-//             shape: RoundedRectangleBorder(
-//               borderRadius: BorderRadius.circular(8),
-//             ),
-//             onSelected: (_) => controller.selectTime(time),
-//           ),
-//         );
-//       }).toList(),
-//     );
-//   }
-//
-// // Option 2: Using Material widget with elevation
-// // Working solution with Container and BoxShadow
-// //   Widget buildTimeSlots(String selectedTime) {
-// //     return Wrap(
-// //       spacing: 8,
-// //       runSpacing: 8,
-// //       children: controller.timeSlots.map((time) {
-// //         final isSelected = selectedTime == time;
-// //         return Container(
-// //           decoration: BoxDecoration(
-// //             borderRadius: BorderRadius.circular(8),
-// //             boxShadow: [
-// //               BoxShadow(
-// //                 color: TextColors.neutral900.withOpacity(0.15),
-// //                 blurRadius: 6,
-// //                 offset: const Offset(0, 2),
-// //                 spreadRadius: 0,
-// //               ),
-// //             ],
-// //           ),
-// //           child: RawChip(
-// //             labelPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-// //             avatar: isSelected
-// //                 ? const Icon(Icons.check, size: 16, color: Colors.white)
-// //                 : null,
-// //             label: Text(
-// //               time,
-// //               style: TextStyle(
-// //                 fontSize: 15,
-// //                 fontFamily: "Satoshi",
-// //                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-// //                 color: isSelected ? Colors.white : Colors.black,
-// //               ),
-// //             ),
-// //             selected: isSelected,
-// //             backgroundColor: Appcolors.natral25,
-// //             selectedColor: TextColors.primary,
-// //             shape: RoundedRectangleBorder(
-// //               borderRadius: BorderRadius.circular(8),
-// //             ),
-// //             onSelected: (_) => controller.selectTime(time),
-// //           ),
-// //         );
-// //       }).toList(),
-// //     );
-// //   }
-//
-// // Alternative: Custom InkWell approach (if you want more control)
   Widget buildTimeSlotsCustom(String selectedTime) {
     return Wrap(
       spacing: 8,
@@ -728,9 +708,9 @@ class _DateTimePickerSectionState extends State<DateTimePickerSection> {
                   borderRadius: BorderRadius.circular(8),
                   boxShadow: [
                     BoxShadow(
-                      color: TextColors.neutral500,
-                      offset: Offset(0, 0.3),
-                      blurRadius: 10,
+                      color: ShadowColor.shadowColors1.withOpacity(0.10),
+                      offset: Offset(0, 3),
+                      blurRadius: 4,
                     )
                   ]
                 ),
@@ -745,7 +725,7 @@ class _DateTimePickerSectionState extends State<DateTimePickerSection> {
                       time,
                       style: TextStyle(
                         fontSize: 16,
-                        fontFamily: "Satoshi",
+                        fontFamily: AppConstants.FONT_FAMILY,
                         fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
                         color: isSelected ? Colors.white : Colors.black,
                       ),

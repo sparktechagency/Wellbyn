@@ -61,6 +61,8 @@ dependencies:
   signature: ^5.4.0
   zoom_tap_animation: ^1.1.0
   google_fonts: ^6.2.1
+  video_player: ^2.10.0
+
 
 
 
@@ -104,6 +106,7 @@ flutter:
       - assets/icons/
       - assets/image/
       - assets/animations/
+      - assets/vedio/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -129,14 +132,11 @@ flutter:
       - family: Inter
         fonts:
           - asset: assets/fonts/Inter_18pt-Regular.ttf
-            weight: 500
           - asset: assets/fonts/Inter_18pt-Bold.ttf
             weight: 700
           - asset: assets/fonts/Inter_18pt-Italic.ttf
-            weight: 500
             style: italic
           - asset: assets/fonts/Inter_18pt-SemiBold.ttf
-            weight: 400
 
 
 

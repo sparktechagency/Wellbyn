@@ -64,107 +64,121 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      autovalidateMode: widget.autovalidateMode ?? AutovalidateMode.disabled,
-      controller: widget.controller,
-      maxLines: widget.isPassword ? 1 : widget.maxLines,
-      keyboardType: widget.keyboardType,
-      obscuringCharacter: widget.obscure!,
-      enabled: widget.enabled ?? true,
-      // validator: widget.validator,
-      validator:
-          widget.validator ??
-          (value) {
-            if (value == null || value.isEmpty) {
-              return "Please enter ${widget.hintText?.toLowerCase() ?? 'this field'}";
-            }
-
-            if (widget.isEmail == true) {
-              // Email validation
-              bool isValidEmail = AppConstants.emailValidator.hasMatch(value);
-              if (!isValidEmail) {
-                return "Please check your email!";
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8.r),
+        boxShadow: [
+          BoxShadow(
+              color: ShadowColor.shadowColors1.withOpacity(0.10), // Shadow color
+              blurRadius: 4, // Softness
+              spreadRadius: 0,
+              offset: Offset(0, 3), // Position of shadow
+              blurStyle: BlurStyle.normal
+          ),
+        ],
+      ),
+      child: TextFormField(
+        autovalidateMode: widget.autovalidateMode ?? AutovalidateMode.disabled,
+        controller: widget.controller,
+        maxLines: widget.isPassword ? 1 : widget.maxLines,
+        keyboardType: widget.keyboardType,
+        obscuringCharacter: widget.obscure!,
+        enabled: widget.enabled ?? true,
+        // validator: widget.validator,
+        validator:
+            widget.validator ??
+            (value) {
+              if (value == null || value.isEmpty) {
+                return "Please enter ${widget.hintText?.toLowerCase() ?? 'this field'}";
               }
 
-            }
+              if (widget.isEmail == true) {
+                // Email validation
+                bool isValidEmail = AppConstants.emailValidator.hasMatch(value);
+                if (!isValidEmail) {
+                  return "Please check your email!";
+                }
 
-            return null;
-          },
+              }
 
-      cursorColor: TextColors.neutral900,
-      obscureText: widget.isPassword ? obscureText : false,
-      onChanged: widget.onChanged,
-      style: TextStyle(color: TextColors.neutral900, fontSize: 14,fontWeight: FontWeight.w400),
-      decoration: InputDecoration(
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.r),
-          borderSide: BorderSide(
-            width: 1.5,
-            color: widget.borderColor ?? BorderColors.primary,
+              return null;
+            },
+
+        cursorColor: TextColors.neutral900,
+        obscureText: widget.isPassword ? obscureText : false,
+        onChanged: widget.onChanged,
+        style: TextStyle(
+            color: TextColors.neutral900,
+            fontSize: 16,
+            fontFamily: AppConstants.FONT_FAMILY,
+            fontWeight: FontWeight.w500),
+        decoration: InputDecoration(
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8.r),
           ),
-        ),
 
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.r),
-          borderSide: BorderSide(
-            width: 1,
-            color: BorderColors.tertiary, // don't use widget.borderColor here
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8.r),
+            borderSide: const BorderSide(
+              width: 0,
+              color: Colors.transparent,
+            ),
           ),
-        ),
 
-        disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.r),
-          borderSide: BorderSide(
-            width: 1,
-            color: BorderColors.disabled, // separate color
+          disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8.r),
           ),
-        ),
 
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.r),
-          borderSide: BorderSide(color: BorderColors.error),
-        ),
-
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.r),
-          borderSide: BorderSide(color: BorderColors.error, width: 2),
-        ),
-
-        contentPadding: EdgeInsets.symmetric(
-          horizontal: widget.contentPaddingHorizontal ?? 15.w,
-          vertical: widget.contentPaddingVertical ?? 12.w,
-        ),
-        fillColor: widget.filColor,
-        prefixIconColor: TextColors.neutral900,
-        prefixIcon: widget.prefixIcon != null
-            ? Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: widget.prefixIcon,
-        )
-            : null,
-        prefixIconConstraints: widget.prefixIcon != null
-            ? BoxConstraints(minHeight: 20.w, minWidth: 20.w)
-            : null,
-
-        suffixIconColor: TextColors.neutral900,
-        suffixIcon: widget.isPassword
-            ? GestureDetector(
-          onTap: toggle,
-          child: _svgSuffixIcon(
-            obscureText
-                ? AppIcons.viewIcon  // e.g., 'assets/icons/eye_closed.svg'
-                : AppIcons.viewIcon,  // e.g., 'assets/icons/eye_open.svg'
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8.r),
+            borderSide: BorderSide(color: BorderColors.error),
           ),
-        )
-            : widget.suffixIcon,
-        labelText: widget.labelText,
-        // Always enabled to keep full custom styling
-        hintText: widget.hintText,
-        hintStyle: TextStyle(
-          fontFamily: 'Satoshi',
-          fontWeight: FontWeight.w500,
-          fontSize: 16.sp,
-          color: TextColors.secondary,
+
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8.r),
+            borderSide: BorderSide(
+              width: 1.1,
+              color: widget.borderColor ?? BorderColors.primary,
+            ),
+          ),
+
+          contentPadding: EdgeInsets.symmetric(
+            horizontal: widget.contentPaddingHorizontal ?? 15.w,
+            vertical: widget.contentPaddingVertical ?? 12.w,
+          ),
+          fillColor: widget.filColor,
+          prefixIconColor: TextColors.neutral900,
+          prefixIcon: widget.prefixIcon != null
+              ? Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: widget.prefixIcon,
+          )
+              : null,
+          prefixIconConstraints: widget.prefixIcon != null
+              ? BoxConstraints(minHeight: 20.w, minWidth: 20.w)
+              : null,
+
+          suffixIconColor: TextColors.neutral900,
+          suffixIcon: widget.isPassword
+              ? GestureDetector(
+            onTap: toggle,
+            child: _svgSuffixIcon(
+              obscureText
+                  ? AppIcons.viewIcon  // e.g., 'assets/icons/eye_closed.svg'
+                  : AppIcons.viewIcon,  // e.g., 'assets/icons/eye_open.svg'
+            ),
+          )
+              : widget.suffixIcon,
+          labelText: widget.labelText,
+          // Always enabled to keep full custom styling
+          hintText: widget.hintText,
+          hintStyle: TextStyle(
+            fontFamily: AppConstants.FONT_FAMILY,
+            fontWeight: FontWeight.w500,
+            fontSize: 16,
+            color: TextColors.secondary,
+          ),
         ),
       ),
     );

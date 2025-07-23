@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -27,15 +28,15 @@ class Canceled extends StatelessWidget {
           ),
           width: double.infinity,
           decoration: BoxDecoration(
-            color: Appcolors.page,
-            boxShadow: [
-              BoxShadow(
-                color: TextColors.neutral500.withOpacity(0.25),
-                offset: const Offset(0, 0.3),
-                blurRadius: 5,
-              ),
-            ],
-            borderRadius: BorderRadius.circular(20),
+            color: Appcolors.primary,
+            // boxShadow: [
+            //   BoxShadow(
+            //     color: ShadowColor.shadowColors1.withOpacity(0.10),
+            //     offset: const Offset(0,3),
+            //     blurRadius: 4,
+            //   ),
+            // ],
+            borderRadius: BorderRadius.circular(12),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -60,7 +61,7 @@ class Canceled extends StatelessWidget {
                             "Dr. Moule Marrk",
                             style: TextStyle(
                               fontSize: 18,
-                              fontFamily: "Satoshi",
+                              fontFamily: "Inter",
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -69,7 +70,7 @@ class Canceled extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 14,
                               color: TextColors.neutral500,
-                              fontFamily: "Satoshi",
+                              fontFamily: "Inter",
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -83,7 +84,7 @@ class Canceled extends StatelessWidget {
                                   style: TextStyle(
                                     fontSize: 14,
                                     color: TextColors.neutral900,
-                                    fontFamily: "Satoshi",
+                                    fontFamily: "Inter",
                                     fontWeight: FontWeight.w500,
                                   ),
                                   overflow: TextOverflow.ellipsis,

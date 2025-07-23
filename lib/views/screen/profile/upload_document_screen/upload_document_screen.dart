@@ -52,7 +52,7 @@ class UploadDocumentScreen extends StatelessWidget {
               SizedBox(height: 12),
               // Upload Dotted Container - Removed unnecessary Obx
               GestureDetector(
-                onTap: () => fileController.pickAndUploadPDF(),
+                onTap: () => fileController.pickAndUploadFiles(allowedExtensions: ['mov', 'jpg', 'pdf'],),
                 child: DottedBorderContainer(
                   child: Container(
                     color: Appcolors.actionPrimary100,

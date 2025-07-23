@@ -28,22 +28,22 @@ class Upcoming extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AppText("Booked appoinment card",fontSize: 20,color: TextColors.neutral900,),
-            SizedBox(height: 16,),
-
+            SizedBox(height: 16.h,),
             Expanded(
               child: ListView.builder(
                 itemCount: 2,
                   physics: const BouncingScrollPhysics(),
                   itemBuilder: (context,index){
                 return Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12,vertical: 12),
                   margin: EdgeInsets.only(bottom: 20),
                   decoration: BoxDecoration(
                     color: Appcolors.primary,
                     boxShadow: [
                       BoxShadow(
-                        color: TextColors.neutral500.withOpacity(0.25),
-                        offset: const Offset(0, 0.3),
-                        blurRadius: 5,
+                        color: ShadowColor.shadowColors1.withOpacity(0.10),
+                        offset: const Offset(0,3),
+                        blurRadius: 4,
                       ),
                     ],
                     borderRadius: BorderRadius.circular(20),
@@ -51,16 +51,14 @@ class Upcoming extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 20),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: Row(
+                      SizedBox(height: 20.h),
+                       Row(
                           children: [
                             const CircleAvatar(
                               radius: 30,
                               backgroundImage: AssetImage('assets/image/doctor_image.png'),
                             ),
-                            const SizedBox(width: 10),
+                            SizedBox(width: 10.w),
                             Expanded( // Add Expanded to prevent overflow
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -70,7 +68,7 @@ class Upcoming extends StatelessWidget {
                                     "Dr. Moule Marrk",
                                     style: TextStyle(
                                       fontSize: 18,
-                                      fontFamily: "Satoshi",
+                                      fontFamily: "Inter",
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
@@ -79,21 +77,21 @@ class Upcoming extends StatelessWidget {
                                     style: TextStyle(
                                       fontSize: 14,
                                       color: TextColors.neutral500,
-                                      fontFamily: "Satoshi",
+                                      fontFamily: "Inter",
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                   Row(
                                     children: [
                                       SvgPicture.asset(AppIcons.hospitallocationIcon),
-                                      const SizedBox(width: 5),
+                                      SizedBox(width: 5.w),
                                       const Expanded( // Add Expanded to prevent overflow
                                         child: Text(
                                           "Sylhet Health Center",
                                           style: TextStyle(
                                             fontSize: 14,
                                             color: TextColors.neutral900,
-                                            fontFamily: "Satoshi",
+                                            fontFamily: "Inter",
                                             fontWeight: FontWeight.w500,
                                           ),
                                           overflow: TextOverflow.ellipsis,
@@ -108,11 +106,8 @@ class Upcoming extends StatelessWidget {
                             _iconButton(AppIcons.chatIcon, Appcolors.action),
                           ],
                         ),
-                      ),
-                      const SizedBox(height: 15),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: Row(
+                       SizedBox(height: 15.h),
+                       Row(
                           children: [
                             const Text(
                               "Las appointment time",
@@ -133,11 +128,9 @@ class Upcoming extends StatelessWidget {
                             ),
                           ],
                         ),
-                      ),
-                      SizedBox(height: 8,),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: Row(
+
+                      SizedBox(height: 8.h,),
+                      Row(
                           children: [
                             SvgPicture.asset(
                               AppIcons.calenderIcon,
@@ -145,7 +138,7 @@ class Upcoming extends StatelessWidget {
                               width: 16,
                               height: 16,
                             ),
-                            const SizedBox(width: 5),
+                            SizedBox(width: 5.w),
                             const Text("16 May 2025"),
                             Spacer(),
                             const Text("10:25pm"),
@@ -167,12 +160,10 @@ class Upcoming extends StatelessWidget {
                             ),
                           ],
                         ), // This marks the end of a Row widget that displays appointment details like date, time, and status.
-                      ),
 
-                      const SizedBox(height: 15),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: IconTextButton(
+
+                      SizedBox(height: 15.h),
+                      IconTextButton(
                           text: "Check-in",
                           height: 50,
                           bordercolor: BorderColors.warning700,
@@ -185,11 +176,8 @@ class Upcoming extends StatelessWidget {
 
 
                           },),
-                      ),
-                      const SizedBox(height: 12),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: LabeledTextFielded(
+                      SizedBox(height: 12.h),
+                      LabeledTextFielded(
                           maxline: 1,
                           borderColor: TextColors.neutral200,
                           label: "Visit Reason",
@@ -201,12 +189,35 @@ class Upcoming extends StatelessWidget {
                           },
                           hintText: "I need a cleaning",
                         ),
+                      SizedBox(height: 12.h),
+                      LabeledTextFielded(
+                        maxline: 1,
+                        borderColor: TextColors.neutral200,
+                        label: "Visit Type",
+                        controller: controller,
+                        // 👈 Use reactive value
+                        readOnly: true,
+                        onTap: () {
+                          // _contrller.pickDate(context);
+                        },
+                        hintText: "New Patient Visit",
                       ),
 
-                      const SizedBox(height: 12),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: LabeledTextFielded(
+                      SizedBox(height: 12.h),
+                      LabeledTextFielded(
+                        maxline: 1,
+                        borderColor: TextColors.neutral200,
+                        label: "Insurance",
+                        controller: controller,
+                        // 👈 Use reactive value
+                        readOnly: true,
+                        onTap: () {
+                          // _contrller.pickDate(context);
+                        },
+                        hintText: "Blusky",
+                      ),
+                      SizedBox(height: 12.h),
+                      LabeledTextFielded(
                           maxline: 2,
                           borderColor: TextColors.neutral200,
                           label: "Summary",
@@ -218,76 +229,26 @@ class Upcoming extends StatelessWidget {
                           },
                           hintText: "Problem \n .head",
                         ),
-                      ),
 
-                      SizedBox(height: 20,),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: AppText("Current Medications",fontSize: 16,color: TextColors.neutral900,),
+
+                      SizedBox(height: 20.h,),
+                      AppText("Current Medications",fontSize: 16,color: TextColors.neutral900,),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: 1,
+                        itemBuilder: (context, index) {
+                        //  final doc = documents[index];
+                          return documentSection('doc pdf', '12.20kb');
+                        },
                       ),
                       SizedBox(height: 8,),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: _buildAllergiesSection(),
-                      ),
+                      _currenMedicineSection(),
 
-                      SizedBox(height: 20),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: Row(
-                          children: [
-                            Text(
-                              "Prior Diagnoses",
-                              style: TextStyle(
-                                fontFamily: "Satoshi",
-                                fontSize: 16,
-                                color: TextColors.neutral900,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            Text(
-                              "(Optional)",
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: TextColors.neutral500,
-                                fontFamily: "Satoshi",
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 12),
-                        height: 160.h,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(width: 1, color: TextColors.neutral200),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Hello dost how are you Hello dost how are you Hello dost how are you Hello dost how are you Hello dost how are you ",
-                                style: TextStyle(
-                                  fontFamily: "Satoshi",
-                                  fontSize: 14,
-                                  color: TextColors.neutral500,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                      SizedBox(height: 8.h,),
+                      PriorDiagoses(),
 
-                      SizedBox(height: 20),
+                      SizedBox(height: 20.h),
                     ],
                   ),
                 );
@@ -297,73 +258,56 @@ class Upcoming extends StatelessWidget {
         ),
     );
   }
-
-   Widget _buildSection({
-     required String title,
-     required VoidCallback onAdd,
-     required Widget child,
-   }) {
+   Widget documentSection(String name, String size) {
      return Container(
+       margin: EdgeInsets.symmetric(vertical: 8.h), // spacing between tiles
+       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+       alignment: Alignment.centerLeft,
        decoration: BoxDecoration(
-         color: Colors.white,
-         borderRadius: BorderRadius.circular(8),
+         color: Appcolors.primary,
+         borderRadius: BorderRadius.circular(8.r),
          boxShadow: [
            BoxShadow(
-             color: Colors.grey.withOpacity(0.1),
-             spreadRadius: 1,
-             blurRadius: 8,
-             offset: const Offset(0, 2),
+             color: ShadowColor.shadowColors1.withOpacity(0.10),
+             blurRadius: 4,
+             spreadRadius: 0,
+             offset: Offset(0, 3),
+             blurStyle: BlurStyle.normal,
            ),
          ],
        ),
-       child: Padding(
-         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-         child: Column(
-           crossAxisAlignment: CrossAxisAlignment.start,
-           children: [
-             Row(
-               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-               children: [
-                 Text(
-                   title,
-                   style: TextStyle(
-                     fontSize: 18,
-                     fontFamily: "Satoshi",
-                     fontWeight: FontWeight.w500,
-                     color: TextColors.neutral900,
-                   ),
-                 ),
-                 GestureDetector(
-                   onTap: onAdd,
-                   child: const Row(
-                     children: [
-                       Icon(Icons.add, color: Appcolors.action, size: 20),
-                       SizedBox(width: 4),
-                       Text(
-                         'Add',
-                         style: TextStyle(
-                           color: Appcolors.action,
-                           fontSize: 16,
-                           fontWeight: FontWeight.w500,
-                         ),
-                       ),
-                     ],
-                   ),
-                 ),
-               ],
+       child: Column(
+         crossAxisAlignment: CrossAxisAlignment.start,
+         children: [
+           Text(
+             name,
+             style: TextStyle(
+               fontSize: 14,
+               color: TextColors.neutral900,
+               fontWeight: FontWeight.w500,
              ),
-             const SizedBox(height: 16),
-             child,
-           ],
-         ),
+           ),
+           SizedBox(height: 4.h),
+           Text(
+             size,
+             style: TextStyle(
+               fontSize: 12.sp,
+               color: TextColors.neutral500,
+               fontWeight: FontWeight.w400,
+             ),
+           ),
+         ],
        ),
      );
    }
 
+
    Widget _buildTableHeader(List<String> headers) {
      return Container(
-       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-       decoration: BoxDecoration(color: HexColor("#F0F5FE")),
+       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 14),
+       decoration: BoxDecoration(
+           borderRadius: BorderRadius.only(topLeft: Radius.circular(8),topRight: Radius.circular(8)),
+           color: HexColor("#EDF4FA")),
        child: Row(
          children: headers.map((header) {
            bool isAction = header == 'Action';
@@ -373,8 +317,8 @@ class Upcoming extends StatelessWidget {
                header,
                style: TextStyle(
                  fontSize: 14,
-                 fontWeight: FontWeight.w400,
-                 color: TextColors.neutral900,
+                 fontWeight: FontWeight.w500,
+                 color: TextColors.neutral500,
                ),
              ),
            );
@@ -383,12 +327,18 @@ class Upcoming extends StatelessWidget {
      );
    }
 
-   Widget _buildAllergiesSection() {
+   Widget _currenMedicineSection() {
      return Container(
        padding: EdgeInsets.only(left: 1, right: 1, top: 1, bottom: 0),
        decoration: BoxDecoration(
-         borderRadius: BorderRadius.circular(5),
-         border: Border.all(width: 1, color: TextColors.neutral200),
+         borderRadius: BorderRadius.circular(8),
+         boxShadow: [
+           BoxShadow(
+             color: ShadowColor.shadowColors1.withOpacity(0.10),
+             offset: const Offset(0,3),
+             blurRadius: 4,
+           ),
+         ],
        ),
        child: Column(
          children: [
@@ -416,6 +366,66 @@ class Upcoming extends StatelessWidget {
      );
    }
 
+   Widget PriorDiagoses(){
+    return Column(
+      children: [
+        Row(
+          children: [
+            Text(
+              "Prior Diagnoses",
+              style: TextStyle(
+                fontFamily: "Inter",
+                fontSize: 16,
+                color: TextColors.neutral900,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            Text(
+              "(Optional)",
+              style: TextStyle(
+                fontSize: 14,
+                color: TextColors.neutral500,
+                fontFamily: "Inter",
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: 8.h,),
+        Container(
+          padding: EdgeInsets.all(8),
+
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8),
+            boxShadow: [
+              BoxShadow(
+                color: ShadowColor.shadowColors1.withOpacity(0.10),
+                offset: const Offset(0,3),
+                blurRadius: 4,
+              ),
+            ],
+          ),
+          child:  Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Patient's medical history includes previous surgeries, allergies to penicillin, and a family history of diabetes. Current concerns involve persistent headaches and occasional dizziness",
+                style: TextStyle(
+                  fontFamily: "Inter",
+                  fontSize: 14,
+                  color: TextColors.neutral500,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+   }
 
 
    Widget _buildDeleteButton(VoidCallback onPressed) {
@@ -449,7 +459,7 @@ class Upcoming extends StatelessWidget {
      );
    }
 
-     Widget _buildTableRow(List<dynamic> cells) {
+   Widget _buildTableRow(List<dynamic> cells) {
      return Container(
        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
        decoration: BoxDecoration(

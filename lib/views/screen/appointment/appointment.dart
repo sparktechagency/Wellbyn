@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:wellbyn/views/screen/canceled/canceled.dart';
@@ -21,7 +21,6 @@ class Appointment extends StatefulWidget {
 class _AppointmentState extends State<Appointment> {
   final AppointmentController appointmentController = Get.put(AppointmentController());
 
-
   final List<String> tabs = ["Upcoming", "Compeleted", "Canceled"];
 
   @override
@@ -33,17 +32,15 @@ class _AppointmentState extends State<Appointment> {
         title: Text(
           "My appointment's",
           style: TextStyle(
-            fontSize: 20,
-            fontFamily: "Satoshi",
+            fontSize: 20.sp,
+            fontFamily: "Inter",
             fontWeight: FontWeight.w500,
             color: HexColor("#3D3D3D"),
           ),
         ),
         centerTitle: true,
         leading: IconButton(
-          onPressed: () {
-            Get.back(id: NavIds.profile);
-          },
+          onPressed:(){},
           icon: SvgPicture.asset(
             'assets/icons/arrow-left.svg',
             width: 30.w,
@@ -56,7 +53,7 @@ class _AppointmentState extends State<Appointment> {
         onTap: () => FocusScope.of(context).unfocus(),
         behavior: HitTestBehavior.opaque,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
           child: Column(
             children: [
               Stack(
@@ -70,36 +67,30 @@ class _AppointmentState extends State<Appointment> {
                           bool isSelected = appointmentController.selectedIndex.value == index;
                           return GestureDetector(
                             behavior: HitTestBehavior.opaque,
-                            onTap: ()=> appointmentController.changeTab(index),
+                            onTap: () => appointmentController.changeTab(index),
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8,
-                                vertical: 10,
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 8.w,
+                                vertical: 10.h,
                               ),
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Text(
-                                    "${tabs[index]}(2)",
+                                    "${tabs[index]}(12)",
                                     style: TextStyle(
-                                      fontSize: isSelected ? 14.12 : 14,
-                                      fontFamily: "Satoshi",
+                                      fontSize: isSelected ? 14.6.sp : 14.sp,
+                                      fontFamily: "Inter",
                                       overflow: TextOverflow.ellipsis,
-                                      color: isSelected
-                                          ? TextColors.action
-                                          : TextColors.secondary,
-                                      fontWeight: isSelected
-                                          ? FontWeight.w600
-                                          : FontWeight.w500,
+                                      color: isSelected ? TextColors.action : TextColors.secondary,
+                                      fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
                                     ),
                                   ),
-                                  const SizedBox(height: 9),
+                                  SizedBox(height: 9.h),
                                   Container(
-                                    height: 2,
-                                    width: isSelected ? 82 : 80,
-                                    color: isSelected
-                                        ? TextColors.action
-                                        : Colors.transparent,
+                                    height: 2.h,
+                                    width: isSelected ? 78.w : 78.w,
+                                    color: isSelected ? TextColors.action : Colors.transparent,
                                   ),
                                 ],
                               ),
@@ -114,37 +105,32 @@ class _AppointmentState extends State<Appointment> {
                     left: 0,
                     right: 0,
                     child: Container(
-                      margin: const EdgeInsets.only(
-                        bottom: 10,
-                        left: 10,
-                        right: 10,
-                      ),
-                      height: 1,
+                      margin: EdgeInsets.symmetric(horizontal: 10.w),
+                      height: 1.h,
                       color: Appcolors.disabled.withOpacity(0.25),
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: 10.h),
               Expanded(
                 child: Obx(() {
                   switch (appointmentController.selectedIndex.value) {
                     case 0:
-                      return Upcoming();
+                      return  Upcoming();
                     case 1:
-                      return Compeleted();
+                      return  Compeleted();
                     case 2:
-                      return Canceled();
+                      return  Canceled();
                     default:
-                      return SizedBox();
+                      return  SizedBox();
                   }
                 }),
               ),
-
-            ]
-         )
-       )
-      )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

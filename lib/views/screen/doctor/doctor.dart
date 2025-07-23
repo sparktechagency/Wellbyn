@@ -4,6 +4,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:lottie/lottie.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/utils/app_constants.dart';
 import 'package:wellbyn/utils/app_icons.dart';
 import 'package:wellbyn/views/screen/doctor/doctor_details.dart';
 
@@ -34,7 +40,7 @@ class Doctor extends StatelessWidget {
           "Doctor",
           style: TextStyle(
             fontSize: 20,
-            fontFamily: "Satoshi",
+            fontFamily: AppConstants.FONT_FAMILY,
             fontWeight: FontWeight.w500,
             color: HexColor("#3D3D3D"),
           ),
@@ -106,7 +112,7 @@ class Doctor extends StatelessWidget {
                                           color: isSelected
                                               ? TextColors.action
                                               : TextColors.secondary,
-                                          fontWeight: FontWeight.w400,
+                                          fontWeight: FontWeight.w500,
                                         ),
                                       ),
                                       SizedBox(height: 4),
@@ -149,7 +155,7 @@ class Doctor extends StatelessWidget {
                       child: Text(
                         "Available Doctor",
                         style: TextStyle(
-                          fontFamily: 'Satoshi',
+                          fontFamily: AppConstants.FONT_FAMILY,
                           fontSize: 20,
                           color: HexColor("##3D3D3D"),
                           fontWeight: FontWeight.w500,
@@ -188,12 +194,10 @@ class Doctor extends StatelessWidget {
                             borderRadius: BorderRadius.circular(12),
                             boxShadow: [
                               BoxShadow(
-                                color: Appcolors.secondary,
-                                // softer effect
-                                blurRadius: 2,
-                                // reasonable softness
-                                spreadRadius: 2,
-                                offset: Offset(0.2, 0.2), // downward shadow
+                                color: ShadowColor.shadowColors1.withOpacity(0.10),
+                                spreadRadius: 0,
+                                blurRadius: 4,
+                                offset: Offset(0, 3),
                               ),
                             ],
                           ),
@@ -235,7 +239,7 @@ class Doctor extends StatelessWidget {
                                   style: TextStyle(
                                     fontSize: 18,
                                     color: TextColors.neutral900,
-                                    fontFamily: 'Satoshi',
+                                    fontFamily: AppConstants.FONT_FAMILY,
                                     fontWeight: FontWeight.w500,
                                   ),
                                   overflow: TextOverflow.ellipsis,
@@ -246,7 +250,7 @@ class Doctor extends StatelessWidget {
                                 "Heart Health Expert",
                                 style: TextStyle(
                                   color: TextColors.neutral500,
-                                  fontFamily: 'Satoshi',
+                                  fontFamily: AppConstants.FONT_FAMILY,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -272,7 +276,7 @@ class Doctor extends StatelessWidget {
                                       style: TextStyle(
                                         fontSize: 14,
                                         fontStyle: FontStyle.italic,
-                                        fontFamily: "Satoshi",
+                                        fontFamily: AppConstants.FONT_FAMILY,
                                         color: TextColors.neutral900,
                                         fontWeight: FontWeight.w500,
                                       ),
@@ -291,8 +295,9 @@ class Doctor extends StatelessWidget {
                                       "3 available time",
                                       style: TextStyle(
                                         fontSize: 14,
+                                        letterSpacing: 0.2,
                                         color: TextColors.neutral900,
-                                        fontFamily: 'Satoshi',
+                                        fontFamily: AppConstants.FONT_FAMILY,
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),
@@ -313,7 +318,7 @@ class Doctor extends StatelessWidget {
                           ),
                         ),
                       );
-                        })
+                    })
                   ),
                 ],
               ),

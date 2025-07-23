@@ -33,31 +33,70 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: padding,
-        child: ElevatedButton(
-          onPressed: loading ? () {} : onTap,
-          style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-                side: BorderSide(
-                    width: 1.w, color: broderColor ?? BorderColors.normal),
-                borderRadius: BorderRadius.circular(8.r)),
-            backgroundColor: color ?? Appcolors.primary,
-            minimumSize: Size(width ?? Get.width, height ?? 53.h),
+      return GestureDetector(
+        onTap: loading ? null : onTap,
+        child: Container(
+          width: width ?? Get.width,
+          height: height ?? 53.h,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: color ?? Appcolors.primary,
+            border: Border.all(
+              color: broderColor ?? BorderColors.normal,
+              width: 1.w,
+            ),
+            borderRadius: BorderRadius.circular(8.r),
+            boxShadow: [
+              BoxShadow(
+                color: ShadowColor.shadowColors1.withOpacity(0.10),
+                blurRadius: 4,
+                offset: Offset(0, 3),
+              ),
+            ],
           ),
           child: loading
               ? SizedBox(
-            height: 20.h,
             width: 20.h,
+            height: 20.h,
             child: const CircularProgressIndicator(
+              strokeWidth: 2,
               color: Colors.white,
             ),
           )
               : CustomText(
-              text: text,
-              fontWeight: FontWeight.w400,
-              fontSize: fontSize ?? 14.sp,
-              color: textColor ?? Colors.black),
-        ));
-  }
+            text: text,
+            fontWeight: FontWeight.w400,
+            fontSize: fontSize ?? 14.sp,
+            color: textColor ?? Colors.black,
+          ),
+        ),
+      );
+    }
+
+    // return Padding(
+    //     padding: padding,
+    //     child: ElevatedButton(
+    //       onPressed: loading ? () {} : onTap,
+    //       style: ElevatedButton.styleFrom(
+    //         shape: RoundedRectangleBorder(
+    //             side: BorderSide(
+    //                 width: 1.w, color: broderColor ?? BorderColors.normal),
+    //             borderRadius: BorderRadius.circular(8.r)),
+    //         backgroundColor: color ?? Appcolors.primary,
+    //         minimumSize: Size(width ?? Get.width, height ?? 53.h),
+    //       ),
+    //       child: loading
+    //           ? SizedBox(
+    //         height: 20.h,
+    //         width: 20.h,
+    //         child: const CircularProgressIndicator(
+    //           color: Colors.white,
+    //         ),
+    //       )
+    //           : CustomText(
+    //           text: text,
+    //           fontWeight: FontWeight.w400,
+    //           fontSize: fontSize ?? 14.sp,
+    //           color: textColor ?? Colors.black),
+    //     ));
 }

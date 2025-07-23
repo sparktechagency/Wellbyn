@@ -30,7 +30,7 @@ class WaitlistScreen extends StatelessWidget {
           "Your Waitlist",
           style: TextStyle(
             fontSize: 20,
-            fontFamily: "Satoshi",
+            fontFamily: "Inter",
             fontWeight: FontWeight.w500,
             color: TextColors.neutral900,
           ),
@@ -58,14 +58,14 @@ class WaitlistScreen extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
             width: double.infinity,
             decoration: BoxDecoration(
-              color: Appcolors.page,
-              boxShadow: [
-                BoxShadow(
-                  color: TextColors.neutral500.withOpacity(0.25),
-                  offset: const Offset(0, 0.3),
-                  blurRadius: 5,
-                ),
-              ],
+              color: Appcolors.primary,
+              // boxShadow: [
+              //   BoxShadow(
+              //     color: TextColors.neutral500.withOpacity(0.25),
+              //     offset: const Offset(0, 0.3),
+              //     blurRadius: 5,
+              //   ),
+              // ],
               borderRadius: BorderRadius.circular(12),
             ),
             child: Column(
@@ -93,7 +93,7 @@ class WaitlistScreen extends StatelessWidget {
                               "Dr. Moule Marrk",
                               style: TextStyle(
                                 fontSize: 18,
-                                fontFamily: "Satoshi",
+                                fontFamily: "Inter",
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -102,7 +102,7 @@ class WaitlistScreen extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 14,
                                 color: TextColors.neutral500,
-                                fontFamily: "Satoshi",
+                                fontFamily: "Inter",
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -116,7 +116,7 @@ class WaitlistScreen extends StatelessWidget {
                                     style: TextStyle(
                                       fontSize: 14,
                                       color: TextColors.neutral900,
-                                      fontFamily: "Satoshi",
+                                      fontFamily: "Inter",
                                       fontWeight: FontWeight.w500,
                                     ),
                                     overflow: TextOverflow.ellipsis,
@@ -171,7 +171,7 @@ class WaitlistScreen extends StatelessWidget {
                         formattedDate,
                         style: TextStyle(
                           fontSize: 14,
-                          fontFamily: "Satoshi",
+                          fontFamily: "Inter",
                           fontWeight: FontWeight.w500,
                           color: TextColors.neutral900,
                         ),
@@ -180,7 +180,7 @@ class WaitlistScreen extends StatelessWidget {
                       SvgPicture.asset(AppIcons.clockIcon),
                       const Text("10:25pm", style: TextStyle(
                         fontSize: 14,
-                        fontFamily: "Satoshi",
+                        fontFamily: "Inter",
                         fontWeight: FontWeight.w500,
                         color: TextColors.neutral900,
                       ),),
@@ -209,8 +209,8 @@ class WaitlistScreen extends StatelessWidget {
                   child: CustomButton(
                     fontSize: 16,
                     height: 45,
-                    color: Appcolors.page,
-                    broderColor: Appcolors.error700,
+                    color: Appcolors.primary,
+                    broderColor: Appcolors.primary,
                     onTap: () {
                       showDialog(
                         context: context,
@@ -252,7 +252,7 @@ class WaitlistScreen extends StatelessWidget {
                                       color: TextColors.neutral900,
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600,
-                                      fontFamily: "Satoshi",
+                                      fontFamily: "Inter",
                                     ),
                                     textAlign: TextAlign.center,
                                   ),

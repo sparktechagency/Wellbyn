@@ -514,12 +514,16 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                     Container(
                                       padding: const EdgeInsets.all(1),
                                       decoration: BoxDecoration(
-                                        color: Appcolors.primary,
-                                        borderRadius: BorderRadius.circular(12),
-                                        border: Border.all(
-                                          color: TextColors.neutral200,
-                                          width: 1,
-                                        ),
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.circular(12.r),
+                                        boxShadow: [
+                                         BoxShadow(
+                                           color: ShadowColor.shadowColors1.withOpacity(0.10),
+                                           blurRadius: 4,
+                                           offset: Offset(0, 3),
+                                           spreadRadius: 0,
+                                         )
+                                        ]
                                       ),
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(8),
@@ -583,24 +587,63 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          CustomButton(
-                            color: Appcolors.primary,
-                            broderColor: TextColors.neutral900,
-                            width: 100,
-                            textColor: TextColors.neutral900,
-                            fontSize: 16,
-                            onTap: () => Get.back(),
-                            text: "Previous",
+                          InkWell(
+                            onTap: () {
+                              Get.back();
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 24),
+                              // padding controls width
+                              height: 50,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Appcolors.primary,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: ShadowColor.shadowColors1.withOpacity(
+                                      0.10,
+                                    ),
+                                    blurRadius: 4,
+                                    spreadRadius: 0,
+                                    offset: Offset(0, 3),
+                                    blurStyle: BlurStyle.normal,
+                                  ),
+                                ],
+                              ),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Previous",
+                                style: TextStyle(
+                                  fontFamily: AppConstants.FONT_FAMILY,
+                                  fontSize: 16,
+                                  color: TextColors.neutral500,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
                           ),
-                          CustomButton(
-                            textColor: Appcolors.primary,
-                            fontSize: 16,
-                            color: Appcolors.action,
-                            width: 100,
-                            onTap: (){
+                          InkWell(
+                            onTap: () {
                               Get.to(() => BaseScreen());
                             },
-                            text: "Next",
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 24),
+                              height: 50,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Appcolors.action,
+                              ),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Next",
+                                style: TextStyle(
+                                  fontFamily: AppConstants.FONT_FAMILY,
+                                  fontSize: 16,
+                                  color: Appcolors.primary,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
                           ),
                         ],
                       ),

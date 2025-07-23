@@ -26,19 +26,20 @@ class CaregiverScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
 
-
                 AppText("Your Caregiver"),
-                SizedBox(height: 10,),
+                SizedBox(height: 16,),
                 Container(
-                padding: const EdgeInsets.only(bottom: 5),
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Appcolors.secondary,
+                  color: Appcolors.primary,
                   borderRadius: BorderRadius.circular(8),
-                  border: Border.all(
-                    color: Appcolors.disabled,
-                    width: 1,
-                  )
+                  boxShadow: [
+                    BoxShadow(
+                      color: ShadowColor.shadowColors1.withOpacity(0.10),
+                      blurRadius: 4,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min, // <-- Important
@@ -46,7 +47,7 @@ class CaregiverScreen extends StatelessWidget {
                     Container(
                       height: 40.h,
                       decoration: BoxDecoration(
-                        color: Appcolors.secondary,
+                        color: Color(0xFFEDF4FA),
                         borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(8),
                           topRight: Radius.circular(8),
@@ -56,8 +57,8 @@ class CaregiverScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: const [
-                          Text("Name",style: TextStyle(fontFamily: "Satoshi",fontSize: 12,fontWeight: FontWeight.w400)),
-                          Text("Action",style: TextStyle(fontFamily: "Satoshi",fontSize: 12,fontWeight: FontWeight.w400)),
+                          Text("Name",style: TextStyle(fontFamily: "Inter",fontSize: 12,color: TextColors.neutral500,fontWeight: FontWeight.w400)),
+                          Text("Action",style: TextStyle(fontFamily: "Inter",fontSize: 12,color: TextColors.neutral500,fontWeight: FontWeight.w400)),
                         ],
                       ),
                     ),
@@ -67,13 +68,14 @@ class CaregiverScreen extends StatelessWidget {
                       itemCount: 2,
                       itemBuilder: (context, index) {
                         return Container(
-                          color: index.isEven ? Colors.white : Appcolors.secondary,
+                          height: 40.h,
+                          color: index.isEven ? Appcolors.primary: Color(0xFFEDF4FA),
                           padding: const EdgeInsets.all(5),
                           child: Row(
                             children: [
                               const Text(
                                 "Rosdeb Koch",
-                                style: TextStyle(fontFamily: "Satoshi",fontSize: 14,fontWeight: FontWeight.w500),
+                                style: TextStyle(fontFamily: "Inter",fontSize: 14,fontWeight: FontWeight.w500),
                               ),
                               Spacer(),
                               Material(
@@ -128,17 +130,19 @@ class CaregiverScreen extends StatelessWidget {
               ),
                 SizedBox(height: 30,),
                 AppText("As a caregiver",),
-                SizedBox(height: 10,),
+                SizedBox(height: 16,),
                 Container(
-                padding: const EdgeInsets.only(bottom: 5),
                 width: double.infinity,
                 decoration: BoxDecoration(
-                    color: Appcolors.secondary,
+                  boxShadow: [
+                    BoxShadow(
+                      color: ShadowColor.shadowColors1.withOpacity(0.10),
+                      blurRadius: 4,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
+                    color: Appcolors.primary,
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      color: Appcolors.disabled,
-                      width: 1,
-                    )
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min, // <-- Important
@@ -146,7 +150,7 @@ class CaregiverScreen extends StatelessWidget {
                     Container(
                       height: 40.h,
                       decoration: BoxDecoration(
-                        color: Appcolors.secondary,
+                        color: Color(0xFFEDF4FA),
                         borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(8),
                           topRight: Radius.circular(8),
@@ -156,9 +160,9 @@ class CaregiverScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: const [
-                          Text("Name",style: TextStyle(fontFamily: "Satoshi",fontSize: 12,fontWeight: FontWeight.w400),),
-                          Text("Relation",style: TextStyle(fontFamily: "Satoshi",fontSize: 12,fontWeight: FontWeight.w400),),
-                          Text("Action",style: TextStyle(fontFamily: "Satoshi",fontSize: 12,fontWeight: FontWeight.w400),),
+                          Text("Name",style: TextStyle(fontFamily: "Inter",fontSize: 12,color: TextColors.neutral500,fontWeight: FontWeight.w400),),
+                          Text("Relation",style: TextStyle(fontFamily: "Inter",fontSize: 12,color: TextColors.neutral500,fontWeight: FontWeight.w400),),
+                          Text("Action",style: TextStyle(fontFamily: "Inter",fontSize: 12,color: TextColors.neutral500,fontWeight: FontWeight.w400),),
                           SizedBox(width: 8,),
                         ],
                       ),
@@ -169,18 +173,19 @@ class CaregiverScreen extends StatelessWidget {
                       itemCount: 2,
                       itemBuilder: (context, index) {
                         return Container(
-                          color: index.isEven ? Colors.white : Appcolors.secondary,
+                          height: 40.h,
+                          color: index.isEven ? Colors.white : Color(0xFFEDF4FA),
                           padding: const EdgeInsets.all(5),
                           child: Row(
                             children: [
                               const Text(
                                 "Jamal",
-                                style: TextStyle(fontFamily: "Satoshi",fontSize: 14,fontWeight: FontWeight.w500),
+                                style: TextStyle(fontFamily: "Inter",fontSize: 14,fontWeight: FontWeight.w500),
                               ),
                               Spacer(),
                               const Text(
                              "Brother",
-                             style: TextStyle(fontFamily: "Satoshi",fontSize: 14,fontWeight: FontWeight.w500),
+                             style: TextStyle(fontFamily: "Inter",fontSize: 14,fontWeight: FontWeight.w500),
                               ),
                               Spacer(),
 
@@ -231,7 +236,7 @@ class CaregiverScreen extends StatelessWidget {
                   ],
                 ),
               ),
-                SizedBox(height: 20,),
+                SizedBox(height: 16,),
                 GestureDetector(
                 onTap: (){
                   print("Click and add the caregiver");
@@ -244,7 +249,13 @@ class CaregiverScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Appcolors.primary,
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Appcolors.action, width: 1),
+                    boxShadow: [
+                      BoxShadow(
+                        color: ShadowColor.shadowColors1.withOpacity(0.10),
+                        blurRadius: 4,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
                   ),
                   child: const Center(
                     child: Row(
@@ -262,14 +273,9 @@ class CaregiverScreen extends StatelessWidget {
                 ),
               ),
 
-
-            ],
-                 ),
-
-
-
-
-      ),
-    );
+               ],
+             ),
+         ),
+     );
   }
 }

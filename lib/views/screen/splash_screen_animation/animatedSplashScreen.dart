@@ -16,14 +16,17 @@ class _AnimatedSplashScreenState extends State<AnimatedSplashScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: Lottie.asset(
-            'assets/animations/data.json',
-            onLoaded: (composition) {
-              Future.delayed(composition.duration, () {
-                Get.offAll(() => CreateAccountPage(role: "doctor"));
-              });
-            },
-          ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 65.0),
+          child: Lottie.asset(
+              'assets/animations/data.json',
+              onLoaded: (composition) {
+                Future.delayed(composition.duration, () {
+                  Get.offAll(() => CreateAccountPage(role: "doctor"));
+                });
+              },
+            ),
+        ),
         ),
     );
   }

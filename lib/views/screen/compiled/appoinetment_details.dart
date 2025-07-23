@@ -10,6 +10,7 @@ import '../../../utils/app_colors.dart';
 import '../../../utils/app_icons.dart';
 import '../../../utils/nab_ids.dart';
 import '../../base/Apptext/app_text.dart';
+import '../../base/ContainerText/containertext.dart';
 import '../../base/icon_text_button.dart';
 class AppoinetmentDetails extends StatelessWidget {
   const AppoinetmentDetails({super.key});
@@ -24,7 +25,7 @@ class AppoinetmentDetails extends StatelessWidget {
           "Doctor History",
           style: TextStyle(
             fontSize: 20,
-            fontFamily: "Satoshi",
+            fontFamily: "Inter",
             fontWeight: FontWeight.w500,
             color: HexColor("#3D3D3D"),
           ),
@@ -49,340 +50,311 @@ class AppoinetmentDetails extends StatelessWidget {
           child:Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              color: Appcolors.page,
+              color: Appcolors.primary,
               boxShadow: [
                 BoxShadow(
-                  color: TextColors.neutral500.withOpacity(0.25),
-                  offset: const Offset(0, 0.3),
-                  blurRadius: 5,
+                  color: ShadowColor.shadowColors1.withOpacity(0.10),
+                  offset: const Offset(0, 3),
+                  blurRadius: 4,
                 ),
               ],
               borderRadius: BorderRadius.circular(20),
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: [
-                      const CircleAvatar(
-                        radius: 30,
-                        backgroundImage: AssetImage('assets/image/doctor_image.png'),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded( // Add Expanded to prevent overflow
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "Dr. Moule Marrk",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontFamily: "Satoshi",
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            const Text(
-                              "Cardiology",
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: TextColors.neutral500,
-                                fontFamily: "Satoshi",
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            Row(
-                              children: [
-                                SvgPicture.asset(AppIcons.hospitallocationIcon),
-                                const SizedBox(width: 5),
-                                const Expanded( // Add Expanded to prevent overflow
-                                  child: Text(
-                                    "Sylhet Health Center",
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      color: TextColors.neutral900,
-                                      fontFamily: "Satoshi",
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 18),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 20),
+                  Row(
+                      children: [
+                        const CircleAvatar(
+                          radius: 30,
+                          backgroundImage: AssetImage('assets/image/doctor_image.png'),
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded( // Add Expanded to prevent overflow
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                "Dr. Moule Marrk",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontFamily: "Inter",
+                                  fontWeight: FontWeight.w500,
                                 ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 15),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: [
-                      const Text(
-                        "Las appointment time",
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: TextColors.neutral500,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Expanded(
-                        child:Container(
-                          height: 1,
-                          decoration: BoxDecoration(
-                            color: TextColors.neutral200,
-
+                              ),
+                              const Text(
+                                "Cardiology",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: TextColors.neutral500,
+                                  fontFamily: "Inter",
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              Row(
+                                children: [
+                                  SvgPicture.asset(AppIcons.hospitallocationIcon),
+                                  const SizedBox(width: 5),
+                                  const Expanded( // Add Expanded to prevent overflow
+                                    child: Text(
+                                      "Sylhet Health Center",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        color: TextColors.neutral900,
+                                        fontFamily: "Inter",
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 8,),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: [
-                      SvgPicture.asset(
-                        AppIcons.calenderIcon,
-                        color: TextColors.neutral900,
-                        width: 16,
-                        height: 16,
-                      ),
-                      const SizedBox(width: 5),
-                      const Text("16 May 2025"),
-                      Spacer(),
-                      const Text("10:25pm"),
-                      Spacer(),
-                      Row(
-                        children: [
-                          Icon(Icons.check,color: BorderColors.success,size: 14,),
-                          AppText("Complete",color: BorderColors.success,fontSize: 14,),
-                        ],
-                      )
-                    ],
-                  ), // This marks the end of a Row widget that displays appointment details like date, time, and status.
-                ),
+                      ],
+                    ),
 
-                const SizedBox(height: 15),
+                  const SizedBox(height: 15),
+                   Row(
+                      children: [
+                        const Text(
+                          "Las appointment time",
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: TextColors.neutral500,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Expanded(
+                          child:Container(
+                            height: 1,
+                            decoration: BoxDecoration(
+                              color: TextColors.neutral200,
 
-                const SizedBox(height: 15),
-
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Reason for Visit",
-                        style: TextStyle(
-                          fontFamily: "Satoshi",
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  SizedBox(height: 8,),
+                  Row(
+                      children: [
+                        SvgPicture.asset(
+                          AppIcons.calenderIcon,
                           color: TextColors.neutral900,
+                          width: 16,
+                          height: 16,
                         ),
-                      ),
-                      SizedBox(height: 5),
-                      Text(
-                        "Need a cleaning",
-                        style: TextStyle(
-                          fontFamily: "Satoshi",
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14,
-                          color: TextColors.neutral500,
+                        const SizedBox(width: 5),
+                        const Text("16 May 2025"),
+                        Spacer(),
+                        const Text("10:25pm"),
+                        Spacer(),
+                        Row(
+                          children: [
+                            Icon(Icons.check,color: BorderColors.success,size: 14,),
+                            SizedBox(width: 4.w,),
+                            AppText("Complete",color: BorderColors.success,fontSize: 14,),
+                          ],
+                        )
+                      ],
+                    ), // This marks the end of a Row widget that displays appointment details like date, time, and status.
+
+
+                  const SizedBox(height: 15),
+
+                  const SizedBox(height: 15),
+
+                  LableTest("Reason for visit","Need a cleaning"),
+
+                  const SizedBox(height: 24),
+                  LableTest("Visit Type","New Patient Visit"),
+
+                  const SizedBox(height: 24),
+                  LableTest("Insurance","Blusky"),
+
+                  SizedBox(height: 24.h),
+                  Column(
+                      children: [
+                        Row(
+                          children: [
+                            AppText("Blood Pressure :",fontSize: 15,color: TextColors.neutral900,),
+                            AppText(" 130/85 mmHg",fontSize: 14,color: TextColors.neutral500,),
+
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 24),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: AppText("Vital Signs",fontSize: 16,color: TextColors.neutral900,),
-                ),
-                const SizedBox(height: 8),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: [
-                      AppText("Blood Pressure :",fontSize: 14,color: TextColors.neutral900,),
-                      AppText(" 130/85 mmHg",fontSize: 14,color: TextColors.neutral500,),
+                        Row(
+                          children: [
+                            AppText("Heart Rate :",fontSize: 15,color: TextColors.neutral900,fontWeight: FontWeight.w500,),
+                            AppText(" 88 bpm",fontSize: 14,color: TextColors.neutral500,),
 
-                    ],
-                  ),
-                ),
-
-                const SizedBox(height: 8),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: [
-                      AppText("Heart Rate :",fontSize: 14,color: TextColors.neutral900,),
-                      AppText(" 88 bpm",fontSize: 14,color: TextColors.neutral500,),
-
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: [
-                      AppText("Temperature :",fontSize: 14,color: TextColors.neutral900,),
-                      AppText(" 100.20F",fontSize: 14,color: TextColors.neutral500,),
-
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 24),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Diagnosis",
-                        style: TextStyle(
-                          fontFamily: "Satoshi",
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                          color: TextColors.neutral900,
+                          ],
                         ),
-                      ),
-                      SizedBox(height: 5),
-                      Text(
-                        "Upper Respiratory Infection",
-                        style: TextStyle(
-                          fontFamily: "Satoshi",
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14,
-                          color: TextColors.neutral500,
+                        Row(
+                          children: [
+                            AppText("Temperature:",fontSize: 15,color: TextColors.neutral900,fontWeight: FontWeight.w500,),
+                            AppText("100.20F",fontSize: 14,color: TextColors.neutral500,),
+
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 24),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "What the Doctor Observed",
-                        style: TextStyle(
-                          fontFamily: "Satoshi",
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                          color: TextColors.neutral900,
+                      ],
+                    ),
+
+                  const SizedBox(height: 24),
+                  Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "SOAP Notes",
+                          style: TextStyle(
+                            fontFamily: "Inter",
+                            fontWeight: FontWeight.w600,
+                            fontSize: 20,
+                            color: TextColors.neutral900,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 5),
-                      Text(
-                        "Patient's medical history includes previous surgeries, allergies to penicillin, and a family history of diabetes. Current concerns involve persistent headaches and occasional dizziness .",
-                        style: TextStyle(
-                          fontFamily: "Satoshi",
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14,
-                          color: TextColors.neutral500,
+                        SizedBox(height: 16.h),
+                        Text(
+                          "Subjective",
+                          style: TextStyle(
+                            fontFamily: "Inter",
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                            color: TextColors.neutral900,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
+                        SizedBox(height: 8.h),
+                        Containertext(text: "Patient presents for routine annual physical examination. Reports feeling well overall with no acute complaints. Denies chest pain, shortness of breath, or palpitations.",
+                          Textcolor: TextColors.neutral500,
 
-                const SizedBox(height: 24),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "What to Do Next?",
-                        style: TextStyle(
-                          fontFamily: "Satoshi",
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                          color: TextColors.neutral900,
                         ),
-                      ),
-                      SizedBox(height: 5),
-                      Text(
-                        "Prescribed antibiotic course for 7 days, recommended rest and increased fluid intake.\n"
-                            "Follow-up in 2 weeks\nif symptoms persist.",
-                        style: TextStyle(
-                          fontFamily: "Satoshi",
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14,
-                          color: TextColors.neutral500,
+                        SizedBox(height: 8.h),
+                        Text(
+                          "Objective",
+                          style: TextStyle(
+                            fontFamily: "Inter",
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                            color: TextColors.neutral900,
+                          ),
                         ),
-                      ),
+                        SizedBox(height: 8.h),
+                        Containertext(text: "Vital signs stable. BP 120/80, HR 72, Temp 98.6°F. Physical examination unremarkable. Heart regular rate and rhythm, lungs clear bilaterally.",
+                          Textcolor: TextColors.neutral500,
+                        ),
+                        SizedBox(height: 8.h),
+                        Text(
+                          "Assessment",
+                          style: TextStyle(
+                            fontFamily: "Inter",
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                            color: TextColors.neutral900,
+                          ),
+                        ),
+                        SizedBox(height: 8.h),
+                        Containertext(text: "Healthy adult male for routine preventive care visit.",
+                          Textcolor: TextColors.neutral500,
+                        ),
+                        SizedBox(height: 8.h),
+                        Text(
+                          "Plan",
+                          style: TextStyle(
+                            fontFamily: "Inter",
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                            color: TextColors.neutral900,
+                          ),
+                        ),
+                        SizedBox(height: 8.h),
+                        Containertext(text: "Continue current lifestyle habits. Return in 1 year for annual physical. Labs ordered for screening.",
+                          Textcolor: TextColors.neutral500,
+                        ),
+                      ],
+                    ),
 
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 24),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: AppText("Download Report" ,fontSize: 16,color: TextColors.neutral900,),
-                ),
-                SizedBox(height: 8,),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: IconTextButton(
-                    text: "Download",
-                    height: 40,
-                    width: 130,
-                    svgAsset: AppIcons.downloadIcon,
-                    bordercolor: Appcolors.action,
-                    textColor: Appcolors.action,
-                    svgAssetcolor: Appcolors.action,
-                    backgroundColor: Appcolors.primary,
-                    onTap: () {
+                  const SizedBox(height: 24),
+                  AppText("Download Report" ,fontSize: 16,color: TextColors.neutral900,),
 
-                  },),
-                ),
+                  SizedBox(height: 8,),
+                  IconTextButton(
+                      text: "Download",
+                      height: 40.h,
+                      fontsize: 14,
+                      width: 120.w,
+                      svgAsset: AppIcons.downloadIcon,
+                      bordercolor: Appcolors.action,
+                      textColor: Appcolors.action,
+                      svgAssetcolor: Appcolors.action,
+                      backgroundColor: Appcolors.primary,
+                      onTap: () {
 
-                const SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: [
-                      AppText("Temperature ",fontSize: 16,color: TextColors.neutral900,),
-                      AppText(" -In 7 day",fontSize: 16,color: TextColors.action,),
+                    },),
 
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: CustomButton(
-                    color: Appcolors.action,
-                    fontSize: 16,
-                    height: 50,
-                    broderColor: Colors.transparent,
-                    textColor:Appcolors.primary,
-                    onTap: (){},
-                    text: "Book Appointment ",),
-                ),
 
-                const SizedBox(height: 20),
-                //Blood Pressure : 130/85 mmHg
-                // Heart Rate : 88 bpm
-                // Temperature : 100.20F
-              ],
+                  const SizedBox(height: 20),
+                  // Row(
+                  //     children: [
+                  //       AppText("Temperature ",fontSize: 16,color: TextColors.neutral900,),
+                  //       AppText(" -In 7 day",fontSize: 16,color: TextColors.action,),
+                  //
+                  //     ],
+                  //   ),
+                  //
+                  // const SizedBox(height: 20),
+                  // CustomButton(
+                  //     color: Appcolors.action,
+                  //     fontSize: 16,
+                  //     height: 50,
+                  //     broderColor: Colors.transparent,
+                  //     textColor:Appcolors.primary,
+                  //     onTap: (){},
+                  //     text: "Book Appointment ",),
+                  //
+                  // const SizedBox(height: 20),
+                  //Blood Pressure : 130/85 mmHg
+                  // Heart Rate : 88 bpm
+                  // Temperature : 100.20F
+                ],
+              ),
             ),
           ),
 
         ),
       ),
     );
+  }
+
+  Column LableTest(String Lable,String text) {
+    return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      Lable,
+                      style: TextStyle(
+                        fontFamily: "Inter",
+                        fontWeight: FontWeight.w600,
+                        fontSize: 15,
+                        color: TextColors.neutral900,
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      text,
+                      style: TextStyle(
+                        fontFamily: "Inter",
+                        fontWeight: FontWeight.w600,
+                        fontSize: 15,
+                        color: TextColors.neutral500,
+                      ),
+                    ),
+                  ],
+                );
   }
 }

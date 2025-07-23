@@ -39,9 +39,16 @@ class _AccountBottomSheetState extends State<AccountBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: const BoxDecoration(
-        color: Colors.white,
+      padding: EdgeInsets.all(16),
+      decoration:  BoxDecoration(
+        color: Appcolors.primary,
+        boxShadow: [
+          BoxShadow(
+            color: ShadowColor.shadowColors1.withOpacity(0.10),
+            blurRadius: 4,
+            offset: Offset(0, 3),
+          ),
+        ],
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(25),
           topRight: Radius.circular(25),

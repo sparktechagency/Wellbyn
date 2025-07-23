@@ -244,9 +244,9 @@ class _CustomTextFieldedState extends State<CustomTextFielded> {
         decoration: InputDecoration(
           hintText: widget.hintText,
           hintStyle: const TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 14,
-            color: TextColors.secondary,
+            fontWeight: FontWeight.w400,
+            fontSize: 15,
+            color: TextColors.neutral500,
           ),
           contentPadding: EdgeInsets.symmetric(
             horizontal: widget.contentPaddingHorizontal ?? 8.w,

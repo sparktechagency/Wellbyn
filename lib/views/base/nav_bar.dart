@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -42,7 +43,7 @@ class BottomNavBar extends StatelessWidget {
       final selectedIndex = controller.currentIndex.value;
 
       return Container(
-        height: 70,
+        height: 81.h,
         decoration: const BoxDecoration(
           color: Appcolors.primary,
           borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
@@ -68,7 +69,7 @@ class BottomNavBar extends StatelessWidget {
                     child: InkWell(
                       splashColor: Colors.transparent,
                       onTap: () => controller.changePage(index),
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(8.r),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: Column(
