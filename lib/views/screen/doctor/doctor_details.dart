@@ -87,6 +87,7 @@ class DoctorDetails extends StatelessWidget {
                       "assets/image/doctor_image.png",
                       fit: BoxFit.cover,
                     ),
+
                   ),
                   Positioned(
                     top: 40,
