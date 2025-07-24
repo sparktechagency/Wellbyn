@@ -237,6 +237,7 @@ class _CustomTextFieldedState extends State<CustomTextFielded> {
               return null;
             },
         style: const TextStyle(
+          letterSpacing: 0.2,
           color: TextColors.neutral900,
           fontSize: 14,
           fontWeight: FontWeight.w500,
@@ -244,7 +245,8 @@ class _CustomTextFieldedState extends State<CustomTextFielded> {
         decoration: InputDecoration(
           hintText: widget.hintText,
           hintStyle: const TextStyle(
-            fontWeight: FontWeight.w400,
+            letterSpacing: 0.2,
+            fontWeight: FontWeight.w500,
             fontSize: 15,
             color: TextColors.neutral500,
           ),

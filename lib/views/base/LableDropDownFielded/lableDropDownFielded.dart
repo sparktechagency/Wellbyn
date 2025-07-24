@@ -28,7 +28,7 @@ class LabeledDropdownFielded extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppText(label, fontSize: 16, color: TextColors.neutral900,fontWeight: FontWeight.w500,),
+        AppText(label, fontSize: 16, color: TextColors.neutral900,fontWeight: FontWeight.w600,),
         SizedBox(height: 6.h),
         CustomDropdownDialogss(
           items: items,
@@ -111,6 +111,7 @@ class _DropdownDialogContent extends StatelessWidget {
       title: Text(
         title,
         style: const TextStyle(
+          letterSpacing: 0.2,
           fontWeight: FontWeight.w500,
           fontSize: 17,
         ),
@@ -167,6 +168,7 @@ class _DropdownListItem extends StatelessWidget {
         title: Text(
           item,
           style: TextStyle(
+            letterSpacing: 0.2,
             fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
             fontSize: 15,
             color: isSelected ? Appcolors.action : Colors.black,
@@ -209,11 +211,11 @@ class _DropdownInputDecorator extends StatelessWidget {
               selectedValue ?? 'Select state',
               style: TextStyle(
                 color: selectedValue == null
-                    ? Colors.grey[600]
-                    : Colors.black,
+                    ? TextColors.neutral500
+                    : TextColors.neutral900,
                 fontWeight:
-                selectedValue == null ? FontWeight.w600 : FontWeight.w400,
-                fontSize: 16
+                selectedValue == null ? FontWeight.w600 : FontWeight.w500,
+                fontSize: 14
               ),
             ),
           ),

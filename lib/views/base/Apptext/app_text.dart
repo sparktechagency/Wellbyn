@@ -21,9 +21,10 @@ class AppText extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
+        letterSpacing: 0.2,
         fontSize: fontSize ?? 20,
         fontFamily: AppConstants.FONT_FAMILY,
-        fontWeight: fontWeight ?? FontWeight.w500,
+        fontWeight: fontWeight ?? FontWeight.w600,
         color: color ?? TextColors.neutral900,
       ),
     );

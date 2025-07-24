@@ -223,7 +223,7 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                             fontWeight: FontWeight.w500,
                                             fontFamily: AppConstants.FONT_FAMILY,
                                             color: TextColors.neutral500,
-                                            fontSize: 14,
+                                            fontSize: 14.sp,
                                           ),
                                         ),
                                         Text(
@@ -233,7 +233,7 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                             fontWeight: FontWeight.w500,
                                             fontFamily: AppConstants.FONT_FAMILY,
                                             color: TextColors.neutral900,
-                                            fontSize: 16,
+                                            fontSize: 16.sp,
                                           ),
                                         ),
                                       ],
@@ -271,19 +271,19 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 20),
+                                SizedBox(height: 20.h),
 
                                 LabelValueText(
-                                  label: "Insurance id",
+                                  label: "Contact ID",
                                   value: "G987654321",
                                   labelStyle: TextStyle(
-                                    fontSize: 14,
+                                    fontSize: 14.sp,
                                     color: TextColors.neutral500,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: AppConstants.FONT_FAMILY,
                                   ),
                                   valueStyle: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 16.sp,
                                     color: TextColors.neutral900,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: AppConstants.FONT_FAMILY,
@@ -293,16 +293,16 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                 SizedBox(height: 20),
 
                                 LabelValueText(
-                                  label: "Group-policy",
+                                  label: "Group Number",
                                   value: "H123456789",
                                   labelStyle: TextStyle(
-                                    fontSize: 14,
+                                    fontSize: 14.sp,
                                     color: TextColors.neutral500,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: AppConstants.FONT_FAMILY,
                                   ),
                                   valueStyle: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 16.sp,
                                     color: TextColors.neutral900,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: AppConstants.FONT_FAMILY,
@@ -311,33 +311,16 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                 SizedBox(height: 20),
 
                                 LabelValueText(
-                                  label: "Phone",
-                                  value: "+1 9999999999",
+                                  label: "Expiration Date",
+                                  value: "31/12/2025",
                                   labelStyle: TextStyle(
-                                    fontSize: 14,
+                                    fontSize: 14.sp,
                                     color: TextColors.neutral500,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: AppConstants.FONT_FAMILY,
                                   ),
                                   valueStyle: TextStyle(
-                                    fontSize: 16,
-                                    color: TextColors.neutral900,
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: AppConstants.FONT_FAMILY,
-                                  ),
-                                ),
-                                SizedBox(height: 20),
-                                LabelValueText(
-                                  label: "Plan Name",
-                                  value: "Select ",
-                                  labelStyle: TextStyle(
-                                    fontSize: 14,
-                                    color: TextColors.neutral500,
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: AppConstants.FONT_FAMILY,
-                                  ),
-                                  valueStyle: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 16.sp,
                                     color: TextColors.neutral900,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: AppConstants.FONT_FAMILY,
@@ -345,7 +328,7 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                 ),
                                 SizedBox(height: 8),
                                 Container(
-                                  height: 1,
+                                  height: 0.5,
                                   color: TextColors.neutral200,
                                   margin: EdgeInsets.symmetric(vertical: 16),
                                 ),
@@ -376,13 +359,13 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                         label: "First Name",
                                         value: "Father",
                                         labelStyle: TextStyle(
-                                          fontSize: 15,
+                                          fontSize: 14.sp,
                                           color: TextColors.neutral500,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: AppConstants.FONT_FAMILY,
                                         ),
                                         valueStyle: TextStyle(
-                                          fontSize: 16,
+                                          fontSize: 16.sp,
                                           color: TextColors.neutral900,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: AppConstants.FONT_FAMILY,
@@ -395,13 +378,13 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                         label: "Middle Name",
                                         value: "Father",
                                         labelStyle: TextStyle(
-                                          fontSize: 15,
+                                          fontSize: 14.sp,
                                           color: TextColors.neutral500,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: AppConstants.FONT_FAMILY,
                                         ),
                                         valueStyle: TextStyle(
-                                          fontSize: 16,
+                                          fontSize: 16.sp,
                                           color: TextColors.neutral900,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: AppConstants.FONT_FAMILY,
@@ -415,13 +398,13 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                         label: "Last Name",
                                         value: "Father",
                                         labelStyle: TextStyle(
-                                          fontSize: 15,
+                                          fontSize: 14.sp,
                                           color: TextColors.neutral500,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: AppConstants.FONT_FAMILY,
                                         ),
                                         valueStyle: TextStyle(
-                                          fontSize: 16,
+                                          fontSize: 16.sp,
                                           color: TextColors.neutral900,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: AppConstants.FONT_FAMILY,
@@ -432,16 +415,16 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                 ),
                                 SizedBox(height: 20),
                                 LabelValueText(
-                                  label: "Group-policy",
+                                  label: "Contract ID",
                                   value: "H123456789",
                                   labelStyle: TextStyle(
-                                    fontSize: 15,
+                                    fontSize: 14.sp,
                                     color: TextColors.neutral500,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: AppConstants.FONT_FAMILY,
                                   ),
                                   valueStyle: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 16.sp,
                                     color: TextColors.neutral900,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: AppConstants.FONT_FAMILY,
@@ -449,24 +432,138 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                 ),
                                 SizedBox(height: 20),
                                 LabelValueText(
-                                  label: "Plan Name",
-                                  value: "Select ",
+                                  label: "Address Line 1",
+                                  value: "H123456789",
                                   labelStyle: TextStyle(
-                                    fontSize: 15,
+                                    fontSize: 14.sp,
                                     color: TextColors.neutral500,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: AppConstants.FONT_FAMILY,
                                   ),
                                   valueStyle: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 16.sp,
                                     color: TextColors.neutral900,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: AppConstants.FONT_FAMILY,
                                   ),
                                 ),
-                                SizedBox(height: 8),
+                                SizedBox(height: 20),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Flexible(
+                                      flex: 1,
+                                      child: LabelValueText(
+                                        label: "City",
+                                        value: "Manhattan",
+                                        labelStyle: TextStyle(
+                                          fontSize: 14.sp,
+                                          color: TextColors.neutral500,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: AppConstants.FONT_FAMILY,
+                                        ),
+                                        valueStyle: TextStyle(
+                                          fontSize: 16.sp,
+                                          color: TextColors.neutral900,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: AppConstants.FONT_FAMILY,
+                                        ),
+                                      ),
+                                    ),
+                                    Flexible(
+                                      flex: 1,
+                                      child: LabelValueText(
+                                        label: "State",
+                                        value: "NYC",
+                                        labelStyle: TextStyle(
+                                          fontSize: 14.sp,
+                                          color: TextColors.neutral500,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: AppConstants.FONT_FAMILY,
+                                        ),
+                                        valueStyle: TextStyle(
+                                          fontSize: 16.sp,
+                                          color: TextColors.neutral900,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: AppConstants.FONT_FAMILY,
+                                        ),
+                                      ),
+                                    ),
+
+                                    Flexible(
+                                      flex: 1,
+                                      child: LabelValueText(
+                                        label: "ZIP",
+                                        value: "00976",
+                                        labelStyle: TextStyle(
+                                          fontSize: 14.sp,
+                                          color: TextColors.neutral500,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: AppConstants.FONT_FAMILY,
+                                        ),
+                                        valueStyle: TextStyle(
+                                          fontSize: 16.sp,
+                                          color: TextColors.neutral900,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: AppConstants.FONT_FAMILY,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 20),
+                                LabelValueText(
+                                  label: "Employer Name",
+                                  value: "Mahmudcompany",
+                                  labelStyle: TextStyle(
+                                    fontSize: 14.sp,
+                                    color: TextColors.neutral500,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: AppConstants.FONT_FAMILY,
+                                  ),
+                                  valueStyle: TextStyle(
+                                    fontSize: 16.sp,
+                                    color: TextColors.neutral900,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: AppConstants.FONT_FAMILY,
+                                  ),
+                                ),
+                                SizedBox(height: 20),
+                                LabelValueText(
+                                  label: "Sex",
+                                  value: "Male",
+                                  labelStyle: TextStyle(
+                                    fontSize: 14.sp,
+                                    color: TextColors.neutral500,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: AppConstants.FONT_FAMILY,
+                                  ),
+                                  valueStyle: TextStyle(
+                                    fontSize: 16.sp,
+                                    color: TextColors.neutral900,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: AppConstants.FONT_FAMILY,
+                                  ),
+                                ),
+                                SizedBox(height: 20),
+                                LabelValueText(
+                                  label: "Date of Birht",
+                                  value: "31/12/2006",
+                                  labelStyle: TextStyle(
+                                    fontSize: 14.sp,
+                                    color: TextColors.neutral500,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: AppConstants.FONT_FAMILY,
+                                  ),
+                                  valueStyle: TextStyle(
+                                    fontSize: 16.sp,
+                                    color: TextColors.neutral900,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: AppConstants.FONT_FAMILY,
+                                  ),
+                                ),
                                 Container(
-                                  height: 1,
+                                  height: 0.5,
                                   color: TextColors.neutral200,
                                   margin: EdgeInsets.symmetric(vertical: 16),
                                 ),
@@ -474,7 +571,7 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                 AppText(
                                   "Insuranced Card",
                                   color: TextColors.neutral900,
-                                  fontSize: 16,
+                                  fontSize: 16.sp,
                                 ),
                                 SizedBox(height: 8),
                                 IconTextButton(

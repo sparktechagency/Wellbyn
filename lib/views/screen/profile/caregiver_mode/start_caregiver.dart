@@ -40,7 +40,7 @@ class StartCaregiver extends StatelessWidget {
                   Text(
                     "Add a Caregiver",
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 24.sp,
                       fontWeight: FontWeight.w500,
                       color: TextColors.neutral900,
                     ),
@@ -49,7 +49,7 @@ class StartCaregiver extends StatelessWidget {
                   Text("By adding a caregiver, you can assign someone to help you with all your appointment-related tasks. They can manage everything on your behalf.",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                      fontSize: 15,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
                       color: TextColors.neutral500,
                     ),
@@ -57,9 +57,8 @@ class StartCaregiver extends StatelessWidget {
                   SizedBox(height: 30.h),
                   SizedBox(
                     width: double.infinity,
-                    height: 45,
+                    height: 48.h,
                     child: ElevatedButton.icon(
-
                       label: Text(
                         "Start",
                         style: TextStyle(

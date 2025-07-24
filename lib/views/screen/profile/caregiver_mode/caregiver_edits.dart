@@ -7,9 +7,13 @@ import 'package:wellbyn/utils/app_icons.dart';
 import 'package:get/get.dart';
 import 'package:wellbyn/utils/nab_ids.dart';
 import 'package:wellbyn/views/base/custom_button.dart';
+import '../../../../controllers/TextField/textfield_Controller.dart';
+import '../../../../controllers/profile_setting_controller.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_constants.dart';
 import '../../../base/Apptext/app_text.dart';
+import '../../../base/LabelTextField/labelTextField.dart';
+import '../../../base/LableDropDownFielded/lableDropDownFielded.dart';
 import '../../../base/icon_text_button.dart';
 
 class CaregiverEdits extends StatelessWidget {
@@ -18,7 +22,8 @@ class CaregiverEdits extends StatelessWidget {
   final TextEditingController name = TextEditingController();
   final TextEditingController names = TextEditingController();
   final CaregiverController caregiverController = Get.put(CaregiverController());
-
+  final DropdownController  dropdownController = Get.put(DropdownController());
+  final ProfileSettingController _controller = Get.put(ProfileSettingController(),);
   List<String> item= ["Father","Mother","Brother","Sistar","other"];
   List<String> items= ["Partial controll ","Full access","Sub access",];
 
@@ -59,86 +64,45 @@ class CaregiverEdits extends StatelessWidget {
           child: Column(
             crossAxisAlignment:CrossAxisAlignment.start,
             children: [
-              LabeledTextField(
+              LabeledTextFielded(
                 maxline: 1,
                 borderColor: TextColors.neutral900,
                 label: "Name ",
                 controller: names,
-                hintText: "name",
+                hintText: "Name",
 
               ),
               SizedBox(height: 20),
-              Obx(() => LabeledDropdownField(
+              LabeledDropdownFielded(
                 label: "Relation",
                 titile: "Relation",
                 items: item,
-                selectedValue: caregiverController.selectedValue.value.isEmpty
-                    ? null
-                    : caregiverController.selectedValue.value,
+                selectedValue: dropdownController.relationShip,
                 onChanged: (value) {
-                  caregiverController.selectedValue(value);
+                  // Optional additional logic
+                  print("Selected: $value");
                 },
-              )),
-
-
-              // LabeledTextField(
-              //   maxline: 1,
-              //   borderColor: TextColors.neutral900,
-              //   label: "Relation ",
-              //   controller: names,
-              //   suffixSvgAsset: AppIcons.arrowdwonIcon,
-              //   hintText: "Father",
-              //   readOnly: true,
-              //   onTap: () {
-              //     showDialog(
-              //       context: context,
-              //       builder: (BuildContext context) {
-              //         return Dialog(
-              //           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-              //           shadowColor: TextColors.neutral200,
-              //           child: Padding(
-              //             padding: const EdgeInsets.all(16.0),
-              //             child: Column(
-              //               mainAxisSize: MainAxisSize.min, // Important to wrap content
-              //               children: const [
-              //
-              //
-              //               ],
-              //             ),
-              //           ),
-              //         );
-              //       },
-              //     );
-              //   },
-              // ),
-              SizedBox(height: 20),
-
-              LabeledTextField(
-                maxline: 1,
-                borderColor: TextColors.neutral500,
-                label: "Date of birth ",
-                controller: name,
-                readOnly: true,
-                onTap: () {
-                  // Use custom date picker instead
-                  showCustomDatePicker(
-                    context: context,
-                    onDateSelected: (DateTime selectedDate) {
-                      String formattedDate = DateFormat(
-                        'MM/dd/yyyy',
-                      ).format(selectedDate);
-                      name.text = formattedDate;
-                    },
-                  );
-                },
-                suffixSvgAsset: AppIcons.calenderIcon01,
-                suffixSvgColor: Appcolors.action,
-                hintText: "mm/dd/yyyy",
               ),
 
               SizedBox(height: 20),
 
-              LabeledTextField(
+              Obx(() => LabeledTextFielded(
+                maxline: 1,
+                borderColor: Appcolors.primary,
+                label: "Date of birth ",
+                controller: TextEditingController(
+                  text: _controller.formattedDate.value,
+                ),
+                readOnly: true,
+                onTap: () => _controller.pickDate(Get.context!),
+                suffixSvgAsset: AppIcons.calenderIcon01,
+                suffixSvgColor: Appcolors.action,
+                hintText: "mm/dd/yyyy",
+              ),),
+
+              SizedBox(height: 20),
+
+              LabeledTextFielded(
                 maxline: 1,
                 borderColor: TextColors.neutral900,
                 label: "Email ",
@@ -146,7 +110,7 @@ class CaregiverEdits extends StatelessWidget {
                 hintText: "name@gmail.com",
               ),
               SizedBox(height: 20),
-              LabeledTextField(
+              LabeledTextFielded(
                 maxline: 1,
                 borderColor: TextColors.neutral900,
                 label: "Phone ",
@@ -155,22 +119,22 @@ class CaregiverEdits extends StatelessWidget {
                 hintText: "+00184545",
               ),
               SizedBox(height: 20),
-              Obx(() => LabeledDropdownField(
+              LabeledDropdownFielded(
                 label: "Permission",
-                titile: "Permission",
+                titile: "Permisson",
                 items: items,
-                selectedValue: caregiverController.selectedControll.value.isEmpty
-                    ? null
-                    : caregiverController.selectedControll.value,
+                selectedValue: dropdownController.selectedValuePermission,
                 onChanged: (value) {
-                  caregiverController.selectedControll(value);
+                  // Optional additional logic
+                  print("Selected: $value");
                 },
-              )),
-              SizedBox(height: 5,),
-              Text(
-                style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500,fontFamily: "Satoshi",color: TextColors.neutral500),
-                "Sensitive information such as patient names, email addresses, passwords, and similar data cannot be changed.",
               ),
+              SizedBox(height: 5,),
+              Text("Sensitive information such as patient names, email addresses, passwords, and similar data cannot be changed.",style: TextStyle(
+                fontSize: 14.sp,
+                letterSpacing: 0.2,
+                fontWeight: FontWeight.w500,
+                color: TextColors.neutral500,),),
               SizedBox(height: 40),
 
               CustomButton(
@@ -191,261 +155,6 @@ class CaregiverEdits extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class CustomTextFieldes extends StatefulWidget {
-  final TextEditingController controller;
-  final TextInputType? keyboardType;
-  final bool? isObscureText;
-  final VoidCallback? onTap;
-  final bool? readOnly;
-  final Color? borderColor;
-  final String? suffixSvgAsset;
-  final Color? suffixSvgColor;
-  final String? obscure;
-  final Color? filColor;
-  final Widget? prefixIcon;
-  final String? labelText;
-  final String? hintText;
-  final double? contentPaddingHorizontal;
-  final double? contentPaddingVertical;
-  final Widget? suffixIcon;
-  final FormFieldValidator? validator;
-  final bool isPassword;
-  final bool? isEmail;
-  final AutovalidateMode? autovalidateMode;
-  final ValueChanged<String>? onChanged;
-  final int? maxLines;
-  final bool? enabled;
-
-  const CustomTextFieldes({
-    super.key,
-    this.suffixSvgAsset,
-    this.onTap,
-    this.readOnly,
-    this.suffixSvgColor,
-    this.contentPaddingHorizontal,
-    this.contentPaddingVertical,
-    this.hintText,
-    this.borderColor,
-    this.prefixIcon,
-    this.suffixIcon,
-
-    this.validator,
-    this.isEmail,
-    required this.controller,
-    this.keyboardType = TextInputType.text,
-    this.isObscureText = false,
-    this.obscure = '*',
-    this.filColor,
-    this.labelText,
-    this.isPassword = false,
-    this.autovalidateMode,
-    this.onChanged,
-    this.maxLines,
-    this.enabled,
-  });
-
-  @override
-  State<CustomTextFieldes> createState() => _CustomTextFieldState();
-}
-
-class _CustomTextFieldState extends State<CustomTextFieldes> {
-  bool obscureText = true;
-
-  void toggle() {
-    setState(() {
-      obscureText = !obscureText;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      autovalidateMode: widget.autovalidateMode ?? AutovalidateMode.disabled,
-      controller: widget.controller,
-      maxLines: widget.isPassword ? 1 : widget.maxLines,
-      keyboardType: widget.keyboardType,
-      obscuringCharacter: widget.obscure!,
-      enabled: widget.enabled ?? true,
-      readOnly: widget.readOnly ?? false,
-      onTap: widget.onTap,
-      // validator: widget.validator,
-      validator:
-          widget.validator ??
-          (value) {
-            if (value == null || value.isEmpty) {
-              return "Please enter ${widget.hintText?.toLowerCase() ?? 'this field'}";
-            }
-            if (widget.isEmail == true) {
-              bool isValidEmail = AppConstants.emailValidator.hasMatch(value);
-              if (!isValidEmail) {
-                return "Please check your email!";
-              }
-            }
-            return null;
-          },
-
-      cursorColor: TextColors.neutral900,
-      obscureText: widget.isPassword ? obscureText : false,
-      onChanged: widget.onChanged,
-      style: TextStyle(
-        color: TextColors.neutral900,
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-      ),
-      decoration: InputDecoration(
-        isDense: true,
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.r),
-          borderSide: BorderSide(
-            width: 1.5,
-            color: widget.borderColor ?? BorderColors.primary,
-          ),
-        ),
-
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.r),
-          borderSide: BorderSide(
-            width: 1,
-            color: BorderColors.tertiary, // don't use widget.borderColor here
-          ),
-        ),
-
-        disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.r),
-          borderSide: BorderSide(
-            width: 1,
-            color: BorderColors.disabled, // separate color
-          ),
-        ),
-        contentPadding: EdgeInsets.symmetric(
-          horizontal: widget.contentPaddingHorizontal ?? 8.w,
-          vertical:
-              widget.contentPaddingVertical ?? 6.h, // reduced vertical padding
-        ),
-
-        suffixIcon: widget.isPassword
-            ? GestureDetector(
-                onTap: toggle,
-                child: _suffixIcon(
-                  obscureText ? Icons.visibility_off : Icons.visibility,
-                ),
-              )
-            : widget.suffixSvgAsset != null
-            ? Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 12,
-                ),
-                child: SvgPicture.asset(
-                  widget.suffixSvgAsset!,
-                  width: 18.w,
-                  height: 18.w,
-                  colorFilter: ColorFilter.mode(
-                    widget.suffixSvgColor ?? TextColors.neutral900,
-                    BlendMode.srcIn,
-                  ),
-                ),
-              )
-            : widget.suffixIcon,
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.r),
-          borderSide: BorderSide(color: BorderColors.error),
-        ),
-
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.r),
-          borderSide: BorderSide(color: BorderColors.error, width: 2),
-        ),
-
-        fillColor: widget.filColor,
-        prefixIconColor: TextColors.neutral900,
-
-        hintText: widget.hintText,
-        hintStyle: TextStyle(
-          fontFamily: 'Satoshi',
-          fontWeight: FontWeight.w500,
-          fontSize: 14,
-          color: TextColors.secondary,
-        ),
-      ),
-    );
-  }
-
-  _suffixIcon(IconData icon) {
-    return Padding(padding: const EdgeInsets.all(10.0), child: Icon(icon));
-  }
-}
-
-class LabeledTextField extends StatelessWidget {
-  final String label;
-  final TextEditingController controller;
-  final String? hintText;
-  final Color? borderColor;
-  final int? maxline;
-  final bool isPassword;
-  final bool? isEmail;
-  final TextInputType? keyboardType;
-  final Widget? suffixIcon;
-  final String? suffixSvgAsset;
-  final Color? suffixSvgColor;
-  final Widget? prefixIcon;
-  final VoidCallback? onTap;
-  final bool? readOnly;
-  final bool? enabled;
-
-  const LabeledTextField({
-    super.key,
-    this.borderColor,
-    required this.label,
-    this.maxline,
-    required this.controller,
-    this.hintText,
-    this.isPassword = false,
-    this.isEmail,
-    this.keyboardType,
-    this.suffixIcon,
-    this.suffixSvgAsset,
-    this.suffixSvgColor,
-    this.onTap,
-    this.enabled,
-    this.readOnly,
-    this.prefixIcon,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        AppText(
-          label,
-          //fontWeight: FontWeight.w500,
-          fontSize: 16,
-          color: TextColors.neutral900,
-        ),
-        SizedBox(height: 6.h),
-        CustomTextFieldes(
-          enabled: enabled,
-          controller: controller,
-          hintText: hintText,
-          isPassword: isPassword,
-          isEmail: isEmail,
-          keyboardType: keyboardType,
-          suffixIcon: suffixIcon,
-          suffixSvgAsset: suffixSvgAsset,
-          suffixSvgColor: suffixSvgColor,
-          prefixIcon: prefixIcon,
-          contentPaddingVertical: 12,
-          borderColor: borderColor,
-          maxLines: maxline,
-          readOnly: readOnly,
-          onTap: onTap,
-        ),
-      ],
     );
   }
 }
@@ -800,298 +509,4 @@ void showCustomDatePicker({
   );
 }
 
-class CustomDropdownDialogs extends StatefulWidget {
-  final List<String> items;
-  final String? selectedValue;
-  final String titile;
-  final ValueChanged<String> onChanged;
 
-  const CustomDropdownDialogs({
-    Key? key,
-    required this.items,
-    this.selectedValue,
-    required this.onChanged,
-    required this.titile,
-  }) : super(key: key);
-
-  @override
-  _CustomDropdownDialogState createState() => _CustomDropdownDialogState();
-}
-
-class _CustomDropdownDialogState extends State<CustomDropdownDialogs> {
-  String? _selectedValue;
-
-  @override
-  void initState() {
-    super.initState();
-    _selectedValue = widget.selectedValue;
-  }
-
-  void _openDialog() async {
-    final selected = await showDialog<String>(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          backgroundColor: Appcolors.page,
-          title: Text(widget.titile,style: TextStyle(fontFamily:"Satoshi" ),),
-          content: Container(
-            width: 70,
-            color: Appcolors.page,
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: widget.items.length,
-              itemBuilder: (context, index) {
-                final item = widget.items[index];
-                final isSelected = item == _selectedValue;
-                return ListTile(
-                  title: Text(
-                    item,
-                    style: TextStyle(
-                      fontFamily: 'Satoshi',
-                      fontWeight: isSelected
-                          ? FontWeight.w700
-                          : FontWeight.w500,
-                      fontSize: 15,
-                      color: isSelected ? Appcolors.action : Colors.black,
-                    ),
-                  ),
-                  trailing: isSelected
-                      ? Icon(Icons.check, color: Appcolors.action, size: 20)
-                      : null,
-                  tileColor: isSelected ? Appcolors.action.withOpacity(0.1) : null,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  onTap: () {
-                    Navigator.pop(context, item);
-                  },
-                );
-              },
-            ),
-          ),
-        );
-      },
-    );
-
-    if (selected != null) {
-      setState(() {
-        _selectedValue = selected;
-      });
-      widget.onChanged(selected);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: _openDialog,
-      borderRadius: BorderRadius.circular(8),
-      child: InputDecorator(
-        decoration: InputDecoration(
-          filled: true,
-          fillColor: Appcolors.primary,
-          contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 9),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: Appcolors.disabled),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: Colors.blue, width: 2),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: Colors.red),
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: Colors.redAccent, width: 2),
-          ),
-          suffixIcon: Padding(
-            padding: const EdgeInsets.all(12),
-            child: SvgPicture.asset(
-              AppIcons.arrowdwonIcon,
-              color: TextColors.neutral900,
-            ),
-          ),
-        ),
-        child: Text(
-          _selectedValue ?? 'Select state',
-          style: TextStyle(
-            color: _selectedValue == null ? Colors.grey[600] : Colors.black,
-            fontWeight: _selectedValue == null
-                ? FontWeight.normal
-                : FontWeight.w300,
-            fontSize: 14,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class LabeledDropdownField extends StatelessWidget {
-  final String label;
-  final String titile;
-  final String? selectedValue;
-  final List<String> items;
-  final ValueChanged<String> onChanged;
-
-  const LabeledDropdownField({
-    super.key,
-    required this.titile,
-    required this.label,
-    required this.items,
-    this.selectedValue,
-    required this.onChanged,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        AppText(
-          label,
-          fontSize: 16,
-          color: TextColors.neutral900,
-        ),
-        SizedBox(height: 6.h),
-        CustomDropdownDialogs(
-          items: items,
-          titile: titile,
-          selectedValue: selectedValue,
-          onChanged: onChanged,
-        ),
-      ],
-    );
-  }
-}
-
-// class CustomDropdownDialoges extends StatefulWidget {
-//   final List<String> items;
-//   final String? selectedValue;
-//   final ValueChanged<String> onChanged;
-//
-//   const CustomDropdownDialoges({
-//     Key? key,
-//     required this.items,
-//     this.selectedValue,
-//     required this.onChanged,
-//   }) : super(key: key);
-//
-//   @override
-//   _CustomDropdownDialogStates createState() => _CustomDropdownDialogStates();
-// }
-//
-// class _CustomDropdownDialogStates extends State<CustomDropdownDialoges> {
-//   String? _selectedValue;
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     _selectedValue = widget.selectedValue;
-//   }
-//
-//   void _openDialog() async {
-//     final selected = await showDialog<String>(
-//       context: context,
-//       builder: (context) {
-//         return AlertDialog(
-//           backgroundColor: Appcolors.page,
-//           title: Text('Select Relation',style: TextStyle(fontFamily:"Satoshi" ),),
-//           content: Container(
-//             width: 70,
-//             color: Appcolors.page,
-//             child: ListView.builder(
-//               shrinkWrap: true,
-//               itemCount: widget.items.length,
-//               itemBuilder: (context, index) {
-//                 final item = widget.items[index];
-//                 final isSelected = item == _selectedValue;
-//                 return ListTile(
-//                   title: Text(
-//                     item,
-//                     style: TextStyle(
-//                       fontFamily: 'Satoshi',
-//                       fontWeight: isSelected
-//                           ? FontWeight.w700
-//                           : FontWeight.w500,
-//                       fontSize: 15,
-//                       color: isSelected ? Appcolors.action : Colors.black,
-//                     ),
-//                   ),
-//                   trailing: isSelected
-//                       ? Icon(Icons.check, color: Appcolors.action, size: 20)
-//                       : null,
-//                   tileColor: isSelected ? Appcolors.action.withOpacity(0.1) : null,
-//                   shape: RoundedRectangleBorder(
-//                     borderRadius: BorderRadius.circular(8),
-//                   ),
-//                   onTap: () {
-//                     Navigator.pop(context, item);
-//                   },
-//                 );
-//               },
-//             ),
-//           ),
-//         );
-//       },
-//     );
-//
-//     if (selected != null) {
-//       setState(() {
-//         _selectedValue = selected;
-//       });
-//       widget.onChanged(selected);
-//     }
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return InkWell(
-//       onTap: _openDialog,
-//       borderRadius: BorderRadius.circular(8),
-//       child: InputDecorator(
-//         decoration: InputDecoration(
-//           filled: true,
-//           fillColor: Appcolors.primary,
-//           contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 9),
-//           enabledBorder: OutlineInputBorder(
-//             borderRadius: BorderRadius.circular(8),
-//             borderSide: BorderSide(color: Appcolors.disabled),
-//           ),
-//           focusedBorder: OutlineInputBorder(
-//             borderRadius: BorderRadius.circular(8),
-//             borderSide: BorderSide(color: Colors.blue, width: 2),
-//           ),
-//           errorBorder: OutlineInputBorder(
-//             borderRadius: BorderRadius.circular(8),
-//             borderSide: BorderSide(color: Colors.red),
-//           ),
-//           focusedErrorBorder: OutlineInputBorder(
-//             borderRadius: BorderRadius.circular(8),
-//             borderSide: BorderSide(color: Colors.redAccent, width: 2),
-//           ),
-//           suffixIcon: Padding(
-//             padding: const EdgeInsets.all(12),
-//             child: SvgPicture.asset(
-//               AppIcons.arrowdwonIcon,
-//               color: TextColors.neutral900,
-//             ),
-//           ),
-//         ),
-//         child: Text(
-//           _selectedValue ?? 'Select state',
-//           style: TextStyle(
-//             color: _selectedValue == null ? Colors.grey[600] : Colors.black,
-//             fontWeight: _selectedValue == null
-//                 ? FontWeight.normal
-//                 : FontWeight.w300,
-//             fontSize: 14,
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }

@@ -10,6 +10,7 @@ import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_constants.dart';
 import '../../../../utils/nab_ids.dart';
 import '../../../base/Apptext/app_text.dart';
+import '../../../base/LabelTextField/labelTextField.dart';
 import '../../../base/icon_text_button.dart';
 class CaregiverModeDetails extends StatelessWidget {
    CaregiverModeDetails({super.key});
@@ -51,17 +52,17 @@ class CaregiverModeDetails extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
-            LabeledTextField(
-              enabled: false,
+            LabeledTextFielded(
+              readOnly: true,
               maxline: 1,
-              borderColor: TextColors.neutral900,
+              borderColor: Appcolors.primary,
             label: "Name ",
             controller: names,
             hintText: "name",
           ),
           SizedBox(height: 20),
-              LabeledTextField(
-                enabled: false,
+              LabeledTextFielded(
+                readOnly: true,
                 maxline: 1,
                 borderColor: TextColors.neutral900,
                 label: "Relation ",
@@ -71,13 +72,12 @@ class CaregiverModeDetails extends StatelessWidget {
               ),
               SizedBox(height: 20),
 
-              LabeledTextField(
-                enabled: false,
+              LabeledTextFielded(
+                readOnly: true,
                 maxline: 1,
                 borderColor: TextColors.neutral900,
                 label: "Date of birth ",
                 controller: name,
-                readOnly: true,
                 onTap: () {
                   // Use custom date picker instead
                   showCustomDatePicker(
@@ -96,8 +96,8 @@ class CaregiverModeDetails extends StatelessWidget {
 
               SizedBox(height: 20),
 
-              LabeledTextField(
-                enabled: false,
+              LabeledTextFielded(
+                readOnly: true,
                 maxline: 1,
                 borderColor: TextColors.neutral900,
                 label: "Email ",
@@ -105,8 +105,8 @@ class CaregiverModeDetails extends StatelessWidget {
                 hintText: "name@gmail.com",
               ),
               SizedBox(height: 20),
-              LabeledTextField(
-                enabled: false,
+              LabeledTextFielded(
+                readOnly: true,
                 maxline: 1,
                 borderColor: TextColors.neutral900,
                 label: "Phone ",
@@ -114,8 +114,8 @@ class CaregiverModeDetails extends StatelessWidget {
                 hintText: "+00184545",
               ),
               SizedBox(height: 20),
-              LabeledTextField(
-                enabled: false,
+              LabeledTextFielded(
+                readOnly: true,
                 maxline: 1,
                 borderColor: TextColors.neutral900,
                 label: "Permission ",
@@ -123,8 +123,13 @@ class CaregiverModeDetails extends StatelessWidget {
                 suffixSvgAsset: AppIcons.arrowdwonIcon,
                 hintText: "partial control",
               ),
-              SizedBox(height: 20),
-
+              SizedBox(height: 8.h),
+              Text("Sensitive information such as patient names, email addresses, passwords, and similar data cannot be changed.",style: TextStyle(
+                fontSize: 14.sp,
+                letterSpacing: 0.2,
+                fontWeight: FontWeight.w500,
+                color: TextColors.neutral500,),),
+              SizedBox(height: 24.h,),
               IconTextButton(
                 height: 48,
                 backgroundColor: Appcolors.action,
@@ -133,7 +138,10 @@ class CaregiverModeDetails extends StatelessWidget {
                 onTap: () {
                   Get.toNamed("/caregiver_edits", id: NavIds.profilenav);
 
-              },)
+              },),
+
+              SizedBox(height: 24.h,),
+
 
             ],
           ),
