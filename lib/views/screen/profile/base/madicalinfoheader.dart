@@ -34,9 +34,11 @@ class MedicalInfoHeader extends StatelessWidget {
         const SizedBox(height: 5),
         Text(
           description,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 14,
-            color: Colors.grey,
+            letterSpacing: 0.2,
+            fontWeight: FontWeight.w500,
+            color: TextColors.neutral500,
             height: 1.4,
           ),
         ),

@@ -13,10 +13,13 @@ import 'package:wellbyn/controllers/profile_controller.dart';
 import 'package:wellbyn/utils/app_icons.dart';
 import 'package:wellbyn/views/base/Apptext/app_text.dart';
 import 'package:wellbyn/views/base/custom_field.dart';
+import 'package:wellbyn/views/base/custom_text.dart';
 
 import '../../../../controllers/dotted_boder.dart';
+import '../../../../controllers/profile_setting_controller.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/nab_ids.dart';
+import '../../../base/LabelTextField/labelTextField.dart';
 import '../../../base/custom_button.dart';
 
 class PersonalInfo extends StatefulWidget {
@@ -49,8 +52,11 @@ class _PersonalInfoState extends State<PersonalInfo> {
   Uint8List? backLicenseImage;
   File? frontLicenseFile;
   File? backLicenseFile;
-  final ProfileController _controller = Get.put(ProfileController());
 
+  final ProfileController _controller = Get.put(ProfileController());
+  final ProfileSettingController controller = Get.put(
+    ProfileSettingController(),
+  );
   @override
   void dispose() {
     // Dispose all controllers
@@ -162,70 +168,70 @@ class _PersonalInfoState extends State<PersonalInfo> {
 
               // Personal Info Section
               _buildSectionContainer(
-                title: "Personal Info",
                 children: [
-                  _buildLabel("Full name"),
-                  SizedBox(height: 8),
-                  CustomTextField(
+                  LabeledTextFielded(
+                    borderColor: Appcolors.primary,
+                    label: "Full Name",
                     controller: firstNameController,
-                    filColor: Colors.white,
-                    borderColor: TextColors.neutral900,
-                    labelText: "First Name",
-                    enabled: false,
+                    maxline: 1,
+
+                    readOnly: true,
+                    hintText: "Full Name",
                   ),
                   SizedBox(height: 8),
                   Row(
                     children: [
                       Expanded(
-                        child: CustomTextField(
+                        child: CustomTextFielded(
                           controller: middleNameController,
                           filColor: Colors.white,
                           borderColor: TextColors.neutral900,
                           labelText: "Middle",
+                          hintText: "Middle",
                           enabled: false,
                         ),
                       ),
                       SizedBox(width: 6),
                       Expanded(
-                        child: CustomTextField(
+                        child: CustomTextFielded(
                           controller: lastNameController,
                           filColor: Colors.white,
                           borderColor: TextColors.neutral900,
                           labelText: "Last",
+                          hintText: "Last",
                           enabled: false,
                         ),
                       ),
                     ],
                   ),
                   const SizedBox(height: 20),
-                  _buildLabel("Date of birth"),
-                  SizedBox(height: 6),
-                  CustomTextFields(
-                    suffixIcon: AppIcons.calenderIcon01,
-                    controller: dobController,
-                    filColor: Colors.white,
-                    iconColor: Appcolors.action,
-                    borderColor: TextColors.neutral300,
-                    labelText: "mm/dd/yyyy",
-                    enabled: false,
-                  ),
+                  Obx(() => LabeledTextFielded(
+                    maxline: 1,
+                    borderColor: TextColors.neutral200,
+                    label: "Date of birth ",
+                    controller: TextEditingController(
+                      text: controller.formattedDate.value,
+                    ),
+                    readOnly: true,
+                    onTap: () => controller.pickDate(Get.context!),
+                    suffixSvgAsset: AppIcons.calenderIcon01,
+                    suffixSvgColor: Appcolors.action,
+                    hintText: "mm/dd/yyyy",
+                  ),),
                   SizedBox(height: 4),
-                  AppText(
-                    "0 years old",
-                    color: TextColors.neutral500,
-                    fontSize: 14,
-                  ),
+
                   const SizedBox(height: 20),
                   _buildLabel("Sex"),
                   _buildGenderSelection(),
                   const SizedBox(height: 20),
                   _buildLabel("Marital Status"),
-                  CustomTextFields(
-                    suffixIcon: AppIcons.arrowdwonIcon,
+                  CustomTextFielded(
+                    suffixSvgAsset: AppIcons.arrowdwonIcon,
                     controller: maritalStatusController,
                     filColor: Colors.white,
                     borderColor: TextColors.neutral300,
                     labelText: "Select status",
+                    hintText: "Select status",
                     enabled: false,
                   ),
                   const SizedBox(height: 20),
@@ -239,11 +245,12 @@ class _PersonalInfoState extends State<PersonalInfo> {
                       ),
                     ],
                   ),
-                  CustomTextFields(
+                  CustomTextFielded(
                     controller: childrenController,
                     filColor: Colors.white,
                     borderColor: TextColors.neutral300,
                     labelText: "0",
+                    hintText: "0",
                     enabled: false,
                   ),
                   const SizedBox(height: 8),
@@ -251,42 +258,40 @@ class _PersonalInfoState extends State<PersonalInfo> {
               ),
 
               const SizedBox(height: 20),
-              Divider(height: 1, color: TextColors.neutral200),
               const SizedBox(height: 20),
 
               // Contact Info Section
               _buildSectionContainer(
-                title: "Contact Info",
                 children: [
                   _buildLabel("Email"),
                   SizedBox(height: 8),
-                  CustomTextFields(
+                  CustomTextFielded(
                     controller: emailController,
                     filColor: Colors.white,
                     borderColor: TextColors.neutral300,
                     labelText: "email@email.com",
+                    hintText: "email@email.com",
                     enabled: false,
                   ),
-                  SizedBox(height: 8),
+                  SizedBox(height: 20),
                   _buildLabel("Phone"),
                   SizedBox(height: 5),
-                  CustomTextFields(
+                  CustomTextFielded(
                     controller: phoneController,
                     filColor: Colors.white,
                     borderColor: TextColors.neutral300,
                     labelText: "+0015411411",
+                    hintText: "+0015411411",
                     enabled: false,
                   ),
                 ],
               ),
 
               const SizedBox(height: 20),
-              Divider(height: 1, color: TextColors.neutral200),
               const SizedBox(height: 20),
 
               // Address Section
               _buildSectionContainer(
-                title: "Address",
                 children: [
                   Row(
                     children: [
@@ -300,21 +305,23 @@ class _PersonalInfoState extends State<PersonalInfo> {
                     ],
                   ),
                   const SizedBox(height: 8),
-                  CustomTextFields(
+                  CustomTextFielded(
                     controller: addressLine2Controller,
                     filColor: Colors.white,
                     borderColor: TextColors.neutral300,
                     labelText: "Address Line 2",
+                    hintText: "Address Line 2",
                     enabled: false,
                   ),
                   const SizedBox(height: 16),
                   _buildLabel("Driver's License"),
                   const SizedBox(height: 8),
-                  CustomTextFields(
+                  CustomTextFielded(
                     controller: licenseController,
                     filColor: Colors.white,
                     borderColor: TextColors.neutral300,
                     labelText: "License number",
+                    hintText: "License number",
                     enabled: false,
                   ),
                   const SizedBox(height: 16),
@@ -326,11 +333,11 @@ class _PersonalInfoState extends State<PersonalInfo> {
                           children: [
                             _buildLabel("City"),
                             const SizedBox(height: 8),
-                            CustomTextFields(
+                            CustomTextFielded(
                               controller: cityController,
                               filColor: Colors.white,
                               borderColor: TextColors.neutral300,
-                              labelText: "City",
+                              hintText: "City",
                               enabled: false,
                             ),
                           ],
@@ -343,13 +350,13 @@ class _PersonalInfoState extends State<PersonalInfo> {
                           children: [
                             _buildLabel("State"),
                             const SizedBox(height: 8),
-                            CustomTextFields(
-                              iconSize: 16,
-                              suffixIcon: AppIcons.arrowdwonIcon,
+                            CustomTextFielded(
+                              suffixSvgAsset: AppIcons.arrowdwonIcon,
                               controller: stateController,
                               filColor: Colors.white,
                               borderColor: TextColors.neutral300,
-                              labelText: "State",
+                              hintText: "State",
+                              maxLines: 1,
                               enabled: false,
                             ),
                           ],
@@ -362,7 +369,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                           children: [
                             _buildLabel("Zip Code"),
                             const SizedBox(height: 8),
-                            CustomTextFields(
+                            CustomTextFielded(
                               controller: zipController,
                               filColor: Colors.white,
                               borderColor: TextColors.neutral300,
@@ -378,104 +385,65 @@ class _PersonalInfoState extends State<PersonalInfo> {
               ),
 
               const SizedBox(height: 20),
-              Divider(height: 1, color: TextColors.neutral200),
               const SizedBox(height: 20),
 
               // Employment Section
               _buildSectionContainer(
-                title: "Employment",
                 children: [
                   _buildLabel("Employer"),
                   const SizedBox(height: 8),
-                  CustomTextFields(
+                  CustomTextFielded(
                     controller: employerController,
                     filColor: Colors.white,
                     borderColor: TextColors.neutral300,
-                    labelText: "Company name",
+                    hintText: "Company name",
+                    enabled: false,
+                  ),
+                  const SizedBox(height: 20),
+                  _buildLabel("Driver's License"),
+                  const SizedBox(height: 8),
+                  CustomTextFielded(
+                    controller: licenseController,
+                    filColor: Colors.white,
+                    borderColor: TextColors.neutral300,
+                    labelText: "License number",
+                    hintText: "License number",
                     enabled: false,
                   ),
                   const SizedBox(height: 20),
                   _buildLabel("Upload Driver's License Images"),
-                  const SizedBox(height: 5),
                   _buildImageUploadSection(),
+                  AppText("Accepted formats: JPG, PNG. Max file size: 5MB",fontSize: 14,fontWeight: FontWeight.w500,color: TextColors.neutral500,),
+                  const SizedBox(height: 10),
+
+                  const SizedBox(height: 20),
+                  Align(
+                      alignment: Alignment.topLeft,
+                      child: _buildLabel("Last 4 digits of SSN")),
+                  SizedBox(height: 8.h),
+                  CustomTextFielded(
+                    isPassword: true,
+                    borderColor: TextColors.neutral900,
+                    suffixSvgAsset: AppIcons.viewIcon,
+                    suffixSvgColor: TextColors.neutral500,
+                    hintText: "45454",
+                    prefixIcon: AppIcons.lockIcon,
+                    controller: emailController,
+                  ),
+                  SizedBox(height: 2),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: AppText(
+                      "For identification purposes on only",
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: TextColors.neutral500.withOpacity(0.80),
+                    ),
+                  ),
                 ],
               ),
 
-              const SizedBox(height: 10),
-              _buildLabel("Accepted formats:JPG,PNG. Max file size: 5MB"),
-              const SizedBox(height: 20),
-              Align(
-                  alignment: Alignment.topLeft,
-                  child: _buildLabel("Last 4 digits of SSN")),
-
-              TextField(
-                controller: emailController,
-                enabled: false,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontFamily: "Satoshi",
-                  color: TextColors.neutral500,
-                  fontWeight: FontWeight.w400,
-                ),
-                decoration: InputDecoration(
-                  filled: true,
-                  suffixIcon: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: SvgPicture.asset(
-                      color: TextColors.neutral500,
-                      AppIcons.viewIcon,
-                      height: 15,
-                      width: 15,
-                    ),
-                  ),
-                  fillColor: Appcolors.primary,
-                  labelText: "454545",
-                  labelStyle: TextStyle(
-                    color: TextColors.neutral500,
-                    fontSize: 14,
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 5,
-                    vertical: 10,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: BorderSide(color: TextColors.neutral500),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: BorderSide(color: TextColors.neutral500),
-                  ),
-                  disabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: BorderSide(
-                      color: TextColors.neutral500.withOpacity(0.4),
-                    ),
-                  ),
-
-                  // ✅ Change this:
-                  prefixIcon: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Icon(Icons.lock),
-                  ),
-                  prefixIconConstraints: const BoxConstraints(
-                    maxHeight: 28,
-                    maxWidth: 32,
-                  ),
-                ),
-              ),
-              SizedBox(height: 2),
-              Align(
-                alignment: Alignment.topLeft,
-                child: AppText(
-                  "For identification purposes on only",
-                  fontSize: 14,
-                  color: TextColors.neutral500,
-                ),
-              ),
-              const SizedBox(height: 20),
-              Divider(height: 1, color: TextColors.neutral200),
-              const SizedBox(height: 20),
+              SizedBox(height: 80.h),
 
             ],
           ),
@@ -485,7 +453,6 @@ class _PersonalInfoState extends State<PersonalInfo> {
   }
 
   Widget _buildSectionContainer({
-    required String title,
     required List<Widget> children,
   }) {
     return Container(
@@ -493,22 +460,20 @@ class _PersonalInfoState extends State<PersonalInfo> {
       decoration: BoxDecoration(
         color: Appcolors.primary,
         borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            color: Appcolors.secondary,
-            blurRadius: 2,
-            spreadRadius: 2,
-            offset: Offset(0.2, 0.2),
-          ),
-        ],
+        // boxShadow: [
+        //   BoxShadow(
+        //     color: ShadowColor.shadowColors1.withOpacity(0.10),
+        //     blurRadius: 4,
+        //     spreadRadius: 0,
+        //     offset: Offset(0, 3),
+        //   ),
+        // ],
       ),
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 8),
-            AppText(title, color: TextColors.neutral500),
             const SizedBox(height: 20),
             ...children,
           ],
@@ -652,87 +617,9 @@ class _PersonalInfoState extends State<PersonalInfo> {
     return Text(
       text,
       style: TextStyle(
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w500,
         fontSize: 16,
         color: TextColors.neutral900,
-      ),
-    );
-  }
-}
-
-class CustomTextFields extends StatelessWidget {
-  final TextEditingController controller;
-  final String labelText;
-  final Color filColor;
-  final Color borderColor;
-  final Color? iconColor;
-  final bool enabled;
-  final int? fontsize;
-  final String? suffixIcon;
-  final String? preffixIcon;
-  final double? iconSize;
-
-  const CustomTextFields({
-    Key? key,
-    required this.controller,
-    required this.labelText,
-    required this.filColor,
-    required this.borderColor,
-    this.enabled = true,
-    this.suffixIcon,
-    this.iconColor,
-    this.fontsize,
-    this.preffixIcon,
-    this.iconSize,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      controller: controller,
-      enabled: enabled,
-      style: TextStyle(
-        fontSize: 14,
-        fontFamily: "Satoshi",
-        color: TextColors.neutral500,
-        fontWeight: FontWeight.w400,
-      ),
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: filColor,
-        labelText: labelText,
-        labelStyle: TextStyle(
-          color: enabled ? TextColors.neutral900 : TextColors.neutral500,
-          fontSize: 14,
-        ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: borderColor),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: borderColor),
-        ),
-        disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: borderColor.withOpacity(0.4)),
-        ),
-        suffixIcon: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5),
-          child: suffixIcon != null
-              ? SvgPicture.asset(
-                  suffixIcon!,
-                  height: iconSize ?? 20,
-                  width: iconSize ?? 20,
-                  color: iconColor ?? TextColors.neutral500,
-                )
-              : null,
-        ),
-        suffixIconConstraints: const BoxConstraints(
-          maxHeight: 28,
-          maxWidth: 32,
-        ),
       ),
     );
   }
