@@ -56,8 +56,18 @@ class _BookReportState extends State<BookReport> {
   void initState() {
     super.initState();
     speechController = Get.put(SpeechController(speech: _speechToText));
+    _initSpeech();
     fileController.requestPermissions();
 
+  }
+  void _initSpeech() async {
+    bool available = await _speechToText.initialize(
+      onStatus: (status) => print('Speech status: $status'),
+      onError: (error) => print('Speech error: $error'),
+    );
+    if (!available) {
+      Get.snackbar("Speech Error", "Speech recognition not available");
+    }
   }
 
   void _deleteFile(int index) {

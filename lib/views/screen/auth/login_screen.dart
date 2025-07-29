@@ -7,7 +7,7 @@ import 'package:wellbyn/controllers/localization_controller.dart';
 import 'package:wellbyn/views/base/AppButton/app_button.dart';
 import 'package:wellbyn/views/base/Apptext/app_text.dart';
 import 'package:wellbyn/views/base/custom_field.dart';
-import 'package:wellbyn/views/screen/auth/create_acount_screen.dart';
+import 'package:wellbyn/views/screen/auth/create_acount_screen.dart' hide LabeledTextFielded;
 import '../../../utils/app_colors.dart';
 
 import '../../../utils/app_constants.dart';

@@ -22,6 +22,9 @@ class LabeledTextFielded extends StatelessWidget {
   final Color? borderColor; // Add this
   final int? maxline;
   final bool next;
+  final FormFieldValidator<String>? validator;
+  final AutovalidateMode? autovalidateMode;
+
 
   const LabeledTextFielded({
     super.key,
@@ -40,6 +43,8 @@ class LabeledTextFielded extends StatelessWidget {
     this.borderColor, // Add this to constructor
     this.contentPaddingHorizontal,
     this.contentPaddingVertical,
+    this.validator, // 👈
+    this.autovalidateMode, // 👈
   });
 
   @override
@@ -64,6 +69,8 @@ class LabeledTextFielded extends StatelessWidget {
           maxLines: maxline,
           next: next,
           borderColor: borderColor, // Pass borderColor here
+          validator: validator, // 👈 pass validator
+          autovalidateMode: autovalidateMode, // 👈 pass autovalidate mode
         ),
       ],
     );
@@ -191,96 +198,208 @@ class _CustomTextFieldedState extends State<CustomTextFielded> {
     });
   }
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Container(
+  //     decoration: BoxDecoration(
+  //       color: Colors.white,
+  //       borderRadius: BorderRadius.circular(8.r),
+  //       boxShadow: [
+  //         BoxShadow(
+  //           color: ShadowColor.shadowColors1.withOpacity(0.10), // Shadow color
+  //           blurRadius: 4, // Softness
+  //           spreadRadius: 0,
+  //           offset: Offset(0, 3), // Position of shadow
+  //         ),
+  //       ],
+  //     ),
+  //     child: TextFormField(
+  //       controller: widget.controller,
+  //       keyboardType: widget.keyboardType,
+  //       obscureText: widget.isPassword ? obscureText : false,
+  //       obscuringCharacter: widget.obscure ?? '*',
+  //       readOnly: widget.readOnly ?? false,
+  //       enabled: widget.enabled ?? true,
+  //       autovalidateMode: widget.autovalidateMode ?? AutovalidateMode.disabled,
+  //       textInputAction:
+  //       widget.next ? TextInputAction.next : TextInputAction.done,
+  //       maxLines: widget.isPassword ? 1 : widget.maxLines,
+  //       cursorColor: TextColors.neutral900,
+  //       onTap: widget.onTap,
+  //       onChanged: widget.onChanged,
+  //
+  //       validator: widget.validator ??
+  //               (value) {
+  //             if (value == null || value.isEmpty) {
+  //               return "Please enter ${widget.hintText?.toLowerCase() ?? 'this field'}";
+  //             }
+  //             if (widget.isEmail == true) {
+  //               if (!AppConstants.emailValidator.hasMatch(value)) {
+  //                 return "Please check your email!";
+  //               }
+  //             }
+  //             return null;
+  //           },
+  //
+  //       style: const TextStyle(
+  //         color: TextColors.neutral900,
+  //         fontSize: 16,
+  //         fontFamily: AppConstants.FONT_FAMILY,
+  //         fontWeight: FontWeight.w500,
+  //       ),
+  //       decoration: InputDecoration(
+  //         isDense: false,
+  //         hintText: widget.hintText,
+  //         hintStyle: const TextStyle(
+  //           fontFamily: AppConstants.FONT_FAMILY,
+  //           fontWeight: FontWeight.w500,
+  //           fontSize: 15,
+  //           color: TextColors.neutral500,
+  //         ),
+  //         contentPadding: EdgeInsets.symmetric(
+  //           horizontal: widget.contentPaddingHorizontal ?? 8.w,
+  //           vertical: widget.contentPaddingVertical ?? 12.w,
+  //         ),
+  //         fillColor: widget.filColor,
+  //         prefixIcon: cachedPrefixIcon,
+  //         suffixIcon: widget.isPassword
+  //             ? GestureDetector(
+  //           onTap: togglePassword,
+  //           child: Padding(
+  //             padding: const EdgeInsets.all(4.0),
+  //             child: Icon(
+  //               size: 24,
+  //               obscureText ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+  //               color: TextColors.neutral900.withOpacity(0.90),
+  //             ),
+  //           ),
+  //         )
+  //             : (cachedSuffixIcon ?? widget.suffixIcon),
+  //         focusedBorder: focusedBorder,
+  //         enabledBorder: enabledBorder,
+  //         disabledBorder: OutlineInputBorder(
+  //           borderRadius: BorderRadius.circular(8.r),
+  //           borderSide: BorderSide(color: Colors.transparent),
+  //         ),
+  //         errorBorder: OutlineInputBorder(
+  //           borderRadius: BorderRadius.circular(8.r),
+  //
+  //           borderSide: const BorderSide(color: BorderColors.error),
+  //         ),
+  //         focusedErrorBorder: OutlineInputBorder(
+  //           borderRadius: BorderRadius.circular(8.r),
+  //           borderSide: const BorderSide(color: BorderColors.error, width: 1.1),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
+  //
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8.r),
-        boxShadow: [
-          BoxShadow(
-            color: ShadowColor.shadowColors1.withOpacity(0.10), // Shadow color
-            blurRadius: 4, // Softness
-            spreadRadius: 0,
-            offset: Offset(0, 3), // Position of shadow
-          ),
-        ],
-      ),
-      child: TextFormField(
-        controller: widget.controller,
-        keyboardType: widget.keyboardType,
-        obscureText: widget.isPassword ? obscureText : false,
-        obscuringCharacter: widget.obscure ?? '*',
-        readOnly: widget.readOnly ?? false,
-        enabled: widget.enabled ?? true,
-        autovalidateMode: widget.autovalidateMode ?? AutovalidateMode.disabled,
-        textInputAction:
-        widget.next ? TextInputAction.next : TextInputAction.done,
-        maxLines: widget.isPassword ? 1 : widget.maxLines,
-        cursorColor: TextColors.neutral900,
-        onTap: widget.onTap,
-        onChanged: widget.onChanged,
-        validator: widget.validator ??
-                (value) {
-              if (value == null || value.isEmpty) {
-                return "Please enter ${widget.hintText?.toLowerCase() ?? 'this field'}";
-              }
-              if (widget.isEmail == true) {
-                if (!AppConstants.emailValidator.hasMatch(value)) {
-                  return "Please check your email!";
-                }
-              }
-              return null;
-            },
-        style: const TextStyle(
-          color: TextColors.neutral900,
-          fontSize: 16,
-          fontFamily: AppConstants.FONT_FAMILY,
-          fontWeight: FontWeight.w500,
-        ),
-        decoration: InputDecoration(
-          hintText: widget.hintText,
-          hintStyle: const TextStyle(
-            fontFamily: AppConstants.FONT_FAMILY,
-            fontWeight: FontWeight.w500,
-            fontSize: 15,
-            color: TextColors.neutral500,
-          ),
-          contentPadding: EdgeInsets.symmetric(
-            horizontal: widget.contentPaddingHorizontal ?? 8.w,
-            vertical: widget.contentPaddingVertical ?? 12.w,
-          ),
-          fillColor: widget.filColor,
-          prefixIcon: cachedPrefixIcon,
-          suffixIcon: widget.isPassword
-              ? GestureDetector(
-            onTap: togglePassword,
-            child: Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Icon(
-                size: 24,
-                obscureText ? Icons.visibility_off_outlined : Icons.visibility_outlined,
-                color: TextColors.neutral900.withOpacity(0.90),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8.r),
+            boxShadow: [
+              BoxShadow(
+                color: ShadowColor.shadowColors1.withOpacity(0.10),
+                blurRadius: 4,
+                spreadRadius: 0,
+                offset: Offset(0, 3),
               ),
+            ],
+          ),
+          child: TextFormField(
+            controller: widget.controller,
+            keyboardType: widget.keyboardType,
+            obscureText: widget.isPassword ? obscureText : false,
+            obscuringCharacter: widget.obscure ?? '*',
+            readOnly: widget.readOnly ?? false,
+            enabled: widget.enabled ?? true,
+            autovalidateMode:
+            widget.autovalidateMode ?? AutovalidateMode.disabled,
+            textInputAction:
+            widget.next ? TextInputAction.next : TextInputAction.done,
+            maxLines: widget.isPassword ? 1 : widget.maxLines,
+            cursorColor: TextColors.neutral900,
+            onTap: widget.onTap,
+            onChanged: widget.onChanged,
+            style: const TextStyle(
+              color: TextColors.neutral900,
+              fontSize: 16,
+              fontFamily: AppConstants.FONT_FAMILY,
+              fontWeight: FontWeight.w500,
             ),
-          )
-              : (cachedSuffixIcon ?? widget.suffixIcon),
-          focusedBorder: focusedBorder,
-          enabledBorder: enabledBorder,
-          disabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.r),
-            borderSide: BorderSide(color: Colors.transparent),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.r),
-            borderSide: const BorderSide(color: BorderColors.error),
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.r),
-            borderSide: const BorderSide(color: BorderColors.error, width: 1.1),
+            decoration: InputDecoration(
+              isDense: false,
+              hintText: widget.hintText,
+              hintStyle: const TextStyle(
+                fontFamily: AppConstants.FONT_FAMILY,
+                fontWeight: FontWeight.w500,
+                fontSize: 15,
+                color: TextColors.neutral500,
+              ),
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: widget.contentPaddingHorizontal ?? 8.w,
+                vertical: widget.contentPaddingVertical ?? 12.w,
+              ),
+              fillColor: widget.filColor,
+              prefixIcon: cachedPrefixIcon,
+              suffixIcon: widget.isPassword
+                  ? GestureDetector(
+                onTap: togglePassword,
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Icon(
+                    size: 24,
+                    obscureText
+                        ? Icons.visibility_off_outlined
+                        : Icons.visibility_outlined,
+                    color: TextColors.neutral900.withOpacity(0.90),
+                  ),
+                ),
+              )
+                  : (cachedSuffixIcon ?? widget.suffixIcon),
+              focusedBorder: focusedBorder,
+              enabledBorder: enabledBorder,
+              disabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.r),
+                borderSide: BorderSide(color: Colors.transparent),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.r),
+                borderSide: const BorderSide(color: BorderColors.error),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.r),
+                borderSide:
+                const BorderSide(color: BorderColors.error, width: 1.1),
+              ),
+              // Hide built-in error text space
+              errorStyle: const TextStyle(height: 0),
+            ),
+            validator: widget.validator ??
+                    (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Please enter ${widget.hintText?.toLowerCase() ?? 'this field'}";
+                  }
+                  if (widget.isEmail == true) {
+                    if (!AppConstants.emailValidator.hasMatch(value)) {
+                      return "Please check your email!";
+                    }
+                  }
+                  return null;
+                },
           ),
         ),
-      ),
+        // Add this to show error text manually (avoids resizing container)
+      ],
     );
   }
+
+
 }

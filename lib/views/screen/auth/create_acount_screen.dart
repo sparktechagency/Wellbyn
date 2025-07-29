@@ -11,9 +11,10 @@ import '../../../utils/app_colors.dart';
 
 import '../../base/AlReadyHaveAcountText/alreadyHaveAcountText.dart';
 import '../../base/GoogleButton/google_button.dart';
+import '../../base/LabelTextField/labelTextField.dart' show LabeledTextFielded;
 import '../../base/LogoHeader/logoHeader.dart';
 import '../../base/TextStyle/text_style.dart';
-import '../profile_setting_start/widget/labeledtextfield.dart';
+
 import 'forgot.dart';
 
 class CreateAccountPage extends StatefulWidget {
@@ -26,9 +27,14 @@ class CreateAccountPage extends StatefulWidget {
 }
 
 class _CreateAccountPageState extends State<CreateAccountPage> {
+
+  final GlobalKey<FormState> email = GlobalKey<FormState>();
+  final GlobalKey<FormState> pass = GlobalKey<FormState>();
+  final GlobalKey<FormState> repass = GlobalKey<FormState>();
   final TextEditingController emailcontroller = TextEditingController();
   final TextEditingController passwordcontroller = TextEditingController();
   final TextEditingController confirmcontroller = TextEditingController();
+
   @override
   void dispose() {
     emailcontroller.dispose();
@@ -45,72 +51,116 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
           padding: EdgeInsets.symmetric(horizontal: 24.w),
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
-            child: Column(
-                  children: [
-                   const SizedBox(height: 35),
+            child: Form(
+              key: email,
+              child:Column(
+                      children: [
+                       const SizedBox(height: 35),
 
-                    //=================> logo header <=======================//
+                        //=================> logo header <=======================//
 
-                    LogoHeader(
-                      imagePath: 'assets/icons/logo.svg',
-                      title: 'Create an account',
+                        LogoHeader(
+                          imagePath: 'assets/icons/logo.svg',
+                          title: 'Create an account',
+                        ),
+                        const SizedBox(height: 20),
+
+                        //=================> input field  <=======================//
+                        inputMethod(),
+                        const SizedBox(height: 20),
+
+                        //=================> Next button  <=======================//
+
+                        AppButton(
+                          text: "Next",
+                          onPressed: () {
+
+                            // final email = emailcontroller.text.trim();
+                            // final password = passwordcontroller.text;
+                            // final confirmPassword = confirmcontroller.text;
+                            //
+                            // if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
+                            //   _showError("All fields are required!");
+                            // } else if (password != confirmPassword) {
+                            //   _showError("Passwords do not match!");
+                            // } else if (!AppConstants.emailValidator.hasMatch(email)) {
+                            //   _showError("Please enter a valid email address!");
+                            // } else if (password.length < 6) {
+                            //   _showError("Password must be at least 6 characters!");
+                            // } else {
+                            //   // ✅ All validations passed
+                            //   Get.to(() => Forgot());
+                            // }
+
+
+                              Get.to(()=> Forgot());
+
+
+                          },
+                        ),
+                        const SizedBox(height: 20),
+
+                        //==================> user log in or create section <===============//
+                        AlreadyHaveAccountText(onTap: (){
+
+                          Get.to(LoginScreen());
+                        },
+                          leadingText: 'Alredy have an account? ',
+                          actionText: 'Sign In',
+                          fontFamily: AppConstants.FONT_FAMILY,),
+
+                        //=================> Or divider   <=======================//
+
+                        OrDivider(),
+
+                        const SizedBox(height: 20),
+
+                        //=================> gooogle buttton   <=======================//
+
+                        GoogleButton(onPressed: () {
+                          print("Google account ");
+                        },),
+                        const  SizedBox(height: 20),
+                      ],
                     ),
-                    const SizedBox(height: 20),
-
-                    //=================> input field  <=======================//
-                    inputMethod(),
-                    const SizedBox(height: 20),
-
-                    //=================> Next button  <=======================//
-
-                    AppButton(
-                      text: "Next",
-                      onPressed: () {
-                        Get.to(Forgot());
-                      },
-                    ),
-                    const SizedBox(height: 20),
-
-                    //==================> user log in or create section <===============//
-                    AlreadyHaveAccountText(onTap: (){
-                      Get.to(LoginScreen());
-                    },
-                      leadingText: 'Alredy have an account? ',
-                      actionText: 'Sign In',
-                      fontFamily: AppConstants.FONT_FAMILY,),
-
-                    //=================> Or divider   <=======================//
-
-                    OrDivider(),
-
-                    const SizedBox(height: 20),
-
-                    //=================> gooogle buttton   <=======================//
-
-                    GoogleButton(onPressed: () {
-                      print("Google account ");
-                    },),
-                    const  SizedBox(height: 20),
-                  ],
-                ),
+            ),
+               ),
               ),
             ),
-          ),
+
     );
   }
+
+
+  void _showError(String message) {
+    Get.snackbar(
+      "Error",
+      message,
+      backgroundColor: Appcolors.error.withOpacity(0.70),
+      colorText: Colors.white,
+      snackPosition: SnackPosition.TOP,
+      margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+      borderRadius: 16.r,
+      duration: const Duration(seconds: 3),
+    );
+  }
+
   Column inputMethod() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+
         LabeledTextFielded(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           borderColor: TextColors.neutral900,
-           label: "Email",
+          label: "Email",
           controller: emailcontroller,
           maxline: 1,
           hintText: "Email Address",
         ),
-     const SizedBox(height: 16),
+        const SizedBox(height: 16),
         LabeledTextFielded(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           borderColor: TextColors.neutral900,
           label: "New Password",
           controller: passwordcontroller,
@@ -119,6 +169,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
         ),
         const SizedBox(height: 16),
         LabeledTextFielded(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           borderColor: TextColors.neutral900,
           label: "Confirm Password",
           controller: confirmcontroller,

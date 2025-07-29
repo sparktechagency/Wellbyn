@@ -45,6 +45,8 @@ class AlreadyHaveAccountText extends StatelessWidget {
               ),
             ],
           ),
+          maxLines: 1, // 👈 Prevents multiline
+          overflow: TextOverflow.ellipsis,
         ),
       ),
     );

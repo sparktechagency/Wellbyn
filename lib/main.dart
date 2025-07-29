@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,7 @@ import 'helpers/route.dart';
 void main()async {
 
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   Map<String, Map<String, String>> _languages = await di.init();
   await TokenService().init();
   runApp( MyApp(languages:_languages,));
