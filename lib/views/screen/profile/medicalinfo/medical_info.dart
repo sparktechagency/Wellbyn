@@ -4,16 +4,27 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:wellbyn/controllers/stepcontroller.dart';
 import 'package:wellbyn/utils/app_colors.dart';
+import 'package:wellbyn/utils/app_constants.dart';
 import 'package:wellbyn/utils/app_icons.dart';
-import 'package:wellbyn/views/base/Apptext/app_text.dart';
-import 'package:wellbyn/views/base/custom_field.dart';
+import 'package:wellbyn/utils/nab_ids.dart';
+import 'package:wellbyn/views/screen/profile_setting_start/setting_insurance_info.dart';
+import 'package:wellbyn/views/screen/profile_setting_start/setting_personal_info.dart';
+import 'package:wellbyn/views/screen/profile_setting_start/widget/circle.dart';
+import '../../../../controllers/profile_setting_controller.dart';
 
-import '../../../../utils/nab_ids.dart';
+import 'package:wellbyn/models/medication.dart';
+import 'package:wellbyn/models/allergies.dart';
+
+import '../../../base/Apptext/app_text.dart';
+import '../../../base/LabelTextField/labelTextField.dart';
 import '../base/madicalinfoheader.dart';
 
+
+
 class MedicalInformationScreen extends StatefulWidget {
-  const MedicalInformationScreen({Key? key}) : super(key: key);
+  MedicalInformationScreen({Key? key}) : super(key: key);
 
   @override
   _MedicalInformationScreenState createState() =>
@@ -21,96 +32,21 @@ class MedicalInformationScreen extends StatefulWidget {
 }
 
 class _MedicalInformationScreenState extends State<MedicalInformationScreen> {
-  // Data models
-  List<Allergy> allergies = [
-    const Allergy(name: 'Penicillin', severity: 'Moderate'),
-    const Allergy(name: 'Shellfish', severity: 'Severe'),
-  ];
+  ProfileSettingController _controller = Get.put(ProfileSettingController());
+  late final StepController controller;
 
-  List<Medication> medications = [
-    const Medication(name: 'Lisinopril', dosage: '10mg', frequency: 'Once daily'),
-    const Medication(name: 'Metformin', dosage: '500mg', frequency: 'Twice daily'),
-  ];
-
-  Map<String, bool> existingConditions = {
-    'Diabetes': false,
-    'Hypertension': false,
-    'Anxiety': false,
-    'Depression': false,
-    'Asthma': false,
-    'None': false,
-  };
-
-  Map<String, bool> lifestyleFactors = {
-    'Smoking': false,
-    'Former Smoker': false,
-    'Alcohol': false,
-  };
+  @override
+  void initState() {
+    super.initState();
+    Get.lazyPut(() => StepController());
+    controller = Get.find<StepController>();
+    controller.resetForNewPage(); // Reset when page opens
+    // Remove the startAnimationSequence call - animation starts automatically
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Appcolors.page,
-      appBar: AppBar(
-        backgroundColor: Appcolors.page,
-        title: Text(
-          "Edit Medical Infor",
-          style: TextStyle(
-            fontSize: 20,
-            fontFamily: "Satoshi",
-            fontWeight: FontWeight.w500,
-            color: TextColors.neutral900,
-          ),
-        ),
-        centerTitle: true,
-        leading: IconButton(
-          onPressed: () {
-            Get.back(id: NavIds.profilenav);
-          },
-          icon: SvgPicture.asset(
-            'assets/icons/arrow-left.svg',
-            width: 30.w,
-            height: 30.h,
-            color: TextColors.neutral900,
-          ),
-        ),
-      ),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Header text
-               MedicalInfoHeader(
-                title: "Medical Information",
-                description:
-                'Hi! Please share your personal info to verify your identity and stay connected with your healthcare providers.',
-                iconPath: AppIcons.medicalfileIcon,
-              ),
-
-              const SizedBox(height: 24),
-
-              // Allergies Section
-              _buildAllergiesSection(),
-              const SizedBox(height: 24),
-
-              // Current Medications Section
-              _buildMedicationsSection(),
-              const SizedBox(height: 24),
-
-              // Existing Conditions Section
-              _buildExistingConditionsSection(),
-              const SizedBox(height: 24),
-
-              // Lifestyle Factors Section
-              _buildLifestyleFactorsSection(),
-              const SizedBox(height: 100),
-            ],
-          ),
-        ),
-      ),
       floatingActionButton: GestureDetector(
         onTap: () {
           Get.snackbar("title", "not fountion add here ");
@@ -134,95 +70,230 @@ class _MedicalInformationScreenState extends State<MedicalInformationScreen> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildAllergiesSection() {
-    return _buildSection(
-      title: 'Allergies',
-      onAdd: _showAddAllergyDialog, // Fixed: Now correctly calls allergy dialog
-      child: Container(
-        padding: EdgeInsets.only(left: 1, right: 1, top: 1, bottom: 0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          border: Border.all(width: 1, color: TextColors.neutral200),
+      backgroundColor: Appcolors.page,
+      appBar: AppBar(
+        backgroundColor: Appcolors.page,
+        title: Text(
+          "Medical Info",
+          style: TextStyle(
+            fontSize: 20,
+            fontFamily: AppConstants.FONT_FAMILY,
+            fontWeight: FontWeight.w500,
+            color: TextColors.neutral900,
+          ),
         ),
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            Get.back(id: NavIds.profilenav);
+          },
+          icon: SvgPicture.asset(
+            'assets/icons/arrow-left.svg',
+            width: 30.w,
+            height: 30.h,
+            color: TextColors.neutral900,
+          ),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildTableHeader(['Name', 'Severity', 'Action']),
-            // Fixed: Changed from 'Dosage' to 'Severity'
-            ...allergies.asMap().entries.map((entry) {
-              int index = entry.key;
-              Allergy allergy = entry.value;
-              return _buildTableRow([
-                allergy.name,
-                allergy.severity, // Fixed: Changed from dosage to severity
-                _buildDeleteButton(() => _deleteAllergy(index)),
-              ]);
-            }).toList(),
+
+            //_______________________============> Hello bro how are you  <=====================
+            Flexible(
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  children: [
+                    SizedBox(height: 25),
+
+                    // Header text
+                    MedicalInfoHeader(
+                      title: "Medical Information",
+                      description:
+                      'Hi! Please share your personal info to verify your identity and stay connected with your healthcare providers.',
+                      iconPath: AppIcons.medicalfileIcon,
+                    ),
+
+                    const SizedBox(height: 24),
+
+                    // Allergies Section
+                    _buildAllergiesSection(),
+                    const SizedBox(height: 24),
+
+                    // Current Medications Section
+                    _buildMedicationsSection(),
+                    const SizedBox(height: 24),
+
+                    // Existing Conditions Section
+                    _buildExistingConditionsSection(),
+                    const SizedBox(height: 24),
+
+                    // Lifestyle Factors Section
+                    _buildLifestyleFactorsSection(),
+                    SizedBox(height: 50),
+
+                    SizedBox(height: 35),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 
+  //==============build allergiseSection <===============
+  Widget _buildAllergiesSection() {
+    return _buildSection(
+      title: 'Allergies',
+      onAdd: _showAddAllergyDialog,
+      child: Obx(
+            () => Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: ShadowColor.shadowColors1.withOpacity(0.10),
+                offset: const Offset(0,3),
+                blurRadius: 4,
+              ),
+            ],
+            // border: Border.all(width: 1, color: Appcolors.primary),
+            borderRadius: BorderRadius.circular(12),
+            color: Colors.white,
+          ),
+          child: Column(
+            children: [
+              _buildTableHeader(['Name', 'Severity', 'Action']),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: _controller.allergies.length,
+                itemBuilder: (context, index) {
+                  final allergy = _controller.allergies[index];
+                  final isLast = index == _controller.allergies.length - 1;
+                  return _buildTableRow(
+                    [
+                      allergy.name,
+                      allergy.severity,
+                      _buildDeleteButton(
+                            () => _controller.deleteAllergy(index),
+                      ),
+                    ],
+                    index,
+                    isLast: isLast,
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  //==============build MedicationSection <===============
   Widget _buildMedicationsSection() {
     return _buildSection(
       title: 'Current Medications',
       onAdd: _showAddMedicationDialog,
-      child: Container(
-        padding: EdgeInsets.only(left: 1, right: 1, top: 1, bottom: 0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          border: Border.all(width: 1, color: TextColors.neutral200),
-        ),
-        child: Column(
-          children: [
-            _buildTableHeader(['Name', 'Frequency', 'Action']),
-            ...medications.asMap().entries.map((entry) {
-              int index = entry.key;
-              Medication medication = entry.value;
-              return _buildTableRow([
-                medication.name,
-                medication.frequency,
-                _buildDeleteButton(() => _deleteMedication(index)),
-              ]);
-            }).toList(),
-          ],
+      child: Obx(
+            () => Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: ShadowColor.shadowColors1.withOpacity(0.10),
+                offset: const Offset(0,3),
+                blurRadius: 4,
+              ),
+            ],
+            // border: Border.all(width: 1, color: Appcolors.primary)
+            borderRadius: BorderRadius.circular(12),
+            color: Colors.white,
+          ),
+          child: Column(
+            children: [
+              _buildTableHeader(['Name', 'Frequency', 'Action']),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: _controller.medications.length,
+                itemBuilder: (context, index) {
+                  final medication = _controller.medications[index];
+                  final isLast = index == _controller.medications.length - 1;
+
+                  return _buildTableRow(
+                    [
+                      medication.name,
+                      medication.frequency,
+                      _buildDeleteButton(
+                            () => _controller.deleteMedication(index),
+                      ),
+                    ],
+                    index,
+                    isLast: isLast,
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
+
+  //==============build _buildExistingConditionsSection <===============
 
   Widget _buildExistingConditionsSection() {
     return _buildSection(
       title: 'Existing Conditions',
       onAdd: _addCondition,
-      child: Column(
-        children: existingConditions.entries.map((entry) {
-          return _buildCheckboxItem(entry.key, entry.value, (value) {
-            setState(() {
-              existingConditions[entry.key] = value!;
-            });
-          });
-        }).toList(),
+      child: Obx(
+            () => ListView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          itemCount: _controller.existingConditions.length,
+          itemBuilder: (context, index) {
+            final key = _controller.existingConditions.keys.elementAt(index);
+            final value = _controller.existingConditions[key]!;
+            return _buildCheckboxItem(
+              key,
+              value,
+                  (newValue) => _controller.toggleCondition(key, newValue!),
+            );
+          },
+        ),
       ),
     );
   }
 
+  //==============build _buildLifestyleFactorsSection <===============
+
   Widget _buildLifestyleFactorsSection() {
     return _buildSection(
       title: 'Lifestyle Factors',
-      onAdd: _addLifestyleFactor,
-      child: Column(
-        children: lifestyleFactors.entries.map((entry) {
-          return _buildCheckboxItem(entry.key, entry.value, (value) {
-            setState(() {
-              lifestyleFactors[entry.key] = value!;
-            });
-          });
-        }).toList(),
-      ),
+      onAdd: showAddLifestyleFactorDialog, // Hook up your dialog input here
+      child: Obx(() {
+        final entries = _controller.lifestyleFactors.entries.toList();
+        return ListView.builder(
+          shrinkWrap: true,
+          // so it doesn’t take infinite height inside another scrollable
+          physics: NeverScrollableScrollPhysics(),
+          // if inside another scroll view
+          itemCount: entries.length,
+          itemBuilder: (context, index) {
+            final entry = entries[index];
+            return _buildCheckboxItem(
+              entry.key,
+              entry.value,
+                  (value) => _controller.toggleLifestyleFactor(entry.key),
+            );
+          },
+        );
+      }),
     );
   }
 
@@ -233,14 +304,18 @@ class _MedicalInformationScreenState extends State<MedicalInformationScreen> {
   }) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
+        color: Appcolors.primary,
+        borderRadius: BorderRadius.circular(8.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 1,
-            blurRadius: 8,
-            offset: const Offset(0, 2),
+            color: ShadowColor.shadowColors1.withOpacity(0.10),
+            // Shadow color
+            blurRadius: 7,
+            // Softness
+            spreadRadius: 0,
+            offset: Offset(0, 2),
+            // Position of shadow
+            blurStyle: BlurStyle.normal,
           ),
         ],
       ),
@@ -256,7 +331,7 @@ class _MedicalInformationScreenState extends State<MedicalInformationScreen> {
                   title,
                   style: TextStyle(
                     fontSize: 18,
-                    fontFamily: "Satoshi",
+                    fontFamily: AppConstants.FONT_FAMILY,
                     fontWeight: FontWeight.w500,
                     color: TextColors.neutral900,
                   ),
@@ -265,12 +340,12 @@ class _MedicalInformationScreenState extends State<MedicalInformationScreen> {
                   onTap: onAdd,
                   child: const Row(
                     children: [
-                      Icon(Icons.add, color: Colors.blue, size: 20),
+                      Icon(Icons.add, color: Appcolors.action, size: 20),
                       SizedBox(width: 4),
                       Text(
                         'Add',
                         style: TextStyle(
-                          color: Colors.blue,
+                          color: Appcolors.action,
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),
@@ -291,7 +366,13 @@ class _MedicalInformationScreenState extends State<MedicalInformationScreen> {
   Widget _buildTableHeader(List<String> headers) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-      decoration: BoxDecoration(color: HexColor("#F0F5FE")),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(8.r),
+          topRight: Radius.circular(8.r),
+        ),
+        color: HexColor("#F0F5FE"),
+      ),
       child: Row(
         children: headers.map((header) {
           bool isAction = header == 'Action';
@@ -301,8 +382,9 @@ class _MedicalInformationScreenState extends State<MedicalInformationScreen> {
               header,
               style: TextStyle(
                 fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: TextColors.neutral900,
+
+                fontWeight: FontWeight.w500,
+                color: TextColors.neutral500,
               ),
             ),
           );
@@ -311,25 +393,42 @@ class _MedicalInformationScreenState extends State<MedicalInformationScreen> {
     );
   }
 
-  Widget _buildTableRow(List<dynamic> cells) {
+  Widget _buildTableRow(
+      List<dynamic> cells,
+      int rowIndex, {
+        bool isLast = false,
+      }) {
+    final int lastCellIndex = cells.length - 1;
+    final Color bgColor = rowIndex.isEven
+        ? Appcolors.primary
+        : Appcolors.actionHoverLight;
+
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
       decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(color: Colors.grey[200]!, width: 1)),
+        color: bgColor,
+        borderRadius: BorderRadius.only(
+          bottomLeft: isLast ? Radius.circular(12) : Radius.zero,
+          bottomRight: isLast ? Radius.circular(12) : Radius.zero,
+        ),
       ),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
       child: Row(
         children: cells.asMap().entries.map((entry) {
-          int index = entry.key;
+          int cellIndex = entry.key;
           dynamic cell = entry.value;
-          bool isAction = index == cells.length - 1;
+          bool isAction = cellIndex == lastCellIndex;
           return Expanded(
             flex: isAction ? 1 : 2,
             child: cell is Widget
                 ? cell
                 : Text(
-                    cell.toString(),
-                    style: const TextStyle(fontSize: 16, color: Colors.black87),
-                  ),
+              cell.toString(),
+              style: TextStyle(
+                fontSize: 16,
+                color: TextColors.neutral900,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
           );
         }).toList(),
       ),
@@ -349,25 +448,55 @@ class _MedicalInformationScreenState extends State<MedicalInformationScreen> {
       Function(bool?) onChanged,
       ) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 2), // Reduced from 0 to 2 for minimal spacing
+      decoration: BoxDecoration(),
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      // Reduced from 0 to 2 for minimal spacing
       child: Row(
         children: [
-          Checkbox(
-            shape: RoundedRectangleBorder(
+          Container(
+            height: 20,
+            width: 20,
+            decoration: BoxDecoration(
+              color: Appcolors.primary50,
+              boxShadow: [
+                BoxShadow(
+                  color: ShadowColor.shadowColors1.withOpacity(0.10),
+                  blurRadius: 2,
+                  spreadRadius: 0,
+                  offset: Offset(0, 3),
+                  blurStyle: BlurStyle.normal,
+                ),
+              ],
               borderRadius: BorderRadius.circular(5),
             ),
-            value: value,
-            side: BorderSide(width: 1),
-            onChanged: onChanged,
-            activeColor: Colors.blue,
-            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap, // Reduces checkbox padding
-            visualDensity: VisualDensity.compact, // Makes checkbox more compact
+            child: Transform.scale(
+              scale: 1.1, // 1.0 = default size, increase for bigger checkbox
+              child: Checkbox(
+                value: value,
+                onChanged: onChanged,
+                activeColor: Appcolors.action,
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                visualDensity: VisualDensity.compact,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                side: BorderSide(color: Appcolors.primary, width: 0),
+              ),
+            ),
           ),
-          const SizedBox(width: 8), // Reduced from 3 to 8 for better spacing between checkbox and text
-          Expanded( // Added Expanded to prevent overflow and better text handling
+
+          const SizedBox(width: 8),
+          // Reduced from 3 to 8 for better spacing between checkbox and text
+          Expanded(
+            // Added Expanded to prevent overflow and better text handling
             child: Text(
               title,
-              style: TextStyle(fontSize: 16, color: TextColors.neutral900),
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                fontFamily: "Inter",
+                color: TextColors.neutral900,
+              ),
             ),
           ),
         ],
@@ -378,42 +507,28 @@ class _MedicalInformationScreenState extends State<MedicalInformationScreen> {
   // Action methods
   void _addCondition() {
     input(
-      title: ' Add Existing Conditions',
-      fieldLabel: 'Existing Conditions name',
-      hintText: 'Enter existing conditions name',
+      title: 'Add Existing Condition',
+      fieldLabel: 'Existing Condition Name',
+      hintText: 'Enter existing condition name',
       onAdd: (value) {
-        setState(() {
-          lifestyleFactors[value] = false;
-        });
+        _controller.addCondition(value); // ✅ Use controller
       },
     );
   }
 
-  void _addLifestyleFactor() {
+  void showAddLifestyleFactorDialog() {
     input(
       title: 'Add Lifestyle Factor',
       fieldLabel: 'Lifestyle Factor Name',
-      hintText: 'Enter lifestyle factor name',
+      hintText: 'Enter lifestyle factor',
       onAdd: (value) {
-        setState(() {
-          lifestyleFactors[value] = false;
-        });
+        if (value.trim().isNotEmpty) {
+          _controller.addLifestyleFactor(value.trim());
+        }
       },
     );
   }
 
-
-  void _deleteAllergy(int index) {
-    setState(() {
-      allergies.removeAt(index);
-    });
-  }
-
-  void _deleteMedication(int index) {
-    setState(() {
-      medications.removeAt(index);
-    });
-  }
   void _showAddMedicationDialog() {
     final TextEditingController nameController = TextEditingController();
     final TextEditingController dosageController = TextEditingController();
@@ -430,36 +545,201 @@ class _MedicalInformationScreenState extends State<MedicalInformationScreen> {
           ),
           child: Form(
             key: _formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 12),
+                  // Title
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Text(
+                      "Add Medication",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: AppConstants.FONT_FAMILY,
+                        fontWeight: FontWeight.w500,
+                        color: TextColors.neutral900,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Divider(height: 1, color: TextColors.neutral200),
+                  const SizedBox(height: 20),
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: LabeledTextFielded(
+                      borderColor: TextColors.neutral900,
+                      label: "Medication Name",
+                      controller: nameController,
+                      maxline: 1,
+                      hintText: "Enter medication name ",
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: LabeledTextFielded(
+                      borderColor: TextColors.neutral900,
+                      label: "Dosage",
+                      controller: dosageController,
+                      maxline: 1,
+                      hintText: "e.g. 10gm",
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: LabeledTextFielded(
+                      borderColor: TextColors.neutral900,
+                      label: "Frequency",
+                      controller: frequencyController,
+                      maxline: 1,
+                      hintText: "e.g. Twice daily",
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+
+                  Divider(height: 1, color: TextColors.neutral200),
+                  const SizedBox(height: 16),
+
+                  // Buttons
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        GestureDetector(
+                          onTap: () => Get.back(),
+                          child: Container(
+                            height: 40.h,
+                            width: 80.w,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: TextColors.neutral500),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Cancel",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: AppConstants.FONT_FAMILY,
+                                  fontWeight: FontWeight.w500,
+                                  color: TextColors.neutral500,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        GestureDetector(
+                          onTap: () {
+                            if (_formKey.currentState!.validate() &&
+                                nameController.text.isNotEmpty &&
+                                dosageController.text.isNotEmpty &&
+                                frequencyController.text.isNotEmpty) {
+                              _controller.medications.add(
+                                Medication(
+                                  name: nameController.text.trim(),
+                                  dosage: dosageController.text.trim(),
+                                  frequency: frequencyController.text.trim(),
+                                ),
+                              );
+                              Get.back();
+
+                              Get.snackbar(
+                                'Success',
+                                '"${nameController.text.trim()}" added successfully',
+                                backgroundColor: Colors.green,
+                                colorText: Colors.white,
+                                snackPosition: SnackPosition.BOTTOM,
+                                duration: const Duration(seconds: 2),
+                              );
+                            }
+                          },
+
+                          child: Container(
+                            height: 40.h,
+                            width: 60.w,
+                            decoration: BoxDecoration(
+                              color: Appcolors.action,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Add",
+                                style: TextStyle(
+                                  color: Appcolors.primary,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void input({
+    required String title,
+    required String fieldLabel,
+    required String hintText,
+    required void Function(String value) onAdd,
+  }) {
+    final TextEditingController nameController = TextEditingController();
+    final _formKey = GlobalKey<FormState>();
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Form(
+            key: _formKey,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 12),
-                // Title
+                SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Text(
-                    "Add Medication",
+                    title,
                     style: TextStyle(
                       fontSize: 20,
-                      fontFamily: "Satoshi",
+                      fontFamily: AppConstants.FONT_FAMILY,
                       fontWeight: FontWeight.w500,
                       color: TextColors.neutral900,
                     ),
                   ),
                 ),
+
                 const SizedBox(height: 12),
                 Divider(height: 1, color: TextColors.neutral200),
                 const SizedBox(height: 20),
-
-                // Medication Name
+                // Allergy Name
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Text(
-                    "Medication Name",
+                    fieldLabel,
                     style: TextStyle(
                       fontSize: 16,
-                      fontFamily: "Satoshi",
+                      fontFamily: AppConstants.FONT_FAMILY,
                       fontWeight: FontWeight.w500,
                       color: TextColors.neutral900,
                     ),
@@ -468,92 +748,41 @@ class _MedicalInformationScreenState extends State<MedicalInformationScreen> {
                 const SizedBox(height: 8),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: CustomTextField(
+                  child: CustomTextFielded(
                     maxLines: 1,
-                    hintText: "Enter medication name",
+                    hintText: hintText,
                     controller: nameController,
                     borderColor: TextColors.neutral500,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                   ),
                 ),
-                const SizedBox(height: 16),
-
-                // Dosage
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: Text(
-                    "Dosage",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: "Satoshi",
-                      fontWeight: FontWeight.w500,
-                      color: TextColors.neutral900,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: CustomTextField(
-                    maxLines: 1,
-                    hintText: "e.g. 10mg",
-                    controller: dosageController,
-                    borderColor: TextColors.neutral500,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                  ),
-                ),
-                const SizedBox(height: 16),
-
-                // Frequency
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: Text(
-                    "Frequency",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: "Satoshi",
-                      fontWeight: FontWeight.w500,
-                      color: TextColors.neutral900,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: CustomTextField(
-                    maxLines: 1,
-                    hintText: "e.g. Twice daily",
-                    controller: frequencyController,
-                    borderColor: TextColors.neutral500,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                  ),
-                ),
-                const SizedBox(height: 24),
-
-                Divider(height: 1, color: TextColors.neutral200),
-                const SizedBox(height: 16),
-
-                // Buttons
+                const SizedBox(height: 18),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       GestureDetector(
-                        onTap: () => Navigator.pop(context),
+                        onTap: () => Get.back(),
                         child: Container(
                           height: 40.h,
                           width: 80.w,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8.r),
+                            borderRadius: BorderRadius.circular(8),
                             border: Border.all(
                               color: TextColors.neutral500,
+                              width: 1,
                             ),
                           ),
                           child: Center(
                             child: Text(
                               "Cancel",
-                              style: TextStyle(fontSize: 14.sp),
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: AppConstants.FONT_FAMILY,
+                                fontWeight: FontWeight.w500,
+                                color: TextColors.neutral500,
+                              ),
                             ),
                           ),
                         ),
@@ -561,28 +790,16 @@ class _MedicalInformationScreenState extends State<MedicalInformationScreen> {
                       const SizedBox(width: 10),
                       GestureDetector(
                         onTap: () {
-                          if (_formKey.currentState!.validate() &&
-                              nameController.text.isNotEmpty &&
-                              dosageController.text.isNotEmpty &&
-                              frequencyController.text.isNotEmpty) {
-                            setState(() {
-                              medications.add(
-                                Medication(
-                                  name: nameController.text.trim(),
-                                  dosage: dosageController.text.trim(),
-                                  frequency: frequencyController.text.trim(),
-                                ),
-                              );
-                            });
-                            Navigator.pop(context);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  'Medication "${nameController.text.trim()}" added successfully',
-                                ),
-                                backgroundColor: Colors.green,
-                                duration: const Duration(seconds: 2),
-                              ),
+                          if (_formKey.currentState!.validate()) {
+                            onAdd(nameController.text.trim());
+                            Get.back();
+                            Get.snackbar(
+                              'Success',
+                              '"${nameController.text.trim()}" added successfully',
+                              backgroundColor: Colors.green,
+                              colorText: Colors.white,
+                              snackPosition: SnackPosition.BOTTOM,
+                              duration: const Duration(seconds: 2),
                             );
                           }
                         },
@@ -591,7 +808,7 @@ class _MedicalInformationScreenState extends State<MedicalInformationScreen> {
                           width: 60.w,
                           decoration: BoxDecoration(
                             color: Appcolors.action,
-                            borderRadius: BorderRadius.circular(8.r),
+                            borderRadius: BorderRadius.circular(8),
                           ),
                           child: Center(
                             child: Text(
@@ -599,7 +816,7 @@ class _MedicalInformationScreenState extends State<MedicalInformationScreen> {
                               style: TextStyle(
                                 color: Appcolors.primary,
                                 fontWeight: FontWeight.w500,
-                                fontSize: 14.sp,
+                                fontSize: 14,
                               ),
                             ),
                           ),
@@ -617,272 +834,6 @@ class _MedicalInformationScreenState extends State<MedicalInformationScreen> {
     );
   }
 
-  // void _showAddMedicationDialogs() {
-  //   final TextEditingController nameController = TextEditingController();
-  //   final TextEditingController frequencyController = TextEditingController();
-  //
-  //   showDialog(
-  //     context: context,
-  //     builder: (context) {
-  //       return AlertDialog(
-  //         backgroundColor: Appcolors.page,
-  //         shape: RoundedRectangleBorder(
-  //           borderRadius: BorderRadius.circular(12),
-  //         ),
-  //         title: const Text('Add Medication'),
-  //         content: Column(
-  //           mainAxisSize: MainAxisSize.min,
-  //           children: [
-  //             TextFieldC(
-  //               controller: nameController,
-  //               decoration: const InputDecoration(
-  //                 fillColor: Colors.white,
-  //                 hintText: 'Enter medication name',
-  //               ),
-  //             ),
-  //             const SizedBox(height: 12),
-  //             TextField(
-  //               controller: frequencyController,
-  //               decoration: const InputDecoration(
-  //                 hintText: 'e.g. Twice daily',
-  //                 fillColor: Colors.white,
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //         actions: [
-  //           TextButton(
-  //             onPressed: () => Navigator.pop(context),
-  //             child: const Text('Cancel'),
-  //           ),
-  //           ElevatedButton(
-  //             onPressed: () {
-  //               if (nameController.text.isNotEmpty &&
-  //                   frequencyController.text.isNotEmpty) {
-  //                 setState(() {
-  //                   medications.add(
-  //                     Medication(
-  //                       name: nameController.text,
-  //                       frequency: frequencyController.text,
-  //                     ),
-  //                   );
-  //                 });
-  //                 Navigator.pop(context);
-  //               }
-  //             },
-  //             style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
-  //             child: const Text('Add'),
-  //           ),
-  //         ],
-  //       );
-  //     },
-  //   );
-  // }
-
-  void _showTextInputDialog({
-    required String title,
-    required Function(String) onAdd,
-  }) {
-    String value = '';
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: Appcolors.page,
-        title: Text(title),
-        content: TextField(
-          decoration: const InputDecoration(
-            hintText: 'Name',
-            border: OutlineInputBorder(),
-          ),
-          onChanged: (v) => value = v,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              if (value.isNotEmpty) {
-                onAdd(value);
-                Navigator.pop(context);
-              }
-            },
-            child: const Text('Add'),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void input({
-    required String title,
-    required String fieldLabel,
-    required String hintText,
-    required void Function(String value) onAdd,
-  }) {
-    final TextEditingController nameController = TextEditingController();
-    final _formKey = GlobalKey<FormState>();
-
-    showDialog(
-      context: context,
-      builder: (context) {
-        return Dialog(
-          backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child:  Form(
-              key: _formKey,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 10,),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Text(
-                      title,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontFamily: "Satoshi",
-                        fontWeight: FontWeight.w500,
-                        color: TextColors.neutral900,
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 12),
-                  Divider(height: 1, color: TextColors.neutral200),
-                  const SizedBox(height: 20),
-                  // Allergy Name
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Text(
-                      fieldLabel,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontFamily: "Satoshi",
-                        fontWeight: FontWeight.w500,
-                        color: TextColors.neutral900,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: CustomTextField(
-                      maxLines: 1,
-                      hintText: hintText,
-                      controller: nameController,
-                      borderColor: TextColors.neutral500,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                    ),
-                  ),
-                  const SizedBox(height: 18),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        GestureDetector(
-                          onTap: () => Navigator.pop(context),
-                          child: Container(
-                            height: 40.h,
-                            width: 80.w,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.r),
-                              border: Border.all(
-                                color: TextColors.neutral500,
-                              ),
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Cancel",
-                                style: TextStyle(fontSize: 14.sp),
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        GestureDetector(
-                          onTap: () {
-                 if (_formKey.currentState!.validate()) {
-                  onAdd(nameController.text.trim());
-                  Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                          content: Text(
-                          '"${nameController.text.trim()}" added successfully',
-                            ),
-                         backgroundColor: Colors.green,
-                         duration: const Duration(seconds: 2),
-                          ),
-                        );
-                       }
-                          },
-                          child: Container(
-                            height: 40.h,
-                            width: 60.w,
-                            decoration: BoxDecoration(
-                              color: Appcolors.action,
-                              borderRadius: BorderRadius.circular(8.r),
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Add",
-                                style: TextStyle(
-                                  color: Appcolors.primary,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14.sp,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.end,
-                  //   children: [
-                  //     TextButton(
-                  //       onPressed: () => Navigator.pop(context),
-                  //       child: Text("Cancel", style: TextStyle(color: Colors.grey[600])),
-                  //     ),
-                  //     const SizedBox(width: 12),
-                  //     ElevatedButton(
-                  //       onPressed: () {
-                  //         if (_formKey.currentState!.validate()) {
-                  //           onAdd(nameController.text.trim());
-                  //           Navigator.pop(context);
-                  //           ScaffoldMessenger.of(context).showSnackBar(
-                  //             SnackBar(
-                  //               content: Text(
-                  //                 '"${nameController.text.trim()}" added successfully',
-                  //               ),
-                  //               backgroundColor: Colors.green,
-                  //               duration: const Duration(seconds: 2),
-                  //             ),
-                  //           );
-                  //         }
-                  //       },
-                  //       child: const Text("Add"),
-                  //     ),
-                  //   ],
-                  // ),
-                ],
-              ),
-            ),
-        );
-      },
-    );
-  }
-
-
-
   void _showAddAllergyDialog() {
     final TextEditingController nameController = TextEditingController();
     String selectedSeverity = 'Mild';
@@ -892,198 +843,211 @@ class _MedicalInformationScreenState extends State<MedicalInformationScreen> {
       context: context,
       builder: (context) {
         return Dialog(
-          backgroundColor: Colors.white,
+          backgroundColor: Appcolors.primary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
           child: StatefulBuilder(
             builder: (context, setDialogState) {
               return SingleChildScrollView(
-                child:  Form(
-                    key: _formKey,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 12),
-                        // Title
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: Text(
-                            "Add Allergy",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontFamily: "Satoshi",
-                              fontWeight: FontWeight.w500,
-                              color: TextColors.neutral900,
-                            ),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 12),
+                      // Title
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Text(
+                          "Add Allergy",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontFamily: AppConstants.FONT_FAMILY,
+                            fontWeight: FontWeight.w500,
+                            color: TextColors.neutral900,
                           ),
                         ),
+                      ),
 
-                        const SizedBox(height: 12),
-                        Divider(height: 1, color: TextColors.neutral200),
-                        const SizedBox(height: 8),
-                        // Allergy Name
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: Text(
-                            "Allergy Name",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontFamily: "Satoshi",
-                              fontWeight: FontWeight.w500,
-                              color: TextColors.neutral900,
-                            ),
-                          ),
+                      const SizedBox(height: 12),
+                      Divider(height: 1, color: BorderColors.tertiary),
+                      const SizedBox(height: 8),
+                      // Allergy Name
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                        child: LabeledTextFielded(
+                          borderColor: TextColors.neutral900,
+                          label: "Allergy Name",
+                          controller: nameController,
+                          maxline: 1,
+                          hintText: "Enter allergy name",
                         ),
-                        const SizedBox(height: 8),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: CustomTextField(
-                            hintText: "Enter name",
-                            controller: nameController,
-                            borderColor: TextColors.neutral500,
-                            autovalidateMode: AutovalidateMode.onUserInteraction,
-                          ),
-                        ),
-                        const SizedBox(height: 18),
+                      ),
+                      const SizedBox(height: 18),
 
-                        // Severity
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: Text(
-                            "Severity",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color: TextColors.neutral900,
-                            ),
+                      // Severity
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Text(
+                          "Severity",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: AppConstants.FONT_FAMILY,
+                            fontWeight: FontWeight.w500,
+                            color: TextColors.neutral900,
                           ),
                         ),
-                        const SizedBox(height: 8),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: Row(
-                            children: ['Mild', 'Moderate', 'Severe'].map((level) {
-                              final isSelected = level == selectedSeverity;
-                              return Expanded(
-                                child: GestureDetector(
-                                  onTap: () => setDialogState(
-                                    () => selectedSeverity = level,
-                                  ),
-                                  child: Container(
-                                    height: 36,
-                                    margin: EdgeInsets.symmetric(horizontal: 4),
-                                    decoration: BoxDecoration(
-                                      color: isSelected
-                                          ? Appcolors.secondary
-                                          : Colors.transparent,
-                                      border: Border.all(
-                                        color: isSelected
-                                            ? Colors.blue
-                                            : Colors.grey.shade300,
+                      ),
+                      const SizedBox(height: 8),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Row(
+                          children: ['Mild', 'Moderate', 'Severe'].map((level) {
+                            final isSelected = level == selectedSeverity;
+                            return Expanded(
+                              child: GestureDetector(
+                                onTap: () => setDialogState(
+                                      () => selectedSeverity = level,
+                                ),
+                                child: Container(
+                                  height: 40,
+                                  margin: EdgeInsets.symmetric(horizontal: 4),
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: ShadowColor.shadowColors1
+                                            .withOpacity(0.10),
+                                        // Shadow color
+                                        blurRadius: 4,
+                                        // Softness
+                                        spreadRadius: 0,
+                                        offset: Offset(0, 3),
+                                        // Position of shadow
+                                        blurStyle: BlurStyle.normal,
                                       ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        level,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: isSelected
-                                              ? FontWeight.w500
-                                              : FontWeight.w400,
-                                          color: isSelected
-                                              ? TextColors.action
-                                              : TextColors.neutral500,
-                                        ),
+                                    ],
+
+                                    color: isSelected
+                                        ? Appcolors.primary50
+                                        : Appcolors.primary,
+
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      level,
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: isSelected
+                                            ? FontWeight.w500
+                                            : FontWeight.w500,
+                                        color: isSelected
+                                            ? TextColors.primary700
+                                            : TextColors.neutral500,
                                       ),
                                     ),
                                   ),
                                 ),
-                              );
-                            }).toList(),
-                          ),
+                              ),
+                            );
+                          }).toList(),
                         ),
-                        const SizedBox(height: 24),
+                      ),
+                      const SizedBox(height: 24),
 
-                        Divider(height: 1, color: TextColors.neutral200),
-                        const SizedBox(height: 16),
+                      Divider(height: 1, color: BorderColors.tertiary),
+                      const SizedBox(height: 16),
 
-                        // Buttons
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              GestureDetector(
-                                onTap: () => Navigator.pop(context),
-                                child: Container(
-                                  height: 40.h,
-                                  width: 80.w,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    border: Border.all(
+                      // Buttons
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            GestureDetector(
+                              onTap: () => Navigator.pop(context),
+                              child: Container(
+                                height: 40.h,
+                                width: 80.w,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8.r),
+                                  color: Appcolors.primary,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: ShadowColor.shadowColors1
+                                          .withOpacity(0.10),
+                                      // Shadow color
+                                      blurRadius: 4,
+                                      // Softness
+                                      spreadRadius: 0,
+                                      offset: Offset(0, 3),
+                                      // Position of shadow
+                                      blurStyle: BlurStyle.normal,
+                                    ),
+                                  ],
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    "Cancel",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: AppConstants.FONT_FAMILY,
+                                      fontWeight: FontWeight.w500,
                                       color: TextColors.neutral500,
                                     ),
                                   ),
-                                  child: Center(
-                                    child: Text(
-                                      "Cancel",
-                                      style: TextStyle(fontSize: 14.sp),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            GestureDetector(
+                              onTap: () {
+                                if (_formKey.currentState!.validate()) {
+                                  _controller.allergies.add(
+                                    Allergy(
+                                      name: nameController.text.trim(),
+                                      severity: selectedSeverity,
+                                    ),
+                                  );
+                                  Get.back();
+                                  Get.snackbar(
+                                    'Success',
+                                    '"${nameController.text.trim()}" added successfully',
+                                    backgroundColor: Colors.green,
+                                    colorText: Colors.white,
+                                    snackPosition: SnackPosition.BOTTOM,
+                                    duration: const Duration(seconds: 2),
+                                  );
+                                }
+                              },
+                              child: Container(
+                                height: 40.h,
+                                width: 60.w,
+                                decoration: BoxDecoration(
+                                  color: Appcolors.action,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    "Add",
+                                    style: TextStyle(
+                                      color: Appcolors.primary,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 14,
                                     ),
                                   ),
                                 ),
                               ),
-                              const SizedBox(width: 10),
-                              GestureDetector(
-                                onTap: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    setState(() {
-                                      allergies.add(
-                                        Allergy(
-                                          name: nameController.text.trim(),
-                                          severity: selectedSeverity,
-                                        ),
-                                      );
-                                    });
-                                    Navigator.pop(context);
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                          'Allergy "${nameController.text.trim()}" added successfully',
-                                        ),
-                                        backgroundColor: Colors.green,
-                                      ),
-                                    );
-                                  }
-                                },
-                                child: Container(
-                                  height: 40.h,
-                                  width: 60.w,
-                                  decoration: BoxDecoration(
-                                    color: Appcolors.action,
-                                    borderRadius: BorderRadius.circular(8.r),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      "Add",
-                                      style: TextStyle(
-                                        color: Appcolors.primary,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 14.sp,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        const SizedBox(height: 12),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(height: 12),
+                    ],
                   ),
+                ),
               );
             },
           ),
@@ -1091,30 +1055,4 @@ class _MedicalInformationScreenState extends State<MedicalInformationScreen> {
       },
     );
   }
-
-  void _editDetails() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Edit details functionality would go here')),
-    );
-  }
-}
-
-// Data models
-class Allergy {
-  final String name;
-  final String severity; // Changed from 'dosage' to 'severity'
-
-  const Allergy({required this.name, required this.severity});
-}
-
-class Medication {
-  final String name;
-  final String dosage;
-  final String frequency;
-
-  const Medication({
-    required this.name,
-    required this.dosage,
-    required this.frequency
-  });
 }

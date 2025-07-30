@@ -31,6 +31,7 @@ class Containertext extends StatelessWidget {
         text,
         style: TextStyle(
           fontSize: 12,
+          letterSpacing: 0.2,
           color:Textcolor?? TextColors.neutral500,
           fontWeight: FontWeight.w500,
         ),

@@ -29,12 +29,11 @@ class Forgot extends StatelessWidget {
                   children: [
 
                     LogoHeader(
+                      fontSize: 24,
                       imagePath: 'assets/icons/logo.svg',
-                      title: 'Welcome back!',
+                      title: 'Forgor password!',
 
                     ),
-
-                    const SizedBox(height: 10),
                     //=================> logo text <=======================//
                     AppText("Enter your email to reset your password.",
                       fontSize: 16,

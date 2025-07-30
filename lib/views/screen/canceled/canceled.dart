@@ -60,7 +60,8 @@ class Canceled extends StatelessWidget {
                           const Text(
                             "Dr. Moule Marrk",
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 20,
+                              letterSpacing: 0.2,
                               fontFamily: "Inter",
                               fontWeight: FontWeight.w500,
                             ),
@@ -85,7 +86,8 @@ class Canceled extends StatelessWidget {
                                     fontSize: 14,
                                     color: TextColors.neutral900,
                                     fontFamily: "Inter",
-                                    fontWeight: FontWeight.w500,
+                                    fontStyle: FontStyle.italic,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -106,7 +108,8 @@ class Canceled extends StatelessWidget {
                     const Text(
                       "Las appointment time",
                       style: TextStyle(
-                        fontSize: 13,
+                        fontSize: 14,
+                        letterSpacing: 0.2,
                         color: TextColors.neutral500,
                         fontWeight: FontWeight.w500,
                       ),
@@ -141,8 +144,8 @@ class Canceled extends StatelessWidget {
                     Spacer(),
                     Row(
                       children: [
-                        Icon(Icons.check,color: Appcolors.error700,size: 14,),
-                        AppText("Canceled",color: Appcolors.error700,fontSize: 14,),
+                        Icon(Icons.check,color:TextColors.success,size: 14,),
+                        AppText("Complete",color:TextColors.success,fontSize: 14,),
                       ],
                     )
                   ],
@@ -156,7 +159,8 @@ class Canceled extends StatelessWidget {
                     const Text(
                       "Upcoming Follow-up",
                       style: TextStyle(
-                        fontSize: 13,
+                        fontSize: 14,
+                        letterSpacing: 0.2,
                         color: TextColors.neutral500,
                         fontWeight: FontWeight.w500,
                       ),
@@ -164,7 +168,8 @@ class Canceled extends StatelessWidget {
                     const Text(
                       "- In 7 days",
                       style: TextStyle(
-                        fontSize: 13,
+                        fontSize: 14,
+                        letterSpacing: 0.2,
                         color: TextColors.action,
                         fontWeight: FontWeight.w500,
                       ),

@@ -9,6 +9,8 @@ import 'package:signature/signature.dart';
 import 'package:wellbyn/utils/app_colors.dart';
 import 'package:wellbyn/utils/app_icons.dart';
 import 'package:wellbyn/views/base/Apptext/app_text.dart';
+import 'package:wellbyn/views/base/custom_button.dart';
+import 'package:wellbyn/views/base/icon_text_button.dart';
 import 'package:wellbyn/views/screen/doctor/doctor_details.dart';
 
 import '../../../utils/nab_ids.dart';
@@ -71,16 +73,18 @@ class HomeScreen extends StatelessWidget {
                       "Hi, Mahmud",
                       style: TextStyle(
                         fontSize: 16,
+                        letterSpacing: 0.2,
                         color: TextColors.neutral900,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w500,
                         fontFamily: "Inter",
                       ),
                     ),
                     Text(
                       "Personal account",
                       style: TextStyle(
-                        fontSize: 12.h,
-                        fontWeight: FontWeight.w600,
+                        fontSize: 12,
+                        letterSpacing: 0.2,
+                        fontWeight: FontWeight.w500,
                         fontFamily: "Inter",
                         color: TextColors.neutral500,
                       ),
@@ -206,7 +210,8 @@ class HomeScreen extends StatelessWidget {
                               child: Text(
                                 "Dr. Leo Marwick",
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 20,
+                                  letterSpacing: 0.2,
                                   color: TextColors.neutral900,
                                   fontFamily: 'Inter',
                                   fontWeight: FontWeight.w500,
@@ -220,7 +225,8 @@ class HomeScreen extends StatelessWidget {
                               style: TextStyle(
                                 color: TextColors.neutral500,
                                 fontFamily: 'Inter',
-                                fontSize: 12,
+                                fontSize: 14,
+                                letterSpacing: 0.2,
                                 fontWeight: FontWeight.w500,
                               ),
                               overflow: TextOverflow.ellipsis,
@@ -243,15 +249,16 @@ class HomeScreen extends StatelessWidget {
                                   child: Text(
                                     "Sylhet Health Center",
                                     style: TextStyle(
-                                      fontSize: 14,
+                                      fontSize: 16,
                                       fontStyle: FontStyle.italic,
-                                      fontFamily: "Inter",
+                                      //fontFamily: "Inter",       // <--- uncomment this
                                       color: TextColors.neutral900,
-                                      fontWeight: FontWeight.w500,
+                                      fontWeight: FontWeight.w500,  // use w400 for italic because you have only 400 italic
                                     ),
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                   ),
+
                                 ),
                               ],
                             ),
@@ -266,6 +273,7 @@ class HomeScreen extends StatelessWidget {
                                       fontSize: 14,
                                       color: TextColors.neutral900,
                                       fontFamily: 'Inter',
+                                      letterSpacing: 0.2,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
@@ -311,12 +319,12 @@ class HomeScreen extends StatelessWidget {
                 ]
               ),
               child: Padding(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(7),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AppText("Hey!", fontSize: 16, color: TextColors.neutral900,fontWeight: FontWeight.w700,),
+                    AppText("Hey!", fontSize: 16, color: TextColors.neutral900,fontWeight: FontWeight.w600,),
                     SizedBox(height: 4,),
 
                     Text(
@@ -324,7 +332,9 @@ class HomeScreen extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: "Inter",
                         fontSize: 13,
-                        fontWeight: FontWeight.w600,
+                        color: TextColors.primary2,
+                        letterSpacing: 0.2,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                     SizedBox(height: 4,),
@@ -332,7 +342,7 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         AppText(
                           "Start",
-                          fontSize: 16,
+                          fontSize: 14,
                           fontWeight: FontWeight.w500,
                           color: TextColors.action,
                         ),
@@ -414,8 +424,9 @@ class HomeScreen extends StatelessWidget {
                                       "Sylhet Health Center",
                                       style: TextStyle(
                                         fontSize: 14,
-                                        color: TextColors.neutral900,
+                                        color: TextColors.primary2,
                                         fontFamily: "Inter",
+                                        fontStyle: FontStyle.italic,
                                         fontWeight: FontWeight.w500,
                                       ),
                                       overflow: TextOverflow.ellipsis,
@@ -438,7 +449,8 @@ class HomeScreen extends StatelessWidget {
                         const Text(
                           "Date & time",
                           style: TextStyle(
-                            fontSize: 13,
+                            fontSize: 14,
+                            letterSpacing: 0.2,
                             color: TextColors.neutral500,
                             fontWeight: FontWeight.w500,
                           ),
@@ -462,21 +474,31 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         SvgPicture.asset(
                           AppIcons.calenderIcon,
-                          color: TextColors.neutral900,
+                          color: TextColors.primary2,
                           width: 16,
                           height: 16,
                         ),
                         const SizedBox(width: 5),
-                        const Text("Today"),
+                        Text("May 16 2025",style: TextStyle(
+                          fontSize: 14,
+                          letterSpacing: 0.2,
+                          fontWeight: FontWeight.w500,
+
+                        ),),
                         Spacer(),
-                        SvgPicture.asset(AppIcons.clockIcon),
-                        const Text("10:25pm",style: TextStyle(fontSize: 13),),
+                        SvgPicture.asset(AppIcons.clockIcon,color: TextColors.primary2,),
+                        const Text("10:25pm",style: TextStyle(
+                          fontSize: 14,
+                          letterSpacing: 0.2,
+                          fontWeight: FontWeight.w500,
+
+                        ),),
                         Spacer(),
                         Row(
                           children: [
-                            Icon(Icons.circle, color: Color(0xff38c976) , size: 13,),
+                            Icon(Icons.check, color: TextColors.success , size: 14,),
                             SizedBox(width: 3,),
-                            AppText("Confirmed", color: TextColors.neutral900,
+                            AppText("Confirmed", color: TextColors.success,
                               fontSize: 13,),
                           ],
                         )
@@ -487,24 +509,41 @@ class HomeScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child:AppText(
-                      "Visit Type",
+                      "Can't make it on this date?",
                       fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: TextColors.neutral900,),
+                      fontWeight: FontWeight.w500,
+                      color: TextColors.neutral500,),
                   ),
-                  SizedBox(height: 6.h),
+                  SizedBox(height: 10.h),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: TextshowData(
-                      text: "Tap to select",
-                      height: 50.h,
-                      color: Appcolors.primary,
-                      onTap: () {
-                        print("Tapped");
-                      },
-                    ),
+                    child:Row(
+                      children: [
+                        IconTextButton(
+                            width: 160.w,
+                            text: "Reschedule",
+                            fontsize: 16,
+                            textColor: Appcolors.action,
+                            backgroundColor: Appcolors.success50,
+                              svgAsset: AppIcons.exchange01Icon,
+                              svgAssetcolor: Appcolors.action,
+                              onTap: (){}),
+                        SizedBox(width: 16.w,),
+                        AppText("OR",color: TextColors.neutral500, fontWeight: FontWeight.w500,fontSize: 16,),
+                        SizedBox(width: 16.w,),
+                        CustomButton(
+                            width: 80.w,
+                              height: 40,
+                              text: "Cancel",
+                              textColor: Appcolors.error700,
+                              broderColor: Colors.transparent,
+                              color: Appcolors.primary,
+                              onTap: (){}),
+                      ],
+                    )
                   ),
                   const SizedBox(height: 15),
+
                 ],
               ),
             );

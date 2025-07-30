@@ -129,20 +129,30 @@ flutter:
 
 
   fonts:
-      - family: Satoshi
-        fonts:
-          - asset: assets/fonts/Satoshi-Regular.otf
-          - asset: assets/fonts/Satoshi-Bold.otf
-            weight: 700
+    - family: Satoshi
+      fonts:
+        - asset: assets/fonts/Satoshi-Regular.otf
+        - asset: assets/fonts/Satoshi-Bold.otf
+          weight: 700
 
-      - family: Inter
-        fonts:
-          - asset: assets/fonts/Inter_18pt-Regular.ttf
-          - asset: assets/fonts/Inter_18pt-Bold.ttf
-            weight: 700
-          - asset: assets/fonts/Inter_18pt-Italic.ttf
-            style: italic
-          - asset: assets/fonts/Inter_18pt-SemiBold.ttf
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter_24pt-Regular.ttf
+          weight: 400
+          style: normal
+        - asset: assets/fonts/Inter_24pt-Medium.ttf
+          weight: 500
+          style: normal
+        - asset: assets/fonts/Inter_24pt-Bold.ttf
+          weight: 700
+          style: normal
+        - asset: assets/fonts/Inter_24pt-ExtraBold.ttf
+          weight: 800
+          style: normal
+        - asset: assets/fonts/Inter_28pt-Italic.ttf
+          weight: 400
+          style: italic
+
 
 
 

@@ -88,7 +88,8 @@ class Compeleted extends StatelessWidget {
                                     fontSize: 14,
                                     color: TextColors.neutral900,
                                     fontFamily: "Inter",
-                                    fontWeight: FontWeight.w500,
+                                    fontStyle: FontStyle.italic,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -144,8 +145,8 @@ class Compeleted extends StatelessWidget {
                     Spacer(),
                     Row(
                       children: [
-                        Icon(Icons.check,color: Colors.green,size: 14,),
-                        AppText("Complete",color: Colors.green,fontSize: 14,),
+                        Icon(Icons.check,color:TextColors.success,size: 14,),
+                        AppText("Complete",color:TextColors.success,fontSize: 14,),
                       ],
                     )
                   ],
@@ -159,7 +160,8 @@ class Compeleted extends StatelessWidget {
                     const Text(
                       "Upcoming Follow-up",
                       style: TextStyle(
-                        fontSize: 13,
+                        fontSize: 14,
+                        letterSpacing: 0.2,
                         color: TextColors.neutral500,
                         fontWeight: FontWeight.w500,
                       ),
@@ -167,7 +169,8 @@ class Compeleted extends StatelessWidget {
                     const Text(
                       "- In 7 days",
                       style: TextStyle(
-                        fontSize: 13,
+                        fontSize: 14,
+                        letterSpacing: 0.2,
                         color: TextColors.action,
                         fontWeight: FontWeight.w500,
                       ),

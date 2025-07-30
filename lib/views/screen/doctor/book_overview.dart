@@ -39,6 +39,7 @@ class BookOverview extends StatelessWidget {
           "Appointment overview",
           style: TextStyle(
             fontSize: 20,
+            letterSpacing: 0.2,
             fontFamily: "Inter",
             fontWeight: FontWeight.w500,
             color: TextColors.neutral900,
@@ -68,21 +69,21 @@ class BookOverview extends StatelessWidget {
               SizedBox(height: 24.h),
 
               Labeldatashow(
-                height: 48.h,
+                height: 50.h,
                 LableText: "Visit Reason",
                 text: "I need a clean",
               ),
               SizedBox(height: 24.h),
 
               Labeldatashow(
-                height: 48.h,
+                height: 50.h,
                 LableText: "Select insurance ",
                 text: "Blusky ",
               ),
               SizedBox(height: 24.h),
 
               Labeldatashow(
-                height: 48.h,
+                height: 50.h,
                 LableText: "Visit Type ",
                 text: "New Patient Visit",
               ),
@@ -459,8 +460,8 @@ class BookOverview extends StatelessWidget {
                 children: [
                   AppText(
                     "Dr. Moule Marrk",
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 20,
                   ),
                   AppText(
                     "Cardiology",
@@ -479,7 +480,7 @@ class BookOverview extends StatelessWidget {
                           color: TextColors.neutral900,
                           fontFamily: "Inter",
                           fontStyle: FontStyle.italic,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ],
@@ -529,7 +530,7 @@ class BookOverview extends StatelessWidget {
                 AppIcons.appointmentIcon,
               ),
               SizedBox(width: 5),
-              Text("16 May 2025"),
+              Text("16 May 2025",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14,letterSpacing: 0.2),),
               Spacer(),
               Text("$formattedTime"),
             ],

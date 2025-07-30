@@ -28,7 +28,7 @@ class LabeledDropdownFielded extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppText(label, fontSize: 16, color: TextColors.neutral900,fontWeight: FontWeight.w600,),
+        AppText(label, fontSize: 16, color: TextColors.neutral900,fontWeight: FontWeight.w500,),
         SizedBox(height: 6.h),
         CustomDropdownDialogss(
           items: items,

@@ -166,61 +166,149 @@ class Doctor extends StatelessWidget {
                   SizedBox(height: 10),
 
                   Expanded(
-                    child: GridView.builder(
-                      physics: const  BouncingScrollPhysics(),
+                    child:  GridView.builder(
+                        physics: BouncingScrollPhysics(),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
+                          crossAxisCount: 2,
                           mainAxisSpacing: 8,
                           crossAxisSpacing: 8,
                           childAspectRatio: 0.56,
                         ),
-
+                        itemCount: 20,
                         itemBuilder: (context,index){
-                      return  GestureDetector(
-                        onTap: () {
-                          Get.toNamed(
-                            '/doctor_details',
-                            id: NavIds.profile, // this matches nested key
-                            arguments: {
-                              'doctorId': 'a1da1dad136adf4566adf1a',
+                          return  GestureDetector(
+                            onTap: () {
+                              Get.toNamed(
+                                '/doctor_details',
+                                id: NavIds.profile, // this matches nested key
+                                arguments: {
+                                  'doctorId': 'a1da1dad136adf4566adf1a',
+                                },
+                              );
                             },
-                          );
-                        },
-                        child: Container(
-                          margin: EdgeInsets.all(2),
-                          padding: EdgeInsets.all(9),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
-                            boxShadow: [
-                              BoxShadow(
-                                color: ShadowColor.shadowColors1.withOpacity(0.10),
-                                spreadRadius: 0,
-                                blurRadius: 4,
-                                offset: Offset(0, 3),
+                            child: Container(
+                              margin: EdgeInsets.all(2),
+                              padding: EdgeInsets.all(9),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(12),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: ShadowColor.shadowColors1.withOpacity(0.10),
+                                    blurRadius: 4,
+                                    // reasonable softness
+                                    spreadRadius: 0,
+                                    offset: Offset(0, 3), // downward shadow
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Stack(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: Image.asset(
-                                      "assets/image/doctor_image.png",
-                                      height: 140.h,
-                                      width: double.infinity,
-                                      fit: BoxFit.cover,
+                                  Stack(
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(8),
+                                        child: Image.asset(
+                                          "assets/image/doctor_image.png",
+                                          height: 140.h,
+                                          width: double.infinity,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      Positioned(
+                                        right: 0,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(5),
+                                          child: SvgPicture.asset(
+                                            "assets/icons/Heart.svg",
+                                            width: 20,
+                                            height: 20,
+                                            colorFilter: ColorFilter.mode(
+                                              TextColors.neutral900,
+                                              BlendMode.srcIn,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 8),
+                                    child: Text(
+                                      "Dr. Leo Marwick",
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        letterSpacing: 0.2,
+                                        color: TextColors.neutral900,
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
                                     ),
                                   ),
-                                  Positioned(
-                                    right: 0,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(5),
-                                      child: SvgPicture.asset(
-                                        "assets/icons/Heart.svg",
+                                  Text(
+                                    "Heart Health Expert",
+                                    style: TextStyle(
+                                      color: TextColors.neutral500,
+                                      fontFamily: 'Inter',
+                                      fontSize: 14,
+                                      letterSpacing: 0.2,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                  ),
+                                  SizedBox(height: 8),
+                                  Row(
+                                    children: [
+                                      SvgPicture.asset(
+                                        AppIcons.hospitallocationIcon,
+                                        width: 20,
+                                        height: 20,
+                                        colorFilter: ColorFilter.mode(
+                                          Appcolors.action,
+                                          BlendMode.srcIn,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 4),
+                                      Expanded(
+                                        child: Text(
+                                          "Sylhet Health Center",
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontStyle: FontStyle.italic,
+                                            //fontFamily: "Inter",       // <--- uncomment this
+                                            color: TextColors.neutral900,
+                                            fontWeight: FontWeight.w500,  // use w400 for italic because you have only 400 italic
+                                          ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 14),
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 0),
+                                        child: Text(
+                                          "3 available time",
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: TextColors.neutral900,
+                                            fontFamily: 'Inter',
+                                            letterSpacing: 0.2,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      SvgPicture.asset(
+                                        AppIcons.shearIcon,
                                         width: 20,
                                         height: 20,
                                         colorFilter: ColorFilter.mode(
@@ -228,97 +316,13 @@ class Doctor extends StatelessWidget {
                                           BlendMode.srcIn,
                                         ),
                                       ),
-                                    ),
+                                    ],
                                   ),
                                 ],
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 8),
-                                child: Text(
-                                  "Dr. Leo Marwick",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: TextColors.neutral900,
-                                    fontFamily: AppConstants.FONT_FAMILY,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                ),
-                              ),
-                              Text(
-                                "Heart Health Expert",
-                                style: TextStyle(
-                                  color: TextColors.neutral500,
-                                  fontFamily: AppConstants.FONT_FAMILY,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                              ),
-                              SizedBox(height: 8),
-                              Row(
-                                children: [
-                                  SvgPicture.asset(
-                                    AppIcons.hospitallocationIcon,
-                                    width: 20,
-                                    height: 20,
-                                    colorFilter: ColorFilter.mode(
-                                      Appcolors.action,
-                                      BlendMode.srcIn,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 4),
-                                  Expanded(
-                                    child: Text(
-                                      "Sylhet Health Center",
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontStyle: FontStyle.italic,
-                                        fontFamily: AppConstants.FONT_FAMILY,
-                                        color: TextColors.neutral900,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 14),
-                              Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 0),
-                                    child: Text(
-                                      "3 available time",
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        letterSpacing: 0.2,
-                                        color: TextColors.neutral900,
-                                        fontFamily: AppConstants.FONT_FAMILY,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                  Spacer(),
-                                  SvgPicture.asset(
-                                    AppIcons.shearIcon,
-                                    width: 20,
-                                    height: 20,
-                                    colorFilter: ColorFilter.mode(
-                                      TextColors.neutral900,
-                                      BlendMode.srcIn,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    })
+                            ),
+                          );
+                        })
                   ),
                 ],
               ),

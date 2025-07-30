@@ -147,10 +147,10 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
 
                         LabeledTextFielded(
                             borderColor: TextColors.neutral900,
-                            label: "Email",
+                            label: "Full Name",
                             controller: _nameController,
                             maxline: 1,
-                            hintText: "Email Address",
+                            hintText: "First Name",
                           ),
                         SizedBox(height: 20.h),
                         Row(
@@ -170,7 +170,7 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
                                 child: CustomTextFielded(
                                   next: true,
                                   controller: _middleNameController,
-                                  hintText: "Middle",
+                                  hintText: "Last Name",
                                   keyboardType: TextInputType.name,
                                   maxLines: 1,
                                   borderColor: TextColors.neutral900,
@@ -397,7 +397,8 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
                           maxline: 1,
                           hintText: "License number",
                         ),
-
+                        SizedBox(height: 24.h,),
+                        AppText("Upload Driver's License Images",fontSize: 16,fontWeight: FontWeight.w500,),
                         _buildImageUploadSection(),
                         const SizedBox(height: 10),
                         Text(
@@ -453,6 +454,7 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
         "Profile Settings",
         style: TextStyle(
           fontSize: 20,
+          letterSpacing: 0.2,
           fontFamily: AppConstants.FONT_FAMILY,
           fontWeight: FontWeight.w500,
           color: TextColors.neutral900,
@@ -569,7 +571,7 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
             const SizedBox(width: 6),
             AppText(
               "Patient Information",
-              fontSize: 18,
+              fontSize: 16,
               color: TextColors.neutral900,
             ),
           ],
@@ -579,8 +581,9 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
           "Hi! Please share your personal info to verify your identity and stay connected with your healthcare providers.",
           style: TextStyle(
             fontSize: 14,
+            fontFamily: AppConstants.FONT_FAMILY,
             color: TextColors.neutral500,
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.w500,
           ),
         ),
         const SizedBox(height: 25),

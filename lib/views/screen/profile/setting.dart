@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:wellbyn/utils/app_constants.dart';
 import 'package:wellbyn/views/screen/profile/account_switch.dart';
 
 import '../../../utils/app_colors.dart';
@@ -30,12 +31,11 @@ class Setting extends StatelessWidget {
          onConfirm: () => _handleLogout(context),
          onCancel: () => Navigator.pop(context),
          iconAsset: AppIcons.alertIcon,
-         title: 'Log out? ',
+         title: 'Logout? ',
          description: 'Are you sure you want to log out of your account?',
        ),
      );
    }
-
 
 
    @override
@@ -48,7 +48,8 @@ class Setting extends StatelessWidget {
           "Settings",
           style: TextStyle(
             fontSize: 20,
-            fontFamily: "Satoshi",
+            letterSpacing: 0.2,
+            fontFamily: AppConstants.FONT_FAMILY,
             fontWeight: FontWeight.w500,
             color: TextColors.neutral900,
           ),
@@ -233,9 +234,10 @@ class Setting extends StatelessWidget {
                          SvgPicture.asset(AppIcons.logoutIcon),
                          SizedBox(width: 8,),
                          Text(
-                             "Log out",
+                             "Logout",
                              style: TextStyle(
-                               fontFamily: "Satoshi",
+                               fontFamily: "Inter",
+                               letterSpacing: 0.2,
                                color: BorderColors.error700,
                                fontSize: 16,
                                fontWeight: FontWeight.w500,

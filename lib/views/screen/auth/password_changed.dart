@@ -16,7 +16,7 @@ class PasswordChanged extends StatelessWidget {
       title: 'Password Changed!',
       message:
       'Return to the login page to enter your account with your new password.',
-      buttonText: 'Back to login',
+      buttonText: 'Back to Sign In',
       buttonColor: Appcolors.action,
       buttonTextColor: Colors.white,
       onButtonTap: () {

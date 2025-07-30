@@ -39,7 +39,7 @@ class LogoHeader extends StatelessWidget {
           style: TextStyle(
             fontFamily: AppConstants.FONT_FAMILY,
             fontSize: fontSize.sp,
-            color: TextColors.neutral900,
+            color: TextColors.primary2,
             fontWeight: FontWeight.w500,
           ),
         ),

@@ -62,6 +62,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                         LogoHeader(
                           imagePath: 'assets/icons/logo.svg',
                           title: 'Create an account',
+                          fontSize: 24,
                         ),
                         const SizedBox(height: 20),
 
@@ -93,7 +94,10 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                             // }
 
 
+                            if(email.currentState!.validate()){
                               Get.to(()=> Forgot());
+                            }
+
 
 
                           },
@@ -105,6 +109,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
                           Get.to(LoginScreen());
                         },
+                          fontSize: 16.sp,
                           leadingText: 'Alredy have an account? ',
                           actionText: 'Sign In',
                           fontFamily: AppConstants.FONT_FAMILY,),

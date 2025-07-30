@@ -53,7 +53,7 @@ class Support extends StatelessWidget {
             SizedBox(height: 8,),
 
             CustomTextField(
-              hintText: 'Problem name',
+              hintText: 'Write problem...',
               controller: problemController,
               filColor: Appcolors.primary,
             ),

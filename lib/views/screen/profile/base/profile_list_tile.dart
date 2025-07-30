@@ -44,6 +44,7 @@ class ProfileListTile extends StatelessWidget {
             Text(
               title,
               style: const TextStyle(
+                letterSpacing: 0.2,
                 fontFamily: 'Inter',
                 color: TextColors.neutral900,
                  fontWeight:  FontWeight.w500,

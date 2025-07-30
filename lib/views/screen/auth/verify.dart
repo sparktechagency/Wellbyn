@@ -164,7 +164,7 @@ class Verify extends StatelessWidget {
                             fontSize: 16,
                             color: TextColors.neutral500,
                             fontWeight: FontWeight.w500,
-                            fontFamily: "Satoshi",
+                            fontFamily: "Inter",
                           ),
                         ),
                       ]

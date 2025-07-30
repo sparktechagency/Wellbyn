@@ -43,8 +43,9 @@ class SettingAddInsurance extends StatelessWidget {
           "Add New Insurance Info",
           style: TextStyle(
             fontSize: 20.sp,
+            letterSpacing: 0.2,
             fontFamily: AppConstants.FONT_FAMILY,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w500,
             color: TextColors.neutral900,
           ),
         ),
@@ -306,7 +307,7 @@ class SettingAddInsurance extends StatelessWidget {
                 AppText(
                   "OR",
                   fontSize: 16,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w600,
                   color: TextColors.neutral900,
                 ),
                 SizedBox(width: 6.w),
@@ -329,14 +330,19 @@ class SettingAddInsurance extends StatelessWidget {
             Stack(
               children: [
                 Container(
+                  height: 140.h,
                   padding: EdgeInsets.all(1.w),
                   decoration: BoxDecoration(
                     color: Appcolors.primary,
                     borderRadius: BorderRadius.circular(12.r),
-                    border: Border.all(
-                      color: TextColors.neutral200,
-                      width: 1.w,
-                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: ShadowColor.shadowColors1.withOpacity(0.10),
+                        offset: Offset(0, 3),
+                        blurRadius: 4,
+
+                      )
+                    ]
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.r),

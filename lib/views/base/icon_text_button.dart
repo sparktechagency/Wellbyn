@@ -93,6 +93,7 @@ class IconTextButton extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: AppConstants.FONT_FAMILY,
                     fontSize:fontsize.h,
+                    letterSpacing: 0.2,
                     color: textColor,
                     fontWeight: FontWeight.w500,
                   ),

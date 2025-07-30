@@ -96,8 +96,8 @@ class BottomNavBar extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 12,
                                 color: isSelected ? selectedColor : unselectedColor,
-                                fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-                                fontFamily: 'Satoshi',
+                                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                                fontFamily: 'Inter',
                               ),
                               child: Text(_labels[index]),
                             ),

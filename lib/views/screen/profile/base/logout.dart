@@ -50,10 +50,11 @@ class CustomConfirmationDialog extends StatelessWidget {
             Text(
               title,
               style: const TextStyle(
-                fontFamily: "Satoshi",
+                fontFamily: "Inter",
+                letterSpacing: 0.2,
                 color: TextColors.neutral900,
                 fontWeight: FontWeight.w500,
-                fontSize: 18,
+                fontSize: 20,
               ),
             ),
             const SizedBox(height: 6),
@@ -61,7 +62,8 @@ class CustomConfirmationDialog extends StatelessWidget {
               description,
               style: const TextStyle(
                 fontSize: 14,
-                fontFamily: "Satoshi",
+                letterSpacing: 0.2,
+                fontFamily: "Inter",
                 color: TextColors.neutral500,
                 fontWeight: FontWeight.w500,
               ),
@@ -74,10 +76,10 @@ class CustomConfirmationDialog extends StatelessWidget {
                 child: Text(
                   confirmText,
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                     color: Appcolors.error700,
                     fontWeight: FontWeight.w500,
-                    fontFamily: "Satoshi",
+                    fontFamily: "Inter",
                   ),
                 ),
               ),
@@ -97,10 +99,10 @@ class CustomConfirmationDialog extends StatelessWidget {
                 child: Text(
                   cancelText,
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                     color: TextColors.primary,
                     fontWeight: FontWeight.w500,
-                    fontFamily: "Satoshi",
+                    fontFamily: "Inter",
                   ),
                 ),
               ),

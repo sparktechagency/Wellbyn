@@ -39,8 +39,9 @@ class SetNewPassword extends StatelessWidget {
                     //=================> logo header <=======================//
 
                     LogoHeader(
+                      fontSize: 24,
                       imagePath: 'assets/icons/logo.svg',
-                      title: 'Verify code',
+                      title: 'Set new password',
                     ),
 
                     //=================> logo header <=======================//

@@ -22,7 +22,7 @@ class ConsentScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 24),
-               Center(
+              Center(
                 child:AppText("HIPAA Consent",fontSize: 24,fontWeight: FontWeight.w500,)
               ),
               const SizedBox(height: 32),

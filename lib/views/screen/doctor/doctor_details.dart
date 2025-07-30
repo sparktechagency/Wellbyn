@@ -187,8 +187,9 @@ class DoctorDetails extends StatelessWidget {
                             const Text(
                               "Dr. Moule Marrk",
                               style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 24,
+                                letterSpacing: 0.2,
                                 color: TextColors.neutral900,
                                 fontFamily: AppConstants.FONT_FAMILY,
                               ),
@@ -198,6 +199,8 @@ class DoctorDetails extends StatelessWidget {
                               style: TextStyle(
                                 color: TextColors.neutral500,
                                 fontSize: 16,
+                                letterSpacing: 0.2,
+                                fontWeight: FontWeight.w400,
                                 fontFamily: AppConstants.FONT_FAMILY,
                               ),
                             ),
@@ -240,7 +243,8 @@ class DoctorDetails extends StatelessWidget {
                           style: TextStyle(
                             color: TextColors.neutral500,
                             fontWeight: FontWeight.w500,
-                            fontSize: 18,
+                            fontSize: 20,
+                            letterSpacing: 0.2,
                             fontFamily: AppConstants.FONT_FAMILY,
                           ),
                         ),
@@ -254,7 +258,7 @@ class DoctorDetails extends StatelessWidget {
                           fontStyle: FontStyle.italic,
                           fontSize: 14,
                           fontFamily: AppConstants.FONT_FAMILY,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w600,
                           color: TextColors.secondary,
                         ),
                       ),
@@ -495,9 +499,10 @@ class _DateTimePickerSectionState extends State<DateTimePickerSection> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Selected Date",
+                  "Selected your date",
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 18,
@@ -533,6 +538,7 @@ class _DateTimePickerSectionState extends State<DateTimePickerSection> {
               "Sun",
               style: TextStyle(
                 fontSize: 14,
+                letterSpacing: 0.2,
                 fontWeight: FontWeight.w500,
                 fontFamily: AppConstants.FONT_FAMILY,
               ),
@@ -541,6 +547,7 @@ class _DateTimePickerSectionState extends State<DateTimePickerSection> {
               "Mon",
               style: TextStyle(
                 fontSize: 14,
+                letterSpacing: 0.2,
                 fontWeight: FontWeight.w500,
                 fontFamily: AppConstants.FONT_FAMILY,
               ),
@@ -548,6 +555,7 @@ class _DateTimePickerSectionState extends State<DateTimePickerSection> {
             Text(
               "Tue",
               style: TextStyle(
+                letterSpacing: 0.2,
                 fontWeight: FontWeight.w500,
                 fontFamily: AppConstants.FONT_FAMILY,
               ),
@@ -555,6 +563,7 @@ class _DateTimePickerSectionState extends State<DateTimePickerSection> {
             Text(
               "Wed",
               style: TextStyle(
+                letterSpacing: 0.2,
                 fontWeight: FontWeight.w500,
                 fontFamily: AppConstants.FONT_FAMILY,
               ),
@@ -562,6 +571,7 @@ class _DateTimePickerSectionState extends State<DateTimePickerSection> {
             Text(
               "Thu",
               style: TextStyle(
+                letterSpacing: 0.2,
                 fontWeight: FontWeight.w500,
                 fontFamily: AppConstants.FONT_FAMILY,
               ),
@@ -569,6 +579,7 @@ class _DateTimePickerSectionState extends State<DateTimePickerSection> {
             Text(
               "Fri",
               style: TextStyle(
+                letterSpacing: 0.2,
                 fontWeight: FontWeight.w500,
                 fontFamily: AppConstants.FONT_FAMILY,
               ),
@@ -576,6 +587,7 @@ class _DateTimePickerSectionState extends State<DateTimePickerSection> {
             Text(
               "Sat",
               style: TextStyle(
+                letterSpacing: 0.2,
                 fontWeight: FontWeight.w500,
                 fontFamily: AppConstants.FONT_FAMILY,
               ),
@@ -609,8 +621,8 @@ class _DateTimePickerSectionState extends State<DateTimePickerSection> {
 
   Widget buildArrowButton(IconData icon, VoidCallback onTap) {
     return Container(
-      height: 25,
-      width: 25,
+      height: 25.h,
+      width: 25.w,
       decoration: BoxDecoration(
         // boxShadow: [
         //   BoxShadow(
@@ -656,8 +668,8 @@ class _DateTimePickerSectionState extends State<DateTimePickerSection> {
         return GestureDetector(
           onTap: () => controller.selectDate(date),
           child: Container(
-            width: 40.h,
-            height: 30.h,
+            width: 45.h,
+            height: 33.h,
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: isSelected ? Appcolors.action : Colors.transparent,

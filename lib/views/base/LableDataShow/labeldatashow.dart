@@ -25,10 +25,10 @@ class Labeldatashow extends StatelessWidget {
         Text(
           LableText,
           style: TextStyle(
-            fontSize: 14,
+            fontSize: 16,
             fontFamily: "Inter",
             color: TextColors.neutral900,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w500,
           ),
         ),
         SizedBox(height: 6.h,),

@@ -81,6 +81,7 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
           "Profile Setting",
           style: TextStyle(
             fontSize: 20,
+            letterSpacing: 0.2,
             fontFamily: AppConstants.FONT_FAMILY,
             fontWeight: FontWeight.w500,
             color: TextColors.neutral900,
@@ -223,7 +224,7 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                             fontWeight: FontWeight.w500,
                                             fontFamily: AppConstants.FONT_FAMILY,
                                             color: TextColors.neutral500,
-                                            fontSize: 14.sp,
+                                            fontSize: 14,
                                           ),
                                         ),
                                         Text(
@@ -233,7 +234,7 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                             fontWeight: FontWeight.w500,
                                             fontFamily: AppConstants.FONT_FAMILY,
                                             color: TextColors.neutral900,
-                                            fontSize: 16.sp,
+                                            fontSize: 16,
                                           ),
                                         ),
                                       ],
@@ -277,13 +278,13 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                   label: "Contact ID",
                                   value: "G987654321",
                                   labelStyle: TextStyle(
-                                    fontSize: 14.sp,
+                                    fontSize: 14,
                                     color: TextColors.neutral500,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: AppConstants.FONT_FAMILY,
                                   ),
                                   valueStyle: TextStyle(
-                                    fontSize: 16.sp,
+                                    fontSize: 16,
                                     color: TextColors.neutral900,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: AppConstants.FONT_FAMILY,
@@ -296,13 +297,13 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                   label: "Group Number",
                                   value: "H123456789",
                                   labelStyle: TextStyle(
-                                    fontSize: 14.sp,
+                                    fontSize: 14,
                                     color: TextColors.neutral500,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: AppConstants.FONT_FAMILY,
                                   ),
                                   valueStyle: TextStyle(
-                                    fontSize: 16.sp,
+                                    fontSize: 16,
                                     color: TextColors.neutral900,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: AppConstants.FONT_FAMILY,
@@ -314,13 +315,13 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                   label: "Expiration Date",
                                   value: "31/12/2025",
                                   labelStyle: TextStyle(
-                                    fontSize: 14.sp,
+                                    fontSize: 14,
                                     color: TextColors.neutral500,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: AppConstants.FONT_FAMILY,
                                   ),
                                   valueStyle: TextStyle(
-                                    fontSize: 16.sp,
+                                    fontSize: 16,
                                     color: TextColors.neutral900,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: AppConstants.FONT_FAMILY,
@@ -337,7 +338,7 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                   label: "Patient Relationship to Insured",
                                   value: "Father",
                                   labelStyle: TextStyle(
-                                    fontSize: 15,
+                                    fontSize: 14,
                                     color: TextColors.neutral500,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: AppConstants.FONT_FAMILY,
@@ -359,13 +360,13 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                         label: "First Name",
                                         value: "Father",
                                         labelStyle: TextStyle(
-                                          fontSize: 14.sp,
+                                          fontSize: 14,
                                           color: TextColors.neutral500,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: AppConstants.FONT_FAMILY,
                                         ),
                                         valueStyle: TextStyle(
-                                          fontSize: 16.sp,
+                                          fontSize: 16,
                                           color: TextColors.neutral900,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: AppConstants.FONT_FAMILY,
@@ -378,13 +379,13 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                         label: "Middle Name",
                                         value: "Father",
                                         labelStyle: TextStyle(
-                                          fontSize: 14.sp,
+                                          fontSize: 14,
                                           color: TextColors.neutral500,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: AppConstants.FONT_FAMILY,
                                         ),
                                         valueStyle: TextStyle(
-                                          fontSize: 16.sp,
+                                          fontSize: 16,
                                           color: TextColors.neutral900,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: AppConstants.FONT_FAMILY,
@@ -398,13 +399,13 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                         label: "Last Name",
                                         value: "Father",
                                         labelStyle: TextStyle(
-                                          fontSize: 14.sp,
+                                          fontSize: 14,
                                           color: TextColors.neutral500,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: AppConstants.FONT_FAMILY,
                                         ),
                                         valueStyle: TextStyle(
-                                          fontSize: 16.sp,
+                                          fontSize: 16,
                                           color: TextColors.neutral900,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: AppConstants.FONT_FAMILY,
@@ -418,13 +419,13 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                   label: "Contract ID",
                                   value: "H123456789",
                                   labelStyle: TextStyle(
-                                    fontSize: 14.sp,
+                                    fontSize: 14,
                                     color: TextColors.neutral500,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: AppConstants.FONT_FAMILY,
                                   ),
                                   valueStyle: TextStyle(
-                                    fontSize: 16.sp,
+                                    fontSize: 16,
                                     color: TextColors.neutral900,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: AppConstants.FONT_FAMILY,
@@ -435,13 +436,13 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                   label: "Address Line 1",
                                   value: "H123456789",
                                   labelStyle: TextStyle(
-                                    fontSize: 14.sp,
+                                    fontSize: 14,
                                     color: TextColors.neutral500,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: AppConstants.FONT_FAMILY,
                                   ),
                                   valueStyle: TextStyle(
-                                    fontSize: 16.sp,
+                                    fontSize: 16,
                                     color: TextColors.neutral900,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: AppConstants.FONT_FAMILY,
@@ -457,13 +458,13 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                         label: "City",
                                         value: "Manhattan",
                                         labelStyle: TextStyle(
-                                          fontSize: 14.sp,
+                                          fontSize: 14,
                                           color: TextColors.neutral500,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: AppConstants.FONT_FAMILY,
                                         ),
                                         valueStyle: TextStyle(
-                                          fontSize: 16.sp,
+                                          fontSize: 16,
                                           color: TextColors.neutral900,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: AppConstants.FONT_FAMILY,
@@ -476,13 +477,13 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                         label: "State",
                                         value: "NYC",
                                         labelStyle: TextStyle(
-                                          fontSize: 14.sp,
+                                          fontSize: 14,
                                           color: TextColors.neutral500,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: AppConstants.FONT_FAMILY,
                                         ),
                                         valueStyle: TextStyle(
-                                          fontSize: 16.sp,
+                                          fontSize: 16,
                                           color: TextColors.neutral900,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: AppConstants.FONT_FAMILY,
@@ -496,13 +497,13 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                         label: "ZIP",
                                         value: "00976",
                                         labelStyle: TextStyle(
-                                          fontSize: 14.sp,
+                                          fontSize: 14,
                                           color: TextColors.neutral500,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: AppConstants.FONT_FAMILY,
                                         ),
                                         valueStyle: TextStyle(
-                                          fontSize: 16.sp,
+                                          fontSize: 16,
                                           color: TextColors.neutral900,
                                           fontWeight: FontWeight.w500,
                                           fontFamily: AppConstants.FONT_FAMILY,
@@ -516,13 +517,13 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                   label: "Employer Name",
                                   value: "Mahmudcompany",
                                   labelStyle: TextStyle(
-                                    fontSize: 14.sp,
+                                    fontSize: 14,
                                     color: TextColors.neutral500,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: AppConstants.FONT_FAMILY,
                                   ),
                                   valueStyle: TextStyle(
-                                    fontSize: 16.sp,
+                                    fontSize: 16,
                                     color: TextColors.neutral900,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: AppConstants.FONT_FAMILY,
@@ -533,13 +534,13 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                   label: "Sex",
                                   value: "Male",
                                   labelStyle: TextStyle(
-                                    fontSize: 14.sp,
+                                    fontSize: 14,
                                     color: TextColors.neutral500,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: AppConstants.FONT_FAMILY,
                                   ),
                                   valueStyle: TextStyle(
-                                    fontSize: 16.sp,
+                                    fontSize: 16,
                                     color: TextColors.neutral900,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: AppConstants.FONT_FAMILY,
@@ -550,13 +551,13 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                   label: "Date of Birht",
                                   value: "31/12/2006",
                                   labelStyle: TextStyle(
-                                    fontSize: 14.sp,
+                                    fontSize: 14,
                                     color: TextColors.neutral500,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: AppConstants.FONT_FAMILY,
                                   ),
                                   valueStyle: TextStyle(
-                                    fontSize: 16.sp,
+                                    fontSize: 16,
                                     color: TextColors.neutral900,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: AppConstants.FONT_FAMILY,
@@ -571,13 +572,14 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                 AppText(
                                   "Insuranced Card",
                                   color: TextColors.neutral900,
-                                  fontSize: 16.sp,
+                                  fontSize: 16,
                                 ),
                                 SizedBox(height: 8),
                                 IconTextButton(
                                   onTap: () {},
                                   height: 40,
                                   width: 135,
+                                  fontsize: 14,
                                   text: "View Card",
                                   svgAsset: AppIcons.viewIcon,
                                   backgroundColor: Appcolors.primary,
@@ -594,6 +596,7 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                 IconTextButton(
                                   onTap: () {},
                                   height: 40,
+                                  fontsize: 14,
                                   width: 166,
                                   text: "View Signature",
                                   svgAsset: AppIcons.viewIcon,
@@ -724,7 +727,7 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                               Get.to(() => BaseScreen());
                             },
                             child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 24),
+                              padding: EdgeInsets.symmetric(horizontal: 35),
                               height: 50,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),

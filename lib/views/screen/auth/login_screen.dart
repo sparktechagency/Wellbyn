@@ -67,7 +67,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                           ),
 
-                          const SizedBox(height: 10),
                           //=================> logo text <=======================//
                           AppText("To sign in, enter your email address",
                             fontSize: 16,
@@ -93,6 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                            AlreadyHaveAccountText(onTap: (){
                             Get.to(CreateAccountPage(role: "petient"));
                             },
+                             fontSize: 16.sp,
                              leadingText: "Don’t have an account?".tr,
                              actionText: " Create an account".tr,
                              fontFamily: AppConstants.FONT_FAMILY,),

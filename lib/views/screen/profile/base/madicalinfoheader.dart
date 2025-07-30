@@ -26,7 +26,7 @@ class MedicalInfoHeader extends StatelessWidget {
             const SizedBox(width: 5),
             AppText(
               title,
-              fontSize: 18,
+              fontSize: 16,
               color: TextColors.neutral900,
             ),
           ],

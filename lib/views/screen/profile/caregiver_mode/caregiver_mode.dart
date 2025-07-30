@@ -19,15 +19,40 @@ class CaregiverScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Caregivers')),
+      appBar: AppBar(
+        backgroundColor: Appcolors.page,
+        title: Text(
+          "Caregiver Mode",
+          style: TextStyle(
+            fontSize: 20,
+            fontFamily: "Inter",
+            letterSpacing: 0.2,
+            fontWeight: FontWeight.w500,
+            color: TextColors.neutral900,
+          ),
+        ),
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            Get.back(id: NavIds.profilenav);
+          },
+          icon: SvgPicture.asset(
+            'assets/icons/arrow-left.svg',
+            width: 30.w,
+            height: 30.h,
+            color: TextColors.neutral900,
+          ),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
+                SizedBox(height: 14.h,),
                 AppText("Your Caregiver"),
-                SizedBox(height: 16,),
+
+                SizedBox(height: 16.h,),
                 Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
@@ -53,7 +78,7 @@ class CaregiverScreen extends StatelessWidget {
                           topRight: Radius.circular(8),
                         ),
                       ),
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.only(left: 12,right: 12,),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: const [
@@ -70,7 +95,7 @@ class CaregiverScreen extends StatelessWidget {
                         return Container(
                           height: 40.h,
                           color: index.isEven ? Appcolors.primary: Color(0xFFEDF4FA),
-                          padding: const EdgeInsets.all(5),
+                          padding: const EdgeInsets.only(left: 12,right: 12),
                           child: Row(
                             children: [
                               const Text(

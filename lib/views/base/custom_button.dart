@@ -65,14 +65,13 @@ class CustomButton extends StatelessWidget {
           )
               : CustomText(
             text: text,
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.w500,
             fontSize: fontSize ?? 14.sp,
             color: textColor ?? Colors.black,
           ),
         ),
       );
     }
-
     // return Padding(
     //     padding: padding,
     //     child: ElevatedButton(

@@ -31,6 +31,7 @@ class RowWithTitleAndAction extends StatelessWidget {
             fontSize: titleFontSize ?? 20,
             fontWeight: FontWeight.w500,
             fontFamily: "Inter",
+            letterSpacing: 0.2,
             color: titleColor ?? TextColors.neutral900,
           ),
         ),
@@ -41,6 +42,7 @@ class RowWithTitleAndAction extends StatelessWidget {
             actionText,
             style: TextStyle(
               fontFamily: "Inter",
+              letterSpacing: 0.2,
               fontSize: actionFontSize ?? 16,
               color: actionColor ?? Colors.blue,
               fontWeight: FontWeight.w500,

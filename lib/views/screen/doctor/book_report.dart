@@ -86,6 +86,7 @@ class _BookReportState extends State<BookReport> {
           "Additional Report",
           style: TextStyle(
             fontSize: 20,
+            letterSpacing: 0.2,
             fontFamily: "Inter",
             fontWeight: FontWeight.w500,
             color: TextColors.neutral900,
@@ -362,7 +363,8 @@ class _BookReportState extends State<BookReport> {
                             Text(
                                 "Dr. Moule Marrk",
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 20,
+                                  letterSpacing: 0.2,
                                   fontFamily: "Inter",
                                   fontWeight: FontWeight.w500,
 
@@ -374,6 +376,7 @@ class _BookReportState extends State<BookReport> {
                                   fontSize: 14,
                                   color:  TextColors.neutral500,
                                   fontFamily: "Inter",
+                                  letterSpacing: 0.2,
                                   fontWeight: FontWeight.w500,
                                 )
                             ),
@@ -384,10 +387,12 @@ class _BookReportState extends State<BookReport> {
                                 Text(
                                     "Sylhet Health Center",
                                style: TextStyle(
-                                fontSize: 14,
+                                fontSize: 16,
+                                letterSpacing: 0.2,
+                                fontStyle: FontStyle.italic,
                                 color: TextColors.neutral900,
                                 fontFamily: "Inter",
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.w600,
                                 )
                               ),
 
@@ -434,14 +439,14 @@ class _BookReportState extends State<BookReport> {
                     child: Row(
                       children: [
                         SvgPicture.asset(
-                          color: TextColors.neutral900,
+                          color: TextColors.primary2,
                           AppIcons.calenderIcon,
                           width: 16,
                           height: 16,),
                         SizedBox(width: 5,),
-                        Text("16 May 2025"),
+                        Text("16 May 2025",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14,letterSpacing: 0.2),),
                         Spacer(),
-                        Text("10:25pm"),
+                        Text("10:25pm",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14,letterSpacing: 0.2),),
                       ],
                     ),
                   ),

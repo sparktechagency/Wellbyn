@@ -26,6 +26,7 @@ class AppoinetmentDetails extends StatelessWidget {
           style: TextStyle(
             fontSize: 20,
             fontFamily: "Inter",
+            letterSpacing: 0.2,
             fontWeight: FontWeight.w500,
             color: HexColor("#3D3D3D"),
           ),
@@ -82,7 +83,8 @@ class AppoinetmentDetails extends StatelessWidget {
                               const Text(
                                 "Dr. Moule Marrk",
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 20,
+                                  letterSpacing: 0.2,
                                   fontFamily: "Inter",
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -107,7 +109,7 @@ class AppoinetmentDetails extends StatelessWidget {
                                         fontSize: 14,
                                         color: TextColors.neutral900,
                                         fontFamily: "Inter",
-                                        fontWeight: FontWeight.w500,
+                                        fontWeight: FontWeight.w600,
                                       ),
                                       overflow: TextOverflow.ellipsis,
                                     ),
@@ -126,7 +128,7 @@ class AppoinetmentDetails extends StatelessWidget {
                         const Text(
                           "Las appointment time",
                           style: TextStyle(
-                            fontSize: 13,
+                            fontSize: 14,
                             color: TextColors.neutral500,
                             fontWeight: FontWeight.w500,
                           ),
@@ -147,14 +149,22 @@ class AppoinetmentDetails extends StatelessWidget {
                       children: [
                         SvgPicture.asset(
                           AppIcons.calenderIcon,
-                          color: TextColors.neutral900,
+                          color: TextColors.primary2,
                           width: 16,
                           height: 16,
                         ),
                         const SizedBox(width: 5),
-                        const Text("16 May 2025"),
+                        const Text("16 May 2025", style: TextStyle(
+                          fontSize: 14,
+                          color: TextColors.primary2,
+                          fontWeight: FontWeight.w500,
+                        ),),
                         Spacer(),
-                        const Text("10:25pm"),
+                        const Text("10:25pm", style: TextStyle(
+                          fontSize: 14,
+                          color: TextColors.primary2,
+                          fontWeight: FontWeight.w500,
+                        ),),
                         Spacer(),
                         Row(
                           children: [
@@ -214,8 +224,9 @@ class AppoinetmentDetails extends StatelessWidget {
                           "SOAP Notes",
                           style: TextStyle(
                             fontFamily: "Inter",
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w500,
                             fontSize: 20,
+                            letterSpacing: 0.2,
                             color: TextColors.neutral900,
                           ),
                         ),
@@ -226,6 +237,7 @@ class AppoinetmentDetails extends StatelessWidget {
                             fontFamily: "Inter",
                             fontWeight: FontWeight.w500,
                             fontSize: 16,
+                            letterSpacing: 0.2,
                             color: TextColors.neutral900,
                           ),
                         ),
@@ -239,13 +251,15 @@ class AppoinetmentDetails extends StatelessWidget {
                           "Objective",
                           style: TextStyle(
                             fontFamily: "Inter",
+                            letterSpacing: 0.2,
                             fontWeight: FontWeight.w500,
                             fontSize: 16,
                             color: TextColors.neutral900,
                           ),
                         ),
                         SizedBox(height: 8.h),
-                        Containertext(text: "Vital signs stable. BP 120/80, HR 72, Temp 98.6°F. Physical examination unremarkable. Heart regular rate and rhythm, lungs clear bilaterally.",
+                        Containertext(
+                          text: "Vital signs stable. BP 120/80, HR 72, Temp 98.6°F. Physical examination unremarkable. Heart regular rate and rhythm, lungs clear bilaterally.",
                           Textcolor: TextColors.neutral500,
                         ),
                         SizedBox(height: 8.h),
@@ -339,8 +353,9 @@ class AppoinetmentDetails extends StatelessWidget {
                       Lable,
                       style: TextStyle(
                         fontFamily: "Inter",
-                        fontWeight: FontWeight.w600,
-                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        letterSpacing: 0.2,
                         color: TextColors.neutral900,
                       ),
                     ),
@@ -348,9 +363,10 @@ class AppoinetmentDetails extends StatelessWidget {
                     Text(
                       text,
                       style: TextStyle(
+                        letterSpacing: 0.2,
                         fontFamily: "Inter",
-                        fontWeight: FontWeight.w600,
-                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
                         color: TextColors.neutral500,
                       ),
                     ),
