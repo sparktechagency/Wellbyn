@@ -54,6 +54,8 @@ class StepController extends GetxController {
 
   // Remove this method since we don't need it anymore
   void startAnimationSequence() {
+
     // Animation starts automatically when AnimatedLine is created
+
   }
 }

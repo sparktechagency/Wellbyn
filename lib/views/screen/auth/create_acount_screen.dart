@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:wellbyn/controllers/auth/create_an_account.dart';
 import 'package:wellbyn/utils/app_constants.dart';
 import 'package:wellbyn/views/base/AppButton/app_button.dart';
 import 'package:wellbyn/views/base/OrDivided/orDivided.dart';
@@ -28,20 +29,10 @@ class CreateAccountPage extends StatefulWidget {
 
 class _CreateAccountPageState extends State<CreateAccountPage> {
 
-  final GlobalKey<FormState> email = GlobalKey<FormState>();
-  final GlobalKey<FormState> pass = GlobalKey<FormState>();
-  final GlobalKey<FormState> repass = GlobalKey<FormState>();
-  final TextEditingController emailcontroller = TextEditingController();
-  final TextEditingController passwordcontroller = TextEditingController();
-  final TextEditingController confirmcontroller = TextEditingController();
 
-  @override
-  void dispose() {
-    emailcontroller.dispose();
-    passwordcontroller.dispose();
-    confirmcontroller.dispose();
-    super.dispose();
-  }
+
+  final CreateAnAccount _controller = Get.put(CreateAnAccount());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,9 +42,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
           padding: EdgeInsets.symmetric(horizontal: 24.w),
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
-            child: Form(
-              key: email,
-              child:Column(
+            child:Column(
                       children: [
                        const SizedBox(height: 35),
 
@@ -64,18 +53,17 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                           title: 'Create an account',
                           fontSize: 24,
                         ),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 24),
 
                         //=================> input field  <=======================//
                         inputMethod(),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 24),
 
                         //=================> Next button  <=======================//
 
                         AppButton(
                           text: "Next",
                           onPressed: () {
-
                             // final email = emailcontroller.text.trim();
                             // final password = passwordcontroller.text;
                             // final confirmPassword = confirmcontroller.text;
@@ -93,19 +81,14 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                             //   Get.to(() => Forgot());
                             // }
 
-
-                            if(email.currentState!.validate()){
                               Get.to(()=> Forgot());
-                            }
-
-
-
                           },
                         ),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 24),
 
                         //==================> user log in or create section <===============//
-                        AlreadyHaveAccountText(onTap: (){
+                        AlreadyHaveAccountText(
+                          onTap: (){
 
                           Get.to(LoginScreen());
                         },
@@ -118,38 +101,25 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
                         OrDivider(),
 
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 24),
 
                         //=================> gooogle buttton   <=======================//
 
                         GoogleButton(onPressed: () {
                           print("Google account ");
                         },),
-                        const  SizedBox(height: 20),
+                        const  SizedBox(height: 24),
                       ],
                     ),
-            ),
+                  ),
                ),
               ),
-            ),
 
     );
   }
 
 
-  void _showError(String message) {
-    Get.snackbar(
-      "Error",
-      message,
-      backgroundColor: Appcolors.error.withOpacity(0.70),
-      colorText: Colors.white,
-      snackPosition: SnackPosition.TOP,
-      margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
-      borderRadius: 16.r,
-      duration: const Duration(seconds: 3),
-    );
-  }
-
+  //============> input textfield <====================//
   Column inputMethod() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -159,7 +129,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
           autovalidateMode: AutovalidateMode.onUserInteraction,
           borderColor: TextColors.neutral900,
           label: "Email",
-          controller: emailcontroller,
+          controller: _controller.emailCtlr,
           maxline: 1,
           hintText: "Email Address",
         ),
@@ -168,7 +138,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
           autovalidateMode: AutovalidateMode.onUserInteraction,
           borderColor: TextColors.neutral900,
           label: "New Password",
-          controller: passwordcontroller,
+          controller: _controller.passWordCtlr,
           maxline: 1,
           hintText: "Type a strong password",
         ),
@@ -177,7 +147,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
           autovalidateMode: AutovalidateMode.onUserInteraction,
           borderColor: TextColors.neutral900,
           label: "Confirm Password",
-          controller: confirmcontroller,
+          controller: _controller.confirmPassCtlr,
           maxline: 1,
           hintText: "Re-type password",
         ),

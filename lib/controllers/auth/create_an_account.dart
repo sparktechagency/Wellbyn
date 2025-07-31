@@ -11,6 +11,7 @@ class CreateAnAccount extends GetxController {
   TextEditingController emailCtlr = TextEditingController();
   TextEditingController passWordCtlr = TextEditingController();
   TextEditingController confirmPassCtlr = TextEditingController();
+
   RxBool isLoading =false.obs;
 
 

@@ -83,7 +83,7 @@ class _BookReportState extends State<BookReport> {
       appBar: AppBar(
         backgroundColor: Appcolors.page,
         title: Text(
-          "Additional Report",
+          "Appointment Details",
           style: TextStyle(
             fontSize: 20,
             letterSpacing: 0.2,
@@ -581,7 +581,7 @@ class _BookReportState extends State<BookReport> {
                         color: TextColors.neutral900,
                         fontWeight: FontWeight.w500,
                         fontSize: 14,
-                        fontFamily: "Satoshi",
+                        fontFamily: "Inter",
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -591,7 +591,7 @@ class _BookReportState extends State<BookReport> {
                         fontSize: 10,
                         color: TextColors.neutral900,
                         fontWeight: FontWeight.w500,
-                        fontFamily: "Satoshi",
+                        fontFamily: "Inter",
                       ),
                     ),
                   ],

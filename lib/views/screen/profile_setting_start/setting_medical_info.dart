@@ -11,6 +11,7 @@ import 'package:wellbyn/utils/app_icons.dart';
 import 'package:wellbyn/views/screen/profile_setting_start/setting_insurance_info.dart';
 import 'package:wellbyn/views/screen/profile_setting_start/setting_personal_info.dart';
 import 'package:wellbyn/views/screen/profile_setting_start/widget/circle.dart';
+import '../../../controllers/profile_setting/medical_info.dart';
 import '../../../controllers/profile_setting_controller.dart';
 import 'package:wellbyn/models/medication.dart';
 import 'package:wellbyn/models/allergies.dart';
@@ -28,7 +29,7 @@ class SettingMedicalInfo extends StatefulWidget {
 }
 
 class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
-  ProfileSettingController _controller = Get.put(ProfileSettingController());
+  OnboradingProfileMedication _controller = Get.put(OnboradingProfileMedication());
   late ScrollControllerGetX scroll = Get.put(ScrollControllerGetX());
   late final StepController controller;
 
@@ -126,23 +127,23 @@ class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
                       iconPath: AppIcons.medicalfileIcon,
                     ),
 
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 32),
 
                     // Allergies Section
                     _buildAllergiesSection(),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 16),
 
                     // Current Medications Section
                     _buildMedicationsSection(),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 16),
 
                     // Existing Conditions Section
                     _buildExistingConditionsSection(),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 16),
 
                     // Lifestyle Factors Section
                     _buildLifestyleFactorsSection(),
-                    SizedBox(height: 50),
+                    SizedBox(height: 48.h),
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -154,7 +155,7 @@ class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
                           child: Container(
                             padding: EdgeInsets.symmetric(horizontal: 24),
                             // padding controls width
-                            height: 50,
+                            height: 48,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               color: Appcolors.primary,
@@ -182,13 +183,14 @@ class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
                             ),
                           ),
                         ),
+
                         InkWell(
                           onTap: () {
                             Get.to(() => SettingInsuranceInfo());
                           },
                           child: Container(
                             padding: EdgeInsets.symmetric(horizontal: 24),
-                            height: 50,
+                            height: 48,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               color: Appcolors.action,
@@ -325,18 +327,71 @@ class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
     );
   }
   //==============build allergiseSection <===============
+  // Widget _buildAllergiesSection() {
+  //   return _buildSection(
+  //     title: 'Allergies',
+  //     onAdd: _showAddAllergyDialog,
+  //     child: Obx(
+  //       () => Container(
+  //         decoration: BoxDecoration(
+  //           border: Border.all(width: 1, color: Appcolors.primary),
+  //           borderRadius: BorderRadius.circular(12),
+  //           color: Colors.white,
+  //         ),
+  //         child: Column(
+  //           children: [
+  //             _buildTableHeader(['Name', 'Severity', 'Action']),
+  //             ListView.builder(
+  //               shrinkWrap: true,
+  //               physics: NeverScrollableScrollPhysics(),
+  //               itemCount: _controller.allergies.length,
+  //               itemBuilder: (context, index) {
+  //                 final allergy = _controller.allergies[index];
+  //                 final isLast = index == _controller.allergies.length - 1;
+  //                 return _buildTableRow(
+  //                   [
+  //                     allergy.name,
+  //                     allergy.severity,
+  //                     _buildDeleteButton(
+  //                       () => _controller.deleteAllergy(index),
+  //                     ),
+  //                   ],
+  //                   index,
+  //                   isLast: isLast,
+  //                 );
+  //               },
+  //             ),
+  //           ],
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
+
   Widget _buildAllergiesSection() {
     return _buildSection(
       title: 'Allergies',
       onAdd: _showAddAllergyDialog,
       child: Obx(
-        () => Container(
+            () => Container(
           decoration: BoxDecoration(
             border: Border.all(width: 1, color: Appcolors.primary),
             borderRadius: BorderRadius.circular(12),
             color: Colors.white,
           ),
-          child: Column(
+          child: _controller.allergies.isEmpty
+              ? Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              'No allergies added yet...',
+              style: TextStyle(
+                fontSize: 16,
+                fontFamily: 'Inter',
+                color: Colors.grey,
+              ),
+            ),
+          )
+              : Column(
             children: [
               _buildTableHeader(['Name', 'Severity', 'Action']),
               ListView.builder(
@@ -351,7 +406,7 @@ class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
                       allergy.name,
                       allergy.severity,
                       _buildDeleteButton(
-                        () => _controller.deleteAllergy(index),
+                            () => _controller.deleteAllergy(index),
                       ),
                     ],
                     index,
@@ -366,6 +421,7 @@ class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
     );
   }
 
+
   //==============build MedicationSection <===============
   Widget _buildMedicationsSection() {
     return _buildSection(
@@ -378,7 +434,17 @@ class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
             borderRadius: BorderRadius.circular(12),
             color: Colors.white,
           ),
-          child: Column(
+          child:_controller.medications.isEmpty ? Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              'No medications added yet...',
+              style: TextStyle(
+                fontSize: 16,
+                fontFamily: 'Inter',
+                color: Colors.grey,
+              ),
+            ),
+          ) : Column(
             children: [
               _buildTableHeader(['Name', 'Frequency', 'Action']),
               ListView.builder(
@@ -411,28 +477,67 @@ class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
 
   //==============build _buildExistingConditionsSection <===============
 
+  // Widget _buildExistingConditionsSection() {
+  //   return _buildSection(
+  //     title: 'Existing Conditions',
+  //     onAdd: _addCondition,
+  //     child: Obx(
+  //       () => ListView.builder(
+  //         shrinkWrap: true,
+  //         physics: NeverScrollableScrollPhysics(),
+  //         itemCount: _controller.existingConditions.length,
+  //         itemBuilder: (context, index) {
+  //           final key = _controller.existingConditions.keys.elementAt(index);
+  //           final value = _controller.existingConditions[key]!;
+  //           return _buildCheckboxItem(
+  //             key,
+  //             value,
+  //             (newValue) => _controller.toggleCondition(key, newValue!),
+  //           );
+  //         },
+  //       ),
+  //     ),
+  //   );
+  // }
   Widget _buildExistingConditionsSection() {
     return _buildSection(
       title: 'Existing Conditions',
       onAdd: _addCondition,
       child: Obx(
-        () => ListView.builder(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          itemCount: _controller.existingConditions.length,
-          itemBuilder: (context, index) {
-            final key = _controller.existingConditions.keys.elementAt(index);
-            final value = _controller.existingConditions[key]!;
-            return _buildCheckboxItem(
-              key,
-              value,
-              (newValue) => _controller.toggleCondition(key, newValue!),
+            () {
+          if (_controller.existingConditions.isEmpty) {
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                'No existing conditions added yet...',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'Inter',
+                  color: Colors.grey,
+                ),
+              ),
             );
-          },
-        ),
+          }
+
+          return ListView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: _controller.existingConditions.length,
+            itemBuilder: (context, index) {
+              final key = _controller.existingConditions.keys.elementAt(index);
+              final value = _controller.existingConditions[key]!;
+              return _buildCheckboxItem(
+                key,
+                value,
+                    (newValue) => _controller.toggleCondition(key, newValue!),
+              );
+            },
+          );
+        },
       ),
     );
   }
+
 
   //==============build _buildLifestyleFactorsSection <===============
 
@@ -441,6 +546,20 @@ class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
       title: 'Lifestyle Factors',
       onAdd: showAddLifestyleFactorDialog, // Hook up your dialog input here
       child: Obx(() {
+
+        if (_controller.lifestyleFactors.isEmpty) {
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              'No existing conditions added yet...',
+              style: TextStyle(
+                fontSize: 16,
+                fontFamily: 'Inter',
+                color: Colors.grey,
+              ),
+            ),
+          );
+        }
         final entries = _controller.lifestyleFactors.entries.toList();
         return ListView.builder(
           shrinkWrap: true,
@@ -484,7 +603,7 @@ class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -783,7 +902,14 @@ class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
                             width: 80.w,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8),
-                              border: Border.all(color: TextColors.neutral500),
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: ShadowColor.shadowColors1.withOpacity(0.10),
+                                      offset: Offset(0, 3),
+                                      blurRadius: 4
+                                  )
+                                ]
                             ),
                             child: Center(
                               child: Text(
@@ -932,11 +1058,15 @@ class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
                           height: 40.h,
                           width: 80.w,
                           decoration: BoxDecoration(
+                            color: Colors.white,
                             borderRadius: BorderRadius.circular(8),
-                            border: Border.all(
-                              color: TextColors.neutral500,
-                              width: 1,
-                            ),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: ShadowColor.shadowColors1.withOpacity(0.10),
+                                    offset: Offset(0, 3),
+                                    blurRadius: 4
+                                )
+                              ]
                           ),
                           child: Center(
                             child: Text(
@@ -973,6 +1103,13 @@ class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
                           decoration: BoxDecoration(
                             color: Appcolors.action,
                             borderRadius: BorderRadius.circular(8),
+                            boxShadow: [
+                              BoxShadow(
+                                color: ShadowColor.shadowColors1.withOpacity(0.10),
+                                offset: Offset(0, 3),
+                                blurRadius: 4
+                              )
+                            ]
                           ),
                           child: Center(
                             child: Text(

@@ -197,7 +197,7 @@ class BookOverview extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(5.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

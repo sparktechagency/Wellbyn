@@ -24,7 +24,6 @@ class BaseScreen extends StatelessWidget {
     return Scaffold(
       body: Obx(() {
         final currentIndex = BaseController.to.currentIndex.value;
-
         // Step 3: Use conditional rendering instead of IndexedStack for better memory
         return _buildCurrentScreen(currentIndex);
       }),

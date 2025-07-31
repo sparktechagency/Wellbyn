@@ -13,22 +13,34 @@ import 'package:wellbyn/utils/app_constants.dart';
 import 'package:wellbyn/utils/app_icons.dart';
 import 'package:wellbyn/views/screen/doctor/doctor_details.dart';
 
+import '../../../controllers/date_picker_controller.dart';
 import '../../../controllers/doctor.dart';
 import '../../../controllers/tabcontroller.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/nab_ids.dart';
 import '../../base/custom_field.dart';
+import '../../base/doctor_bottom_sheet/dotor_details_bottom_sheet.dart';
+import '../doctro_message/doctor_message.dart';
 
 class Doctor extends StatelessWidget {
   final void Function(String doctorId)? onDetailsTap;
 
   Doctor({super.key, this.onDetailsTap});
 
-  final TabControllerX controller = Get.put(TabControllerX());
+  final TabControllerX _controller = Get.put(TabControllerX());
   final TextEditingController searchcontroller = TextEditingController();
   final DoctorController doctorController = Get.put(DoctorController());
+  final DateTimePickerController controller = Get.put(DateTimePickerController(),);
+  final DateTimePickerController dateTimeController = Get.put(DateTimePickerController());
 
   final List<String> tabs = ["All", "Favorite (4)"];
+
+  final List<String> timeSlots = [
+    "11:45 am", "2:15 pm", "4:30 am",
+    "6:20 pm", "10:05 pm", "7:00 pm",
+    "1:55 am"
+  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -93,10 +105,10 @@ class Doctor extends StatelessWidget {
                           children: List.generate(tabs.length, (index) {
                             return Obx(() {
                               bool isSelected =
-                                  controller.selectedIndex.value == index;
+                                  _controller.selectedIndex.value == index;
                               return GestureDetector(
                                 behavior: HitTestBehavior.translucent,
-                                onTap: () => controller.setTab(index),
+                                onTap: () => _controller.setTab(index),
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: 10,
@@ -148,21 +160,21 @@ class Doctor extends StatelessWidget {
                     ],
                   ),
 
-                  Padding(
-                    padding: const EdgeInsets.only(left: 4),
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        "Available Doctor",
-                        style: TextStyle(
-                          fontFamily: AppConstants.FONT_FAMILY,
-                          fontSize: 20,
-                          color: HexColor("##3D3D3D"),
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(left: 4),
+                  //   child: Align(
+                  //     alignment: Alignment.topLeft,
+                  //     child: Text(
+                  //       "Available Doctor",
+                  //       style: TextStyle(
+                  //         fontFamily: AppConstants.FONT_FAMILY,
+                  //         fontSize: 20,
+                  //         color: HexColor("##3D3D3D"),
+                  //         fontWeight: FontWeight.w500,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                   SizedBox(height: 10),
 
                   Expanded(
@@ -178,13 +190,9 @@ class Doctor extends StatelessWidget {
                         itemBuilder: (context,index){
                           return  GestureDetector(
                             onTap: () {
-                              Get.toNamed(
-                                '/doctor_details',
-                                id: NavIds.profile, // this matches nested key
-                                arguments: {
-                                  'doctorId': 'a1da1dad136adf4566adf1a',
-                                },
-                              );
+                              showDoctorBookingSheet(context);
+
+                              //Get.toNamed('/doctor_details', id: NavIds.profile);
                             },
                             child: Container(
                               margin: EdgeInsets.all(2),
@@ -332,4 +340,41 @@ class Doctor extends StatelessWidget {
       }),
     );
   }
+  void showDoctorBookingSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      barrierColor: Colors.black.withOpacity(0.5),
+      enableDrag: true,
+      isDismissible: false,
+      builder: (_) {
+        return DoctorBookingSheet(
+          doctorName: "Dr. Moule Marrk",
+          department: "Cardiology",
+          location: "Sylhet Health Center",
+          timeSlots: timeSlots,
+          selectedTime: dateTimeController.selectedTime,
+          onSelectTime: dateTimeController.selectTime,
+          onWaitlist: () => Get.back(),
+          onNext: () {
+            Get.back(); // Close bottom sheet first
+
+            // Navigate and set flag to show bottom sheet when returning
+            Get.toNamed('/book_report', id: NavIds.profile)?.then((_) {
+              // Use post frame callback to ensure the widget is ready
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                if (Get.currentRoute == '/doctor') { // Check if we're still on doctor page
+                 // shouldShowBottomSheet.value = true;
+                }
+              });
+            });
+          },
+        );
+      },
+    );
+  }
+
+
+
 }

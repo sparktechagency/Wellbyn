@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:wellbyn/controllers/auth/forgot_password.dart';
 import 'package:wellbyn/utils/app_colors.dart';
 import 'package:wellbyn/views/screen/auth/verify.dart';
 import '../../base/AppButton/app_button.dart';
@@ -14,7 +15,8 @@ import '../profile_setting_start/widget/labeledtextfield.dart';
 class Forgot extends StatelessWidget {
    Forgot({super.key});
 
-  TextEditingController emailcontrller= TextEditingController();
+   final ForgotPasswordController _controller = Get.put(ForgotPasswordController());
+
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +81,7 @@ class Forgot extends StatelessWidget {
         LabeledTextFielded(
           borderColor: TextColors.neutral900,
           label: "Email",
-          controller: emailcontrller,
+          controller: _controller.emailcontrller,
           next: true,
           maxline: 1,
           hintText: "Email Address",

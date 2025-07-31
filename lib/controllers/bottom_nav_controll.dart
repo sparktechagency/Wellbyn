@@ -5,10 +5,7 @@ class BottomNavController extends GetxController {
   var selectedIndex = 0.obs;
 
   // Each tab will have its own Navigator
-  final List<GlobalKey<NavigatorState>> navigatorKeys = List.generate(
-    4,
-        (_) => GlobalKey<NavigatorState>(),
-  );
+  final List<GlobalKey<NavigatorState>> navigatorKeys = List.generate(4,(_) => GlobalKey<NavigatorState>(),);
 
   void selectTab(int index) {
     if (selectedIndex.value == index) {

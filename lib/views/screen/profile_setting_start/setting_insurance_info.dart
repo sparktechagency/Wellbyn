@@ -146,14 +146,14 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                   controller: scroll.scrollController2,
                   child:Column(
                     children: [
-                      SizedBox(height: 25),
+                      SizedBox(height: 32),
                       MedicalInfoHeader(
                         title: "Medical Information",
                         description:
                         'Greetings! To keep your insurance information current and facilitate ongoing communication with your healthcare providers, we kindly request that you provide your insurance details.',
                         iconPath: AppIcons.shieduserIcon,
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: 32),
                       IconTextButton(
                         bordercolor: Appcolors.action,
                         onTap: () {
@@ -166,7 +166,7 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                         backgroundColor: Appcolors.action,
                         textColor: Appcolors.primary,
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 12),
                       IconTextButton(
                         height: 50,
                         bordercolor: Appcolors.action,
@@ -190,7 +190,7 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                           return Container(
                             margin: EdgeInsets.only(bottom: 20),
                             padding: EdgeInsets.only(
-                              top: 30,
+                              top: 24,
                               left: 20,
                               right: 20,
                               bottom: 20,
@@ -330,7 +330,7 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                 SizedBox(height: 8),
                                 Container(
                                   height: 0.5,
-                                  color: TextColors.neutral200,
+                                  color: TextColors.neutral300,
                                   margin: EdgeInsets.symmetric(vertical: 16),
                                 ),
                                 SizedBox(height: 8),
@@ -586,7 +586,7 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                   bordercolor: Appcolors.action,
                                   textColor: Appcolors.action,
                                 ),
-                                SizedBox(height: 20),
+                                SizedBox(height: 24),
                                 AppText(
                                   "Digital Signature ",
                                   color: TextColors.neutral900,
@@ -605,7 +605,7 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                   textColor: Appcolors.action,
                                 ),
 
-                                SizedBox(height: 20,),
+                                SizedBox(height: 24,),
 
                                 AppText('Draw Signature ',fontSize: 16,color: TextColors.neutral900,),
                                 SizedBox(height: 8),
@@ -664,7 +664,7 @@ class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
                                   ],
                                 ),
 
-                                SizedBox(height: 20,),
+                                SizedBox(height: 24,),
                                 IconTextButton(
                                   onTap: () {},
                                   height: 50,

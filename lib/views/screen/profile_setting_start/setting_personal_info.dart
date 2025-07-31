@@ -4,6 +4,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
+import 'package:wellbyn/controllers/profile_setting/personal_info.dart';
 import 'package:wellbyn/controllers/profile_setting_controller.dart';
 import 'package:wellbyn/controllers/scrollController.dart';
 import 'package:wellbyn/views/screen/profile_setting_start/setting_medical_info.dart';
@@ -29,62 +31,12 @@ class SettingPersonalInfo extends StatefulWidget {
 }
 
 class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
-  // Controllers should be final and initialized in the constructor
-  late final TextEditingController _nameController;
-  late final TextEditingController _middleNameController;
-  late final TextEditingController _lastNameController;
-  late final TextEditingController _emailController;
-  late final TextEditingController _phoneController;
-  late final TextEditingController _addressController;
-  late final TextEditingController _cityController;
-  late final TextEditingController _zipController;
-  late final TextEditingController _childrenController;
-  late final TextEditingController _employerController;
-  late final TextEditingController _licenseController;
-  late final TextEditingController _ssnController;
-  late final TextEditingController _numboroffchlid;
 
-  @override
-  void initState() {
-    super.initState();
-    // Initialize controllers only once
-    _nameController = TextEditingController();
-    _middleNameController = TextEditingController();
-    _lastNameController = TextEditingController();
-    _emailController = TextEditingController();
-    _phoneController = TextEditingController();
-    _addressController = TextEditingController();
-    _cityController = TextEditingController();
-    _zipController = TextEditingController();
-    _childrenController = TextEditingController();
-    _employerController = TextEditingController();
-    _licenseController = TextEditingController();
-    _ssnController = TextEditingController();
-    _numboroffchlid = TextEditingController();
-  }
 
-  @override
-  void dispose() {
-    // Properly dispose all controllers to prevent memory leaks
-    _nameController.dispose();
-    _middleNameController.dispose();
-    _lastNameController.dispose();
-    _emailController.dispose();
-    _phoneController.dispose();
-    _addressController.dispose();
-    _cityController.dispose();
-    _zipController.dispose();
-    _childrenController.dispose();
-    _employerController.dispose();
-    _licenseController.dispose();
-    _ssnController.dispose();
-    _numboroffchlid.dispose();
-    super.dispose();
-  }
 
-  final ProfileSettingController _controller = Get.put(
-    ProfileSettingController(),
-  );
+
+  final OnboardingProfileInfo _controller = Get.put(OnboardingProfileInfo(),);
+
   final ScrollControllerGetX scroll = Get.put(ScrollControllerGetX());
   final DropdownController  dropdownController = Get.put(DropdownController());
 
@@ -148,17 +100,17 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
                         LabeledTextFielded(
                             borderColor: TextColors.neutral900,
                             label: "Full Name",
-                            controller: _nameController,
+                            controller: _controller.nameController,
                             maxline: 1,
                             hintText: "First Name",
                           ),
-                        SizedBox(height: 20.h),
+                        SizedBox(height: 8.h),
                         Row(
                             children: [
                               Expanded(
                                 child: CustomTextFielded(
                                   next: true,
-                                  controller: _middleNameController,
+                                  controller: _controller.middleNameController,
                                   hintText: "Middle",
                                   keyboardType: TextInputType.name,
                                   maxLines: 1,
@@ -169,7 +121,7 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
                               Expanded(
                                 child: CustomTextFielded(
                                   next: true,
-                                  controller: _middleNameController,
+                                  controller: _controller.lastNameController,
                                   hintText: "Last Name",
                                   keyboardType: TextInputType.name,
                                   maxLines: 1,
@@ -178,7 +130,7 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
                               ),
                             ],
                           ),
-                        SizedBox(height: 20.h),
+                        SizedBox(height: 24.h),
                         Obx(() => LabeledTextFielded(
                               maxline: 1,
                               borderColor: TextColors.neutral200,
@@ -192,7 +144,7 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
                               suffixSvgColor: Appcolors.action,
                               hintText: "mm/dd/yyyy",
                             ),),
-                        SizedBox(height: 20.h),
+                        SizedBox(height: 24.h),
                         LabeledDropdownFielded(
                           label: "Sex",
                           titile: "City",
@@ -206,7 +158,7 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
 
 
 
-                        SizedBox(height: 20.h),
+                        SizedBox(height: 24.h),
 
                         LabeledDropdownFielded(
                           label: "Marital Status",
@@ -226,7 +178,7 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
                           },
                         ),
 
-                        SizedBox(height: 20.h),
+                        SizedBox(height: 24.h),
                         LabeledDropdownFielded(
                           label: "Blood Group",
                           titile: "Select Group",
@@ -253,7 +205,7 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
                                 "Number of Children",
                                 style: TextStyle(
                                   fontSize: 16,
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: FontWeight.w600,
                                   color: TextColors.neutral900,
                                   fontFamily: AppConstants.FONT_FAMILY,
                                 ),
@@ -272,41 +224,41 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
                         SizedBox(height: 8.h),
                         CustomTextFielded(
                             borderColor: TextColors.neutral900,
-                            controller: _numboroffchlid,
+                            controller: _controller.numberOfChildController,
                             hintText: "0",
                             keyboardType: TextInputType.number,
                           ),
-                        SizedBox(height: 20.h),
+                        SizedBox(height: 24.h),
                         LabeledTextFielded(
                            next: true,
                            borderColor: TextColors.neutral900,
                            label: "Email",
-                           controller: _emailController,
+                           controller: _controller.emailController,
                            maxline: 1,
                            hintText: "name@gmail.com",
                         ),
-                        SizedBox(height: 20.h),
+                        SizedBox(height: 24.h),
                         LabeledTextFielded(
                            next: true,
                            borderColor: TextColors.neutral900,
                            label: "Phone",
-                           controller: _phoneController,
+                           controller: _controller.phoneController,
                            keyboardType: TextInputType.number,
                            maxline: 1,
                            hintText: "+02154555585",
                         ),
 
-                        SizedBox(height: 20.h),
+                        SizedBox(height: 24.h),
                         LabeledTextFielded(
                           next: true,
                           borderColor: TextColors.neutral900,
                           label: "Address Line 1",
-                          controller: _phoneController,
+                          controller: _controller.addressController,
                           keyboardType: TextInputType.number,
                           maxline: 1,
                           hintText: "Street address",
                         ),
-                        SizedBox(height: 20.h),
+                        SizedBox(height: 24.h),
                         Row(
                           children: [
                             Text(
@@ -331,11 +283,11 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
                         ),
                         CustomTextFielded(
                           borderColor: TextColors.neutral900,
-                          controller: _numboroffchlid,
+                          controller: _controller.numberOfChildController,
                           hintText: "Apartment, suite, unit,etc",
                           keyboardType: TextInputType.number,
                         ),
-                        SizedBox(height: 20.h),
+                        SizedBox(height: 24.h),
 
                         Row(
                           children: [
@@ -344,7 +296,7 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
                                 next: true,
                                 borderColor: TextColors.neutral900,
                                 label: "City",
-                                controller: _phoneController,
+                                controller: _controller.phoneController,
                                 keyboardType: TextInputType.number,
                                 maxline: 1,
                                 hintText: "",
@@ -378,7 +330,7 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
                                 next: true,
                                 borderColor: TextColors.neutral900,
                                 label: "Zip Code",
-                                controller: _phoneController,
+                                controller: _controller.phoneController,
                                 keyboardType: TextInputType.number,
                                 maxline: 1,
                                 hintText: "",
@@ -392,7 +344,7 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
                           next: true,
                           borderColor: TextColors.neutral900,
                           label: "Driver's License",
-                          controller: _phoneController,
+                          controller: _controller.addressController,
                           keyboardType: TextInputType.number,
                           maxline: 1,
                           hintText: "License number",
@@ -400,7 +352,7 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
                         SizedBox(height: 24.h,),
                         AppText("Upload Driver's License Images",fontSize: 16,fontWeight: FontWeight.w500,),
                         _buildImageUploadSection(),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 12),
                         Text(
                           "Accepted formats: JPG, PNG. Max file size: 5MB",
                           style: TextStyle(
@@ -425,7 +377,7 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
                           suffixSvgColor: TextColors.neutral500,
                           hintText: "45454",
                           prefixIcon: AppIcons.lockIcon,
-                          controller: _ssnController,
+                          controller: _controller.ssnController,
                         ),
                         SizedBox(height: 6.h,),
                         AppText("For identification purposes only",fontWeight: FontWeight.w500, fontSize: 16,color: TextColors.neutral500,),
@@ -665,7 +617,13 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
             child: DottedBorderContainer(
               child: AspectRatio(
                 aspectRatio: 16 / 6,
-                child: _controller.frontLicenseImage.value != null
+                child: _controller.isFrontUploading.value
+                    ? Center(child: Lottie.asset(
+                  'assets/animations/loading.json',
+                  onLoaded: (composition) {
+                  },
+                ),):
+                _controller.frontLicenseImage.value != null
                     ? Container(
                       child: Image.memory(
                           _controller.frontLicenseImage.value!,
@@ -747,7 +705,6 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 20),
             ...children,
           ],
         ),

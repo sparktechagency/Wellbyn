@@ -5,7 +5,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/views/screen/auth/login_screen.dart';
 import 'package:wellbyn/views/screen/profile/account_switch.dart';
+import 'package:wellbyn/views/screen/profile/personalinfo/personal_info.dart';
 
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_icons.dart';
@@ -20,8 +22,7 @@ class Setting extends StatelessWidget {
 
    void _handleLogout(BuildContext context) {
      // TODO: logout logic, then:
-     Navigator.pop(context); // Close dialog
-     Navigator.pushReplacementNamed(context, '/login'); // Go to login
+     Get.offAll(LoginScreen());// Go to login
    }
 
    void _showCustomLogoutDialog(BuildContext context) {
@@ -58,6 +59,7 @@ class Setting extends StatelessWidget {
         leading: IconButton(
           onPressed: () {
            // Get.back(id: NavIds.profilenav);
+            //Get.offAll(LoginScreen());
           },
           icon: SvgPicture.asset(
             'assets/icons/arrow-left.svg',
@@ -90,46 +92,136 @@ class Setting extends StatelessWidget {
                
                    ),
                
-                   SizedBox(height: 20,),
-                   buildText("Information"),
-                   SizedBox(height: 8,),
-               
-               
-                   ProfileListTile(
-                     leadingIconPath: AppIcons.settingIcon,
-                     title: ' Personal Information',
-                     trailingIconPath: AppIcons.arrorightIcon,
-                     onTap: () {
-                       // Navigate or do something
-                       Get.toNamed(
-                         '/personal_info',
-                         id: NavIds.profilenav,
-                       );
-               
-               
-                     },
+                   SizedBox(height: 24,),
+
+
+
+                   GestureDetector(
+                 onTap: (){
+                   Get.toNamed(
+                     '/personal_info',
+                     id: NavIds.profilenav,
+                   );
+                 },
+                 child: Container(
+                   height: 60,
+                   decoration: BoxDecoration(
+                       borderRadius: BorderRadius.only(topLeft: Radius.circular(8),topRight: Radius.circular(8)),
+                       color: Appcolors.primary,
+                       boxShadow: [
+                         BoxShadow(
+                           color:ShadowColor.shadowColors1.withOpacity(0.10) , // softer effect
+                           blurRadius: 4, // reasonable softness
+                           spreadRadius: 0,
+                           offset: Offset(0, 3), // downward shadow
+                         ),
+                       ]
                    ),
-                   SizedBox(height: 8,),
-                   ProfileListTile(
-                     leadingIconPath: AppIcons.medicalfileIcon,
-                     title: ' Medical Information',
-                     trailingIconPath: AppIcons.arrorightIcon,
-                     onTap: () {
-                       // Navigate or do something
+                   padding: const EdgeInsets.all(8),
+                   margin: EdgeInsets.symmetric(horizontal: 2),
+                   child: Row(
+                     children: [
+                       SvgPicture.asset(AppIcons.settingIcon),
+                       const SizedBox(width: 12),
+                       Text(
+                         "Personal Information",
+                         style: const TextStyle(
+                           letterSpacing: 0.2,
+                           fontFamily: 'Inter',
+                           color: TextColors.neutral900,
+                           fontWeight:  FontWeight.w500,
+                           fontSize: 16,
+                         ),
+                       ),
+                       const Spacer(),
+                       SvgPicture.asset(AppIcons.arrorightIcon, color: TextColors.neutral900,),
+                     ],
+                   ),
+                 ),
+               ),
+                   GestureDetector(
+                     onTap: (){
                        Get.toNamed("/medical_info",id: NavIds.profilenav);
                      },
+                     child: Container(
+                       height: 60,
+                       decoration: BoxDecoration(
+                           borderRadius: BorderRadius.circular(0.0),
+                           color: Appcolors.primary,
+                           boxShadow: [
+                             BoxShadow(
+                               color:ShadowColor.shadowColors1.withOpacity(0.10) , // softer effect
+                               blurRadius: 4, // reasonable softness
+                               spreadRadius: 0,
+                               offset: Offset(0, 3), // downward shadow
+                             ),
+                           ]
+                       ),
+                       padding: const EdgeInsets.all(8),
+                       margin: EdgeInsets.symmetric(horizontal: 2,vertical: 1),
+                       child: Row(
+                         children: [
+                           SvgPicture.asset(AppIcons.medicalfileIcon),
+                           const SizedBox(width: 12),
+                           Text(
+                             "Medical Information",
+                             style: const TextStyle(
+                               letterSpacing: 0.2,
+                               fontFamily: 'Inter',
+                               color: TextColors.neutral900,
+                               fontWeight:  FontWeight.w500,
+                               fontSize: 16,
+                             ),
+                           ),
+                           const Spacer(),
+                           SvgPicture.asset(AppIcons.arrorightIcon, color: TextColors.neutral900,),
+                         ],
+                       ),
+                     ),
                    ),
-                   SizedBox(height: 8,),
-               
-                   ProfileListTile(
-                     leadingIconPath: AppIcons.shieduserIcon,
-                     title: " Insurance Information ",
-                     trailingIconPath: AppIcons.arrorightIcon,
-                     onTap: () {
+                   GestureDetector(
+                     onTap: (){
                        Get.toNamed("/insurance_info",id: NavIds.profilenav);
                      },
+                     child: Container(
+                       height: 60,
+                       decoration: BoxDecoration(
+                           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(8),bottomRight: Radius.circular(8)),
+                           color: Appcolors.primary,
+                           boxShadow: [
+                             BoxShadow(
+                               color:ShadowColor.shadowColors1.withOpacity(0.10) , // softer effect
+                               blurRadius: 4, // reasonable softness
+                               spreadRadius: 0,
+                               offset: Offset(0, 3), // downward shadow
+                             ),
+                           ]
+                       ),
+                       padding: const EdgeInsets.all(8),
+                       margin: EdgeInsets.symmetric(horizontal: 2,vertical: 1),
+                       child: Row(
+                         children: [
+                           SvgPicture.asset(AppIcons.shieduserIcon,),
+                           const SizedBox(width: 12),
+                           Text(
+                             "Insurance Information",
+                             style: const TextStyle(
+                               letterSpacing: 0.2,
+                               fontFamily: 'Inter',
+                               color: TextColors.neutral900,
+                               fontWeight:  FontWeight.w500,
+                               fontSize: 16,
+                             ),
+                           ),
+                           const Spacer(),
+                           SvgPicture.asset(AppIcons.arrorightIcon, color: TextColors.neutral900,),
+                         ],
+                       ),
+                     ),
                    ),
+
                    SizedBox(height: 8,),
+
                
                    ProfileListTile(
                      leadingIconPath: AppIcons.fileuploadtIcon,
@@ -141,8 +233,6 @@ class Setting extends StatelessWidget {
                
                      },
                    ),
-                   SizedBox(height: 20,),
-                   buildText("Quick"),
                    SizedBox(height: 8,),
                    ProfileListTile(
                      leadingIconPath: AppIcons.alamclock1Icon,
@@ -165,8 +255,6 @@ class Setting extends StatelessWidget {
                            print("helo");
                            },
                           ),
-                        SizedBox(height: 20,),
-                   buildText("Account"),
                    SizedBox(height: 8,),
                    ProfileListTile(
                      leadingIconPath: AppIcons.userswitchIcon,
@@ -190,9 +278,6 @@ class Setting extends StatelessWidget {
                        // Navigate or do something
                      },
                    ),
-                   SizedBox(height: 20,),
-               
-                   buildText("Other"),
                    SizedBox(height: 8,),
                    ProfileListTile(
                      leadingIconPath: AppIcons.documentIcon,
@@ -209,10 +294,10 @@ class Setting extends StatelessWidget {
                      trailingIconPath: AppIcons.arrorightIcon,
                      onTap: () {
                        Get.toNamed('/support',id: NavIds.profilenav);
-               
+
                      },
                    ),
-                   SizedBox(height: 25,),
+                   SizedBox(height: 24,),
                
                    GestureDetector(
                      onTap: (){
@@ -269,4 +354,5 @@ class Setting extends StatelessWidget {
                )
            );
   }
+
 }

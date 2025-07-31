@@ -84,9 +84,10 @@ class MedicationSetting extends StatelessWidget {
                     svgAsset: AppIcons.editIcon,
                     text:"Edit details",
                     height: 50,
+                    fontsize: 16,
                     bordercolor: Appcolors.action,
-                    textColor: TextColors.action,
-                    backgroundColor: Appcolors.primary,
+                    textColor: Appcolors.primary,
+                    backgroundColor: Appcolors.action,
                     onTap: (){
                       Get.toNamed("/medication_edit",id: NavIds.profilenav);
 

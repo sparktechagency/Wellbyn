@@ -68,14 +68,14 @@ class _AccountBottomSheetState extends State<AccountBottomSheet> {
           ),
           Text(
             "Switch account",
-            style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20,fontFamily: "Satoshi",color: TextColors.neutral900),
+            style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20,fontFamily: "Inter",color: TextColors.neutral900),
           ),
           const SizedBox(height: 12),
           const Align(
             alignment: Alignment.centerLeft,
             child: Text(
               'Personal account',
-              style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20,fontFamily: "Satoshi",color: TextColors.neutral900),
+              style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20,fontFamily: "Inter",color: TextColors.neutral900),
             ),
           ),
           const _AccountTile(
@@ -90,7 +90,7 @@ class _AccountBottomSheetState extends State<AccountBottomSheet> {
             alignment: Alignment.centerLeft,
             child: Text(
               'As a caregiver',
-              style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20,fontFamily: "Satoshi",color: TextColors.neutral900),
+              style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20,fontFamily: "Inter",color: TextColors.neutral900),
             ),
           ),
           SizedBox(

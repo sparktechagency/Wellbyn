@@ -22,7 +22,7 @@ class AppoinetmentDetails extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Appcolors.page,
         title: Text(
-          "Doctor History",
+          "Details History",
           style: TextStyle(
             fontSize: 20,
             fontFamily: "Inter",
@@ -70,10 +70,16 @@ class AppoinetmentDetails extends StatelessWidget {
                   const SizedBox(height: 20),
                   Row(
                       children: [
-                        const CircleAvatar(
-                          radius: 30,
-                          backgroundImage: AssetImage('assets/image/doctor_image.png'),
-                        ),
+                         GestureDetector(
+                           onTap: (){
+                             Get.toNamed("/doctor_profile",id: NavIds.appointment);
+
+                           },
+                           child: CircleAvatar(
+                            radius: 30,
+                            backgroundImage: AssetImage('assets/image/doctor_image.png'),
+                                                   ),
+                         ),
                         const SizedBox(width: 10),
                         Expanded( // Add Expanded to prevent overflow
                           child: Column(
@@ -109,6 +115,7 @@ class AppoinetmentDetails extends StatelessWidget {
                                         fontSize: 14,
                                         color: TextColors.neutral900,
                                         fontFamily: "Inter",
+                                        fontStyle: FontStyle.italic,
                                         fontWeight: FontWeight.w600,
                                       ),
                                       overflow: TextOverflow.ellipsis,
@@ -156,13 +163,13 @@ class AppoinetmentDetails extends StatelessWidget {
                         const SizedBox(width: 5),
                         const Text("16 May 2025", style: TextStyle(
                           fontSize: 14,
-                          color: TextColors.primary2,
+                          color: TextColors.neutral900,
                           fontWeight: FontWeight.w500,
                         ),),
                         Spacer(),
                         const Text("10:25pm", style: TextStyle(
                           fontSize: 14,
-                          color: TextColors.primary2,
+                          color: TextColors.neutral900,
                           fontWeight: FontWeight.w500,
                         ),),
                         Spacer(),
@@ -188,8 +195,9 @@ class AppoinetmentDetails extends StatelessWidget {
 
                   const SizedBox(height: 24),
                   LableTest("Insurance","Blusky"),
-
-                  SizedBox(height: 24.h),
+                  const SizedBox(height: 24),
+                  AppText("Vital Signs",fontWeight: FontWeight.w500,fontSize: 16,),
+                  SizedBox(height: 8),
                   Column(
                       children: [
                         Row(

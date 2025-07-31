@@ -236,7 +236,7 @@ class DoctorDetails extends StatelessWidget {
                     Row(
                       children: [
                         SvgPicture.asset(
-                            AppIcons.hospitallocationIcon, color: Colors.blue),
+                            AppIcons.hospitallocationIcon, color: Colors.blue,width: 24,height: 24,),
                         const SizedBox(width: 4),
                         const Text(
                           "Sylhet Health Center",
@@ -250,19 +250,19 @@ class DoctorDetails extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: Text(
-                        "Calle Ceiba #142, Urb. Alturas de Monte Verde, Trujillo Alto, PR 00976",
-                        style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          fontSize: 14,
-                          fontFamily: AppConstants.FONT_FAMILY,
-                          fontWeight: FontWeight.w600,
-                          color: TextColors.secondary,
-                        ),
-                      ),
-                    ),
+                    // const Padding(
+                    //   padding: EdgeInsets.symmetric(horizontal: 20),
+                    //   child: Text(
+                    //     "Calle Ceiba #142, Urb. Alturas de Monte Verde, Trujillo Alto, PR 00976",
+                    //     style: TextStyle(
+                    //       fontStyle: FontStyle.italic,
+                    //       fontSize: 14,
+                    //       fontFamily: AppConstants.FONT_FAMILY,
+                    //       fontWeight: FontWeight.w600,
+                    //       color: TextColors.secondary,
+                    //     ),
+                    //   ),
+                    // ),
                     const SizedBox(height: 20),
                     // Date Picker
                     DateTimePickerSection(),

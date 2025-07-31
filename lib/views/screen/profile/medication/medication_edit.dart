@@ -163,7 +163,7 @@ class _MedicationEditState extends State<MedicationEdit> {
                         width: 38,
                         padding: const EdgeInsets.all(6),
                         decoration: BoxDecoration(
-                          color: TextColors.neutral100,
+                          color: Colors.transparent,
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: SvgPicture.asset(

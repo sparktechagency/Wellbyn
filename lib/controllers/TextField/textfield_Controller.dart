@@ -9,5 +9,4 @@ class DropdownController extends GetxController {
   RxString state  = 'Select'.obs;
 
 
-
 }

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:wellbyn/controllers/auth/set_new_password.dart';
 import 'package:wellbyn/views/base/Apptext/app_text.dart';
 import 'package:wellbyn/views/screen/auth/password_changed.dart';
 
@@ -17,8 +18,7 @@ import 'forgot.dart';
 class SetNewPassword extends StatelessWidget {
   SetNewPassword({super.key});
 
-  final TextEditingController passwordcontroller = TextEditingController();
-  final TextEditingController confirmcontroller = TextEditingController();
+  final SetNewPasswordController _controller = Get.put(SetNewPasswordController());
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +88,7 @@ class SetNewPassword extends StatelessWidget {
                       LabeledTextFielded(
                         borderColor: TextColors.neutral900,
                         label: "New Password",
-                        controller: confirmcontroller,
+                        controller: _controller.confirmcontroller,
                         next: true,
                         maxline: 1,
                         hintText: "Type a strong password",
@@ -97,7 +97,7 @@ class SetNewPassword extends StatelessWidget {
                       LabeledTextFielded(
                         borderColor: TextColors.neutral900,
                         label: "Confirm Password",
-                        controller: confirmcontroller,
+                        controller: _controller.confirmcontroller,
                         next: true,
                         maxline: 1,
                         hintText: "Re-type password",

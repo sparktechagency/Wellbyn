@@ -27,6 +27,7 @@ class Upcoming extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(height: 8,),
             AppText("Booked appoinment card",fontSize: 20,color: TextColors.neutral900,),
             SizedBox(height: 16.h,),
             Expanded(
@@ -72,6 +73,7 @@ class Upcoming extends StatelessWidget {
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
+
                                   const Text(
                                     "Cardiology",
                                     style: TextStyle(
@@ -81,6 +83,7 @@ class Upcoming extends StatelessWidget {
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
+                                  SizedBox(height: 7.h,),
                                   Row(
                                     children: [
                                       SvgPicture.asset(AppIcons.hospitallocationIcon),
@@ -106,13 +109,13 @@ class Upcoming extends StatelessWidget {
                             _iconButton(AppIcons.chatIcon, Appcolors.action),
                           ],
                         ),
-                       SizedBox(height: 15.h),
+                       SizedBox(height: 16.h),
                        Row(
                           children: [
                             const Text(
-                              "Las appointment time",
+                              "Date & Time",
                               style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 14,
                                 color: TextColors.neutral500,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -139,22 +142,22 @@ class Upcoming extends StatelessWidget {
                               height: 16,
                             ),
                             SizedBox(width: 5.w),
-                            const Text("16 May 2025"),
+                            const AppText("May 16 2025",fontSize: 14,),
                             Spacer(),
-                            const Text("10:25pm"),
+                            const AppText("10:25pm",fontSize: 14,),
                             Spacer(),
                             Row(
                               children: [
                                 Icon(
                                   Icons.circle,
                                   color: Color(0xff38c976),
-                                  size: 13,
+                                  size: 16,
                                 ),
                                 SizedBox(width: 3),
                                 AppText(
                                   "Confirmed",
                                   color: TextColors.neutral900,
-                                  fontSize: 13,
+                                  fontSize: 14,
                                 ),
                               ],
                             ),
@@ -162,10 +165,11 @@ class Upcoming extends StatelessWidget {
                         ), // This marks the end of a Row widget that displays appointment details like date, time, and status.
 
 
-                      SizedBox(height: 15.h),
+                      SizedBox(height: 16.h),
                       IconTextButton(
-                          text: "Check-in",
+                          text: "Check In",
                           height: 50,
+                          fontsize: 16,
                           bordercolor: BorderColors.warning700,
                           backgroundColor: Appcolors.warning,
                           textColor: BorderColors.warning700,
@@ -176,7 +180,7 @@ class Upcoming extends StatelessWidget {
 
 
                           },),
-                      SizedBox(height: 12.h),
+                      SizedBox(height: 16.h),
                       LabeledTextFielded(
                           maxline: 1,
                           borderColor: TextColors.neutral200,
@@ -189,7 +193,7 @@ class Upcoming extends StatelessWidget {
                           },
                           hintText: "I need a cleaning",
                         ),
-                      SizedBox(height: 12.h),
+                      SizedBox(height: 16.h),
                       LabeledTextFielded(
                         maxline: 1,
                         borderColor: TextColors.neutral200,
@@ -203,7 +207,7 @@ class Upcoming extends StatelessWidget {
                         hintText: "New Patient Visit",
                       ),
 
-                      SizedBox(height: 12.h),
+                      SizedBox(height: 16.h),
                       LabeledTextFielded(
                         maxline: 1,
                         borderColor: TextColors.neutral200,
@@ -216,36 +220,36 @@ class Upcoming extends StatelessWidget {
                         },
                         hintText: "Blusky",
                       ),
-                      SizedBox(height: 12.h),
-                      LabeledTextFielded(
-                          maxline: 2,
-                          borderColor: TextColors.neutral200,
-                          label: "Summary",
-                          controller: controller,
-                          // 👈 Use reactive value
-                          readOnly: true,
-                          onTap: () {
-                            // _contrller.pickDate(context);
-                          },
-                          hintText: "Problem \n .head",
-                        ),
+                      SizedBox(height: 16.h),
 
-
-                      SizedBox(height: 20.h,),
-                      AppText("Current Medications",fontSize: 16,color: TextColors.neutral900,),
+                      AppText("Documentation",fontSize: 16,color: TextColors.neutral900,fontWeight: FontWeight.w500,),
                       ListView.builder(
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
                         itemCount: 1,
                         itemBuilder: (context, index) {
-                        //  final doc = documents[index];
+                          //  final doc = documents[index];
                           return documentSection('doc pdf', '12.20kb');
                         },
                       ),
-                      SizedBox(height: 8,),
+
+                      SizedBox(height: 16.h,),
+                      LabeledTextFielded(
+                        maxline: 2,
+                        borderColor: TextColors.neutral200,
+                        label: "Summary",
+                        controller: controller,
+                        // 👈 Use reactive value
+                        readOnly: true,
+                        onTap: () {
+                          // _contrller.pickDate(context);
+                        },
+                        hintText: "Problem \n .head",
+                      ),
+                      SizedBox(height: 16,),
                       _currenMedicineSection(),
 
-                      SizedBox(height: 8.h,),
+                      SizedBox(height: 16.h,),
                       PriorDiagoses(),
 
                       SizedBox(height: 20.h),
@@ -291,9 +295,9 @@ class Upcoming extends StatelessWidget {
            Text(
              size,
              style: TextStyle(
-               fontSize: 12.sp,
+               fontSize: 13.sp,
                color: TextColors.neutral500,
-               fontWeight: FontWeight.w400,
+               fontWeight: FontWeight.w500,
              ),
            ),
          ],

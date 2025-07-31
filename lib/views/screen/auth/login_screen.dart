@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:wellbyn/controllers/auth/log_in.dart';
 import 'package:wellbyn/controllers/localization_controller.dart';
 import 'package:wellbyn/views/base/AppButton/app_button.dart';
 import 'package:wellbyn/views/base/Apptext/app_text.dart';
@@ -29,30 +30,28 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
 
-  final TextEditingController emailcontroller = TextEditingController();
-  final TextEditingController passwordcontroller = TextEditingController();
-  final TextEditingController confirmcontroller = TextEditingController();
-  LocalizationController localizationController = Get.find<LocalizationController>();
-  final List<String> language = ['English', 'Franch'];
+  // LocalizationController localizationController = Get.find<LocalizationController>();
+  // final List<String> language = ['English', 'Franch'];
+  // String? selectedLanguage;
+  final LogInController _controller = Get.put(LogInController());
 
-  String? selectedLanguage;
 
 @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(Duration.zero,(){
-      setState(() {
-        selectedLanguage = language[localizationController.selectedIndex];
-      });
-    });
+    // Future.delayed(Duration.zero,(){
+    //   setState(() {
+    //     selectedLanguage = language[localizationController.selectedIndex];
+    //   });
+    // });
   }
 
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
           backgroundColor: Appcolors.page,
-         body: Padding(
+          body: Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.w),
               child: SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
@@ -89,7 +88,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           }),
 
                           SizedBox(height: 20.h),
-                           AlreadyHaveAccountText(onTap: (){
+                          AlreadyHaveAccountText(
+                             onTap: (){
                             Get.to(CreateAccountPage(role: "petient"));
                             },
                              fontSize: 16.sp,
@@ -217,7 +217,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       LabeledTextFielded(
                         borderColor: TextColors.neutral900,
                         label: "Email".tr,
-                        controller: emailcontroller,
+                        controller: _controller.emailcontroller,
                         next: true,
                         maxline: 1,
                         hintText: "Email Address".tr,
@@ -231,7 +231,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         isPassword: true,
                         borderColor: TextColors.neutral900,
                         label: "New Password",
-                        controller: passwordcontroller,
+                        controller: _controller.passwordcontroller,
                         maxline: 1,
                         hintText: "Password ",
                       ),

@@ -214,11 +214,11 @@ class ChekinAppointment extends StatelessWidget {
             height: 20,
             width: 20,
             decoration: BoxDecoration(
-              color: Appcolors.primary50,
+              color: Appcolors.primary,
               boxShadow: [
                 BoxShadow(
                   color: ShadowColor.shadowColors1.withOpacity(0.10),
-                  blurRadius: 2,
+                  blurRadius: 4,
                   spreadRadius: 0,
                   offset: Offset(0, 3),
                   blurStyle: BlurStyle.normal,
@@ -276,7 +276,7 @@ class ChekinAppointment extends StatelessWidget {
             height: 20,
             width: 20,
             decoration: BoxDecoration(
-              color: Appcolors.primary50,
+              color: Appcolors.primary,
               boxShadow: [
                 BoxShadow(
                   color: ShadowColor.shadowColors1.withOpacity(0.10),

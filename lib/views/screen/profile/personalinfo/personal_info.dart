@@ -179,6 +179,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                     hintText: "Full Name",
                   ),
                   SizedBox(height: 8),
+
                   Row(
                     children: [
                       Expanded(
@@ -205,6 +206,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                     ],
                   ),
                   const SizedBox(height: 20),
+
                   Obx(() => LabeledTextFielded(
                     maxline: 1,
                     borderColor: TextColors.neutral200,
@@ -223,6 +225,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                   const SizedBox(height: 20),
                   _buildLabel("Sex"),
                   _buildGenderSelection(),
+
                   const SizedBox(height: 20),
                   _buildLabel("Marital Status"),
                   CustomTextFielded(
@@ -261,8 +264,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
               const SizedBox(height: 20),
 
               // Contact Info Section
-              _buildSectionContainer(
-                children: [
+              _buildSectionContainer(children: [
                   _buildLabel("Email"),
                   SizedBox(height: 8),
                   CustomTextFielded(
@@ -284,15 +286,13 @@ class _PersonalInfoState extends State<PersonalInfo> {
                     hintText: "+0015411411",
                     enabled: false,
                   ),
-                ],
-              ),
+                ],),
 
               const SizedBox(height: 20),
               const SizedBox(height: 20),
 
               // Address Section
-              _buildSectionContainer(
-                children: [
+              _buildSectionContainer(children: [
                   Row(
                     children: [
                       _buildLabel("Address Line 2"),
@@ -381,15 +381,13 @@ class _PersonalInfoState extends State<PersonalInfo> {
                       ),
                     ],
                   ),
-                ],
-              ),
+                ],),
 
               const SizedBox(height: 20),
               const SizedBox(height: 20),
 
               // Employment Section
-              _buildSectionContainer(
-                children: [
+              _buildSectionContainer(children: [
                   _buildLabel("Employer"),
                   const SizedBox(height: 8),
                   CustomTextFielded(
@@ -440,10 +438,10 @@ class _PersonalInfoState extends State<PersonalInfo> {
                       color: TextColors.neutral500.withOpacity(0.80),
                     ),
                   ),
-                ],
-              ),
+                ],),
 
               SizedBox(height: 80.h),
+
 
             ],
           ),

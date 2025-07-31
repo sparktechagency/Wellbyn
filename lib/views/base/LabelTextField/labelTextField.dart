@@ -322,7 +322,6 @@
 //   }
 //
 // }
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -330,10 +329,10 @@ import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:wellbyn/helpers/di.dart';
 import 'package:wellbyn/utils/app_icons.dart';
-
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_constants.dart';
 import '../Apptext/app_text.dart';
+
 
 class LabeledTextFielded extends StatelessWidget {
   final String label;
@@ -379,6 +378,7 @@ class LabeledTextFielded extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+
         AppText(label, fontSize: 16, color: TextColors.neutral900),
         SizedBox(height: 8.h),
         CustomTextFielded(
@@ -398,6 +398,7 @@ class LabeledTextFielded extends StatelessWidget {
           next: next,
           borderColor: borderColor, // Pass borderColor here
         ),
+
       ],
     );
   }
@@ -618,15 +619,23 @@ class _CustomTextFieldedState extends State<CustomTextFielded> {
           decoration:  BoxDecoration(
             color:  hasError ? Colors.transparent : Colors.white,
             borderRadius: BorderRadius.circular(8.r),
-            boxShadow: (hasError)
-                ? []
-                : [
+            boxShadow: [
               BoxShadow(
                 color: ShadowColor.shadowColors1.withOpacity(0.10),
                 blurRadius: 4,
                 spreadRadius: 0,
                 offset: Offset(0, 3),
-              )],
+              )
+            ]
+            // boxShadow: (!hasError)
+            //     ? [  BoxShadow(
+            //   color: ShadowColor.shadowColors1.withOpacity(0.10),
+            //   blurRadius: 4,
+            //   spreadRadius: 0,
+            //   offset: Offset(0, 3),
+            // )]
+            //     : [
+            // ],
             // boxShadow: hasError
             //     ? []
             //     : isValid

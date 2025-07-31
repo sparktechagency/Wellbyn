@@ -79,8 +79,8 @@ class IconTextButton extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 svgAsset,
-                width: 18.w,
-                height: 18.w,
+                width: 24.w,
+                height: 24.w,
                 colorFilter: ColorFilter.mode(
                   svgAssetcolor ?? textColor,
                   BlendMode.srcIn,

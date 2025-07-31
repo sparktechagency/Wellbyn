@@ -188,9 +188,9 @@ class WaitlistScreen extends StatelessWidget {
                       Row(
                         children: [
                           Icon(
-                            Icons.circle,
+                            Icons.check,
                             color: Color(0xff38c976),
-                            size: 13,
+                            size: 16,
                           ),
                           SizedBox(width: 3),
                           AppText(

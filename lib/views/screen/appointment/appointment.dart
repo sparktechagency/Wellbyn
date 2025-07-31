@@ -7,7 +7,7 @@ import 'package:wellbyn/views/screen/canceled/canceled.dart';
 import 'package:wellbyn/views/screen/compiled/compeleted.dart';
 import 'package:wellbyn/views/screen/upcoming/upcoming.dart';
 
-import '../../../controllers/appointment.dart';
+import '../../../controllers/appointment/appointment.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/nab_ids.dart';
 
@@ -21,7 +21,7 @@ class Appointment extends StatefulWidget {
 class _AppointmentState extends State<Appointment> {
   final AppointmentController appointmentController = Get.put(AppointmentController());
 
-  final List<String> tabs = ["Upcoming", "Compeleted", "Canceled"];
+  final List<String> tabs = ["Upcoming", "Completed", "Canceled"];
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class _AppointmentState extends State<Appointment> {
       appBar: AppBar(
         backgroundColor: Appcolors.page,
         title: Text(
-          "My appointment's",
+          "My Appointment's",
           style: TextStyle(
             fontSize: 20.sp,
             fontFamily: "Inter",
@@ -76,20 +76,35 @@ class _AppointmentState extends State<Appointment> {
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Text(
-                                    "${tabs[index]}(12)",
-                                    style: TextStyle(
-                                      fontSize: isSelected ? 14.6.sp : 14.sp,
-                                      fontFamily: "Inter",
-                                      overflow: TextOverflow.ellipsis,
-                                      color: isSelected ? TextColors.action : TextColors.secondary,
-                                      fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                                  RichText(
+                                    text: TextSpan(
+                                      style: TextStyle(
+                                        fontFamily: "Inter",
+                                        fontSize: isSelected ? 14.1.sp : 14.sp,
+                                        fontWeight: isSelected ? FontWeight.w500 : FontWeight.w500,
+                                        color: isSelected ? TextColors.action : TextColors.secondary,
+                                      ),
+                                      children: [
+                                        TextSpan(
+                                          text: tabs[index],
+                                          // Same style as above or customize if you want
+                                        ),
+                                        TextSpan(
+                                          text: ' (12)', // or dynamic count here
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            color: isSelected ? TextColors.action.withOpacity(0.7) : TextColors.secondary,
+                                            fontSize: isSelected ? 14.1.sp : 14.sp,
+                                          ),
+                                        ),
+                                      ],
                                     ),
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                                   SizedBox(height: 9.h),
                                   Container(
                                     height: 2.h,
-                                    width: isSelected ? 78.w : 78.w,
+                                    width: isSelected ? 100.w : 0.w,
                                     color: isSelected ? TextColors.action : Colors.transparent,
                                   ),
                                 ],
@@ -101,13 +116,13 @@ class _AppointmentState extends State<Appointment> {
                     ),
                   ),
                   Positioned(
-                    bottom: 0,
+                    bottom: 8,
                     left: 0,
                     right: 0,
                     child: Container(
                       margin: EdgeInsets.symmetric(horizontal: 10.w),
                       height: 1.h,
-                      color: Appcolors.disabled.withOpacity(0.25),
+                      color: Appcolors.disabled.withOpacity(0.88),
                     ),
                   ),
                 ],

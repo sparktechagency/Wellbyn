@@ -49,8 +49,8 @@ class CaregiverScreen extends StatelessWidget {
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-                SizedBox(height: 14.h,),
-                AppText("Your Caregiver"),
+                SizedBox(height: 24.h,),
+                AppText("Your caregiver",),
 
                 SizedBox(height: 16.h,),
                 Container(
@@ -153,7 +153,7 @@ class CaregiverScreen extends StatelessWidget {
                   ],
                 ),
               ),
-                SizedBox(height: 30,),
+                SizedBox(height: 32,),
                 AppText("As a caregiver",),
                 SizedBox(height: 16,),
                 Container(
@@ -181,7 +181,7 @@ class CaregiverScreen extends StatelessWidget {
                           topRight: Radius.circular(8),
                         ),
                       ),
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: const [
@@ -200,7 +200,7 @@ class CaregiverScreen extends StatelessWidget {
                         return Container(
                           height: 40.h,
                           color: index.isEven ? Colors.white : Color(0xFFEDF4FA),
-                          padding: const EdgeInsets.all(5),
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
                           child: Row(
                             children: [
                               const Text(

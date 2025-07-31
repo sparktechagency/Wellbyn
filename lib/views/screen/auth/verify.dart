@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:wellbyn/controllers/auth/verify_code.dart';
 import 'package:wellbyn/utils/app_constants.dart';
 import 'package:wellbyn/views/screen/auth/set_new_password.dart';
 
@@ -17,9 +18,9 @@ import 'forgot.dart';
 class Verify extends StatelessWidget {
   Verify({super.key});
 
-  final TextEditingController _pinController = TextEditingController();
 
-  String otpCode = '';
+  final VerifyCodeController _controller = Get.put(VerifyCodeController());
+
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +62,8 @@ class Verify extends StatelessWidget {
                       },
                     ),
                     SizedBox(height: 20.h),
-                    AlreadyHaveAccountText(onTap: (){
+                    AlreadyHaveAccountText(
+                      onTap: (){
                       //Get.to(CreateAccountPage(role: "petient"));
                     },
                       leadingText: "Don’t receive OTP? ".tr,
@@ -106,7 +108,7 @@ class Verify extends StatelessWidget {
                       color: TextColors.action,
                       fontFamily: "Satoshi",
                     ),
-                    controller: _pinController,
+                    controller: _controller.pinController,
                     animationType: AnimationType.scale,
                     keyboardType: TextInputType.number,
                     pinTheme: PinTheme(
@@ -127,10 +129,10 @@ class Verify extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     // 👈 Reduce space between boxes
                     onChanged: (value) {
-                      otpCode = value;
+                      _controller.otpCode.value = value;
                     },
                     onCompleted: (value) {
-                      otpCode = value;
+                      _controller.otpCode.value = value;
                       print("Entered Code: $value");
                     },
                   );
