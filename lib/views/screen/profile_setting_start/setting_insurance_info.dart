@@ -38,6 +38,7 @@ import 'package:wellbyn/views/screen/profile_setting_start/setting_personal_info
 import 'package:wellbyn/views/screen/profile_setting_start/widget/circle.dart';
 import 'package:wellbyn/views/screen/profile_setting_start/widget/labevalue.dart';
 
+import '../../../controllers/profile_setting/personal_info.dart';
 import '../../../controllers/scrollController.dart';
 import '../../../controllers/stepcontroller.dart';
 import '../../../utils/app_colors.dart';
@@ -57,7 +58,7 @@ class SettingInsuranceInfo extends StatefulWidget {
 }
 
 class _SettingInsuranceInfoState extends State<SettingInsuranceInfo> {
-  final signatureCtrl = Get.put(ProfileSettingController());
+  final signatureCtrl = Get.put(OnboardingProfileInfo());
   late ScrollControllerGetX scroll=Get.put(ScrollControllerGetX());
 
   late final StepController controller;

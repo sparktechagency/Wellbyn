@@ -13,6 +13,7 @@ import 'package:wellbyn/utils/app_icons.dart';
 
 
 import '../../../controllers/TextField/textfield_Controller.dart';
+import '../../../controllers/profile_setting/personal_info.dart';
 import '../../base/LabelTextField/labelTextField.dart';
 import '../../base/LableDropDownFielded/lableDropDownFielded.dart';
 
@@ -29,7 +30,7 @@ class SettingAddInsurance extends StatelessWidget {
     "Unknown",
   ];
 
-  final ProfileSettingController _controller = Get.put(ProfileSettingController());
+  final OnboardingProfileInfo _controller = Get.put(OnboardingProfileInfo());
   final TextEditingController name = TextEditingController();
 
   final DropdownController  dropdownController = Get.put(DropdownController());

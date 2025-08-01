@@ -27,8 +27,8 @@ class Upcoming extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 8,),
-            AppText("Booked appoinment card",fontSize: 20,color: TextColors.neutral900,),
+            SizedBox(height: 0,),
+            //AppText("Booked appoinment card",fontSize: 20,color: TextColors.neutral900,),
             SizedBox(height: 16.h,),
             Expanded(
               child: ListView.builder(
@@ -124,7 +124,7 @@ class Upcoming extends StatelessWidget {
                               child:Container(
                                 height: 1,
                                 decoration: BoxDecoration(
-                                  color: TextColors.neutral200,
+                                  color: Colors.transparent,
 
                                 ),
                               ),
@@ -183,7 +183,7 @@ class Upcoming extends StatelessWidget {
                       SizedBox(height: 16.h),
                       LabeledTextFielded(
                           maxline: 1,
-                          borderColor: TextColors.neutral200,
+                          borderColor: Colors.transparent,
                           label: "Visit Reason",
                           controller: controller,
                           // 👈 Use reactive value
@@ -196,7 +196,7 @@ class Upcoming extends StatelessWidget {
                       SizedBox(height: 16.h),
                       LabeledTextFielded(
                         maxline: 1,
-                        borderColor: TextColors.neutral200,
+                        borderColor: Colors.transparent,
                         label: "Visit Type",
                         controller: controller,
                         // 👈 Use reactive value
@@ -210,7 +210,7 @@ class Upcoming extends StatelessWidget {
                       SizedBox(height: 16.h),
                       LabeledTextFielded(
                         maxline: 1,
-                        borderColor: TextColors.neutral200,
+                        borderColor: Colors.transparent,
                         label: "Insurance",
                         controller: controller,
                         // 👈 Use reactive value
@@ -236,7 +236,7 @@ class Upcoming extends StatelessWidget {
                       SizedBox(height: 16.h,),
                       LabeledTextFielded(
                         maxline: 2,
-                        borderColor: TextColors.neutral200,
+                        borderColor: Colors.transparent,
                         label: "Summary",
                         controller: controller,
                         // 👈 Use reactive value
@@ -420,6 +420,7 @@ class Upcoming extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: "Inter",
                   fontSize: 14,
+                  letterSpacing: 0.2,
                   color: TextColors.neutral500,
                   fontWeight: FontWeight.w500,
                 ),

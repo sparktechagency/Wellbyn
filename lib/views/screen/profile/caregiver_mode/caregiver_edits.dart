@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:wellbyn/controllers/caregiver_controller.dart';
+import 'package:wellbyn/controllers/profile_setting/personal_info.dart';
 import 'package:wellbyn/utils/app_icons.dart';
 import 'package:get/get.dart';
 import 'package:wellbyn/utils/nab_ids.dart';
@@ -23,7 +24,7 @@ class CaregiverEdits extends StatelessWidget {
   final TextEditingController names = TextEditingController();
   final CaregiverController caregiverController = Get.put(CaregiverController());
   final DropdownController  dropdownController = Get.put(DropdownController());
-  final ProfileSettingController _controller = Get.put(ProfileSettingController(),);
+  final OnboardingProfileInfo _controller = Get.put(OnboardingProfileInfo(),);
   List<String> item= ["Father","Mother","Brother","Sistar","other"];
   List<String> items= ["Partial controll ","Full access","Sub access",];
 

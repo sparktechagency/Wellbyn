@@ -115,7 +115,7 @@ class _AccountBottomSheetState extends State<AccountBottomSheet> {
           GestureDetector(
             onTap: (){
               Get.toNamed("/caregiver_mode",id: NavIds.profilenav);
-
+              Navigator.of(context).pop();
             },
             child: Container(
               height: 45,
@@ -123,9 +123,15 @@ class _AccountBottomSheetState extends State<AccountBottomSheet> {
               decoration: BoxDecoration(
                 color: Appcolors.primary,
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Appcolors.action, width: 1),
+                boxShadow: [
+                  BoxShadow(
+                    color: ShadowColor.shadowColors1.withOpacity(0.10),
+                    offset: Offset(0, 3),
+                    blurRadius: 4,
+                  )
+                ]
               ),
-              child: const Center(
+              child:  Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -133,7 +139,7 @@ class _AccountBottomSheetState extends State<AccountBottomSheet> {
                     SizedBox(width: 8),
                     Text(
                       "Add Caregiver",
-                      style: TextStyle(color: Appcolors.action,fontSize: 16),
+                      style: TextStyle(color: Appcolors.action,fontSize: 16,fontWeight: FontWeight.w500),
                     ),
                   ],
                 ),

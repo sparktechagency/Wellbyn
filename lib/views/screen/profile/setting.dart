@@ -94,8 +94,6 @@ class Setting extends StatelessWidget {
                
                    SizedBox(height: 24,),
 
-
-
                    GestureDetector(
                  onTap: (){
                    Get.toNamed(
@@ -220,7 +218,7 @@ class Setting extends StatelessWidget {
                      ),
                    ),
 
-                   SizedBox(height: 8,),
+                   SizedBox(height: 16,),
 
                
                    ProfileListTile(
@@ -233,7 +231,7 @@ class Setting extends StatelessWidget {
                
                      },
                    ),
-                   SizedBox(height: 8,),
+                   SizedBox(height: 16,),
                    ProfileListTile(
                      leadingIconPath: AppIcons.alamclock1Icon,
                      title: " Waitlist",
@@ -244,7 +242,7 @@ class Setting extends StatelessWidget {
                
                      },
                    ),
-                   SizedBox(height: 8,),
+                   SizedBox(height: 16,),
                    ProfileListTile(
                      leadingIconPath: AppIcons.givepillIcon,
                      title: " Medications",
@@ -255,21 +253,21 @@ class Setting extends StatelessWidget {
                            print("helo");
                            },
                           ),
-                   SizedBox(height: 8,),
+                   SizedBox(height: 16,),
                    ProfileListTile(
                      leadingIconPath: AppIcons.userswitchIcon,
                      title: " Switch account",
                      trailingIconPath: AppIcons.arrorightIcon,
-                     onTap: () {
-                       showModalBottomSheet(
-                         context: context,
-                         isScrollControlled: true,
-                         backgroundColor: Colors.transparent,
-                         builder: (_) => const AccountBottomSheet(),
-                       );
+                     onTap: () async {
+                        // Close the bottom sheet
+                       // Reopen bottom sheet when returning
+                       showAccountBottomSheet(context);
+                       //Navigator.of(context).pop();
+                       //await Get.toNamed("/caregiver_mode", id: NavIds.profilenav);
                      },
+
                    ),
-                   SizedBox(height: 8,),
+                   SizedBox(height: 16,),
                    ProfileListTile(
                      leadingIconPath: AppIcons.userswitchIcon,
                      title: " Caregiver",
@@ -278,7 +276,7 @@ class Setting extends StatelessWidget {
                        // Navigate or do something
                      },
                    ),
-                   SizedBox(height: 8,),
+                   SizedBox(height: 16,),
                    ProfileListTile(
                      leadingIconPath: AppIcons.documentIcon,
                      title: " HIPAA Consent",
@@ -287,7 +285,7 @@ class Setting extends StatelessWidget {
                        // Navigate or do something
                      },
                    ),
-                   SizedBox(height: 8,),
+                   SizedBox(height: 16,),
                    ProfileListTile(
                      leadingIconPath: AppIcons.helpIcon,
                      title: " Support",
@@ -344,6 +342,234 @@ class Setting extends StatelessWidget {
     );
   }
 
+   Widget buildAccountBottomSheet(BuildContext context) {
+     final List<Map<String, dynamic>> caregivers = [
+       {
+         "name": "Sakib",
+         "label": "Caregiver",
+         "avatar": "Sa",
+         "avatarColor": Colors.brown,
+         "labelColor": BorderColors.warning50,
+       },
+       {
+         "name": "Kamal",
+         "label": "Caregiver",
+         "avatar": "Ka",
+         "avatarColor": Colors.brown,
+         "labelColor": BorderColors.warning50,
+       },
+       {
+         "name": "Kamal",
+         "label": "Caregiver",
+         "avatar": "Ka",
+         "avatarColor": Colors.brown,
+         "labelColor": BorderColors.warning50,
+       },
+     ];
+
+     return Container(
+       padding: EdgeInsets.all(16),
+       decoration: BoxDecoration(
+         color: Appcolors.primary,
+         boxShadow: [
+           BoxShadow(
+             color: ShadowColor.shadowColors1.withOpacity(0.10),
+             blurRadius: 4,
+             offset: Offset(0, 3),
+           ),
+         ],
+         borderRadius: BorderRadius.only(
+           topLeft: Radius.circular(25),
+           topRight: Radius.circular(25),
+         ),
+       ),
+       child: Column(
+         mainAxisSize: MainAxisSize.min,
+         children: [
+           Container(
+             width: 50,
+             height: 5,
+             margin: const EdgeInsets.only(bottom: 16),
+             decoration: BoxDecoration(
+               color: Colors.grey[300],
+               borderRadius: BorderRadius.circular(10),
+             ),
+           ),
+           Text(
+             "Switch account",
+             style: TextStyle(
+               fontWeight: FontWeight.w500,
+               fontSize: 20,
+               fontFamily: "Inter",
+               color: TextColors.neutral900,
+             ),
+           ),
+           const SizedBox(height: 12),
+           const Align(
+             alignment: Alignment.centerLeft,
+             child: Text(
+               'Personal account',
+               style: TextStyle(
+                 fontWeight: FontWeight.w500,
+                 fontSize: 20,
+                 fontFamily: "Inter",
+                 color: TextColors.neutral900,
+               ),
+             ),
+           ),
+           buildAccountTile(
+             name: 'Mahmud',
+             label: 'Personal',
+             avatar: 'Ma',
+             avatarColor: Appcolors.action,
+             labelColor: Appcolors.action,
+           ),
+           const SizedBox(height: 8),
+           const Align(
+             alignment: Alignment.centerLeft,
+             child: Text(
+               'As a caregiver',
+               style: TextStyle(
+                 fontWeight: FontWeight.w500,
+                 fontSize: 20,
+                 fontFamily: "Inter",
+                 color: TextColors.neutral900,
+               ),
+             ),
+           ),
+           SizedBox(
+             height: 140,
+             child: ListView.builder(
+               physics: const BouncingScrollPhysics(),
+               shrinkWrap: true,
+               itemCount: caregivers.length,
+               itemBuilder: (context, index) {
+                 final caregiver = caregivers[index];
+                 return buildAccountTile(
+                   name: caregiver['name'],
+                   label: caregiver['label'],
+                   avatar: caregiver['avatar'],
+                   avatarColor: caregiver['avatarColor'],
+                   labelColor: caregiver['labelColor'],
+                 );
+               },
+             ),
+           ),
+           const SizedBox(height: 12),
+           GestureDetector(
+             onTap: () {
+               final currentContext = context;
+
+               // Close the bottom sheet first
+               Navigator.of(context).pop();
+
+               // Navigate to caregiver mode
+               Get.toNamed("/caregiver_mode", id: NavIds.profilenav)?.whenComplete(() {
+                 // Use a post-frame callback to ensure the navigation is complete
+                 WidgetsBinding.instance.addPostFrameCallback((_) {
+                   if (currentContext.mounted) {
+                     showAccountBottomSheet(currentContext);
+                   }
+                 });
+               });
+
+             },
+             child: Container(
+               height: 45,
+               width: double.infinity,
+               decoration: BoxDecoration(
+                 color: Appcolors.primary,
+                 borderRadius: BorderRadius.circular(8),
+                 boxShadow: [
+                   BoxShadow(
+                     color: ShadowColor.shadowColors1.withOpacity(0.10),
+                     offset: Offset(0, 3),
+                     blurRadius: 4,
+                   )
+                 ],
+               ),
+               child: Center(
+                 child: Row(
+                   mainAxisAlignment: MainAxisAlignment.center,
+                   children: [
+                     Icon(Icons.add, color: Appcolors.action),
+                     SizedBox(width: 8),
+                     Text(
+                       "Add Caregiver",
+                       style: TextStyle(
+                         color: Appcolors.action,
+                         fontSize: 16,
+                         fontWeight: FontWeight.w500,
+                       ),
+                     ),
+                   ],
+                 ),
+               ),
+             ),
+           ),
+         ],
+       ),
+     );
+   }
+
+   Widget buildAccountTile({
+     required String name,
+     required String label,
+     required String avatar,
+     required Color avatarColor,
+     required Color labelColor,
+   }) {
+     return Container(
+       margin: const EdgeInsets.symmetric(vertical: 4),
+       padding: const EdgeInsets.all(12),
+       decoration: BoxDecoration(
+         color: label == 'Caregiver' ? Colors.orange.shade50 : Appcolors.actionHoverLight,
+         borderRadius: BorderRadius.circular(8),
+       ),
+       child: Row(
+         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+         children: [
+           Row(
+             children: [
+               CircleAvatar(
+                 backgroundColor: avatarColor,
+                 child: Text(
+                   avatar,
+                   style: const TextStyle(color: Colors.white),
+                 ),
+               ),
+               const SizedBox(width: 8),
+               Text(name),
+             ],
+           ),
+           Container(
+             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+             decoration: BoxDecoration(
+               border: Border.all(color: avatarColor),
+               borderRadius: BorderRadius.circular(20),
+             ),
+             child: Text(
+               label,
+               style: TextStyle(
+                 color: avatarColor,
+                 fontWeight: FontWeight.w600,
+               ),
+             ),
+           ),
+         ],
+       ),
+     );
+   }
+
+// Usage example:
+  void showAccountBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (context) => buildAccountBottomSheet(context),
+    );
+  }
    Text buildText(String name ) {
       return Text(
           name,

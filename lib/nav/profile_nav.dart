@@ -5,6 +5,7 @@ import 'package:wellbyn/views/screen/profile/caregiver_mode/caregiver_edits.dart
 import 'package:wellbyn/views/screen/profile/caregiver_mode/caregiver_mode_details.dart';
 import 'package:wellbyn/views/screen/profile/caregiver_mode/start_caregiver.dart';
 import 'package:wellbyn/views/screen/profile/medication/medication_edit.dart';
+import 'package:wellbyn/views/screen/profile/upload_document_screen/edit_upload_documention.dart';
 import 'package:wellbyn/views/screen/profile/upload_document_screen/upload_document_screen.dart';
 import 'package:wellbyn/views/screen/profile/waitlist/waitlist_screen.dart';
  // replace with your actual profile screen path
@@ -35,6 +36,11 @@ class _ProfileNavState extends State<ProfileNav> {
           return MaterialPageRoute(
             settings: settings,
             builder: (_) =>  PersonalInfo(),
+          );
+        } if (settings.name == '/edit_upload_documention') {
+          return MaterialPageRoute(
+            settings: settings,
+            builder: (_) =>  EditUploadDocumention(),
           );
         }
         else if(settings.name == '/support') {

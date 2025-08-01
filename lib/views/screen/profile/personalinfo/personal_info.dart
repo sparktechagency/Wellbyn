@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:wellbyn/controllers/personal_info.dart';
 import 'package:wellbyn/controllers/profile_controller.dart';
+import 'package:wellbyn/controllers/profile_setting/personal_info.dart';
 import 'package:wellbyn/utils/app_icons.dart';
 import 'package:wellbyn/views/base/Apptext/app_text.dart';
 import 'package:wellbyn/views/base/custom_field.dart';
@@ -54,8 +55,8 @@ class _PersonalInfoState extends State<PersonalInfo> {
   File? backLicenseFile;
 
   final ProfileController _controller = Get.put(ProfileController());
-  final ProfileSettingController controller = Get.put(
-    ProfileSettingController(),
+  final OnboardingProfileInfo controller = Get.put(
+    OnboardingProfileInfo(),
   );
   @override
   void dispose() {

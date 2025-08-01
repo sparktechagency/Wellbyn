@@ -7,7 +7,21 @@ import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class FileUploadController extends GetxController {
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+  }
+
   var files = <Map<String, dynamic>>[].obs;
+  final itemx = <String>[].obs;
+
+  var selectedIndex = 0.obs;
+
+  void toggle(int index) {
+    selectedIndex.value = index;
+  }
 
   // Request required permissions
   Future<void> requestPermissions() async {
@@ -89,5 +103,13 @@ class FileUploadController extends GetxController {
     const suffixes = ["B", "KB", "MB", "GB"];
     int i = (log(bytes) / log(1024)).floor();
     return '${(bytes / pow(1024, i)).toStringAsFixed(2)} ${suffixes[i]}';
+  }
+
+
+  @override
+  void onClose() {
+    selectedIndex.close();
+    // TODO: implement onClose
+    super.onClose();
   }
 }

@@ -47,6 +47,7 @@ class AppIcons{
   static String addIcon02="assets/icons/add02.svg";
   static String downloadIcon="assets/icons/download_circle.svg";
   static String locationcheckIcon="assets/icons/location_check.svg";
+  static String heartSecondIcon="assets/icons/Heartes.svg";
 
 
 

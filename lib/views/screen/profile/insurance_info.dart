@@ -13,6 +13,7 @@ import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_icons.dart';
 import '../../../../utils/nab_ids.dart';
 
+import '../../../controllers/profile_setting/personal_info.dart';
 import '../../../controllers/profile_setting_controller.dart';
 import '../../../utils/app_constants.dart';
 import '../profile_setting_start/widget/labevalue.dart';
@@ -24,7 +25,7 @@ class InsuranceInfo extends StatelessWidget {
    InsuranceInfo({super.key});
 
    final InsuranceController controller = Get.put(InsuranceController());
-   final signatureCtrl = Get.put(ProfileSettingController());
+   final signatureCtrl = Get.put(OnboardingProfileInfo());
 
   @override
   Widget build(BuildContext context) {

@@ -8,6 +8,7 @@ import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:signature/signature.dart';
 
 import '../../utils/app_colors.dart';
 
@@ -46,6 +47,28 @@ class OnboardingProfileInfo extends GetxController{
     super.onClose();
   }
 
+
+  final signatureController = SignatureController(
+    penStrokeWidth: 2,
+    penColor: const Color(0xFF000000),
+    exportBackgroundColor: const Color(0xFFFFFFFF),
+  );
+
+  var isSignatureNotEmpty = false.obs;
+
+  void clearSignature() {
+    signatureController.clear();
+    isSignatureNotEmpty.value = false;
+  }
+
+  final RxMap<String, bool> existingConditions = <String, bool>{
+    'Diabetes': false,
+    'Hypertension': false,
+    'Anxiety': false,
+    'Depression': false,
+    'Asthma': false,
+    'None': false,
+  }.obs;
 
   RxBool showText = false.obs;
   RxBool isStep2Active = false.obs;

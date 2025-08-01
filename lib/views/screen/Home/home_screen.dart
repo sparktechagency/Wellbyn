@@ -237,10 +237,10 @@ class HomeScreen extends StatelessWidget {
                               children: [
                                 SvgPicture.asset(
                                   AppIcons.hospitallocationIcon,
-                                  width: 20,
-                                  height: 20,
+                                  // width: 18,
+                                  // height: 18,
                                   colorFilter: ColorFilter.mode(
-                                    Appcolors.action,
+                                    Color(0xFF3D75E6),
                                     BlendMode.srcIn,
                                   ),
                                 ),
@@ -268,7 +268,7 @@ class HomeScreen extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 0),
                                   child: Text(
-                                    "3 available time",
+                                    "3 Time Available",
                                     style: TextStyle(
                                       fontSize: 14,
                                       color: TextColors.neutral900,

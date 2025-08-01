@@ -44,7 +44,6 @@ class DoctorBookingSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-
     final DateTimePickerController controller = Get.put(DateTimePickerController(),);
 
     return DraggableScrollableSheet(
@@ -348,7 +347,7 @@ class DoctorBookingSheet extends StatelessWidget {
         );
       },
     );
-  }
+    }
 
   Widget _iconButton(String iconAsset, Color bgColor, {Color? iconColor}) {
     return Container(
@@ -376,5 +375,4 @@ class DoctorBookingSheet extends StatelessWidget {
       ),
     );
   }
-
-}
+  }

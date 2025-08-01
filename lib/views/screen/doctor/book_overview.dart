@@ -92,13 +92,13 @@ class BookOverview extends StatelessWidget {
               SizedBox(height: 6.h),
               listofdocument(),
 
-              SizedBox(height: 20),
+              SizedBox(height: 16),
               AppText("Summary", fontSize: 16),
               SizedBox(height: 8),
               summary(),
-              SizedBox(height: 20),
+              SizedBox(height: 24.h),
               currentMedicine(),
-              SizedBox(height: 20),
+              SizedBox(height: 24.h),
               Row(
                 children: [
                   Text(
@@ -116,14 +116,14 @@ class BookOverview extends StatelessWidget {
                       fontSize: 14,
                       color: TextColors.neutral500,
                       fontFamily: "Inter",
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ],
               ),
               SizedBox(height: 8),
               optionalText(),
-              SizedBox(height: 20),
+              SizedBox(height: 24.h),
               CustomButton(
                 onTap: () {},
                 fontSize: 16,
@@ -132,7 +132,7 @@ class BookOverview extends StatelessWidget {
                 color: Appcolors.action,
                 textColor: Appcolors.primary,
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 20.h),
             ],
           ),
         ),
@@ -180,7 +180,7 @@ class BookOverview extends StatelessWidget {
     return ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              itemCount: 2,
+              itemCount: 1,
               itemBuilder: (context, index) {
                 return Container(
                   height: 53,
@@ -209,7 +209,7 @@ class BookOverview extends StatelessWidget {
                         AppText(
                           "20.45kb",
                           fontSize: 12,
-                          color: TextColors.neutral900,
+                          color: TextColors.neutral500,
                         ),
                       ],
                     ),
@@ -265,7 +265,7 @@ class BookOverview extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min, // <-- Important
                         children: [
                           Container(
-                            height: 40.h,
+                            height: 40,
                             decoration: BoxDecoration(
                               color: Color(0xFFEDF4FA),
                               borderRadius: const BorderRadius.only(
@@ -274,34 +274,46 @@ class BookOverview extends StatelessWidget {
                               ),
                             ),
                             padding: const EdgeInsets.symmetric(
-                              horizontal: 10,
+                              horizontal: 12,
                             ),
                             child: Row(
                               mainAxisAlignment:
                                   MainAxisAlignment.spaceBetween,
                               children: const [
-                                Text(
-                                  "Name",
-                                  style: TextStyle(
-                                    fontFamily: "Inter",
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
+                                Expanded(
+                                  flex: 3,
+                                  child: Text(
+                                    "Name",
+                                    style: TextStyle(
+                                      fontFamily: "Inter",
+                                      fontSize: 12,
+                                      color: TextColors.neutral500,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
                                 ),
-                                Text(
-                                  "Frequency",
-                                  style: TextStyle(
-                                    fontFamily: "Inter",
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
+                                Expanded(
+                                  flex: 3,
+                                  child: Text(
+                                    "Dosage",
+                                    style: TextStyle(
+                                      fontFamily: "Inter",
+                                      fontSize: 12,
+                                      color: TextColors.neutral500,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
                                 ),
-                                Text(
-                                  "Action",
-                                  style: TextStyle(
-                                    fontFamily: "Inter",
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
+                                Expanded(
+                                  flex: 1,
+                                  child: Text(
+                                    "Action",
+                                    style: TextStyle(
+                                      fontFamily: "Inter",
+                                      fontSize: 12,
+                                      color: TextColors.neutral500,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -322,62 +334,68 @@ class BookOverview extends StatelessWidget {
                                   children: [
                                     Row(
                                       children: [
-                                        const Text(
-                                          "Rosdeb Koch",
-                                          style: TextStyle(
-                                            fontFamily: "Inter",
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w500,
+                                         Expanded(
+                                           flex:3,
+                                           child: Text(
+                                            "Rosdeb Koch",
+                                            style: TextStyle(
+                                              fontFamily: "Inter",
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                                                                   ),
+                                         ),
+
+                                        Expanded(
+                                          flex: 3,
+                                          child: Text(
+                                            "Once daily",
+                                            style: TextStyle(
+                                              fontFamily: "Inter",
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w500,
+                                            ),
                                           ),
                                         ),
-                                        Spacer(),
-                                        Text(
-                                          "Once daily",
-                                          style: TextStyle(
-                                            fontFamily: "Inter",
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                        Spacer(),
-                                        Spacer(),
-                                        SizedBox(width: 12),
-                                        Material(
-                                          color: Colors.transparent,
-                                          child: InkWell(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            onTap: () {
-                                              showDialog(
-                                                context: context,
-                                                builder: (context) =>
-                                                    CustomConfirmationDialog(
-                                                      onConfirm: () {
-                                                        // Handle confirm logic
-                                                        Navigator.of(
-                                                          context,
-                                                        ).pop(); // Close dialog
-                                                      },
-                                                      onCancel: () {
-                                                        Navigator.of(
-                                                          context,
-                                                        ).pop(); // Just close
-                                                      },
-                                                      iconAsset:
-                                                          AppIcons.alertIcon,
-                                                      title:
-                                                          'Remove caregiver',
-                                                      description:
-                                                          'Are you sure you want to remove your caregiver?',
-                                                    ),
-                                              );
-                                            },
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(
-                                                4.0,
-                                              ),
-                                              child: SvgPicture.asset(
-                                                AppIcons.delete02Icon,
+                                        Expanded(
+                                          flex: 1,
+                                          child: Material(
+                                            color: Colors.transparent,
+                                            child: InkWell(
+                                              borderRadius:
+                                                  BorderRadius.circular(4),
+                                              onTap: () {
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (context) =>
+                                                      CustomConfirmationDialog(
+                                                        onConfirm: () {
+                                                          // Handle confirm logic
+                                                          Navigator.of(
+                                                            context,
+                                                          ).pop(); // Close dialog
+                                                        },
+                                                        onCancel: () {
+                                                          Navigator.of(
+                                                            context,
+                                                          ).pop(); // Just close
+                                                        },
+                                                        iconAsset:
+                                                            AppIcons.alertIcon,
+                                                        title:
+                                                            'Remove caregiver',
+                                                        description:
+                                                            'Are you sure you want to remove your caregiver?',
+                                                      ),
+                                                );
+                                              },
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(
+                                                  4.0,
+                                                ),
+                                                child: SvgPicture.asset(
+                                                  AppIcons.delete02Icon,
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -471,7 +489,10 @@ class BookOverview extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      SvgPicture.asset(AppIcons.hospitallocationIcon),
+                      SvgPicture.asset(
+                         color: Color(0xFF3D75E6),
+                          AppIcons.hospitallocationIcon
+                      ),
                       SizedBox(width: 5),
                       Text(
                         "Sylhet Health Center",

@@ -82,8 +82,12 @@ class CaregiverScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: const [
-                          Text("Name",style: TextStyle(fontFamily: "Inter",fontSize: 12,color: TextColors.neutral500,fontWeight: FontWeight.w400)),
-                          Text("Action",style: TextStyle(fontFamily: "Inter",fontSize: 12,color: TextColors.neutral500,fontWeight: FontWeight.w400)),
+                          Expanded(
+                              flex: 4,
+                              child: Text("Name",style: TextStyle(fontFamily: "Inter",fontSize: 12,color: TextColors.neutral500,fontWeight: FontWeight.w400))),
+                          Expanded(
+                              flex: 0,
+                              child: Text("Action",style: TextStyle(fontFamily: "Inter",fontSize: 12,color: TextColors.neutral500,fontWeight: FontWeight.w400))),
                         ],
                       ),
                     ),
@@ -98,48 +102,57 @@ class CaregiverScreen extends StatelessWidget {
                           padding: const EdgeInsets.only(left: 12,right: 12),
                           child: Row(
                             children: [
-                              const Text(
-                                "Rosdeb Koch",
-                                style: TextStyle(fontFamily: "Inter",fontSize: 14,fontWeight: FontWeight.w500),
+                              Expanded(
+                                flex:4,
+                                child: const Text(
+                                  "Rosdeb Koch",
+                                  style: TextStyle(fontFamily: "Inter",fontSize: 14,fontWeight: FontWeight.w500),
+                                ),
                               ),
-                              Spacer(),
-                              Material(
-                                color: Colors.transparent,
-                                child: InkWell(
-                                  borderRadius: BorderRadius.circular(4),
-                                  onTap: () {
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: SvgPicture.asset(AppIcons.viewIcon),
+
+                              Expanded(
+                                flex: 0,
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: InkWell(
+                                    borderRadius: BorderRadius.circular(4),
+                                    onTap: () {
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: SvgPicture.asset(AppIcons.viewIcon),
+                                    ),
                                   ),
                                 ),
                               ),
-                              SizedBox(width: 10),
-                              Material(
-                                color: Colors.transparent,
-                                child: InkWell(
-                                  borderRadius: BorderRadius.circular(4),
-                                  onTap: () {
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) => CustomConfirmationDialog(
-                                        onConfirm: () {
-                                          // Handle confirm logic
-                                          Navigator.of(context).pop(); // Close dialog
-                                        },
-                                        onCancel: () {
-                                          Navigator.of(context).pop(); // Just close
-                                        },
-                                        iconAsset: AppIcons.alertIcon,
-                                        title: 'Remove caregiver',
-                                        description: 'Are you sure you want to remove your caregiver?',
-                                      ),
-                                    );
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: SvgPicture.asset(AppIcons.delete02Icon),
+                              SizedBox(width: 6),
+                              Expanded(
+                                flex: 0,
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: InkWell(
+                                    borderRadius: BorderRadius.circular(4),
+                                    onTap: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) => CustomConfirmationDialog(
+                                          onConfirm: () {
+                                            // Handle confirm logic
+                                            Navigator.of(context).pop(); // Close dialog
+                                          },
+                                          onCancel: () {
+                                            Navigator.of(context).pop(); // Just close
+                                          },
+                                          iconAsset: AppIcons.alertIcon,
+                                          title: 'Remove caregiver',
+                                          description: 'Are you sure you want to remove your caregiver?',
+                                        ),
+                                      );
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 0),
+                                      child: SvgPicture.asset(AppIcons.delete02Icon),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -173,7 +186,7 @@ class CaregiverScreen extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min, // <-- Important
                   children: [
                     Container(
-                      height: 40.h,
+                      height: 40,
                       decoration: BoxDecoration(
                         color: Color(0xFFEDF4FA),
                         borderRadius: const BorderRadius.only(
@@ -185,10 +198,16 @@ class CaregiverScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: const [
-                          Text("Name",style: TextStyle(fontFamily: "Inter",fontSize: 12,color: TextColors.neutral500,fontWeight: FontWeight.w400),),
-                          Text("Relation",style: TextStyle(fontFamily: "Inter",fontSize: 12,color: TextColors.neutral500,fontWeight: FontWeight.w400),),
-                          Text("Action",style: TextStyle(fontFamily: "Inter",fontSize: 12,color: TextColors.neutral500,fontWeight: FontWeight.w400),),
-                          SizedBox(width: 8,),
+                          Expanded(
+                              flex: 3,
+                              child: Text("Name",style: TextStyle(fontFamily: "Inter",fontSize: 12,color: TextColors.neutral500,fontWeight: FontWeight.w500),)),
+                          Expanded(
+                              flex: 3,
+                              child: Text("Relation",style: TextStyle(fontFamily: "Inter",fontSize: 12,color: TextColors.neutral500,fontWeight: FontWeight.w500),)),
+                          Expanded(
+                              flex: 1,
+                              child: Text("Action",style: TextStyle(fontFamily: "Inter",fontSize: 12,color: TextColors.neutral500,fontWeight: FontWeight.w500),)),
+
                         ],
                       ),
                     ),
@@ -203,52 +222,59 @@ class CaregiverScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 12),
                           child: Row(
                             children: [
-                              const Text(
-                                "Jamal",
-                                style: TextStyle(fontFamily: "Inter",fontSize: 14,fontWeight: FontWeight.w500),
+                              Expanded(
+                                flex:3,
+                                child: Text(
+                                  "Rosedb koch",
+                                  style: TextStyle(fontFamily: "Inter",fontSize: 14,fontWeight: FontWeight.w500),
+                                ),
                               ),
-                              Spacer(),
-                              const Text(
-                             "Brother",
-                             style: TextStyle(fontFamily: "Inter",fontSize: 14,fontWeight: FontWeight.w500),
-                              ),
-                              Spacer(),
 
-                              GestureDetector(
-                                onTap: (){
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) => CustomConfirmationDialog(
-                                      onConfirm: () {
-                                        // Handle confirm logic
-                                        Navigator.of(context).pop(); // Close dialog
-                                      },
-                                      onCancel: () {
-                                        Navigator.of(context).pop(); // Just close
-                                      },
-                                      iconAsset: AppIcons.alertIcon,
-                                      title: 'Remove as a caregiver',
-                                      description: 'Are you sure you want to remove your caregiver?',
-                                    ),
-                                  );
-                                },
-                                child: IntrinsicWidth(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Leave as caregiver",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          color: Appcolors.action,
-                                          fontWeight: FontWeight.w500,
+                              Expanded(
+                                flex: 2,
+                                child: Text("Brother",style: TextStyle(fontFamily: "Inter",fontSize: 14,fontWeight: FontWeight.w500),
+                                ),
+                              ),
+
+                              Expanded(
+                                flex: 2,
+                                child: GestureDetector(
+                                  onTap: (){
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => CustomConfirmationDialog(
+                                        onConfirm: () {
+                                          // Handle confirm logic
+                                          Navigator.of(context).pop(); // Close dialog
+                                        },
+                                        onCancel: () {
+                                          Navigator.of(context).pop(); // Just close
+                                        },
+                                        iconAsset: AppIcons.alertIcon,
+                                        title: 'Remove as a caregiver',
+                                        description: 'Are you sure you want to remove your caregiver?',
+                                      ),
+                                    );
+                                  },
+                                  child: IntrinsicWidth(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          overflow: TextOverflow.ellipsis,
+                                          "Leave as caregiver",
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Appcolors.action,
+                                            fontWeight: FontWeight.w500,
+                                          ),
                                         ),
-                                      ),
-                                      Container(
-                                        height: 1,
-                                        color: Appcolors.action,
-                                      ),
-                                    ],
+                                        Container(
+                                          height: 1,
+                                          color: Appcolors.action,
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),

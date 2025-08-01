@@ -84,7 +84,8 @@ class DoctorDetails extends StatelessWidget {
                 children: [
                   Positioned.fill(
                     child: Image.asset(
-                      "assets/image/doctor_image.png",
+                      width: double.infinity,
+                      "assets/image/doctors.png",
                       fit: BoxFit.cover,
                     ),
 
@@ -126,13 +127,15 @@ class DoctorDetails extends StatelessWidget {
                             color: Appcolors.background,
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: SvgPicture.asset(
+                          child: controller.isFavorite.value ?
+                          SvgPicture.asset(
                             controller.isFavorite.value
                                 ? AppIcons.heart01Icon
                                 : AppIcons.heartIcon,
-                            color: controller.isFavorite.value
-                                ? Colors.red
-                                : Appcolors.brand222,
+                          ):   SvgPicture.asset(
+                            controller.isFavorite.value
+                                ? AppIcons.heartSecondIcon
+                                : AppIcons.heartIcon,
                           ),
                         ),
                       );
@@ -144,7 +147,7 @@ class DoctorDetails extends StatelessWidget {
             // Top image section
             // Bottom scrollable content
             Container(
-              margin: EdgeInsets.only(top: 248.h),
+              margin: EdgeInsets.only(top: 250.h),
               padding: const EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
                 color: Appcolors.page,
@@ -164,7 +167,7 @@ class DoctorDetails extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 14),
+                    const SizedBox(height: 16),
                     Center(
                       child: Container(
                         height: 4,
@@ -175,7 +178,7 @@ class DoctorDetails extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 24),
 
                     // Doctor name
                     Row(
@@ -236,14 +239,14 @@ class DoctorDetails extends StatelessWidget {
                     Row(
                       children: [
                         SvgPicture.asset(
-                            AppIcons.hospitallocationIcon, color: Colors.blue,width: 24,height: 24,),
+                            AppIcons.hospitallocationIcon, color:  Color(0xFF3D75E6),width: 24,height: 24,),
                         const SizedBox(width: 4),
-                        const Text(
+                         Text(
                           "Sylhet Health Center",
                           style: TextStyle(
                             color: TextColors.neutral500,
                             fontWeight: FontWeight.w500,
-                            fontSize: 20,
+                            fontSize: 20.sp,
                             letterSpacing: 0.2,
                             fontFamily: AppConstants.FONT_FAMILY,
                           ),

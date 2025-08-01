@@ -11,15 +11,22 @@ class OnboradingProfileMedication extends GetxController{
   final RxList<Allergy> allergies = <Allergy>[
     Allergy(name: 'Penicillin', severity: 'Moderate'),
     Allergy(name: 'Shellfish', severity: 'Severe'),
+    Allergy(name: 'Name', severity: 'Severe'),
   ].obs;
 
   final RxList<Medication> medications = <Medication>[
     Medication(name: 'Lisinopril', dosage: '10mg', frequency: 'Once daily'),
     Medication(name: 'Metformin', dosage: '500mg', frequency: 'Twice daily'),
+    Medication(name: 'Low', dosage: '500mg', frequency: 'Once daily'),
   ].obs;
 
   final RxMap<String, bool> existingConditions = <String, bool>{
-
+    'Diabetes': false,
+    'Hypertension': false,
+    'Anxiety': false,
+    'Depression': false,
+    'Asthma': false,
+    'None': false,
   }.obs;
 
   List<String> get selectedexistingConditions => existingConditions.entries
@@ -28,7 +35,9 @@ class OnboradingProfileMedication extends GetxController{
       .toList();
 
   final RxMap<String, bool> lifestyleFactors = <String, bool>{
-
+    'Smoking': false,
+    'Former Smoker': false,
+    'Alcohol': false,
   }.obs;
 
   List<String> get selectedLifestyleFactors => lifestyleFactors.entries
