@@ -32,6 +32,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
   final CreateAnAccount _controller = Get.put(CreateAnAccount());
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -42,75 +43,80 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
           padding: EdgeInsets.symmetric(horizontal: 24.w),
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
-            child:Column(
-                      children: [
-                       const SizedBox(height: 35),
+            child:Form(
+              key: _formKey,
+              child: Column(
+                        children: [
+                         const SizedBox(height: 35),
 
-                        //=================> logo header <=======================//
+                          //=================> logo header <=======================//
 
-                        LogoHeader(
-                          imagePath: 'assets/icons/logo.svg',
-                          title: 'Create an account',
-                          fontSize: 24,
-                        ),
-                        const SizedBox(height: 24),
+                          LogoHeader(
+                            imagePath: 'assets/icons/logo.svg',
+                            title: 'Create an account',
+                            fontSize: 24,
+                          ),
+                          const SizedBox(height: 24),
 
-                        //=================> input field  <=======================//
-                        inputMethod(),
-                        const SizedBox(height: 24),
+                          //=================> input field  <=======================//
+                          inputMethod(),
+                          const SizedBox(height: 24),
 
-                        //=================> Next button  <=======================//
+                          //=================> Next button  <=======================//
 
-                        AppButton(
-                          text: "Next",
-                          onPressed: () {
-                            // final email = emailcontroller.text.trim();
-                            // final password = passwordcontroller.text;
-                            // final confirmPassword = confirmcontroller.text;
-                            //
-                            // if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
-                            //   _showError("All fields are required!");
-                            // } else if (password != confirmPassword) {
-                            //   _showError("Passwords do not match!");
-                            // } else if (!AppConstants.emailValidator.hasMatch(email)) {
-                            //   _showError("Please enter a valid email address!");
-                            // } else if (password.length < 6) {
-                            //   _showError("Password must be at least 6 characters!");
-                            // } else {
-                            //   // ✅ All validations passed
-                            //   Get.to(() => Forgot());
-                            // }
+                          AppButton(
+                            text: "Next",
+                            onPressed: () {
+                              // final email = emailcontroller.text.trim();
+                              // final password = passwordcontroller.text;
+                              // final confirmPassword = confirmcontroller.text;
+                              //
+                              // if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
+                              //   _showError("All fields are required!");
+                              // } else if (password != confirmPassword) {
+                              //   _showError("Passwords do not match!");
+                              // } else if (!AppConstants.emailValidator.hasMatch(email)) {
+                              //   _showError("Please enter a valid email address!");
+                              // } else if (password.length < 6) {
+                              //   _showError("Password must be at least 6 characters!");
+                              // } else {
+                              //   // ✅ All validations passed
+                              //   Get.to(() => Forgot());
+                              // }
 
-                              Get.to(()=> Forgot());
+                              if(_formKey.currentState!.validate()){
+                                Get.to(()=> Forgot());
+                              }
+                            },
+                          ),
+                          const SizedBox(height: 24),
+
+                          //==================> user log in or create section <===============//
+                          AlreadyHaveAccountText(
+                            onTap: (){
+
+                            Get.to(LoginScreen());
                           },
-                        ),
-                        const SizedBox(height: 24),
+                            fontSize: 16.sp,
+                            leadingText: 'Alredy have an account? ',
+                            actionText: 'Sign In',
+                            fontFamily: AppConstants.FONT_FAMILY,),
 
-                        //==================> user log in or create section <===============//
-                        AlreadyHaveAccountText(
-                          onTap: (){
+                          //=================> Or divider   <=======================//
 
-                          Get.to(LoginScreen());
-                        },
-                          fontSize: 16.sp,
-                          leadingText: 'Alredy have an account? ',
-                          actionText: 'Sign In',
-                          fontFamily: AppConstants.FONT_FAMILY,),
+                          OrDivider(),
 
-                        //=================> Or divider   <=======================//
+                          const SizedBox(height: 24),
 
-                        OrDivider(),
+                          //=================> gooogle buttton   <=======================//
 
-                        const SizedBox(height: 24),
-
-                        //=================> gooogle buttton   <=======================//
-
-                        GoogleButton(onPressed: () {
-                          print("Google account ");
-                        },),
-                        const  SizedBox(height: 24),
-                      ],
-                    ),
+                          GoogleButton(onPressed: () {
+                            print("Google account ");
+                          },),
+                          const  SizedBox(height: 24),
+                        ],
+                      ),
+            ),
                   ),
                ),
               ),
