@@ -11,6 +11,7 @@ import '../../base/SectionContanter/sectionContainer.dart';
 class DoctorProfile extends StatelessWidget {
   DoctorProfile({super.key});
 
+  List<String> item = ["Allergy Consultation","Annual Physical","Back Pain","Cold"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,6 +104,7 @@ class DoctorProfile extends StatelessWidget {
                   fontSize: 16,),
                 SizedBox(height: 8,),
                 SectionContainer(
+                  padding: EdgeInsets.symmetric(horizontal: 12,vertical: 12),
                     children: [
                        Row(
                 children: [
@@ -139,6 +141,168 @@ class DoctorProfile extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                   fontSize: 16,),
                 SizedBox(height: 8,),
+
+                SectionContainer(
+                  padding: EdgeInsets.symmetric(horizontal: 12,vertical: 12),
+                    children: [
+
+                      AppText(
+                        "Ramon Mendez-Sexto, MD",
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,),
+                      AppText(
+                        "1.5 mi • 12 Calle D, Guaynabo, PR, 00965",
+                        color: TextColors.neutral500,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14,),
+
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(8), // Adjust the radius as needed
+                        child: Image.asset(
+                          AppIcons.mapImage,
+                          height: 76.h,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+
+                      //============> divided the two user <=================//
+                      SizedBox(height: 16,),
+                      AppText(
+                        "Ramon Mendez-Sexto, MD",
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,),
+                      AppText(
+                        "1.5 mi • 12 Calle D, Guaynabo, PR, 00965",
+                        color: TextColors.neutral500,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14,),
+
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.asset(
+                          AppIcons.mapImage,
+                          height: 76.h,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      SizedBox(height: 16,),
+                      //==============> view more <===============//
+                      IntrinsicWidth(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AppText(
+                              "View more",
+                              color: TextColors.neutral900,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 14,
+                            ),
+                            Container(
+                              height: 1.1,
+                              color: TextColors.neutral900,
+                            ),
+                          ],
+                        ),
+                      ),
+
+
+                    ]),
+                SizedBox(height: 28,),
+                AppText(
+                  "Popular Visit Reasons",
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,),
+                SizedBox(height: 8,),
+                SectionContainer(
+                  padding: EdgeInsets.symmetric(horizontal: 12,vertical: 12),
+                    children: [
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(), // prevents conflict with SingleChildScrollView
+                        itemCount: item.length, // replace with actual count
+                        itemBuilder: (context, index) {
+                          final items = item[index];
+                          return Container(
+                            margin: const EdgeInsets.symmetric(vertical: 8),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.check,
+                                  color: TextColors.neutral500,
+                                  size: 16,),
+
+                                SizedBox(width: 6),
+                                AppText("${items}", fontSize: 14), // replace with actual data
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                      SizedBox(height: 10,),
+                      IntrinsicWidth(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AppText(
+                              "see more",
+                              color: TextColors.neutral900,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 12,
+                            ),
+                            Container(
+                              height: 1.5,
+                              color: TextColors.neutral900,
+                            ),
+                          ],
+                        ),
+                      ),
+
+                    ]),
+                SizedBox(height: 28,),
+                SectionContainer(
+                    padding: EdgeInsets.symmetric(horizontal: 12,vertical: 12),
+                    children: [
+                      AppText(
+                        "Doctor of Medicine (M.D.)",
+                        color: TextColors.neutral900,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                      ),
+                      AppText(
+                        "University of California, San Francisco",
+                        color: TextColors.neutral500,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14,
+                      ),
+                      AppText(
+                        "2008",
+                        color: TextColors.neutral500,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14,
+                      ),
+                      SizedBox(height: 16,),
+                      AppText(
+                        "Doctor of Medicine (M.D.)",
+                        color: TextColors.neutral900,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                      ),
+                      AppText(
+                        "University of California, San Francisco",
+                        color: TextColors.neutral500,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14,
+                      ),
+                      AppText(
+                        "2008",
+                        color: TextColors.neutral500,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14,
+                      ),
+                ]),
+                SizedBox(height: 28,),
               ],
             ),
           ),

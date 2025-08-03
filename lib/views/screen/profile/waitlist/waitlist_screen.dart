@@ -168,7 +168,7 @@ class WaitlistScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 5),
                       Text(
-                        formattedDate,
+                        "May 16, 2025",
                         style: TextStyle(
                           fontSize: 14,
                           fontFamily: "Inter",
@@ -178,7 +178,8 @@ class WaitlistScreen extends StatelessWidget {
                       ),
                       Spacer(),
                       SvgPicture.asset(AppIcons.clockIcon),
-                      const Text("10:25pm", style: TextStyle(
+                      SizedBox(width: 4,),
+                      Text("10:25pm", style: TextStyle(
                         fontSize: 14,
                         fontFamily: "Inter",
                         fontWeight: FontWeight.w500,
@@ -194,8 +195,8 @@ class WaitlistScreen extends StatelessWidget {
                           ),
                           SizedBox(width: 3),
                           AppText(
-                            "Confirmed",
-                            color: TextColors.neutral900,
+                            "Complete",
+                            color: Color(0xff38c976),
                             fontSize: 13,
                           ),
                         ],

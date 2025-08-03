@@ -48,6 +48,7 @@ class AppIcons{
   static String downloadIcon="assets/icons/download_circle.svg";
   static String locationcheckIcon="assets/icons/location_check.svg";
   static String heartSecondIcon="assets/icons/Heartes.svg";
+  static String mapImage="assets/image/map.png";
 
 
 

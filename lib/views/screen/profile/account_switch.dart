@@ -24,14 +24,14 @@ class _AccountBottomSheetState extends State<AccountBottomSheet> {
       "name": "Kamal",
       "label": "Caregiver",
       "avatar": "Ka",
-      "avatarColor":  Colors.brown,
+      "avatarColor":  Colors.white,
       "labelColor":BorderColors.warning50,
     },
     {
       "name": "Kamal",
       "label": "Caregiver",
       "avatar": "Ka",
-      "avatarColor":  Colors.brown,
+      "avatarColor":  Colors.white,
       "labelColor": BorderColors.warning50,
     },
   ];
@@ -82,8 +82,8 @@ class _AccountBottomSheetState extends State<AccountBottomSheet> {
             name: 'Mahmud',
             label: 'Personal',
             avatar: 'Ma',
-            avatarColor: Appcolors.action,
-            labelColor: Appcolors.action,
+            avatarColor: Appcolors.primary,
+            labelColor: Appcolors.primary,
           ),
           const SizedBox(height: 8),
           const Align(
@@ -183,12 +183,13 @@ class _AccountTile extends StatelessWidget {
           Row(
             children: [
               CircleAvatar(
-                backgroundColor: avatarColor,
+                backgroundColor: Colors.white,
                 child: Text(
                   avatar,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.brown), // visible on white background
                 ),
               ),
+
               const SizedBox(width: 8),
               Text(name),
             ],

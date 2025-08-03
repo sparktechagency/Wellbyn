@@ -120,7 +120,7 @@ class ChekinAppointment extends StatelessWidget {
                 fontSize: 16,
                 color: TextColors.neutral900,
               ),
-        
+              SizedBox(height: 8),
               Obx(() => Wrap(
                 spacing: 16,
                 runSpacing: 8,
@@ -249,7 +249,7 @@ class ChekinAppointment extends StatelessWidget {
             child: Text(
               label,
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 16.sp,
                 fontWeight: FontWeight.w500,
                 fontFamily: "Inter",
                 color: TextColors.neutral900,
@@ -310,8 +310,9 @@ class ChekinAppointment extends StatelessWidget {
             // Added Expanded to prevent overflow and better text handling
             child: Text(
               title,
+              maxLines: 1,
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 16.sp,
                 fontWeight: FontWeight.w500,
                 fontFamily: "Inter",
                 color: TextColors.neutral900,

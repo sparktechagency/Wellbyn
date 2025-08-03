@@ -5,6 +5,7 @@ class DropdownController extends GetxController {
   RxString relationShip = 'Father'.obs;
   RxString selectedValuePermission = 'Partal control'.obs;
   RxString maritialValue  = 'Select state'.obs;
+  RxString categoySelected  = 'Select'.obs;
   RxString bloodGroup  = 'None'.obs;
   RxString state  = 'Select'.obs;
 

@@ -100,7 +100,7 @@ class EditUploadDocumention extends StatelessWidget {
                     height: 37.h,
                     onTap: (){},
                     textColor: Appcolors.error700,
-                    text: "Delete document")
+                    text: "Delete Document")
               ],
             ),
             SizedBox(height: 29,),
@@ -110,7 +110,7 @@ class EditUploadDocumention extends StatelessWidget {
                 label: "Document Name",
                 controller: docname,
                 maxline: 1,
-                hintText: "document name",
+                hintText: "",
               ),
               SizedBox(height: 29,),
               LabeledDropdownFielded(
@@ -124,7 +124,7 @@ class EditUploadDocumention extends StatelessWidget {
                   "Separated",
                   "Unknown",
                 ],
-                selectedValue: dropdownController.maritialValue,
+                selectedValue: dropdownController.categoySelected,
                 onChanged: (value) {
                   // Optional additional logic
                   print("Selected: $value");

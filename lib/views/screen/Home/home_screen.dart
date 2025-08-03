@@ -121,19 +121,19 @@ class HomeScreen extends StatelessWidget {
               Nextappointmentdoctor(),
               SizedBox(height: 15,),
 
-              RowWithTitleAndAction(
-                title: "Available Doctor",
-                actionText: "View all",
-                onTap: () {
-                  print("View all tapped");
-                },
-                titleColor: TextColors.neutral900,
-                actionColor: TextColors.action,
-                titleFontSize: 20,
-                actionFontSize: 16,
-              ),
-
-              SizedBox(height: 15,),
+              // RowWithTitleAndAction(
+              //   title: "Available Doctor",
+              //   actionText: "View all",
+              //   onTap: () {
+              //     print("View all tapped");
+              //   },
+              //   titleColor: TextColors.neutral900,
+              //   actionColor: TextColors.action,
+              //   titleFontSize: 20,
+              //   actionFontSize: 16,
+              // ),
+              //
+               SizedBox(height: 16,),
 
               //================> available doctor list <=====================//
 
@@ -542,7 +542,7 @@ class HomeScreen extends StatelessWidget {
                       ],
                     )
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 10),
 
                 ],
               ),

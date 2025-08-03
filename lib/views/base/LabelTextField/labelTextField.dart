@@ -714,8 +714,9 @@ class _CustomTextFieldedState extends State<CustomTextFielded> {
                 horizontal: widget.contentPaddingHorizontal ?? 8.w,
                 vertical: widget.contentPaddingVertical ?? 12.w,
               ),
-              fillColor: widget.filColor,
+              fillColor: widget.filColor ?? Appcolors.primary,
               prefixIcon: cachedPrefixIcon,
+              filled: true,
               suffixIcon: widget.isPassword
                   ? GestureDetector(
                 onTap: togglePassword,

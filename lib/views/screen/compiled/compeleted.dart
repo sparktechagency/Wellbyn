@@ -68,7 +68,8 @@ class Compeleted extends StatelessWidget {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          const Text(
+                           SizedBox(height: 4.h,),
+                           Text(
                             "Cardiology",
                             style: TextStyle(
                               fontSize: 14,
@@ -108,7 +109,7 @@ class Compeleted extends StatelessWidget {
                 child: Row(
                   children: [
                     const Text(
-                      "Las appointment time",
+                      "Last Appointment Time",
                       style: TextStyle(
                         fontSize: 13,
                         color: TextColors.neutral500,
@@ -139,13 +140,20 @@ class Compeleted extends StatelessWidget {
                       height: 16,
                     ),
                     const SizedBox(width: 5),
-                    const Text("16 May 2025"),
+                     AppText("May 16, 2025",fontWeight: FontWeight.w500,fontSize: 14.sp),
                     Spacer(),
-                    const Text("10:25pm"),
+                     Row(
+                       children: [
+                         SvgPicture.asset(AppIcons.clockIcon,width: 16.w,height: 16.h,),
+                         SizedBox(width: 2,),
+                         AppText("10:25 PM",fontWeight: FontWeight.w500,fontSize: 14.sp,),
+                       ],
+                     ),
                     Spacer(),
                     Row(
                       children: [
                         Icon(Icons.check,color:TextColors.success,size: 14,),
+                        SizedBox(width: 6,),
                         AppText("Complete",color:TextColors.success,fontSize: 14,),
                       ],
                     )
@@ -158,7 +166,7 @@ class Compeleted extends StatelessWidget {
                 child: Row(
                   children: [
                     const Text(
-                      "Upcoming Follow-up",
+                      "Upcoming Follow Up",
                       style: TextStyle(
                         fontSize: 14,
                         letterSpacing: 0.2,
@@ -166,15 +174,15 @@ class Compeleted extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    const Text(
-                      "- In 7 days",
-                      style: TextStyle(
-                        fontSize: 14,
-                        letterSpacing: 0.2,
-                        color: TextColors.action,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
+                    // const Text(
+                    //   "- In 7 days",
+                    //   style: TextStyle(
+                    //     fontSize: 14,
+                    //     letterSpacing: 0.2,
+                    //     color: TextColors.action,
+                    //     fontWeight: FontWeight.w500,
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -182,7 +190,7 @@ class Compeleted extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: AppButton(
-                  text: "View details",
+                  text: "View Details",
                   onPressed: () {
                    Get.toNamed('/appoinetment_details',id: NavIds.appointment);
 

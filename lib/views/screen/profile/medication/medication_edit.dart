@@ -60,7 +60,6 @@ class _MedicationEditState extends State<MedicationEdit> {
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Container(
-
           width: double.infinity,
           margin: EdgeInsets.only(left: 20,right: 20,bottom: 25),
           padding: EdgeInsets.all(12),
@@ -94,7 +93,7 @@ class _MedicationEditState extends State<MedicationEdit> {
               AppText("Reminder Time", fontSize: 16, color: TextColors.neutral900),
               SizedBox(height: 8),
 
-            Obx((){
+               Obx((){
             return ListView.builder(
               itemCount: _controller.reminderItems.length,
               shrinkWrap: true,

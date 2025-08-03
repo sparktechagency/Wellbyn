@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:wellbyn/utils/app_constants.dart';
+import 'package:wellbyn/views/base/Apptext/app_text.dart';
 import 'package:wellbyn/views/screen/auth/login_screen.dart';
 import 'package:wellbyn/views/screen/profile/account_switch.dart';
 import 'package:wellbyn/views/screen/profile/personalinfo/personal_info.dart';
@@ -348,21 +349,21 @@ class Setting extends StatelessWidget {
          "name": "Sakib",
          "label": "Caregiver",
          "avatar": "Sa",
-         "avatarColor": Colors.brown,
+         "avatarColor": Colors.white,
          "labelColor": BorderColors.warning50,
        },
        {
          "name": "Kamal",
          "label": "Caregiver",
          "avatar": "Ka",
-         "avatarColor": Colors.brown,
+         "avatarColor": Colors.white,
          "labelColor": BorderColors.warning50,
        },
        {
          "name": "Kamal",
          "label": "Caregiver",
          "avatar": "Ka",
-         "avatarColor": Colors.brown,
+         "avatarColor": Colors.white,
          "labelColor": BorderColors.warning50,
        },
      ];
@@ -404,7 +405,7 @@ class Setting extends StatelessWidget {
                color: TextColors.neutral900,
              ),
            ),
-           const SizedBox(height: 12),
+           const SizedBox(height: 16),
            const Align(
              alignment: Alignment.centerLeft,
              child: Text(
@@ -417,14 +418,46 @@ class Setting extends StatelessWidget {
                ),
              ),
            ),
-           buildAccountTile(
-             name: 'Mahmud',
-             label: 'Personal',
-             avatar: 'Ma',
-             avatarColor: Appcolors.action,
-             labelColor: Appcolors.action,
-           ),
            const SizedBox(height: 8),
+            Container(
+           padding: const EdgeInsets.all(12),
+           decoration: BoxDecoration(
+             color: Appcolors.primary50,
+             borderRadius: BorderRadius.circular(8),
+           ),
+           child: Row(
+             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+             children: [
+               Row(
+                 children: [
+                   CircleAvatar(
+                     backgroundColor: Colors.white,
+                     child: Text(
+                       "M",
+                       style: const TextStyle(color: Appcolors.action),
+                     ),
+                   ),
+                   const SizedBox(width: 8),
+                   AppText("Mahmud",fontSize: 16,color: Appcolors.action,),
+                 ],
+               ),
+               Container(
+                 padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+                 decoration: BoxDecoration(
+                   borderRadius: BorderRadius.circular(20),
+                 ),
+                 child: Text(
+                   "Personal",
+                   style: TextStyle(
+                     color: Appcolors.action,
+                     fontWeight: FontWeight.w600,
+                   ),
+                 ),
+               ),
+             ],
+           ),
+         ),
+           const SizedBox(height: 16),
            const Align(
              alignment: Alignment.centerLeft,
              child: Text(
@@ -437,6 +470,7 @@ class Setting extends StatelessWidget {
                ),
              ),
            ),
+           const SizedBox(height: 8),
            SizedBox(
              height: 140,
              child: ListView.builder(
@@ -507,6 +541,7 @@ class Setting extends StatelessWidget {
                ),
              ),
            ),
+           const SizedBox(height: 12),
          ],
        ),
      );
@@ -523,7 +558,7 @@ class Setting extends StatelessWidget {
        margin: const EdgeInsets.symmetric(vertical: 4),
        padding: const EdgeInsets.all(12),
        decoration: BoxDecoration(
-         color: label == 'Caregiver' ? Colors.orange.shade50 : Appcolors.actionHoverLight,
+         color: BorderColors.warning50,
          borderRadius: BorderRadius.circular(8),
        ),
        child: Row(
@@ -533,25 +568,30 @@ class Setting extends StatelessWidget {
              children: [
                CircleAvatar(
                  backgroundColor: avatarColor,
-                 child: Text(
+                 child: AppText(
                    avatar,
-                   style: const TextStyle(color: Colors.white),
-                 ),
+                     fontSize: 16,
+                     fontWeight: FontWeight.w500,
+                       color:TextColors.warning600),
                ),
                const SizedBox(width: 8),
-               Text(name),
+       AppText(
+           name,
+           fontSize: 16,
+           fontWeight: FontWeight.w500,
+           color:TextColors.warning600),
              ],
            ),
            Container(
              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
              decoration: BoxDecoration(
-               border: Border.all(color: avatarColor),
+               // border: Border.all(color: avatarColor),
                borderRadius: BorderRadius.circular(20),
              ),
              child: Text(
                label,
                style: TextStyle(
-                 color: avatarColor,
+                 color: TextColors.warning600,
                  fontWeight: FontWeight.w600,
                ),
              ),

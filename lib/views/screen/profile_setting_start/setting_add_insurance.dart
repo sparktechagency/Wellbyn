@@ -68,7 +68,7 @@ class SettingAddInsurance extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
-        _buildSectionContainer(children: [
+
 
           LabeledDropdownFielded(
             label: "Insurance Name",
@@ -257,7 +257,7 @@ class SettingAddInsurance extends StatelessWidget {
           Obx(() => LabeledTextFielded(
             maxline: 1,
             borderColor: TextColors.neutral200,
-            label: "Date of birth ",
+            label: "Date of Birth ",
             controller: TextEditingController(
               text: _controller.formattedDate.value,
             ),
@@ -268,7 +268,7 @@ class SettingAddInsurance extends StatelessWidget {
             hintText: "mm/dd/yyyy",
           ),),
 
-
+          SizedBox(height: 24.h,),
 
           AppText(
             "Insuranced Card",
@@ -385,7 +385,7 @@ class SettingAddInsurance extends StatelessWidget {
                 ),
             ],
           ),
-          SizedBox(height: 24.h),
+          SizedBox(height: 32.h),
           CustomButton(
             fontSize: 16.sp,
             textColor: Appcolors.primary,
@@ -393,11 +393,10 @@ class SettingAddInsurance extends StatelessWidget {
             onTap: () {},
             text: "Save Change",
           ),
-
+            SizedBox(height: 50.h),
         ]),
 
-          ],
-        ),
+
       ),
     );
   }
