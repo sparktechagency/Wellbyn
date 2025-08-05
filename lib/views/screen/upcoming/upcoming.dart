@@ -7,7 +7,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:wellbyn/utils/app_colors.dart';
 import 'package:wellbyn/utils/nab_ids.dart';
 import 'package:wellbyn/views/base/Apptext/app_text.dart';
-import 'package:wellbyn/views/base/icon_text_button.dart';
+import 'package:wellbyn/views/base/iconsTextbutton/icon_text_button.dart';
 
 import '../../../controllers/profile_setting_controller.dart';
 import '../../../models/allergies.dart';

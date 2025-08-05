@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:wellbyn/utils/app_icons.dart';
 
 import '../../../utils/app_colors.dart';
-import '../../base/confrim_screen.dart';
+import '../../base/comfirmscreen/confrim_screen.dart';
 import 'Hipaa_Consent.dart';
 class PasswordChanged extends StatelessWidget {
   const PasswordChanged({super.key});

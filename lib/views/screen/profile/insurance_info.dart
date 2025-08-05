@@ -7,7 +7,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:signature/signature.dart';
 import 'package:wellbyn/controllers/insurance_controller.dart';
 import 'package:wellbyn/views/base/Apptext/app_text.dart';
-import 'package:wellbyn/views/base/icon_text_button.dart';
+import 'package:wellbyn/views/base/iconsTextbutton/icon_text_button.dart';
 
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_icons.dart';

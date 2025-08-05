@@ -8,13 +8,13 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:wellbyn/views/base/Apptext/app_text.dart';
-import 'package:wellbyn/views/base/custom_button.dart';
+import 'package:wellbyn/views/base/custombutton/custom_button.dart';
 import 'package:wellbyn/views/screen/profile/add_insurance.dart';
 
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_icons.dart';
 import '../../../../utils/nab_ids.dart';
-import '../../../base/icon_text_button.dart';
+import '../../../base/iconsTextbutton/icon_text_button.dart';
 import 'medicationsetting.dart';
 
 class MedicationEdit extends StatefulWidget {

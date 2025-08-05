@@ -6,7 +6,7 @@ import 'package:wellbyn/utils/app_colors.dart';
 import 'package:wellbyn/utils/app_icons.dart';
 import 'package:wellbyn/utils/nab_ids.dart';
 import 'package:wellbyn/views/base/Apptext/app_text.dart';
-import '../../../../controllers/caregiver_controller.dart';
+import '../../../../controllers/caregivermode/caregiver_controller.dart';
 import '../base/logout.dart';
 
 

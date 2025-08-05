@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:wellbyn/utils/app_icons.dart';
-import 'package:wellbyn/views/base/custom_button.dart';
-import 'package:wellbyn/views/base/icon_text_button.dart';
+import 'package:wellbyn/views/base/custombutton/custom_button.dart';
+import 'package:wellbyn/views/base/iconsTextbutton/icon_text_button.dart';
 
 import '../../../../controllers/TextField/textfield_Controller.dart';
 import '../../../../controllers/profile_setting/personal_info.dart';

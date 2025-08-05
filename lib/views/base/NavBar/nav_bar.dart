@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/base_controller.dart';
-import '../../utils/app_colors.dart';
+import '../../../controllers/baseController/base_controller.dart';
+import '../../../utils/app_colors.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({super.key});

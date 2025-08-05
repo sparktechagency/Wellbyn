@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:wellbyn/controllers/stepcontroller.dart';
+import 'package:wellbyn/controllers/stepController/stepcontroller.dart';
 import 'package:wellbyn/utils/app_colors.dart';
 import 'package:wellbyn/utils/app_constants.dart';
 import 'package:wellbyn/utils/app_icons.dart';

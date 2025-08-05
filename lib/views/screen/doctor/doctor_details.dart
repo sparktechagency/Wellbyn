@@ -32,10 +32,10 @@ import 'package:get/get.dart';
 import 'package:wellbyn/views/screen/doctor/doctor.dart';
 import 'package:wellbyn/views/screen/doctro_message/doctor_message.dart';
 
-import '../../../controllers/date_picker_controller.dart';
+import '../../../controllers/datePicker/date_picker_controller.dart';
 import '../../../controllers/doctor.dart';
 import '../../../utils/nab_ids.dart';
-import '../../base/icon_text_button.dart';
+import '../../base/iconsTextbutton/icon_text_button.dart';
 
 class DoctorDetails extends StatelessWidget {
   final String doctorId;

@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-import '../../../controllers/role_controller.dart';
+import '../../../controllers/Role/role_controller.dart';
 import '../../../utils/app_colors.dart';
 import '../../base/AppButton/app_button.dart';
 import 'create_acount_screen.dart';

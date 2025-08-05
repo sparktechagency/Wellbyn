@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:wellbyn/controllers/stepcontroller.dart';
+import 'package:wellbyn/controllers/stepController/stepcontroller.dart';
 import 'package:wellbyn/utils/app_colors.dart';
 import 'package:wellbyn/utils/app_constants.dart';
 import 'package:wellbyn/utils/app_icons.dart';
@@ -12,7 +12,6 @@ import 'package:wellbyn/views/screen/profile_setting_start/setting_insurance_inf
 import 'package:wellbyn/views/screen/profile_setting_start/setting_personal_info.dart';
 import 'package:wellbyn/views/screen/profile_setting_start/widget/circle.dart';
 import '../../../controllers/profile_setting/medical_info.dart';
-import '../../../controllers/profile_setting_controller.dart';
 import 'package:wellbyn/models/medication.dart';
 import 'package:wellbyn/models/allergies.dart';
 import '../../../controllers/scrollController.dart';
@@ -21,7 +20,7 @@ import '../profile/base/madicalinfoheader.dart';
 
 
 class SettingMedicalInfo extends StatefulWidget {
-  SettingMedicalInfo({Key? key}) : super(key: key);
+  const SettingMedicalInfo({super.key});
 
   @override
   _MedicalInformationScreenState createState() =>
@@ -29,7 +28,7 @@ class SettingMedicalInfo extends StatefulWidget {
 }
 
 class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
-  OnboradingProfileMedication _controller = Get.put(OnboradingProfileMedication());
+  final OnboradingProfileMedication _controller = Get.put(OnboradingProfileMedication());
   late ScrollControllerGetX scroll = Get.put(ScrollControllerGetX());
   late final StepController controller;
 

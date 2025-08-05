@@ -725,7 +725,7 @@ import 'package:wellbyn/utils/app_constants.dart';
 import 'package:wellbyn/utils/app_icons.dart';
 import 'package:wellbyn/views/screen/doctor/doctor_details.dart';
 
-import '../../../controllers/date_picker_controller.dart';
+import '../../../controllers/datePicker/date_picker_controller.dart';
 import '../../../controllers/doctor.dart';
 import '../../../controllers/dotor_details.dart';
 import '../../../controllers/tabcontroller.dart';

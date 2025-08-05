@@ -6,13 +6,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:wellbyn/controllers/profile_setting/personal_info.dart';
-import 'package:wellbyn/controllers/profile_setting_controller.dart';
-import 'package:wellbyn/controllers/scrollController.dart';
 import 'package:wellbyn/views/screen/profile_setting_start/setting_medical_info.dart';
 import 'package:wellbyn/views/screen/profile_setting_start/widget/circle.dart';
 import '../../../controllers/TextField/textfield_Controller.dart';
 import '../../../controllers/dotted_boder.dart';
-import '../../../controllers/stepcontroller.dart';
+import '../../../controllers/scrollController.dart';
+import '../../../controllers/stepController/stepcontroller.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_constants.dart';
 import '../../../utils/app_icons.dart';
@@ -23,7 +22,7 @@ import '../../base/LableDropDownFielded/lableDropDownFielded.dart';
 enum Gender { male, female, other }
 
 class SettingPersonalInfo extends StatefulWidget {
-  SettingPersonalInfo({super.key});
+  const SettingPersonalInfo({super.key});
 
 
   @override
@@ -77,7 +76,7 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
           key: const ValueKey('progress'),
           child: _buildProgressIndicator(),
         )
-            : Container(
+            :Container(
           key: const ValueKey('empty'),
           height: 0,
           width: double.infinity,

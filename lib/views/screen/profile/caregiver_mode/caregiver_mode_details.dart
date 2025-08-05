@@ -11,7 +11,7 @@ import '../../../../utils/app_constants.dart';
 import '../../../../utils/nab_ids.dart';
 import '../../../base/Apptext/app_text.dart';
 import '../../../base/LabelTextField/labelTextField.dart';
-import '../../../base/icon_text_button.dart';
+import '../../../base/iconsTextbutton/icon_text_button.dart';
 class CaregiverModeDetails extends StatelessWidget {
    CaregiverModeDetails({super.key});
 

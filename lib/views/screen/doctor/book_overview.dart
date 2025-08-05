@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
 import 'package:wellbyn/utils/app_constants.dart';
-import 'package:wellbyn/views/base/custom_button.dart';
+import 'package:wellbyn/views/base/custombutton/custom_button.dart';
 
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_icons.dart';

@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:wellbyn/utils/app_constants.dart';
 
-import '../../utils/app_colors.dart';
+import '../../../utils/app_colors.dart';
 
 class IconTextButton extends StatelessWidget {
   final VoidCallback onTap;

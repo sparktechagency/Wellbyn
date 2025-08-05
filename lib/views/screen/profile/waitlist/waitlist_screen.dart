@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
-import 'package:wellbyn/views/base/custom_button.dart';
+import 'package:wellbyn/views/base/custombutton/custom_button.dart';
 
 import '../../../../controllers/dotted_boder.dart';
 import '../../../../utils/app_colors.dart';

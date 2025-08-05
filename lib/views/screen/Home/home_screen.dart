@@ -9,8 +9,8 @@ import 'package:signature/signature.dart';
 import 'package:wellbyn/utils/app_colors.dart';
 import 'package:wellbyn/utils/app_icons.dart';
 import 'package:wellbyn/views/base/Apptext/app_text.dart';
-import 'package:wellbyn/views/base/custom_button.dart';
-import 'package:wellbyn/views/base/icon_text_button.dart';
+import 'package:wellbyn/views/base/custombutton/custom_button.dart';
+import 'package:wellbyn/views/base/iconsTextbutton/icon_text_button.dart';
 import 'package:wellbyn/views/screen/doctor/doctor_details.dart';
 
 import '../../../utils/nab_ids.dart';

@@ -5,9 +5,9 @@ import 'package:wellbyn/nav/doctor.dart';
 import 'package:wellbyn/nav/home_nav.dart';
 import 'package:wellbyn/nav/profile_nav.dart';
 import 'package:wellbyn/views/screen/Home/home_screen.dart';
-import '../../controllers/base_controller.dart';
+import '../../controllers/baseController/base_controller.dart';
 
-import '../base/nav_bar.dart';
+import '../base/NavBar/nav_bar.dart';
 
 
 // STEP 1: Optimized BaseScreen with lazy loading and widget caching

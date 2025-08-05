@@ -7,7 +7,7 @@ import 'package:wellbyn/themes/light_theme.dart';
 import 'package:wellbyn/utils/app_constants.dart';
 import 'package:wellbyn/utils/message.dart';
 import 'package:wellbyn/utils/token_service.dart';
-import 'controllers/base_controller.dart';
+import 'controllers/baseController/base_controller.dart';
 import 'controllers/localization_controller.dart';
 import 'controllers/theme_controller.dart';
 import 'helpers/di.dart' as di;

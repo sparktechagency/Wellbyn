@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
-import 'package:wellbyn/controllers/caregiver_controller.dart';
+import 'package:wellbyn/controllers/caregivermode/caregiver_controller.dart';
 import 'package:wellbyn/controllers/profile_setting/personal_info.dart';
 import 'package:wellbyn/utils/app_icons.dart';
 import 'package:get/get.dart';
 import 'package:wellbyn/utils/nab_ids.dart';
-import 'package:wellbyn/views/base/custom_button.dart';
+import 'package:wellbyn/views/base/custombutton/custom_button.dart';
 import '../../../../controllers/TextField/textfield_Controller.dart';
 import '../../../../controllers/profile_setting_controller.dart';
 import '../../../../utils/app_colors.dart';
@@ -15,7 +15,7 @@ import '../../../../utils/app_constants.dart';
 import '../../../base/Apptext/app_text.dart';
 import '../../../base/LabelTextField/labelTextField.dart';
 import '../../../base/LableDropDownFielded/lableDropDownFielded.dart';
-import '../../../base/icon_text_button.dart';
+import '../../../base/iconsTextbutton/icon_text_button.dart';
 
 class CaregiverEdits extends StatelessWidget {
   CaregiverEdits({super.key});

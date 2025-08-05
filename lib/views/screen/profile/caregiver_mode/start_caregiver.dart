@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:wellbyn/utils/nab_ids.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_icons.dart';
-import '../../../base/confrim_screen.dart';
+import '../../../base/comfirmscreen/confrim_screen.dart';
 
 class StartCaregiver extends StatelessWidget {
   const StartCaregiver({super.key});
