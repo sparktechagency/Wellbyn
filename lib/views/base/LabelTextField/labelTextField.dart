@@ -17,7 +17,7 @@ class LabeledTextFielded extends StatelessWidget {
   final String? suffixSvgAsset;
   final Color? suffixSvgColor;
   final String? prefixIcon;
-  final Color? borderColor; // Add this
+  final Color? borderColor;
   final int? maxline;
   final bool next;
   final VoidCallback? onTap;
@@ -135,9 +135,11 @@ class _CustomTextFieldedState extends State<CustomTextFielded> {
   late bool obscureText;
   late FocusNode _focusNode;
 
-  bool _touched = false; // Start as false (not touched)
+  bool _hasTyped = false; // Only true when user has actually typed something
   bool _hasError = false;
   bool _isValid = false;
+  bool _shouldShowError = false; // Controls when to show error visually
+  bool _hasTapped = false; // Track if field has been tapped
 
   @override
   void initState() {
@@ -152,36 +154,57 @@ class _CustomTextFieldedState extends State<CustomTextFielded> {
     final text = widget.controller.text.trim();
     final error = validator(text) != null;
     _isValid = text.isNotEmpty && !error;
-    _hasError =
-        error &&
-        text.isNotEmpty; // Only show error if user has entered something
+    _hasError = false; // Start with no visual error
+    _shouldShowError = false;
 
-    // Listen to controller changes and update error state
+    // Listen to controller changes
     widget.controller.addListener(() {
       final text = widget.controller.text.trim();
       final error = validator(text) != null;
       final valid = text.isNotEmpty && !error;
 
-      if (valid != _isValid || error != _hasError) {
-        setState(() {
-          _isValid = valid;
-          _hasError =
-              error; // Remove the condition here - always update error state
-        });
-      }
+      setState(() {
+        _isValid = valid;
+
+        // Show error only when field has been typed in and is now empty and unfocused
+        if (_hasTyped && text.isEmpty && !_focusNode.hasFocus) {
+          _shouldShowError = true;
+          _hasError = true;
+        }
+        // Hide error when user enters valid text
+        else if (text.isNotEmpty && !error) {
+          _shouldShowError = false;
+          _hasError = false;
+        }
+        // Keep error visible if text is still invalid
+        else if (_hasTyped && text.isNotEmpty && error) {
+          _shouldShowError = true;
+          _hasError = true;
+        }
+      });
     });
 
-    // Update touched state when focus changes
+    // Handle focus changes
     _focusNode.addListener(() {
-      if (!_focusNode.hasFocus && !_touched) {
+      if (!_focusNode.hasFocus) {
+        // Field lost focus - reset tap state
         setState(() {
-          _touched = true;
+          _hasTapped = false;
         });
-      }
 
-      // Trigger rebuild when focus changes to update shadow/background
+        if (_hasTyped) {
+          final text = widget.controller.text.trim();
+          if (text.isEmpty) {
+            setState(() {
+              _shouldShowError = true;
+              _hasError = true;
+            });
+          }
+        }
+      }
       setState(() {});
     });
+
   }
 
   @override
@@ -191,13 +214,16 @@ class _CustomTextFieldedState extends State<CustomTextFielded> {
   }
 
   String? _validate(String? value) {
+    // Always return the actual validation result for form validation
     final error = widget.validator?.call(value) ?? defaultValidator(value);
 
-    // Update error state immediately when validation runs
+    // But update visual error state based on user interaction
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) {
+      if (mounted && error != null) {
         setState(() {
-          _hasError = error != null;
+          _shouldShowError = true;
+          _hasError = true;
+          _hasTyped = true; // Form validation means user tried to submit
         });
       }
     });
@@ -223,19 +249,19 @@ class _CustomTextFieldedState extends State<CustomTextFielded> {
 
   @override
   Widget build(BuildContext context) {
-    // Shadow logic: Show shadow by default, hide when touched OR has error
-    // BUT show shadow again if field is valid and not focused
-    final bool showShadow =
-        (!_touched && !_hasError) ||
-        (_isValid && !_focusNode.hasFocus && !_hasError);
 
-    // Background color logic: Always transparent when touched or has error
-    // BUT show white background again if field is valid and not focused
-    final Color backgroundColor =
-        (_touched || _hasError) &&
-            !(_isValid && !_focusNode.hasFocus && !_hasError)
-        ? Colors.transparent
-        : (widget.filColor ?? Colors.white);
+    final bool hasFocus = _focusNode.hasFocus;
+    final bool hasText = widget.controller.text.trim().isNotEmpty;
+
+
+    final bool showShadow = (!hasFocus && !_hasTyped && !_hasTapped && !hasText) ||
+        (_isValid && !hasFocus && hasText);
+
+
+    final Color backgroundColor = showShadow
+        ? (widget.filColor ?? Colors.white)
+        : Colors.transparent;
+
 
     Widget? cachedPrefixIcon;
     if (widget.prefixIcon != null) {
@@ -277,13 +303,13 @@ class _CustomTextFieldedState extends State<CustomTextFielded> {
             borderRadius: BorderRadius.circular(8.r),
             boxShadow: showShadow
                 ? [
-                    BoxShadow(
-                      color: ShadowColor.shadowColors1.withOpacity(0.10),
-                      blurRadius: 4,
-                      spreadRadius: 0,
-                      offset: const Offset(0, 3),
-                    ),
-                  ]
+              BoxShadow(
+                color: ShadowColor.shadowColors1.withOpacity(0.10),
+                blurRadius: 4,
+                spreadRadius: 0,
+                offset: const Offset(0, 3),
+              ),
+            ]
                 : [],
           ),
           child: TextFormField(
@@ -295,28 +321,41 @@ class _CustomTextFieldedState extends State<CustomTextFielded> {
             readOnly: widget.readOnly ?? false,
             enabled: widget.enabled ?? true,
             autovalidateMode:
-                widget.autovalidateMode ?? AutovalidateMode.onUserInteraction,
+            widget.autovalidateMode ?? AutovalidateMode.onUserInteraction,
             textInputAction: widget.next
                 ? TextInputAction.next
                 : TextInputAction.done,
             maxLines: widget.isPassword ? 1 : widget.maxLines,
             cursorColor: TextColors.neutral900,
             onTap: () {
-              // Mark as touched when user taps
-              if (!_touched) {
+              // Mark as tapped when user taps - this removes white background
+              if (!_hasTapped) {
                 setState(() {
-                  _touched = true;
+                  _hasTapped = true;
                 });
               }
               widget.onTap?.call();
             },
             onChanged: (value) {
-              // Mark as touched when user starts typing
-              if (!_touched) {
+              // Mark as typed when user actually enters text
+              if (!_hasTyped && value.trim().isNotEmpty) {
                 setState(() {
-                  _touched = true;
+                  _hasTyped = true;
                 });
               }
+
+              // Only hide error when user enters VALID text
+              final trimmedValue = value.trim();
+              if (trimmedValue.isNotEmpty) {
+                final error = (widget.validator?.call(trimmedValue) ?? defaultValidator(trimmedValue)) != null;
+                if (!error && _shouldShowError) {
+                  setState(() {
+                    _shouldShowError = false;
+                    _hasError = false;
+                  });
+                }
+              }
+
               widget.onChanged?.call(value);
             },
             validator: _validate,
@@ -343,20 +382,20 @@ class _CustomTextFieldedState extends State<CustomTextFielded> {
               prefixIcon: cachedPrefixIcon,
               suffixIcon: widget.isPassword
                   ? GestureDetector(
-                      onTap: togglePassword,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: SvgPicture.asset(
-                          obscureText ? AppIcons.lockIcon : AppIcons.lockIcon,
-                          width: 20.w,
-                          height: 20.w,
-                          colorFilter: const ColorFilter.mode(
-                            TextColors.neutral500,
-                            BlendMode.srcIn,
-                          ),
-                        ),
-                      ),
-                    )
+                onTap: togglePassword,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: SvgPicture.asset(
+                    obscureText ? AppIcons.lockIcon : AppIcons.lockIcon,
+                    width: 20.w,
+                    height: 20.w,
+                    colorFilter: const ColorFilter.mode(
+                      TextColors.neutral500,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                ),
+              )
                   : cachedSuffixIcon ?? widget.suffixIcon,
               focusedBorder: focusedBorder,
               enabledBorder: enabledBorder,

@@ -1,8 +1,7 @@
-import 'dart:typed_data'; // Add this import at the top of your file
+import 'dart:typed_data';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -37,7 +36,7 @@ class ProfileSettingController extends GetxController {
 
   void selectGender(String gender) {
     selectedGender.value = gender;
-    print(selectedGender);
+    //print(selectedGender);
   }
 
   final RxString selectedMarital = ''.obs;
@@ -97,7 +96,7 @@ class ProfileSettingController extends GetxController {
       format: CompressFormat.jpeg,
     );
     if (result == null) {
-      print("⚠️ Compression failed. Using original image.");
+     // print("⚠️ Compression failed. Using original image.");
       return file;
     }
     return File(result.path);

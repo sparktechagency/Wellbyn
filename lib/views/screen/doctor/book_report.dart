@@ -23,7 +23,7 @@ import 'package:wellbyn/views/screen/doctor/widget/animationwave.dart';
 
 import '../../../controllers/TextField/textfield_Controller.dart';
 import '../../../controllers/file_upload_controller.dart';
-import '../../../controllers/speed_controller.dart';
+import '../../../controllers/speech_controller.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/nab_ids.dart';
 import 'package:file_picker/file_picker.dart';

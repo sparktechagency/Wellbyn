@@ -9,7 +9,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:wellbyn/views/base/Apptext/app_text.dart';
 import 'package:wellbyn/views/base/custombutton/custom_button.dart';
-import 'package:wellbyn/views/screen/profile/add_insurance.dart';
+import 'package:wellbyn/views/screen/profile/Insurance/add_insurance.dart';
 
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_icons.dart';

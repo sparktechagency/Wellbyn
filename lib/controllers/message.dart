@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 class ChatController extends GetxController {
   var message = <Map<String, dynamic>>[].obs;

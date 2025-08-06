@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wellbyn/views/screen/Home/home_screen.dart';
 import 'package:wellbyn/views/screen/appointment/appointment.dart';
 import 'package:wellbyn/views/screen/compiled/appoinetment_details.dart';
 import 'package:wellbyn/views/screen/doctor/doctor_profile.dart';
@@ -9,7 +8,7 @@ import '../utils/nab_ids.dart';
 import '../views/screen/upcoming/chekIn_appointment.dart';
 
 class AppointmentNav extends StatelessWidget {
-  AppointmentNav({super.key});
+  const AppointmentNav({super.key});
 
   @override
   Widget build(BuildContext context) {

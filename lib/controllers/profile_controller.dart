@@ -38,7 +38,7 @@ class ProfileController extends GetxController{
       format: CompressFormat.jpeg,
     );
     if(result == null){
-      print("⚠️ Compression failed. Using original image.");
+      //print("⚠️ Compression failed. Using original image.");
       return file;
     }
     return File(result.path);

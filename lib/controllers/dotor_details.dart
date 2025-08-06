@@ -56,7 +56,7 @@ class DoctorDetailsController extends GetxController{
 
     } catch (e) {
       // Handle error
-      print('Error loading doctor data: $e');
+      //print('Error loading doctor data: $e');
     } finally {
       isloading(false);
     }

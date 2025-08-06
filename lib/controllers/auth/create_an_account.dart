@@ -35,17 +35,17 @@ class CreateAnAccount extends GetxController {
       );
 
       if(response.statusCode ==200){
-        print("body:${response.body}");
+        //print("body:${response.body}");
         Get.snackbar("Success", "Accoun created sucessfully!");
 
       }else{
-        print("Error:${response.body}");
+        //print("Error:${response.body}");
       }
 
     }catch(e){
       //=======> when user not the register progress indecator off<===========//
       isLoading.value = false;
-      print("Error during register:$e");
+      //print("Error during register:$e");
       Get.snackbar("Error", "An unexpected error occurred");
 
     }//============> here progress indecator is false <=======================//

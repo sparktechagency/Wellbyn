@@ -6,7 +6,7 @@ import '../utils/nab_ids.dart';
 import '../views/screen/doctor/doctor_details.dart';
 
 class HomeNav extends StatelessWidget {
-   HomeNav({super.key});
+   const HomeNav({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -9,6 +9,8 @@ import '../views/screen/doctor/doctor.dart';
 import '../views/screen/doctor/doctor_details.dart';
 
 class DoctorNav extends StatelessWidget {
+  const DoctorNav({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Navigator(

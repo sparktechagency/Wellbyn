@@ -372,7 +372,7 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
                         CustomTextFielded(
                           isPassword: true,
                           borderColor: TextColors.neutral900,
-                          suffixSvgAsset: AppIcons.viewIcon,
+                          suffixSvgAsset: AppIcons.locationcheckIcon,
                           suffixSvgColor: TextColors.neutral500,
                           hintText: "45454",
                           prefixIcon: AppIcons.lockIcon,
@@ -623,12 +623,10 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
                   },
                 ),):
                 _controller.frontLicenseImage.value != null
-                    ? Container(
-                      child: Image.memory(
-                          _controller.frontLicenseImage.value!,
-                          fit: BoxFit.cover,
-                        ),
-                    )
+                    ? Image.memory(
+                        _controller.frontLicenseImage.value!,
+                        fit: BoxFit.cover,
+                      )
                     : _uploadLicenseContent(isFront: true),
               ),
             ),
@@ -824,98 +822,4 @@ class _AnimatedLineState extends State<AnimatedLine>
 
 
 
-// class TypingTextController extends GetxController {
-//   RxString displayedText = "".obs;
-//   int currentIndex = 0;
-//   late Timer _timer;
-//
-//   final String fullText;
-//   final Duration speed;
-//   final Duration delay;
-//   final VoidCallback? onTypingComplete;
-//
-//   TypingTextController({
-//     required this.fullText,
-//     this.speed = const Duration(milliseconds: 200),
-//     this.delay = Duration.zero,
-//     this.onTypingComplete,
-//   });
-//
-//   void startTyping() {
-//     Future.delayed(delay, () {
-//       _timer = Timer.periodic(speed, (timer) {
-//         if (currentIndex < fullText.length) {
-//           displayedText.value += fullText[currentIndex];
-//           currentIndex++;
-//         } else {
-//           _timer.cancel();
-//           onTypingComplete?.call(); // <-- Trigger callback here
-//         }
-//       });
-//     });
-//   }
-//
-//   @override
-//   void onClose() {
-//     _timer.cancel();
-//     super.onClose();
-//   }
-// }
-//
-// // Widget
-// class TypingTextWidget extends StatefulWidget {
-//   final String text;
-//   final TextStyle? style;
-//   final Duration speed;
-//   final Duration delay;
-//   final VoidCallback? onComplete; // <-- Add this
-//
-//   const TypingTextWidget({
-//     Key? key,
-//     required this.text,
-//     this.style,
-//     this.speed = const Duration(milliseconds: 200),
-//     this.delay = Duration.zero,
-//     this.onComplete,
-//   }) : super(key: key);
-//
-//   @override
-//   State<TypingTextWidget> createState() => _TypingTextWidgetState();
-// }
 
-// class _TypingTextWidgetState extends State<TypingTextWidget> {
-//   late TypingTextController controller;
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//
-//     // Ensure old controller (if any) is removed before re-putting
-//     if (Get.isRegistered<TypingTextController>(tag: widget.text)) {
-//       Get.delete<TypingTextController>(tag: widget.text);
-//     }
-//
-//     controller = Get.put(
-//       TypingTextController(
-//         fullText: widget.text,
-//         speed: widget.speed,
-//         delay: widget.delay,
-//         onTypingComplete: widget.onComplete,
-//       ),
-//       tag: widget.text,
-//     );
-//
-//     controller.startTyping();
-//   }
-//
-//   @override
-//   void dispose() {
-//     Get.delete<TypingTextController>(tag: widget.text);
-//     super.dispose();
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Obx(() => Text(controller.displayedText.value, style: widget.style));
-//   }
-// }

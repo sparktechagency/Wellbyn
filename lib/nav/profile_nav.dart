@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wellbyn/views/screen/profile/add_insurance.dart';
+import 'package:wellbyn/views/screen/profile/Insurance/add_insurance.dart';
 import 'package:wellbyn/views/screen/profile/caregiver_mode/caregiver_edits.dart';
 import 'package:wellbyn/views/screen/profile/caregiver_mode/caregiver_mode_details.dart';
 import 'package:wellbyn/views/screen/profile/caregiver_mode/start_caregiver.dart';
@@ -11,7 +11,7 @@ import 'package:wellbyn/views/screen/profile/waitlist/waitlist_screen.dart';
  // replace with your actual profile screen path
 import '../utils/nab_ids.dart';
 import '../views/screen/profile/caregiver_mode/caregiver_mode.dart';
-import '../views/screen/profile/insurance_info.dart';
+import '../views/screen/profile/Insurance/insurance_info.dart';
 import '../views/screen/profile/medicalinfo/medical_info.dart';
 import '../views/screen/profile/medication/medicationsetting.dart';
 import '../views/screen/profile/personalinfo/personal_info.dart';

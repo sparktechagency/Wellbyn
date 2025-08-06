@@ -9,17 +9,17 @@ import 'package:wellbyn/controllers/insurance_controller.dart';
 import 'package:wellbyn/views/base/Apptext/app_text.dart';
 import 'package:wellbyn/views/base/iconsTextbutton/icon_text_button.dart';
 
-import '../../../../utils/app_colors.dart';
-import '../../../../utils/app_icons.dart';
-import '../../../../utils/nab_ids.dart';
+import '../../../../../utils/app_colors.dart';
+import '../../../../../utils/app_icons.dart';
+import '../../../../../utils/nab_ids.dart';
 
-import '../../../controllers/profile_setting/personal_info.dart';
-import '../../../controllers/profile_setting_controller.dart';
-import '../../../utils/app_constants.dart';
-import '../profile_setting_start/widget/labevalue.dart';
-import 'base/infoitem.dart';
-import 'base/logout.dart';
-import 'base/madicalinfoheader.dart';
+import '../../../../controllers/profile_setting/personal_info.dart';
+import '../../../../controllers/profile_setting_controller.dart';
+import '../../../../utils/app_constants.dart';
+import '../../profile_setting_start/widget/labevalue.dart';
+import '../base/infoitem.dart';
+import '../base/logout.dart';
+import '../base/madicalinfoheader.dart';
 
 class InsuranceInfo extends StatelessWidget {
    InsuranceInfo({super.key});

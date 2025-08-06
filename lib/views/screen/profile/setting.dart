@@ -7,7 +7,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:wellbyn/utils/app_constants.dart';
 import 'package:wellbyn/views/base/Apptext/app_text.dart';
 import 'package:wellbyn/views/screen/auth/login_screen.dart';
-import 'package:wellbyn/views/screen/profile/account_switch.dart';
+import 'package:wellbyn/views/screen/profile/account_switch/account_switch.dart';
 import 'package:wellbyn/views/screen/profile/personalinfo/personal_info.dart';
 
 import '../../../utils/app_colors.dart';
