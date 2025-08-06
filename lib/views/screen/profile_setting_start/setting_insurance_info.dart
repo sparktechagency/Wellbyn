@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:http/http.dart';
 import 'package:signature/signature.dart';
-import 'package:wellbyn/controllers/scrollController.dart';
+import 'package:wellbyn/controllers/scrollController/scrollController.dart';
 import 'package:wellbyn/utils/app_constants.dart';
 import 'package:wellbyn/views/screen/base_screen.dart';
 import 'package:wellbyn/views/screen/profile_setting_start/setting_add_insurance.dart';

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:wellbyn/controllers/dotted_boder.dart';
+import 'package:wellbyn/controllers/dotted_border/dotted_boder.dart';
 import 'package:wellbyn/utils/app_icons.dart';
 import 'package:wellbyn/views/base/Apptext/app_text.dart';
 

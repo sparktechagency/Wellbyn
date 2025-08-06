@@ -16,7 +16,7 @@ import 'package:wellbyn/views/base/Apptext/app_text.dart';
 import 'package:wellbyn/views/base/custom_field.dart';
 import 'package:wellbyn/views/base/customText/custom_text.dart';
 
-import '../../../../controllers/dotted_boder.dart';
+import '../../../../controllers/dotted_border/dotted_boder.dart';
 import '../../../../controllers/profile_setting_controller.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/nab_ids.dart';

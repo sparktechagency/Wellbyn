@@ -14,7 +14,7 @@ import 'package:wellbyn/views/screen/profile_setting_start/widget/circle.dart';
 import '../../../controllers/profile_setting/medical_info.dart';
 import 'package:wellbyn/models/medication.dart';
 import 'package:wellbyn/models/allergies.dart';
-import '../../../controllers/scrollController.dart';
+import '../../../controllers/scrollController/scrollController.dart';
 import '../../base/LabelTextField/labelTextField.dart';
 import '../profile/base/madicalinfoheader.dart';
 
