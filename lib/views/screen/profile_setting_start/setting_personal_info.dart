@@ -372,7 +372,7 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
                         CustomTextFielded(
                           isPassword: true,
                           borderColor: TextColors.neutral900,
-                          suffixSvgAsset: AppIcons.locationcheckIcon,
+                          suffixSvgAsset: AppIcons.viewIcon,
                           suffixSvgColor: TextColors.neutral500,
                           hintText: "45454",
                           prefixIcon: AppIcons.lockIcon,

@@ -12,12 +12,23 @@ import '../../base/LogoHeader/logoHeader.dart';
 import '../../base/custom_field.dart';
 import '../profile_setting_start/widget/labeledtextfield.dart';
 
-class Forgot extends StatelessWidget {
+class Forgot extends StatefulWidget {
    Forgot({super.key});
 
-   final ForgotPasswordController _controller = Get.put(ForgotPasswordController());
+  @override
+  State<Forgot> createState() => _ForgotState();
+}
 
+class _ForgotState extends State<Forgot> {
+    final ForgotPasswordController _controller = Get.put(ForgotPasswordController());
+    final  TextEditingController emailcontrller= TextEditingController();
+    @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    emailcontrller.dispose();
 
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,7 +92,7 @@ class Forgot extends StatelessWidget {
         LabeledTextFielded(
           borderColor: TextColors.neutral900,
           label: "Email",
-          controller: _controller.emailcontrller,
+          controller: emailcontrller,
           next: true,
           maxline: 1,
           hintText: "Email Address",
@@ -89,5 +100,4 @@ class Forgot extends StatelessWidget {
       ],
     );
   }
-
-   }
+}

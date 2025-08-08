@@ -35,7 +35,6 @@ class _LoginScreenState extends State<LoginScreen> {
   // String? selectedLanguage;
   final LogInController _controller = Get.put(LogInController());
 
-
 @override
   void initState() {
     // TODO: implement initState
@@ -45,6 +44,13 @@ class _LoginScreenState extends State<LoginScreen> {
     //     selectedLanguage = language[localizationController.selectedIndex];
     //   });
     // });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+
+    super.dispose();
   }
 
   @override

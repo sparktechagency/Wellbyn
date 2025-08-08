@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:wellbyn/controllers/auth/create_an_account.dart';
 import 'package:wellbyn/utils/app_constants.dart';
 import 'package:wellbyn/views/base/AppButton/app_button.dart';
 import 'package:wellbyn/views/base/OrDivided/orDivided.dart';
-import 'package:wellbyn/views/base/custom_field.dart';
 import 'package:wellbyn/views/screen/auth/login_screen.dart';
 import '../../../utils/app_colors.dart';
 
@@ -14,14 +12,13 @@ import '../../base/AlReadyHaveAcountText/alreadyHaveAcountText.dart';
 import '../../base/GoogleButton/google_button.dart';
 import '../../base/LabelTextField/labelTextField.dart' show LabeledTextFielded;
 import '../../base/LogoHeader/logoHeader.dart';
-import '../../base/TextStyle/text_style.dart';
 
 import 'forgot.dart';
 
 class CreateAccountPage extends StatefulWidget {
   final String role;
 
-  CreateAccountPage({required this.role, Key? key}) : super(key: key);
+  const CreateAccountPage({required this.role, super.key});
 
   @override
   State<CreateAccountPage> createState() => _CreateAccountPageState();
@@ -49,7 +46,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                         children: [
                          const SizedBox(height: 35),
 
-                          //=================> logo header <=======================//
+                          //<=================> logo header <=======================>//
 
                           LogoHeader(
                             imagePath: 'assets/icons/logo.svg',
@@ -58,11 +55,11 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                           ),
                           const SizedBox(height: 24),
 
-                          //=================> input field  <=======================//
+                          //<=================> input field  <=======================>//
                           inputMethod(),
                           const SizedBox(height: 24),
 
-                          //=================> Next button  <=======================//
+                          //=================> Next button  <=======================>//
 
                           AppButton(
                             text: "Next",
@@ -87,11 +84,12 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                               if(_formKey.currentState!.validate()){
                                 Get.to(()=> Forgot());
                               }
+
                             },
                           ),
                           const SizedBox(height: 24),
 
-                          //==================> user log in or create section <===============//
+                          //<==================> user log in or create section <===============>//
                           AlreadyHaveAccountText(
                             onTap: (){
 
@@ -102,21 +100,21 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                             actionText: 'Sign In',
                             fontFamily: AppConstants.FONT_FAMILY,),
 
-                          //=================> Or divider   <=======================//
+                          //<=================> Or divider   <=======================>//
 
                           OrDivider(),
 
                           const SizedBox(height: 24),
 
-                          //=================> gooogle buttton   <=======================//
+                          //<=================> gooogle buttton   <=======================>//
 
                           GoogleButton(onPressed: () {
-                            print("Google account ");
+                            //print("Google account ");
                           },),
                           const  SizedBox(height: 24),
                         ],
                       ),
-            ),
+                     ),
                   ),
                ),
               ),

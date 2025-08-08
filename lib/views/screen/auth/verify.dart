@@ -15,12 +15,24 @@ import '../../base/ArrowBackAuth/arrowBackAuth.dart';
 import '../../base/LogoHeader/logoHeader.dart';
 import 'forgot.dart';
 
-class Verify extends StatelessWidget {
+class Verify extends StatefulWidget {
   Verify({super.key});
 
+  @override
+  State<Verify> createState() => _VerifyState();
+}
+
+class _VerifyState extends State<Verify> {
 
   final VerifyCodeController _controller = Get.put(VerifyCodeController());
+  final TextEditingController pinController = TextEditingController();
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    pinController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,14 +50,14 @@ class Verify extends StatelessWidget {
                   children: [
                     SizedBox(height: 40.h),
 
-                    //=================> logo header <=======================//
+                    //<=================> logo header <=======================>//
 
                     LogoHeader(
                       imagePath: 'assets/icons/logo.svg',
                       title: 'Verify code',
                     ),
 
-                    //=================> buildPadding <=======================//
+                    //<=================> buildPadding <=======================>//
 
                     buildPadding(),
 
@@ -53,7 +65,7 @@ class Verify extends StatelessWidget {
                     PinCodeEnter(context),
                     SizedBox(height: 20.h),
 
-                    //=================> AppButton <=======================//
+                    //<=================> AppButton <=======================>//
 
                     AppButton(
                       text: "Next",
@@ -71,7 +83,7 @@ class Verify extends StatelessWidget {
                       fontFamily: AppConstants.FONT_FAMILY,),
                     SizedBox(height: 10),
 
-                    //=================> logo text <=======================//
+                    //<=================> logo text <=======================>//
 
                     BackButtonWithText(
                       text: "Back To Sign In",
@@ -108,7 +120,7 @@ class Verify extends StatelessWidget {
                       color: TextColors.action,
                       fontFamily: "Satoshi",
                     ),
-                    controller: _controller.pinController,
+                    controller: pinController,
                     animationType: AnimationType.scale,
                     keyboardType: TextInputType.number,
                     pinTheme: PinTheme(
@@ -170,8 +182,9 @@ class Verify extends StatelessWidget {
                           ),
                         ),
                       ]
-                      ),
-                    ),
-                  );
+                     ),
+                 ),
+
+              );
+         }
   }
-}

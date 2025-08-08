@@ -210,7 +210,31 @@ class _CustomTextFieldedState extends State<CustomTextFielded> {
   @override
   void dispose() {
     _focusNode.dispose();
+    widget.controller.removeListener(_controllerListener);
     super.dispose();
+  }
+
+  void _controllerListener() {
+    final validator = widget.validator ?? defaultValidator;
+    final text = widget.controller.text.trim();
+    final error = validator(text) != null;
+    final valid = text.isNotEmpty && !error;
+
+    if (mounted) {
+      setState(() {
+        _isValid = valid;
+        if (_hasTyped && text.isEmpty && !_focusNode.hasFocus) {
+          _shouldShowError = true;
+          _hasError = true;
+        } else if (text.isNotEmpty && !error) {
+          _shouldShowError = false;
+          _hasError = false;
+        } else if (_hasTyped && text.isNotEmpty && error) {
+          _shouldShowError = true;
+          _hasError = true;
+        }
+      });
+    }
   }
 
   String? _validate(String? value) {
@@ -386,7 +410,7 @@ class _CustomTextFieldedState extends State<CustomTextFielded> {
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: SvgPicture.asset(
-                    obscureText ? AppIcons.lockIcon : AppIcons.lockIcon,
+                    obscureText ? AppIcons.viewIcon : AppIcons.viewIcon,
                     width: 20.w,
                     height: 20.w,
                     colorFilter: const ColorFilter.mode(

@@ -705,6 +705,8 @@ class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
                 ? cell
                 : Text(
                     cell.toString(),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: 16,
                       color: TextColors.neutral900,
