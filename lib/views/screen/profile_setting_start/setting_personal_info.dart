@@ -18,6 +18,7 @@ import '../../../utils/app_icons.dart';
 import '../../base/Apptext/app_text.dart';
 import '../../base/LabelTextField/labelTextField.dart';
 import '../../base/LableDropDownFielded/lableDropDownFielded.dart';
+import '../../base/PickUpdate/pickupdate.dart';
 
 enum Gender { male, female, other }
 
@@ -44,167 +45,223 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
     return Scaffold(
       backgroundColor: Appcolors.page,
       appBar: _buildAppBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-
-            Obx(() => AnimatedSize(
-      duration: const Duration(milliseconds: 400),
-      curve: Curves.easeInOut,
-      child: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 500),
-        switchInCurve: Curves.easeInOutSine,
-        switchOutCurve: Curves.easeInOutCubic,
-        transitionBuilder: (child, animation) {
-          final offsetAnimation = Tween<Offset>(
-            begin: const Offset(0, -0.3),
-            end: Offset.zero,
-          ).animate(animation);
-
-          return FadeTransition(
-            opacity: animation,
-            child: SlideTransition(
-              position: offsetAnimation,
-              child: child,
-            ),
-          );
-        },
-        child: scroll.isProgressVisible.value
-            ? Container(
-          key: const ValueKey('progress'),
-          child: _buildProgressIndicator(),
-        )
-            :Container(
-          key: const ValueKey('empty'),
-          height: 0,
-          width: double.infinity,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+        
+              Obx(() => AnimatedSize(
+        duration: const Duration(milliseconds: 400),
+        curve: Curves.easeInOut,
+        child: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 500),
+          switchInCurve: Curves.easeInOutSine,
+          switchOutCurve: Curves.easeInOutCubic,
+          transitionBuilder: (child, animation) {
+            final offsetAnimation = Tween<Offset>(
+              begin: const Offset(0, -0.3),
+              end: Offset.zero,
+            ).animate(animation);
+        
+            return FadeTransition(
+              opacity: animation,
+              child: SlideTransition(
+                position: offsetAnimation,
+                child: child,
+              ),
+            );
+          },
+          child: scroll.isProgressVisible.value
+              ? Container(
+            key: const ValueKey('progress'),
+            child: _buildProgressIndicator(),
+          )
+              :Container(
+            key: const ValueKey('empty'),
+            height: 0,
+            width: double.infinity,
+          ),
         ),
-      ),
-    )),
-
-            Flexible(
-              child: SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  controller: scroll.scrollController,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildPatientInfoSection(),
-
-
-                      _buildSectionContainer(children: [
-
-                        LabeledTextFielded(
-                            borderColor: TextColors.neutral900,
-                            label: "Full Name",
-                            controller: _controller.nameController,
-                            maxline: 1,
-                            hintText: "First Name",
-                          ),
-                        SizedBox(height: 8.h),
-                        Row(
-                            children: [
-                              Expanded(
-                                child: CustomTextFielded(
-                                  next: true,
-                                  controller: _controller.middleNameController,
-                                  hintText: "Middle",
-                                  keyboardType: TextInputType.name,
-                                  maxLines: 1,
-                                  borderColor: TextColors.neutral900,
-                                ),
-                              ),
-                              const SizedBox(width: 8),
-                              Expanded(
-                                child: CustomTextFielded(
-                                  next: true,
-                                  controller: _controller.lastNameController,
-                                  hintText: "Last Name",
-                                  keyboardType: TextInputType.name,
-                                  maxLines: 1,
-                                  borderColor: TextColors.neutral900,
-                                ),
-                              ),
-                            ],
-                          ),
-                        SizedBox(height: 24.h),
-                        Obx(() => LabeledTextFielded(
+            )),
+        
+              Flexible(
+                child: SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
+                    controller: scroll.scrollController,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildPatientInfoSection(),
+        
+        
+                        _buildSectionContainer(children: [
+        
+                          LabeledTextFielded(
+                              borderColor: TextColors.neutral900,
+                              label: "Full Name",
+                              controller: _controller.nameController,
                               maxline: 1,
-                              borderColor: TextColors.neutral200,
-                              label: "Date of birth ",
-                              controller: TextEditingController(
-                                text: _controller.formattedDate.value,
-                              ),
-                              readOnly: true,
-                              onTap: () => _controller.pickDate(Get.context!),
-                              suffixSvgAsset: AppIcons.calenderIcon01,
-                              suffixSvgColor: Appcolors.action,
-                              hintText: "mm/dd/yyyy",
-                            ),),
-                        SizedBox(height: 24.h),
-                        LabeledDropdownFielded(
-                          label: "Sex",
-                          titile: "City",
-                          items: ["Male", "Female", "Other"],
-                          selectedValue: dropdownController.selectedValue,
-                          onChanged: (value) {
-                            // Optional additional logic
-                            print("Selected: $value");
-                          },
-                        ),
+                              hintText: "First Name",
+                            ),
+                          SizedBox(height: 8.h),
+                          Row(
+                              children: [
+                                Expanded(
+                                  child: CustomTextFielded(
+                                    next: true,
+                                    controller: _controller.middleNameController,
+                                    hintText: "Middle",
+                                    keyboardType: TextInputType.name,
+                                    maxLines: 1,
+                                    borderColor: TextColors.neutral900,
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: CustomTextFielded(
+                                    next: true,
+                                    controller: _controller.lastNameController,
+                                    hintText: "Last Name",
+                                    keyboardType: TextInputType.name,
+                                    maxLines: 1,
+                                    borderColor: TextColors.neutral900,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          SizedBox(height: 24.h),
+                          CustomDatePickerField(
+                            selectedDate: _controller.formattedDate,
+                            onTap: () => _controller.pickDate(Get.context!),
+                            hintText: "mm/dd/yyyy",
+                            svgIconPath: AppIcons.calenderIcon01,
+                          ),
 
 
-
-                        SizedBox(height: 24.h),
-
-                        LabeledDropdownFielded(
-                          label: "Marital Status",
-                          titile: "Marital Status",
-                          items: [
-                            "Single",
-                            "Married",
-                            "Divorced",
-                            "Widowed",
-                            "Separated",
-                            "Unknown",
-                          ],
-                          selectedValue: dropdownController.maritialValue,
-                          onChanged: (value) {
-                            // Optional additional logic
-                            print("Selected: $value");
-                          },
-                        ),
-
-                        SizedBox(height: 24.h),
-                        LabeledDropdownFielded(
-                          label: "Blood Group",
-                          titile: "Select Group",
-                          items:[
-                            "A+",
-                            "A-",
-                            "B+",
-                            "B-",
-                            "AB+",
-                            "AB-",
-                            "O+",
-                            "O-",
-                          ],
-                          selectedValue: dropdownController.bloodGroup,
-                          onChanged: (value) {
-                            // Optional additional logic
-                            print("Selected: $value");
-                          },
-                        ),
-                        const SizedBox(height: 20),
-                        Row(
+                          SizedBox(height: 24.h),
+                          LabeledDropdownFielded(
+                            label: "Sex",
+                            titile: "City",
+                            items: ["Male", "Female", "Other"],
+                            selectedValue: dropdownController.selectedValue,
+                            onChanged: (value) {
+                              // Optional additional logic
+                              print("Selected: $value");
+                            },
+                          ),
+        
+        
+        
+                          SizedBox(height: 24.h),
+        
+                          LabeledDropdownFielded(
+                            label: "Marital Status",
+                            titile: "Marital Status",
+                            items: [
+                              "Single",
+                              "Married",
+                              "Divorced",
+                              "Widowed",
+                              "Separated",
+                              "Unknown",
+                            ],
+                            selectedValue: dropdownController.maritialValue,
+                            onChanged: (value) {
+                              // Optional additional logic
+                              print("Selected: $value");
+                            },
+                          ),
+        
+                          SizedBox(height: 24.h),
+                          LabeledDropdownFielded(
+                            label: "Blood Group",
+                            titile: "Select Group",
+                            items:[
+                              "A+",
+                              "A-",
+                              "B+",
+                              "B-",
+                              "AB+",
+                              "AB-",
+                              "O+",
+                              "O-",
+                            ],
+                            selectedValue: dropdownController.bloodGroup,
+                            onChanged: (value) {
+                              // Optional additional logic
+                              print("Selected: $value");
+                            },
+                          ),
+                          const SizedBox(height: 20),
+                          Row(
+                              children: [
+                                Text(
+                                  "Number of Children",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: TextColors.neutral900,
+                                    fontFamily: AppConstants.FONT_FAMILY,
+                                  ),
+                                ),
+                                Text(
+                                  " (optional)",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                    color: TextColors.neutral500,
+                                    fontFamily: AppConstants.FONT_FAMILY,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          SizedBox(height: 8.h),
+                          CustomTextFielded(
+                              borderColor: TextColors.neutral900,
+                              controller: _controller.numberOfChildController,
+                              hintText: "0",
+                              keyboardType: TextInputType.number,
+                            ),
+                          SizedBox(height: 24.h),
+                          LabeledTextFielded(
+                             next: true,
+                             borderColor: TextColors.neutral900,
+                             label: "Email",
+                             controller: _controller.emailController,
+                             maxline: 1,
+                             hintText: "name@gmail.com",
+                          ),
+                          SizedBox(height: 24.h),
+                          LabeledTextFielded(
+                             next: true,
+                             borderColor: TextColors.neutral900,
+                             label: "Phone",
+                             controller: _controller.phoneController,
+                             keyboardType: TextInputType.number,
+                             maxline: 1,
+                             hintText: "+02154555585",
+                          ),
+        
+                          SizedBox(height: 24.h),
+                          LabeledTextFielded(
+                            next: true,
+                            borderColor: TextColors.neutral900,
+                            label: "Address Line 1",
+                            controller: _controller.addressController,
+                            keyboardType: TextInputType.number,
+                            maxline: 1,
+                            hintText: "Street address",
+                          ),
+                          SizedBox(height: 24.h),
+                          Row(
                             children: [
                               Text(
-                                "Number of Children",
+                                "Address Line 2",
                                 style: TextStyle(
                                   fontSize: 16,
-                                  fontWeight: FontWeight.w600,
+                                  fontWeight: FontWeight.w500,
                                   color: TextColors.neutral900,
                                   fontFamily: AppConstants.FONT_FAMILY,
                                 ),
@@ -220,178 +277,119 @@ class _SettingPersonalInfoState extends State<SettingPersonalInfo> {
                               ),
                             ],
                           ),
-                        SizedBox(height: 8.h),
-                        CustomTextFielded(
+                          CustomTextFielded(
                             borderColor: TextColors.neutral900,
                             controller: _controller.numberOfChildController,
-                            hintText: "0",
+                            hintText: "Apartment, suite, unit,etc",
                             keyboardType: TextInputType.number,
                           ),
-                        SizedBox(height: 24.h),
-                        LabeledTextFielded(
-                           next: true,
-                           borderColor: TextColors.neutral900,
-                           label: "Email",
-                           controller: _controller.emailController,
-                           maxline: 1,
-                           hintText: "name@gmail.com",
-                        ),
-                        SizedBox(height: 24.h),
-                        LabeledTextFielded(
-                           next: true,
-                           borderColor: TextColors.neutral900,
-                           label: "Phone",
-                           controller: _controller.phoneController,
-                           keyboardType: TextInputType.number,
-                           maxline: 1,
-                           hintText: "+02154555585",
-                        ),
-
-                        SizedBox(height: 24.h),
-                        LabeledTextFielded(
-                          next: true,
-                          borderColor: TextColors.neutral900,
-                          label: "Address Line 1",
-                          controller: _controller.addressController,
-                          keyboardType: TextInputType.number,
-                          maxline: 1,
-                          hintText: "Street address",
-                        ),
-                        SizedBox(height: 24.h),
-                        Row(
-                          children: [
-                            Text(
-                              "Address Line 2",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: TextColors.neutral900,
-                                fontFamily: AppConstants.FONT_FAMILY,
+                          SizedBox(height: 24.h),
+        
+                          Row(
+                            children: [
+                              Expanded(
+                                child: LabeledTextFielded(
+                                  next: true,
+                                  borderColor: TextColors.neutral900,
+                                  label: "City",
+                                  controller: _controller.phoneController,
+                                  keyboardType: TextInputType.number,
+                                  maxline: 1,
+                                  hintText: "",
+                                ),
                               ),
-                            ),
-                            Text(
-                              " (optional)",
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                                color: TextColors.neutral500,
-                                fontFamily: AppConstants.FONT_FAMILY,
+                              SizedBox(width: 8.w,),
+                              Expanded(
+                                child:   LabeledDropdownFielded(
+                                  label: "State",
+                                  titile: "State",
+                                  items:[
+                                    "AO",
+                                    "AI",
+                                    "BI",
+                                    "CD",
+                                    "HI+",
+                                    "CO-",
+                                    "HO",
+                                    "KA",
+                                  ],
+                                  selectedValue: dropdownController.state,
+                                  onChanged: (value) {
+                                    // Optional additional logic
+                                    print("Selected: $value");
+                                  },
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        CustomTextFielded(
-                          borderColor: TextColors.neutral900,
-                          controller: _controller.numberOfChildController,
-                          hintText: "Apartment, suite, unit,etc",
-                          keyboardType: TextInputType.number,
-                        ),
-                        SizedBox(height: 24.h),
-
-                        Row(
-                          children: [
-                            Expanded(
-                              child: LabeledTextFielded(
-                                next: true,
-                                borderColor: TextColors.neutral900,
-                                label: "City",
-                                controller: _controller.phoneController,
-                                keyboardType: TextInputType.number,
-                                maxline: 1,
-                                hintText: "",
+                              SizedBox(width: 8.w,),
+                              Expanded(
+                                child: LabeledTextFielded(
+                                  next: true,
+                                  borderColor: TextColors.neutral900,
+                                  label: "Zip Code",
+                                  controller: _controller.phoneController,
+                                  keyboardType: TextInputType.number,
+                                  maxline: 1,
+                                  hintText: "",
+                                ),
                               ),
-                            ),
-                            SizedBox(width: 8.w,),
-                            Expanded(
-                              child:   LabeledDropdownFielded(
-                                label: "State",
-                                titile: "State",
-                                items:[
-                                  "AO",
-                                  "AI",
-                                  "BI",
-                                  "CD",
-                                  "HI+",
-                                  "CO-",
-                                  "HO",
-                                  "KA",
-                                ],
-                                selectedValue: dropdownController.state,
-                                onChanged: (value) {
-                                  // Optional additional logic
-                                  print("Selected: $value");
-                                },
-                              ),
-                            ),
-                            SizedBox(width: 8.w,),
-                            Expanded(
-                              child: LabeledTextFielded(
-                                next: true,
-                                borderColor: TextColors.neutral900,
-                                label: "Zip Code",
-                                controller: _controller.phoneController,
-                                keyboardType: TextInputType.number,
-                                maxline: 1,
-                                hintText: "",
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        SizedBox(height: 24.h,),
-                        LabeledTextFielded(
-                          next: true,
-                          borderColor: TextColors.neutral900,
-                          label: "Driver's License",
-                          controller: _controller.addressController,
-                          keyboardType: TextInputType.number,
-                          maxline: 1,
-                          hintText: "License number",
-                        ),
-                        SizedBox(height: 24.h,),
-                        AppText("Upload Driver's License Images",fontSize: 16,fontWeight: FontWeight.w500,),
-                        _buildImageUploadSection(),
-                        const SizedBox(height: 12),
-                        Text(
-                          "Accepted formats: JPG, PNG. Max file size: 5MB",
-                          style: TextStyle(
-                            fontFamily: AppConstants.FONT_FAMILY,
-                            fontWeight: FontWeight.w500,
-                            color: TextColors.neutral500,
-                            fontSize: 14,
+                            ],
                           ),
+        
+                          SizedBox(height: 24.h,),
+                          LabeledTextFielded(
+                            next: true,
+                            borderColor: TextColors.neutral900,
+                            label: "Driver's License",
+                            controller: _controller.addressController,
+                            keyboardType: TextInputType.number,
+                            maxline: 1,
+                            hintText: "License number",
+                          ),
+                          SizedBox(height: 24.h,),
+                          AppText("Upload Driver's License Images",fontSize: 16,fontWeight: FontWeight.w500,),
+                          _buildImageUploadSection(),
+                          const SizedBox(height: 12),
+                          Text(
+                            "Accepted formats: JPG, PNG. Max file size: 5MB",
+                            style: TextStyle(
+                              fontFamily: AppConstants.FONT_FAMILY,
+                              fontWeight: FontWeight.w500,
+                              color: TextColors.neutral500,
+                              fontSize: 14,
+                            ),
+                          ),
+        
+                          SizedBox(height: 24.h,),
+        
+                          const SizedBox(height: 20),
+                          AppText("Last 4 Digits Of SSN",fontWeight: FontWeight.w500, fontSize: 16,),
+        
+                          SizedBox(height: 8.h),
+        
+                          CustomTextFielded(
+                            isPassword: true,
+                            borderColor: TextColors.neutral900,
+                            suffixSvgAsset: AppIcons.viewIcon,
+                            suffixSvgColor: TextColors.neutral500,
+                            hintText: "45454",
+                            prefixIcon: AppIcons.lockIcon,
+                            controller: _controller.ssnController,
+                          ),
+                          SizedBox(height: 6.h,),
+                          AppText("For identification purposes only",fontWeight: FontWeight.w500, fontSize: 16,color: TextColors.neutral500,),
+                        ],
                         ),
-
-                        SizedBox(height: 24.h,),
-
-                        const SizedBox(height: 20),
-                        AppText("Last 4 Digits Of SSN",fontWeight: FontWeight.w500, fontSize: 16,),
-
-                        SizedBox(height: 8.h),
-
-                        CustomTextFielded(
-                          isPassword: true,
-                          borderColor: TextColors.neutral900,
-                          suffixSvgAsset: AppIcons.viewIcon,
-                          suffixSvgColor: TextColors.neutral500,
-                          hintText: "45454",
-                          prefixIcon: AppIcons.lockIcon,
-                          controller: _controller.ssnController,
-                        ),
-                        SizedBox(height: 6.h,),
-                        AppText("For identification purposes only",fontWeight: FontWeight.w500, fontSize: 16,color: TextColors.neutral500,),
+        
+                        const SizedBox(height: 52),
+                        _buildNavigationButtons(),
+                        const SizedBox(height: 35),
                       ],
-                      ),
-
-                      const SizedBox(height: 52),
-                      _buildNavigationButtons(),
-                      const SizedBox(height: 35),
-                    ],
+                    ),
                   ),
-                ),
-           ),
-            
-          ],
+             ),
+              
+            ],
+          ),
         ),
       ),
     );

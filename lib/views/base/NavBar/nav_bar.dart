@@ -9,7 +9,6 @@ import '../../../utils/app_colors.dart';
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({super.key});
 
-  // Step 1: Make lists static const for better memory management
   static const List<String> _icons = [
     'assets/icons/home.svg',
     'assets/icons/stethoscope.svg',
@@ -31,35 +30,39 @@ class BottomNavBar extends StatelessWidget {
     'Profile',
   ];
 
-  // Step 2: Pre-define colors as static const to avoid recreation
   static const Color selectedColor = Color(0xFF2D8BC9);
   static const Color unselectedColor = Colors.black54;
-  static const Color shadowColor = Colors.black26;
 
   @override
   Widget build(BuildContext context) {
     final BaseController controller = Get.find<BaseController>();
-    return Obx(() {
-      final selectedIndex = controller.currentIndex.value;
 
-      return Container(
-        height: 81.h,
-        decoration: const BoxDecoration(
-          color: Appcolors.primary,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              blurRadius: 5,
-              offset: Offset(-2, 1),
-            )
-          ],
-        ),
-        child: SafeArea(
-          child: Obx(() {
-            final selectedIndex = controller.currentIndex.value;
+    // Get the bottom padding to handle different navigation types
+    final bottomPadding = MediaQuery.of(context).viewPadding.bottom;
 
-            return Row(
+    return Container(
+      // Use dynamic height that adapts to system UI
+      height: 81.h + bottomPadding,
+      decoration: const BoxDecoration(
+        color: Appcolors.primary,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 5,
+            offset: Offset(-2, 1),
+          )
+        ],
+      ),
+      child: Obx(() {
+        final selectedIndex = controller.currentIndex.value;
+
+        return Padding(
+          // Add bottom padding manually to ensure proper spacing
+          padding: EdgeInsets.only(bottom: bottomPadding),
+          child: SizedBox(
+            height: 81.h,
+            child: Row(
               children: List.generate(_icons.length, (index) {
                 final isSelected = selectedIndex == index;
 
@@ -94,7 +97,7 @@ class BottomNavBar extends StatelessWidget {
                               duration: const Duration(milliseconds: 200),
                               curve: Curves.easeInOut,
                               style: TextStyle(
-                                fontSize: 12,
+                                fontSize: isSelected ? 13.5 : 13.1,
                                 color: isSelected ? selectedColor : unselectedColor,
                                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
                                 fontFamily: 'Inter',
@@ -108,12 +111,10 @@ class BottomNavBar extends StatelessWidget {
                   ),
                 );
               }),
-            );
-          }),
-        ),
-      );
-
-    });
-
+            ),
+          ),
+        );
+      }),
+    );
   }
 }

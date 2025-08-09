@@ -24,7 +24,7 @@ import '../../../base/LabelTextField/labelTextField.dart';
 import '../../../base/custombutton/custom_button.dart';
 
 class PersonalInfo extends StatefulWidget {
-  PersonalInfo({super.key});
+  const PersonalInfo({super.key});
 
   @override
   State<PersonalInfo> createState() => _PersonalInfoState();
@@ -120,7 +120,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
           "Patient Info",
           style: TextStyle(
             fontSize: 20,
-            fontFamily: "Satoshi",
+            fontFamily: "Inter",
             fontWeight: FontWeight.w500,
             color: TextColors.neutral900,
           ),
@@ -159,25 +159,25 @@ class _PersonalInfoState extends State<PersonalInfo> {
               Text(
                 style: TextStyle(
                   fontSize: 14,
+                  letterSpacing: 0.2,
                   color: TextColors.neutral500,
-                  fontWeight: FontWeight.w400,
+                  fontWeight: FontWeight.w500,
                 ),
                 overflow: TextOverflow.clip,
                 "Hi! Please share your personal info to verify your identity and stay connected with your healthcare providers.",
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 32),
 
               // Personal Info Section
               _buildSectionContainer(
                 children: [
-                  LabeledTextFielded(
-                    borderColor: Appcolors.primary,
-                    label: "Full Name",
-                    controller: firstNameController,
-                    maxline: 1,
-
-                    readOnly: true,
+                  _buildLabel("Full Name"),
+                  CustomTextFielded(
+                    controller: lastNameController,
+                    filColor: Colors.white,
+                    borderColor: TextColors.neutral900,
                     hintText: "Full Name",
+                    enabled: false,
                   ),
                   SizedBox(height: 8),
 
@@ -207,20 +207,16 @@ class _PersonalInfoState extends State<PersonalInfo> {
                     ],
                   ),
                   const SizedBox(height: 20),
-
-                  Obx(() => LabeledTextFielded(
-                    maxline: 1,
-                    borderColor: TextColors.neutral200,
-                    label: "Date of birth ",
-                    controller: TextEditingController(
-                      text: controller.formattedDate.value,
-                    ),
-                    readOnly: true,
-                    onTap: () => controller.pickDate(Get.context!),
+                  _buildLabel("Date of Birth"),
+                  CustomTextFielded(
                     suffixSvgAsset: AppIcons.calenderIcon01,
                     suffixSvgColor: Appcolors.action,
+                    controller: lastNameController,
+                    filColor: Colors.white,
+                    borderColor: TextColors.neutral900,
                     hintText: "mm/dd/yyyy",
-                  ),),
+                    enabled: false,
+                  ),
                   SizedBox(height: 4),
 
                   const SizedBox(height: 20),
@@ -228,6 +224,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                   _buildGenderSelection(),
 
                   const SizedBox(height: 20),
+
                   _buildLabel("Marital Status"),
                   CustomTextFielded(
                     suffixSvgAsset: AppIcons.arrowdwonIcon,
@@ -368,7 +365,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            _buildLabel("Zip Code"),
+                            _buildLabel("Zip"),
                             const SizedBox(height: 8),
                             CustomTextFielded(
                               controller: zipController,
@@ -412,9 +409,8 @@ class _PersonalInfoState extends State<PersonalInfo> {
                   const SizedBox(height: 20),
                   _buildLabel("Upload Driver's License Images"),
                   _buildImageUploadSection(),
+                  SizedBox(height: 8,),
                   AppText("Accepted formats: JPG, PNG. Max file size: 5MB",fontSize: 14,fontWeight: FontWeight.w500,color: TextColors.neutral500,),
-                  const SizedBox(height: 10),
-
                   const SizedBox(height: 20),
                   Align(
                       alignment: Alignment.topLeft,
@@ -435,8 +431,8 @@ class _PersonalInfoState extends State<PersonalInfo> {
                     child: AppText(
                       "For identification purposes on only",
                       fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: TextColors.neutral500.withOpacity(0.80),
+                      fontWeight: FontWeight.w500,
+                      color: TextColors.neutral500,
                     ),
                   ),
                 ],),
@@ -473,7 +469,6 @@ class _PersonalInfoState extends State<PersonalInfo> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 20),
             ...children,
           ],
         ),
@@ -526,7 +521,7 @@ class _PersonalInfoState extends State<PersonalInfo> {
                       gender.name.capitalizeFirst!,
                       style: TextStyle(
                         fontSize: 14,
-                        color: isSelected ? Colors.black : Colors.grey,
+                        color: isSelected ? TextColors.neutral900 : TextColors.neutral900,
                         fontWeight: FontWeight.w500,
                       ),
                     ),

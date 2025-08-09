@@ -8,7 +8,7 @@ import 'package:wellbyn/controllers/localization_controller.dart';
 import 'package:wellbyn/views/base/AppButton/app_button.dart';
 import 'package:wellbyn/views/base/Apptext/app_text.dart';
 import 'package:wellbyn/views/base/custom_field.dart';
-import 'package:wellbyn/views/screen/auth/create_acount_screen.dart' hide LabeledTextFielded;
+import 'package:wellbyn/views/screen/auth/create_acount_screen.dart';
 import '../../../utils/app_colors.dart';
 
 import '../../../utils/app_constants.dart';
@@ -233,7 +233,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       LabeledTextFielded(
                         suffixSvgAsset: AppIcons.viewIcon,
-                        suffixSvgColor: TextColors.neutral500,
+                        suffixSvgColor: TextColors.neutral900,
                         isPassword: true,
                         borderColor: TextColors.neutral900,
                         label: "New Password",

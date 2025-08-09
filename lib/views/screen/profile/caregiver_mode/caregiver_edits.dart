@@ -40,9 +40,10 @@ class CaregiverEdits extends StatelessWidget {
           "Caregiver Mode",
           style: TextStyle(
             fontSize: 20,
-            fontFamily: "Satoshi",
+            fontFamily: "Inter",
+            letterSpacing: 0.2,
             fontWeight: FontWeight.w500,
-            color: TextColors.neutral900,
+            color: TextColors.primary2,
           ),
         ),
         centerTitle: true,
@@ -95,7 +96,14 @@ class CaregiverEdits extends StatelessWidget {
                   text: _controller.formattedDate.value,
                 ),
                 readOnly: true,
-                onTap: () => _controller.pickDate(Get.context!),
+                onTap: () async {
+                  // Close the keyboard/focus first
+                  FocusScope.of(Get.context!).unfocus();
+
+                  // Then open date picker
+                  await _controller.pickDate(Get.context!);
+                },
+
                 suffixSvgAsset: AppIcons.calenderIcon01,
                 suffixSvgColor: Appcolors.action,
                 hintText: "mm/dd/yyyy",

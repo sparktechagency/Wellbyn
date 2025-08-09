@@ -25,7 +25,7 @@ class MedicationSetting extends StatelessWidget {
           "Medications",
           style: TextStyle(
             fontSize: 20,
-            fontFamily: "Satoshi",
+            fontFamily: "Inter",
             fontWeight: FontWeight.w500,
             color: HexColor("#3D3D3D"),
           ),
@@ -82,7 +82,7 @@ class MedicationSetting extends StatelessWidget {
                   SizedBox(height: 24,),
                   IconTextButton(
                     svgAsset: AppIcons.editIcon,
-                    text:"Edit details",
+                    text:"Edit Details",
                     height: 50,
                     fontsize: 16,
                     bordercolor: Appcolors.action,
@@ -94,8 +94,6 @@ class MedicationSetting extends StatelessWidget {
                     },
 
                   )
-
-
 
                 ],
               ),
@@ -115,17 +113,16 @@ class MedicationSetting extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                       color: Appcolors.primary,
                       boxShadow: [
-                  BoxShadow(
-                  color:  TextColors.neutral900.withOpacity(0.09), // very soft shadow
-                  offset: const Offset(0, 2),
-                  blurRadius: 6,
-                  spreadRadius: 1,
-                ),
+                        BoxShadow(
+                            color: ShadowColor.shadowColors1.withOpacity(0.10),
+                            offset: Offset(0, 3),
+                            blurRadius: 4
+                        )
               ],
                   ),
                   child: Text(
                     "Take one tablet by mouth twice daily as needed for pain",
-                    style: TextStyle(color: TextColors.neutral900,fontWeight: FontWeight.w500,fontSize: 14,fontFamily: "Satoshi"),
+                    style: TextStyle(color: TextColors.neutral900,fontWeight: FontWeight.w500,fontSize: 14,fontFamily: "Inter"),
                     softWrap: true,
                     overflow: TextOverflow.visible,
                   ),
@@ -141,17 +138,16 @@ class MedicationSetting extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                     color: Appcolors.primary,
                     boxShadow: [
-                      BoxShadow(
-                        color: TextColors.neutral900.withOpacity(0.09),
-                        offset: Offset(0, 2),
-                        blurRadius: 6,
-                        spreadRadius: 1,
-                      )
+                   BoxShadow(
+                     color: ShadowColor.shadowColors1.withOpacity(0.10),
+                     offset: Offset(0, 3),
+                     blurRadius: 4
+                   )
                     ]
                   ),
                   child: const Text(
                     "Ibuprofen 800 mg",
-                    style: TextStyle(color: TextColors.neutral900,fontWeight: FontWeight.w500,fontSize: 14,fontFamily: "Satoshi"),
+                    style: TextStyle(color: TextColors.neutral900,fontWeight: FontWeight.w500,fontSize: 14,fontFamily: "Inter"),
                   ),
                 );
   }
@@ -177,10 +173,9 @@ class reminder_item extends StatelessWidget {
           color: Appcolors.primary,
           boxShadow: [
             BoxShadow(
-              color: TextColors.neutral900.withOpacity(0.09),
-              offset: Offset(0, 2),
-              blurRadius: 6,
-              spreadRadius: 1,
+                color: ShadowColor.shadowColors1.withOpacity(0.10),
+                offset: Offset(0, 3),
+                blurRadius: 4
             )
           ]
       ),

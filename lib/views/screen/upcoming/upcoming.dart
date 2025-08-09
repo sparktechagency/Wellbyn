@@ -13,6 +13,7 @@ import '../../../controllers/profile_setting_controller.dart';
 import '../../../models/allergies.dart';
 import '../../../utils/app_icons.dart';
 import '../../base/LabelTextField/labelTextField.dart';
+import '../../base/LableDataShow/labeldatashow.dart';
 import '../profile_setting_start/setting_personal_info.dart';
 class Upcoming extends StatelessWidget {
    Upcoming({super.key});
@@ -181,44 +182,23 @@ class Upcoming extends StatelessWidget {
 
                           },),
                       SizedBox(height: 16.h),
-                      LabeledTextFielded(
-                          maxline: 1,
-                          borderColor: Colors.transparent,
-                          label: "Visit Reason",
-                          controller: controller,
-                          // 👈 Use reactive value
-                          readOnly: true,
-                          onTap: () {
-                           // _contrller.pickDate(context);
-                          },
-                          hintText: "I need a cleaning",
-                        ),
+                      Labeldatashow(
+                        height: 50.h,
+                        LableText: "Visit Reason",
+                        text: "I need a cleaning ",
+                      ),
                       SizedBox(height: 16.h),
-                      LabeledTextFielded(
-                        maxline: 1,
-                        borderColor: Colors.transparent,
-                        label: "Visit Type",
-                        controller: controller,
-                        // 👈 Use reactive value
-                        readOnly: true,
-                        onTap: () {
-                          // _contrller.pickDate(context);
-                        },
-                        hintText: "New Patient Visit",
+                      Labeldatashow(
+                        height: 50.h,
+                        LableText: "Visit Type",
+                        text: "New Patient Visit",
                       ),
 
                       SizedBox(height: 16.h),
-                      LabeledTextFielded(
-                        maxline: 1,
-                        borderColor: Colors.transparent,
-                        label: "Insurance",
-                        controller: controller,
-                        // 👈 Use reactive value
-                        readOnly: true,
-                        onTap: () {
-                          // _contrller.pickDate(context);
-                        },
-                        hintText: "Blusky",
+                      Labeldatashow(
+                        height: 50.h,
+                        LableText: "Insurance",
+                        text: "Blusky",
                       ),
                       SizedBox(height: 16.h),
 

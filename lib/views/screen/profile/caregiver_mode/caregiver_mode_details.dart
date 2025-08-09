@@ -28,7 +28,8 @@ class CaregiverModeDetails extends StatelessWidget {
           "Caregiver Mode",
           style: TextStyle(
             fontSize: 20,
-            fontFamily: "Satoshi",
+            letterSpacing: 0.2,
+            fontFamily: "Inter",
             fontWeight: FontWeight.w500,
             color: TextColors.neutral900,
           ),

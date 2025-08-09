@@ -69,152 +69,154 @@ class _MedicalInformationScreenState extends State<SettingMedicalInfo> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            //=================> Animated here sizebox here <=================
-            Obx(()=> AnimatedSize(
-                duration: const Duration(milliseconds: 400),
-                curve: Curves.easeInOut,
-                child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 500),
-                  switchInCurve: Curves.easeInOutSine,
-                  switchOutCurve: Curves.easeInOutCubic,
-                  transitionBuilder: (child, animation) {
-                    final offsetAnimation = Tween<Offset>(
-                      begin: const Offset(0, -0.4),
-                      end: Offset.zero,
-                    ).animate(animation);
-
-                    return FadeTransition(
-                      opacity: animation,
-                      child: SlideTransition(
-                        position: offsetAnimation,
-                        child: child,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              //=================> Animated here sizebox here <=================
+              Obx(()=> AnimatedSize(
+                  duration: const Duration(milliseconds: 400),
+                  curve: Curves.easeInOut,
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 500),
+                    switchInCurve: Curves.easeInOutSine,
+                    switchOutCurve: Curves.easeInOutCubic,
+                    transitionBuilder: (child, animation) {
+                      final offsetAnimation = Tween<Offset>(
+                        begin: const Offset(0, -0.4),
+                        end: Offset.zero,
+                      ).animate(animation);
+        
+                      return FadeTransition(
+                        opacity: animation,
+                        child: SlideTransition(
+                          position: offsetAnimation,
+                          child: child,
+                        ),
+                      );
+                    },
+                    child: scroll.isProgressVisible1.value
+                        ? Container(
+                            key: const ValueKey('progress'),
+                            child: _buildProgressIndicator(),
+                          )
+                        : Container(
+                            key: const ValueKey('empty'),
+                            height: 0,
+                            width: double.infinity,
+                          ),
+                  ),
+                ),),
+        
+              //_______________________============> Hello bro how are you  <=====================
+              Flexible(
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  controller: scroll.scrollController1,
+                  child: Column(
+                    children: [
+                      SizedBox(height: 25),
+        
+                      // Header text
+                      MedicalInfoHeader(
+                        title: "Medical Information",
+                        description:
+                            'Hi! Please share your personal info to verify your identity and stay connected with your healthcare providers.',
+                        iconPath: AppIcons.medicalfileIcon,
                       ),
-                    );
-                  },
-                  child: scroll.isProgressVisible1.value
-                      ? Container(
-                          key: const ValueKey('progress'),
-                          child: _buildProgressIndicator(),
-                        )
-                      : Container(
-                          key: const ValueKey('empty'),
-                          height: 0,
-                          width: double.infinity,
-                        ),
-                ),
-              ),),
-
-            //_______________________============> Hello bro how are you  <=====================
-            Flexible(
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                controller: scroll.scrollController1,
-                child: Column(
-                  children: [
-                    SizedBox(height: 25),
-
-                    // Header text
-                    MedicalInfoHeader(
-                      title: "Medical Information",
-                      description:
-                          'Hi! Please share your personal info to verify your identity and stay connected with your healthcare providers.',
-                      iconPath: AppIcons.medicalfileIcon,
-                    ),
-
-                    const SizedBox(height: 32),
-
-                    // Allergies Section
-                    _buildAllergiesSection(),
-                    const SizedBox(height: 16),
-
-                    // Current Medications Section
-                    _buildMedicationsSection(),
-                    const SizedBox(height: 16),
-
-                    // Existing Conditions Section
-                    _buildExistingConditionsSection(),
-                    const SizedBox(height: 16),
-
-                    // Lifestyle Factors Section
-                    _buildLifestyleFactorsSection(),
-                    SizedBox(height: 48.h),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            Get.back();
-                          },
-                          child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 24),
-                            // padding controls width
-                            height: 48,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Appcolors.primary,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: ShadowColor.shadowColors1.withOpacity(
-                                    0.10,
-                                  ),
-                                  blurRadius: 4,
-                                  spreadRadius: 0,
-                                  offset: Offset(0, 3),
-                                  blurStyle: BlurStyle.normal,
-                                ),
-                              ],
-                            ),
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Previous",
-                              style: TextStyle(
-                                fontFamily: AppConstants.FONT_FAMILY,
-                                fontSize: 16,
-                                color: TextColors.neutral500,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        InkWell(
-                          onTap: () {
-                            Get.to(() => SettingInsuranceInfo());
-                          },
-                          child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 24),
-                            height: 48,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Appcolors.action,
-                            ),
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Save & Next",
-                              style: TextStyle(
-                                fontFamily: AppConstants.FONT_FAMILY,
-                                fontSize: 16,
+        
+                      const SizedBox(height: 32),
+        
+                      // Allergies Section
+                      _buildAllergiesSection(),
+                      const SizedBox(height: 16),
+        
+                      // Current Medications Section
+                      _buildMedicationsSection(),
+                      const SizedBox(height: 16),
+        
+                      // Existing Conditions Section
+                      _buildExistingConditionsSection(),
+                      const SizedBox(height: 16),
+        
+                      // Lifestyle Factors Section
+                      _buildLifestyleFactorsSection(),
+                      SizedBox(height: 48.h),
+        
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              Get.back();
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 24),
+                              // padding controls width
+                              height: 48,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
                                 color: Appcolors.primary,
-                                fontWeight: FontWeight.w500,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: ShadowColor.shadowColors1.withOpacity(
+                                      0.10,
+                                    ),
+                                    blurRadius: 4,
+                                    spreadRadius: 0,
+                                    offset: Offset(0, 3),
+                                    blurStyle: BlurStyle.normal,
+                                  ),
+                                ],
+                              ),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Previous",
+                                style: TextStyle(
+                                  fontFamily: AppConstants.FONT_FAMILY,
+                                  fontSize: 16,
+                                  color: TextColors.neutral500,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-
-                    SizedBox(height: 35),
-                  ],
+        
+                          InkWell(
+                            onTap: () {
+                              Get.to(() => SettingInsuranceInfo());
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 24),
+                              height: 48,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Appcolors.action,
+                              ),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Save & Next",
+                                style: TextStyle(
+                                  fontFamily: AppConstants.FONT_FAMILY,
+                                  fontSize: 16,
+                                  color: Appcolors.primary,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+        
+                      SizedBox(height: 35),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

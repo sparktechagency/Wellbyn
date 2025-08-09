@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:wellbyn/themes/dart_theme.dart';
@@ -10,13 +11,20 @@ import 'package:wellbyn/utils/token_service.dart';
 import 'controllers/baseController/base_controller.dart';
 import 'controllers/localization_controller.dart';
 import 'controllers/theme_controller.dart';
+import 'firebase_options.dart';
 import 'helpers/di.dart' as di;
 import 'helpers/route.dart';
 
 void main()async {
 
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp
+  ]);
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   Map<String, Map<String, String>> _languages = await di.init();
   await TokenService().init();
   runApp( MyApp(languages:_languages,));

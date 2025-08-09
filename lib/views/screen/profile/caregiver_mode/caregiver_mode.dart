@@ -28,7 +28,7 @@ class CaregiverScreen extends StatelessWidget {
             fontFamily: "Inter",
             letterSpacing: 0.2,
             fontWeight: FontWeight.w500,
-            color: TextColors.neutral900,
+            color: TextColors.primary2,
           ),
         ),
         centerTitle: true,
@@ -258,6 +258,7 @@ class CaregiverScreen extends StatelessWidget {
                                   },
                                   child: IntrinsicWidth(
                                     child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(

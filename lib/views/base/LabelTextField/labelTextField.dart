@@ -310,7 +310,8 @@ class _CustomTextFieldedState extends State<CustomTextFielded> {
         child: SvgPicture.asset(
           widget.suffixSvgAsset!,
           width: 20.w,
-          height: 20.w,
+          height: 14.h,
+         // color: widget.suffixSvgColor,
           colorFilter: ColorFilter.mode(
             widget.suffixSvgColor ?? TextColors.neutral900,
             BlendMode.srcIn,
@@ -410,11 +411,11 @@ class _CustomTextFieldedState extends State<CustomTextFielded> {
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: SvgPicture.asset(
-                    obscureText ? AppIcons.viewIcon : AppIcons.viewIcon,
+                    obscureText ? AppIcons.viewIcon : AppIcons.viewremove,
                     width: 20.w,
                     height: 20.w,
-                    colorFilter: const ColorFilter.mode(
-                      TextColors.neutral500,
+                    colorFilter:  ColorFilter.mode(
+                      widget.suffixSvgColor ?? TextColors.neutral900,
                       BlendMode.srcIn,
                     ),
                   ),
@@ -436,7 +437,7 @@ class _CustomTextFieldedState extends State<CustomTextFielded> {
   OutlineInputBorder get focusedBorder => OutlineInputBorder(
     borderRadius: BorderRadius.circular(8.r),
     borderSide: BorderSide(
-      width: 1.1,
+      width: 1.5,
       color: widget.borderColor ?? BorderColors.primary,
     ),
   );

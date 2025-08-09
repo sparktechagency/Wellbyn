@@ -32,14 +32,14 @@ class _MedicationEditState extends State<MedicationEdit> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Appcolors.page,
+      backgroundColor: Appcolors.primary,
       appBar: AppBar(
-        backgroundColor: Appcolors.page,
+        // backgroundColor: Appcolors.page,
         title: Text(
           "Edit Medications",
           style: TextStyle(
             fontSize: 20,
-            fontFamily: "Satoshi",
+            fontFamily: "Inter",
             fontWeight: FontWeight.w500,
             color: HexColor("#3D3D3D"),
           ),
@@ -62,16 +62,16 @@ class _MedicationEditState extends State<MedicationEdit> {
         child: Container(
           width: double.infinity,
           margin: EdgeInsets.only(left: 20,right: 20,bottom: 25),
-          padding: EdgeInsets.all(12),
+          padding: EdgeInsets.only(left: 12,right: 12,top: 20,bottom: 20),
           decoration: BoxDecoration(
             color: Appcolors.primary,
             borderRadius: BorderRadius.circular(12),
             boxShadow: [
               BoxShadow(
-                color: TextColors.neutral900.withOpacity(0.09),
-                offset: const Offset(0, 2),
-                blurRadius: 6,
-                spreadRadius: 1,
+                color: ShadowColor.shadowColors1.withOpacity(0.10),
+                offset: Offset(0, 3),
+                blurRadius: 4,
+                spreadRadius: 0,
               ),
             ],
           ),
@@ -105,17 +105,17 @@ class _MedicationEditState extends State<MedicationEdit> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     AnimatedContainer(
-                      margin: EdgeInsets.symmetric(vertical: 10),
-                      padding: EdgeInsets.symmetric(horizontal: 5,vertical: 6),
+                      margin: EdgeInsets.symmetric(vertical: 4),
+                      padding: EdgeInsets.symmetric(horizontal: 6,vertical: 6),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: Appcolors.primary,
                         boxShadow: [
                           BoxShadow(
-                            color: TextColors.neutral900.withOpacity(0.09),
-                            offset: Offset(0, 2),
-                            blurRadius: 6,
-                            spreadRadius: 1,
+                            color: ShadowColor.shadowColors1.withOpacity(0.10),
+                            offset: Offset(0, 3),
+                            blurRadius: 4,
+                            spreadRadius: 0,
                           ),
                         ],
                       ),
@@ -141,7 +141,7 @@ class _MedicationEditState extends State<MedicationEdit> {
                           ),
                           AppText("Repeat Daily",fontSize: 15.h,color: TextColors.neutral900,),
                           Transform.scale(
-                            scale: 0.7.h,
+                            scale: 0.72.h,
                             child: CupertinoSwitch(
                               value:item.isRepeatDaily,
                               activeColor: Appcolors.action,
@@ -224,10 +224,10 @@ class _MedicationEditState extends State<MedicationEdit> {
         color: Appcolors.primary,
         boxShadow: [
           BoxShadow(
-            color: TextColors.neutral900.withOpacity(0.09),
-            offset: const Offset(0, 2),
-            blurRadius: 6,
-            spreadRadius: 1,
+            color: ShadowColor.shadowColors1.withOpacity(0.10),
+            offset: Offset(0, 3),
+            blurRadius: 4,
+            spreadRadius: 0,
           ),
         ],
       ),
@@ -237,7 +237,7 @@ class _MedicationEditState extends State<MedicationEdit> {
             color: TextColors.neutral900,
             fontWeight: FontWeight.w500,
             fontSize: 14,
-            fontFamily: "Satoshi"
+            fontFamily: "Inter"
         ),
         softWrap: true,
         overflow: TextOverflow.visible,
@@ -255,11 +255,11 @@ class _MedicationEditState extends State<MedicationEdit> {
           color: Appcolors.primary,
           boxShadow: [
             BoxShadow(
-              color: TextColors.neutral900.withOpacity(0.09),
-              offset: Offset(0, 2),
-              blurRadius: 6,
-              spreadRadius: 1,
-            )
+              color: ShadowColor.shadowColors1.withOpacity(0.10),
+              offset: Offset(0, 3),
+              blurRadius: 4,
+              spreadRadius: 0,
+            ),
           ]
       ),
       child: const Text(
@@ -268,7 +268,7 @@ class _MedicationEditState extends State<MedicationEdit> {
             color: TextColors.neutral900,
             fontWeight: FontWeight.w500,
             fontSize: 14,
-            fontFamily: "Satoshi"
+            fontFamily: "Inter"
         ),
       ),
     );

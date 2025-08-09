@@ -30,8 +30,8 @@ class StartCaregiver extends StatelessWidget {
                   const Spacer(),
                   SvgPicture.asset(
                     AppIcons.addcaregiverIcon,
-                    // width: 100.w,
-                    // height: 100.h,
+                     width: 80.w,
+                     height: 80.h,
                     color: HexColor("#93531F"),
                     fit: BoxFit.contain,
                     alignment: Alignment.center,
@@ -49,6 +49,8 @@ class StartCaregiver extends StatelessWidget {
                   Text("By adding a caregiver, you can assign someone to help you with all your appointment-related tasks. They can manage everything on your behalf.",
                       textAlign: TextAlign.center,
                       style: TextStyle(
+                        fontFamily: "Inter",
+                      letterSpacing: 0.2,
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
                       color: TextColors.neutral500,
@@ -62,6 +64,7 @@ class StartCaregiver extends StatelessWidget {
                       label: Text(
                         "Start",
                         style: TextStyle(
+                          fontFamily: "Inter",
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w500,
                           color: Appcolors.primary,

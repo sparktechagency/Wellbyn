@@ -101,9 +101,9 @@ class _AppointmentState extends State<Appointment> {
                                     ),
                                     overflow: TextOverflow.ellipsis,
                                   ),
-                                  SizedBox(height: 9.h),
+                                  SizedBox(height: 10.h),
                                   Container(
-                                    height: 2.h,
+                                    height: 2.2.h,
                                     width: isSelected ? 100.w : 0.w,
                                     color: isSelected ? TextColors.action : Colors.transparent,
                                   ),
@@ -116,7 +116,7 @@ class _AppointmentState extends State<Appointment> {
                     ),
                   ),
                   Positioned(
-                    bottom: 8,
+                    bottom: 9.1,
                     left: 0,
                     right: 0,
                     child: Container(
