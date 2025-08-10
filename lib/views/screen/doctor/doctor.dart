@@ -732,6 +732,7 @@ import '../../../controllers/tabcontroller.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/nab_ids.dart';
 import '../../base/custom_field.dart';
+import '../../base/custombutton/custom_button.dart';
 import '../../base/doctor_bottom_sheet/dotor_details_bottom_sheet.dart';
 import '../doctro_message/doctor_message.dart';
 
@@ -893,13 +894,13 @@ class Doctor extends StatelessWidget {
                           crossAxisCount: 2,
                           mainAxisSpacing: 8,
                           crossAxisSpacing: 8,
-                          childAspectRatio: 0.56,
+                          childAspectRatio: 0.48,
                         ),
                         itemCount: 20,
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             onTap: () {
-                              showDoctorBookingSheet(context);
+                        //      showDoctorBookingSheet(context);
                             },
                             child: Container(
                               margin: EdgeInsets.all(2),
@@ -983,61 +984,28 @@ class Doctor extends StatelessWidget {
                                     maxLines: 1,
                                   ),
                                   SizedBox(height: 8),
-                                  Row(
-                                    children: [
-                                      SvgPicture.asset(
-                                        AppIcons.hospitallocationIcon,
-                                        width: 20,
-                                        height: 20,
-                                        colorFilter: ColorFilter.mode(
-                                          Color(0xFF3D75E6),
-                                          BlendMode.srcIn,
-                                        ),
-                                      ),
-                                      const SizedBox(width: 4),
-                                      Expanded(
-                                        child: Text(
-                                          "Sylhet Health Center",
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontStyle: FontStyle.italic,
-                                            color: TextColors.neutral900,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ),
-                                    ],
+                                  CustomButton(
+                                    onTap: () {
+                                      showDoctorBookingSheet(context);
+                                    },
+                                    text: 'Book Now',
+                                    height: 46,
+                                    fontSize: 16,
+                                    textColor: Appcolors.primary,
+                                    broderColor: Colors.transparent,
+                                    color: Appcolors.action,
                                   ),
-                                  SizedBox(height: 14),
-                                  Row(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 0),
-                                        child: Text(
-                                          "3 Time Available",
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: TextColors.neutral900,
-                                            fontFamily: 'Inter',
-                                            letterSpacing: 0.2,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ),
-                                      Spacer(),
-                                      SvgPicture.asset(
-                                        AppIcons.shearIcon,
-                                        width: 20,
-                                        height: 20,
-                                        colorFilter: ColorFilter.mode(
-                                          TextColors.neutral900,
-                                          BlendMode.srcIn,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                  SizedBox(height: 8,),
+                                  CustomButton(
+                                    onTap: () {
+                                      Get.toNamed("/doctor_profile",id: NavIds.profile);
+                                    },
+                                    text: 'Details',
+                                    fontSize: 16,
+                                    broderColor: Colors.transparent,
+                                    textColor: TextColors.primary2,
+                                    color: Appcolors.primary,
+                                  )
                                 ],
                               ),
                             ),
